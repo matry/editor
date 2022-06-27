@@ -146,16 +146,18 @@ const select = {
   select_parent(state) {
     const { selections } = state
 
-    if (selections.length !== 1) {
-      return null
-    }
-
-    if (selections[0].parentElement === document.body) {
+    if (selections.length === 0) {
       return null
     }
 
     return {
-      selections: [selections[0].parentElement],
+      selections: selections.map((selection) => {
+        if (selection.parentElement === document.body) {
+          return selection
+        }
+  
+        return selection.parentElement
+      }),
     }
   },
 
@@ -168,16 +170,14 @@ const select = {
       }
     }
 
-    if (selections.length > 1) {
-      return null
-    }
-
-    if (selections[0].getAttribute('data-type') !== 'shape' || selections[0].children.length === 0) {
-      return null
-    }
-
     return {
-      selections: [selections[0].firstElementChild],
+      selections: selections.map((selection) => {
+        if (selection.getAttribute('data-type') !== 'shape' || selection.children.length === 0) {
+          return selection
+        }
+
+        return selection.firstElementChild
+      })
     }
   },
 
