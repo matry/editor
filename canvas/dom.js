@@ -188,9 +188,13 @@ export const selectNextNode = (selections) => {
     return [bodyChildren[0]]
   }
 
-  const nextSibling = selections[selections.length - 1].nextElementSibling
+  return selections.map((selection) => {
+    if (selection.nextElementSibling) {
+      return selection.nextElementSibling
+    }
 
-  return nextSibling ?  [nextSibling] : selections
+    return selection
+  }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
 export const selectPreviousNode = (selections) => {
@@ -198,9 +202,13 @@ export const selectPreviousNode = (selections) => {
     return selections
   }
 
-  const previousNode = selections[selections.length - 1].previousElementSibling
+  return selections.map((selection) => {
+    if (selection.previousElementSibling) {
+      return selection.previousElementSibling
+    }
 
-  return previousNode ? [previousNode] : selections
+    return selection
+  }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
 export const selectFirstSiblingNode = (selections) => {
@@ -208,7 +216,9 @@ export const selectFirstSiblingNode = (selections) => {
     return selections
   }
 
-  return [selections[0].parentElement.firstElementChild]
+  return selections.map((selection) => {
+    return selection.parentElement.firstElementChild
+  }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
 export const selectLastSiblingNode = (selections) => {
@@ -216,7 +226,9 @@ export const selectLastSiblingNode = (selections) => {
     return selections
   }
 
-  return [selections[0].parentElement.lastElementChild]
+  return selections.map((selection) => {
+    return selection.parentElement.lastElementChild
+  }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
 export const getSelectionDirection = (selections) => {

@@ -215,6 +215,12 @@ const select = {
   },
 
   clear_selections(state) {
+    if (state.selections.length > 1) {
+      return {
+        selections: [state.selections[0]],
+      }
+    }
+
     return {
       selections: [],
     }
