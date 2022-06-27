@@ -16,9 +16,17 @@
       border-style: solid;
     } */
 
-    body [data-selected="on"], body [data-selected="on"]:focus {
-      outline: 2px solid blue;
+    body [data-selected="on"],
+    body [data-selected="on"]:focus {
+      outline-width: 2px;
+      outline-style: solid;
       outline-offset: -1px;
+      outline-color: blue;
+    }
+
+    body[data-mode="append"] [data-selected="on"],
+    body[data-mode="append"] [data-selected="on"]:focus {
+      outline-color: orange;
     }
 
     body[data-after]:after {
@@ -37,6 +45,6 @@
   </style>
   <script type="module" src="./index.js"></script>
 </head>
-<body>
+<body data-mode="select">
 </body>
 </html>

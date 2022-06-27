@@ -4,10 +4,17 @@ import { randomId } from '../utils'
 
 const append = {
   commands: {
+    'Escape': 'exit_mode',
     'ArrowUp': 'add_previous_sibling',
     'ArrowRight': 'add_last_child',
     'ArrowDown': 'add_next_sibling',
     'ArrowLeft': 'add_parent',
+  },
+
+  exit_mode() {
+    return {
+      mode: 'select',
+    }
   },
 
   add_next_sibling(state) {

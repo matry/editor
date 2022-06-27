@@ -44,6 +44,7 @@ window.addEventListener('mode_changed', async () => {
       await mode['on_enter'](currentState)
     }
 
+    document.body.setAttribute('data-mode', currentState.mode)
   } catch (error) {
     window.alert(error)
   }

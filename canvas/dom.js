@@ -114,9 +114,6 @@ export const appendNode = (target, template, position) => {
 
   const parser = new DOMParser()
 
-  console.log('template!')
-  console.log(template)
-
   const doc = parser.parseFromString(template, 'text/html')
   const element = doc.body.firstElementChild
   target.insertAdjacentElement(insertionPoint, element)
