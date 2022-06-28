@@ -4,10 +4,10 @@ import App from './components/App'
 import './index.css'
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
-const render = (mode) => {
+const render = (extension) => {
   reactRoot.render(
     <React.StrictMode>
-      <App mode={mode} />
+      <App extension={extension} />
     </React.StrictMode>,
   )
 }
@@ -17,19 +17,20 @@ window.addEventListener('message', ({ data }) => {
     return
   }
 
+  if (data.action.startsWith('request_extension')) {
+    render('css')
+    return
+  }
+
   switch (data.action) {
-    case 'enter_style_mode':
-      render('style')
+    case 'exit_extension':
+      render('')
+      document.getElementById('canvas').contentWindow.focus()
       break
     default:
+      document.getElementById('canvas').contentWindow.postMessage(data)
       break
   }
-})
-
-window.addEventListener('exit_style_mode', () => {
-  render('')
-
-  document.getElementById('canvas').contentWindow.focus()
 })
 
 render('')

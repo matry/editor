@@ -1,1 +1,0 @@
-const scale1000 = []

@@ -35,7 +35,7 @@ const select = {
   },
 
   style_selections() {
-    window.parent.postMessage({ action: 'enter_style_mode' })
+    window.parent.postMessage({ action: 'request_extension_css' })
   },
 
   edit_selections({ selections }) {

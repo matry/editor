@@ -18,7 +18,7 @@ const CSSInput = () => {
     <div
       className="absolute top-0 left-0 right-0 w-screen h-screen flex justify-center items-center z-10"
       onClick={() => {
-        window.dispatchEvent(new CustomEvent('exit_style_mode'))
+        window.parent.postMessage({ action: 'exit_extension', data: {} })
       }}
     >
       <form
@@ -27,7 +27,7 @@ const CSSInput = () => {
         onSubmit={(e) => {
           e.preventDefault()
 
-          document.getElementById('canvas').contentWindow.postMessage({
+          window.parent.postMessage({
             action: 'update_selection_styles',
             data: {
               property: prop,
@@ -57,7 +57,7 @@ const CSSInput = () => {
             }}
             onKeyDown={(e) => {
               if (e.code === 'Escape') {
-                window.dispatchEvent(new CustomEvent('exit_style_mode'))
+                window.parent.postMessage({ action: 'exit_extension', data: {} })
               }
 
               if (!suggestions.length) {
@@ -97,7 +97,7 @@ const CSSInput = () => {
             }}
             onKeyDown={(e) => {
               if (e.code === 'Escape') {
-                window.dispatchEvent(new CustomEvent('exit_style_mode'))
+                window.parent.postMessage({ action: 'exit_extension', data: {} })
               }
             }}
           />
