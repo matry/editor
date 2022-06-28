@@ -1,5 +1,5 @@
 import { appendRules } from '../cssom'
-import { constructTemplate, appendNode } from '../dom'
+import { constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent } from '../dom'
 import { randomId } from '../utils'
 
 const append = {
@@ -32,13 +32,7 @@ const append = {
       }
 
       const { id, cssRules, template } = constructTemplate(state.appendingElementType)
-
       appendRules(state.stylesheet, id, cssRules)
-
-      // Object.entries(cssRules).forEach(([property, value]) => {
-      //   appendRule(id, property, value)
-      // })
-
       appendNode(selection, template, position)
 
       return document.getElementById(id)
@@ -105,8 +99,22 @@ const append = {
     }
   },
 
-  add_parent() {
-    window.alert('This action is not yet available')
+  add_parent({ stylesheet, selections, appendingElementType }) {
+    if (appendingElementType !== 'shape') {
+      window.alert(`${appendingElementType} elements cannot have children`)
+    }
+
+    if (isSiblings(selections)) {
+      return {
+        selections: [nestGroupWithinParent(stylesheet, selections)],
+        mode: 'select',
+      }
+    } else {
+      return {
+        selections: nestIndividuallyWithinParent(stylesheet, selections),
+        mode: 'select',
+      }
+    }
   },
 }
 

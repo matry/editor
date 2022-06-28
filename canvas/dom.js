@@ -1,5 +1,6 @@
 import { LoremIpsum } from 'lorem-ipsum'
 import { randomColor, randomId, randomNumber } from './utils'
+import { appendRules } from './cssom'
 import { randomImage } from './utils'
 
 const lorem = new LoremIpsum({
@@ -284,4 +285,41 @@ export const serialize = (element) => {
   const serializer = new XMLSerializer()
 
   return serializer.serializeToString(element)
+}
+
+export const isSiblings = (elements) => {
+  let parent = elements[0].parentElement
+  let result = true
+
+  elements.forEach((element) => {
+    if (element.parentElement !== parent) {
+      result = false
+    }
+  })
+
+  return result
+}
+
+export const nestGroupWithinParent = (stylesheet, elements) => {
+  const { id, cssRules, template } = constructShapeTemplate()
+  appendRules(stylesheet, id, cssRules)
+  const parentElement = appendNode(elements[0], template, 'before')
+
+  elements.forEach((element) => {
+    parentElement.appendChild(element)
+  })
+
+  return parentElement
+}
+
+export const nestIndividuallyWithinParent = (stylesheet, elements) => {
+  const parentElements = elements.map((element) => {
+    const { id, cssRules, template } = constructShapeTemplate()
+    appendRules(stylesheet, id, cssRules)
+    const parentElement = appendNode(element, template, 'before')
+    parentElement.appendChild(element)
+    return parentElement
+  })
+
+  return parentElements
 }
