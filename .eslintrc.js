@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     'react',
   ],
-  ignorePatterns: ['assets/**/*', 'public/**/*', 'src/lib/**/*'],
+  ignorePatterns: ['assets/**/*', 'dist/**/*', 'node_modules/**/*'],
   rules: {
     semi: ['error', 'never'],
     'react/jsx-filename-extension': 'off',
