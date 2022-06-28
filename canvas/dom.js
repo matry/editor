@@ -35,22 +35,6 @@ export const constructTemplate = (elementType) => {
   }
 }
 
-export const constructShapeTemplate = () => {
-  const id = randomId()
-
-  return {
-    id,
-    cssRules: {
-      'display': 'block',
-      'width': '100$%',
-      'min-height': '50px',
-      'padding': '10px',
-      'background-color': randomColor(),
-    },
-    template: `<div data-type="shape" id=${id}></div>`,
-  }
-}
-
 export const constructTextTemplate = () => {
   const text = lorem.generateWords(2)
   const id = randomId()
@@ -92,6 +76,22 @@ export const constructVideoTemplate = () => {
     template: `
       <iframe data-type="video" id="${id}" width="560" height="315" src="https://www.youtube.com/embed/9ZfN87gSjvI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     `
+  }
+}
+
+export const constructShapeTemplate = () => {
+  const id = randomId()
+
+  return {
+    id,
+    cssRules: {
+      'display': 'block',
+      'width': '100$%',
+      'min-height': '50px',
+      'padding': '10px',
+      'background-color': randomColor(),
+    },
+    template: `<div data-type="shape" id=${id}></div>`,
   }
 }
 
