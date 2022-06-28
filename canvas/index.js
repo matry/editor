@@ -32,7 +32,9 @@ window.addEventListener('message', ({ data }) => {
 })
 
 window.addEventListener('keydown', async (e) => {
-  const { metaKey, shiftKey, ctrlKey, altKey, code } = e
+  const {
+    metaKey, shiftKey, ctrlKey, altKey, code,
+  } = e
 
   const keyboardShortcut = [
     metaKey ? 'meta' : '',
@@ -40,7 +42,7 @@ window.addEventListener('keydown', async (e) => {
     altKey ? 'alt' : '',
     shiftKey ? 'shift' : '',
     code,
-  ].filter(key => key !== '').join(' ').trim()
+  ].filter((key) => key !== '').join(' ').trim()
 
   // console.log(`shortcut: ${keyboardShortcut}`)
 
@@ -86,7 +88,9 @@ document.body.addEventListener('click', (e) => {
     return
   }
 
-  const { metaKey, shiftKey, ctrlKey, altKey } = e
+  const {
+    metaKey, shiftKey, ctrlKey, altKey,
+  } = e
 
   const mouseCommand = [
     metaKey ? 'meta' : '',
@@ -94,7 +98,7 @@ document.body.addEventListener('click', (e) => {
     altKey ? 'alt' : '',
     shiftKey ? 'shift' : '',
     'onclick',
-  ].filter(key => key !== '').join(' ').trim()
+  ].filter((key) => key !== '').join(' ').trim()
 
   // console.log(`mouse: ${mouseCommand}`)
 

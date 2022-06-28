@@ -1,39 +1,25 @@
 import { LoremIpsum } from 'lorem-ipsum'
-import { randomColor, randomId, randomNumber } from './utils'
+import {
+  randomColor, randomId, randomImage,
+} from './utils'
 import { appendRules } from './cssom'
-import { randomImage } from './utils'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 8,
-    min: 4
+    min: 4,
   },
   wordsPerSentence: {
     max: 16,
-    min: 4
-  }
+    min: 4,
+  },
 })
 
-export const randomStyles = (id) => {
-  return `#${id} {
+export const randomStyles = (id) => `#${id} {
     width: 100%;
     min-height: 50px;
     background-color: ${randomColor()};
   }`
-}
-
-export const constructTemplate = (elementType) => {
-  switch (elementType) {
-    case 'text':
-      return constructTextTemplate()
-    case 'image':
-      return constructImageTemplate()
-    case 'video':
-      return constructVideoTemplate()
-    default:
-      return constructShapeTemplate()
-  }
-}
 
 export const constructTextTemplate = () => {
   const text = lorem.generateWords(2)
@@ -42,9 +28,9 @@ export const constructTextTemplate = () => {
   return {
     id,
     cssRules: {
-      'display': 'block',
-      'width': '100%',
-      'padding': '10px',
+      display: 'block',
+      width: '100%',
+      padding: '10px',
       'user-select': 'none',
       'background-color': randomColor(),
     },
@@ -59,7 +45,7 @@ export const constructImageTemplate = () => {
   return {
     id,
     cssRules: {
-      'display': 'block',
+      display: 'block',
       'user-select': 'none',
     },
     template: `<img data-type="image" width="${width}px" height="${height}px" id="${id}" src="${url}" />`,
@@ -71,11 +57,11 @@ export const constructVideoTemplate = () => {
   return {
     id,
     cssRules: {
-      'display': 'block',
+      display: 'block',
     },
     template: `
       <iframe data-type="video" id="${id}" width="560" height="315" src="https://www.youtube.com/embed/9ZfN87gSjvI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `
+    `,
   }
 }
 
@@ -85,13 +71,26 @@ export const constructShapeTemplate = () => {
   return {
     id,
     cssRules: {
-      'display': 'block',
-      'width': '100$%',
+      display: 'block',
+      width: '100$%',
       'min-height': '50px',
-      'padding': '10px',
+      padding: '10px',
       'background-color': randomColor(),
     },
     template: `<div data-type="shape" id=${id}></div>`,
+  }
+}
+
+export const constructTemplate = (elementType) => {
+  switch (elementType) {
+    case 'text':
+      return constructTextTemplate()
+    case 'image':
+      return constructImageTemplate()
+    case 'video':
+      return constructVideoTemplate()
+    default:
+      return constructShapeTemplate()
   }
 }
 
@@ -111,6 +110,8 @@ export const appendNode = (target, template, position) => {
     case 'last':
       insertionPoint = 'beforeend'
       break
+    default:
+      break
   }
 
   const parser = new DOMParser()
@@ -122,13 +123,9 @@ export const appendNode = (target, template, position) => {
   return element
 }
 
-export const firstSelection = () => {
-  return window.state.current.selections[0] || null
-}
+export const firstSelection = () => window.state.current.selections[0] || null
 
-export const lastSelection = () => {
-  return window.state.current.selections[window.state.current.selections.length - 1] || null
-}
+export const lastSelection = () => window.state.current.selections[window.state.current.selections.length - 1] || null
 
 export const selectAll = (selections) => {
   if (!selections.length) {
@@ -148,7 +145,7 @@ export const addNodeToSelection = (state, node) => {
 
 export const selectNode = (state, node) => {
   if (!node) {
-    return
+    return null
   }
 
   return {
@@ -217,9 +214,7 @@ export const selectFirstSiblingNode = (selections) => {
     return selections
   }
 
-  return selections.map((selection) => {
-    return selection.parentElement.firstElementChild
-  }).filter((selection, index, self) => self.indexOf(selection) === index)
+  return selections.map((selection) => selection.parentElement.firstElementChild).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
 export const selectLastSiblingNode = (selections) => {
@@ -227,9 +222,7 @@ export const selectLastSiblingNode = (selections) => {
     return selections
   }
 
-  return selections.map((selection) => {
-    return selection.parentElement.lastElementChild
-  }).filter((selection, index, self) => self.indexOf(selection) === index)
+  return selections.map((selection) => selection.parentElement.lastElementChild).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
 export const getSelectionDirection = (selections) => {
@@ -276,7 +269,9 @@ export const isInBounds = (element) => {
     return true
   }
 
-  const { top, right, bottom, left } = element.getBoundingClientRect()
+  const {
+    top, right, bottom, left,
+  } = element.getBoundingClientRect()
 
   return top >= 0 && left >= 0 && right <= window.innerWidth && bottom <= window.innerHeight
 }
@@ -288,7 +283,7 @@ export const serialize = (element) => {
 }
 
 export const isSiblings = (elements) => {
-  let parent = elements[0].parentElement
+  const parent = elements[0].parentElement
   let result = true
 
   elements.forEach((element) => {

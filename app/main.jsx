@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom/client'
 import App from './components/App'
 import './index.css'
 
+const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
+const render = (mode) => {
+  reactRoot.render(
+    <React.StrictMode>
+      <App mode={mode} />
+    </React.StrictMode>,
+  )
+}
+
 window.addEventListener('message', ({ data }) => {
   if (!data.action) {
     return
@@ -22,14 +31,5 @@ window.addEventListener('exit_style_mode', () => {
 
   document.getElementById('canvas').contentWindow.focus()
 })
-
-const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
-const render = (mode) => {
-  reactRoot.render(
-    <React.StrictMode>
-      <App mode={mode} />
-    </React.StrictMode>
-  )
-}
 
 render('')

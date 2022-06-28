@@ -1,8 +1,8 @@
-
 export class ExtensionManager {
   isOpeningExtension = false
+
   sourceMap = {
-    'css': 'extensions/css/index.html',
+    css: 'extensions/css/index.html',
   }
 
   constructor() {
@@ -31,5 +31,4 @@ export class ExtensionManager {
   extensionDidOpen() {
     this.isOpeningExtension = false
   }
-
 }

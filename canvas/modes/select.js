@@ -1,5 +1,7 @@
-import { appendRule, updateRule } from '../cssom'
-import { deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectNode, selectPreviousNode, serialize } from '../dom'
+import { updateRule } from '../cssom'
+import {
+  deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
+} from '../dom'
 
 const select = {
   commands: {
@@ -7,10 +9,10 @@ const select = {
     'shift KeyT': 'append_text',
     'shift KeyI': 'append_image',
     'shift KeyV': 'append_video',
-    'ArrowUp': 'select_previous_sibling',
-    'ArrowDown': 'select_next_sibling',
-    'ArrowLeft': 'select_parent',
-    'ArrowRight': 'select_first_child',
+    ArrowUp: 'select_previous_sibling',
+    ArrowDown: 'select_next_sibling',
+    ArrowLeft: 'select_parent',
+    ArrowRight: 'select_first_child',
     'shift ArrowUp': 'shift_selection_up',
     'shift ArrowDown': 'shift_selection_down',
     'meta ArrowUp': 'select_first_sibling',
@@ -18,12 +20,12 @@ const select = {
     'meta KeyA': 'select_all',
     'meta KeyC': 'copy_selections',
     'meta KeyV': 'paste_selections',
-    'onclick': 'select_node',
+    onclick: 'select_node',
     'meta onclick': 'select_another_node',
-    'Escape': 'clear_selections',
-    'Backspace': 'delete_selections',
-    'Enter': 'edit_selections',
-    'Slash': 'style_selections',
+    Escape: 'clear_selections',
+    Backspace: 'delete_selections',
+    Enter: 'edit_selections',
+    Slash: 'style_selections',
   },
 
   update_selection_style({ stylesheet, selections }, property, value) {
@@ -32,7 +34,7 @@ const select = {
     })
   },
 
-  style_selections({ stylesheet, selections }) {
+  style_selections() {
     window.parent.postMessage({ action: 'enter_style_mode' })
   },
 
@@ -117,13 +119,13 @@ const select = {
 
   select_first_sibling(state) {
     return {
-      selections: selectFirstSiblingNode(state.selections)
+      selections: selectFirstSiblingNode(state.selections),
     }
   },
 
   select_last_sibling(state) {
     return {
-      selections: selectLastSiblingNode(state.selections)
+      selections: selectLastSiblingNode(state.selections),
     }
   },
 
@@ -155,7 +157,7 @@ const select = {
         if (selection.parentElement === document.body) {
           return selection
         }
-  
+
         return selection.parentElement
       }),
     }
@@ -166,7 +168,7 @@ const select = {
 
     if (selections.length === 0 && document.body.firstElementChild) {
       return {
-        selections: [document.body.firstElementChild]
+        selections: [document.body.firstElementChild],
       }
     }
 
@@ -177,7 +179,7 @@ const select = {
         }
 
         return selection.firstElementChild
-      })
+      }),
     }
   },
 
@@ -198,7 +200,7 @@ const select = {
     }
 
     return {
-      selections: [clickedElements[clickedIndex + 1]]
+      selections: [clickedElements[clickedIndex + 1]],
     }
   },
 

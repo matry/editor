@@ -1,7 +1,6 @@
-
 const content = {
   commands: {
-    'Escape': 'exit',
+    Escape: 'exit',
   },
 
   on_enter({ selections }) {
@@ -20,7 +19,7 @@ const content = {
     return {
       mode: 'select',
     }
-  }
+  },
 }
 
 export default content

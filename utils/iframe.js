@@ -1,4 +1,3 @@
-
 export const messageParent = (data) => {
   window.parent.postMessage(data)
 }

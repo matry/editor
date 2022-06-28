@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import { all } from 'known-css-properties'
-import { useEffect, useState } from 'react'
+import { useState, useRef } from 'react'
 import classNames from 'classnames'
-import { useRef } from 'react'
 
-const cssProperties = all.filter(property => !property.startsWith('-'))
+const cssProperties = all.filter((property) => !property.startsWith('-'))
 
 const CSSInput = () => {
   const propRef = useRef()
@@ -12,9 +12,7 @@ const CSSInput = () => {
   const [suggestions, setSuggestions] = useState([])
   const [highlightIndex, setHighlightIndex] = useState(-1)
 
-  const filter = (newProp) => {
-    return cssProperties.filter((property) => property.includes(newProp))
-  }
+  const filter = (newProp) => cssProperties.filter((property) => property.includes(newProp))
 
   return (
     <div
@@ -81,6 +79,8 @@ const CSSInput = () => {
                   setHighlightIndex(-1)
                   e.preventDefault()
                   break
+                default:
+                  break
               }
             }}
           />
@@ -116,7 +116,7 @@ const CSSInput = () => {
                   {
                     'bg-slate-400': highlightIndex === i,
                     'bg-transparent': highlightIndex !== i,
-                  }
+                  },
                 )}
                 onClick={() => {
                   setProp(suggestion)
@@ -126,7 +126,7 @@ const CSSInput = () => {
               >
                 {suggestion}
               </li>
-            ))}          
+            ))}
           </ul>
         )}
       </form>

@@ -1,13 +1,12 @@
-
 export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
 
-  if (! length) {
+  if (!length) {
     length = Math.floor(Math.random() * chars.length)
   }
 
   let str = ''
-  for (var i = 0; i < length; i++) {
+  for (let i = 0; i < length; i++) {
     str += chars[Math.floor(Math.random() * chars.length)]
   }
 
@@ -23,9 +22,7 @@ export const randomNumber = (max, min = 100) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export const randomPercent = (mi = 0) => {
-  return `${randomNumber(100, min)}%`
-}
+export const randomPercent = (min = 0) => `${randomNumber(100, min)}%`
 
 export const randomImage = () => {
   const height = Math.floor(randomNumber(400, 100))
@@ -42,7 +39,7 @@ export const randomColor = () => {
   const hexChars = [7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f']
   const hexArr = [0, 0, 0, 0, 0, 0]
 
-  const resultHexArr = hexArr.map((char) => {
+  const resultHexArr = hexArr.map(() => {
     const index = Math.floor(Math.random() * hexChars.length)
     return hexChars[index]
   })

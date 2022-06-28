@@ -1,14 +1,16 @@
 import { appendRules } from '../cssom'
-import { constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent } from '../dom'
+import {
+  constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent,
+} from '../dom'
 import { randomId } from '../utils'
 
 const append = {
   commands: {
-    'Escape': 'exit_mode',
-    'ArrowUp': 'add_previous_sibling',
-    'ArrowRight': 'add_last_child',
-    'ArrowDown': 'add_next_sibling',
-    'ArrowLeft': 'add_parent',
+    Escape: 'exit_mode',
+    ArrowUp: 'add_previous_sibling',
+    ArrowRight: 'add_last_child',
+    ArrowDown: 'add_next_sibling',
+    ArrowLeft: 'add_parent',
   },
 
   exit_mode() {
@@ -109,11 +111,10 @@ const append = {
         selections: [nestGroupWithinParent(stylesheet, selections)],
         mode: 'select',
       }
-    } else {
-      return {
-        selections: nestIndividuallyWithinParent(stylesheet, selections),
-        mode: 'select',
-      }
+    }
+    return {
+      selections: nestIndividuallyWithinParent(stylesheet, selections),
+      mode: 'select',
     }
   },
 }

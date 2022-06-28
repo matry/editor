@@ -7,18 +7,18 @@ window.addEventListener('selections_changed', () => {
 
     const previousSelections = document.querySelectorAll('[data-selected="on"]')
     previousSelections.forEach((selection) => selection.removeAttribute('data-selected'))
-  
+
     selections.forEach((selection) => selection.setAttribute('data-selected', 'on'))
-  
+
     const lastSelection = selections[selections.length - 1]
-  
+
     if (lastSelection && !isInBounds(lastSelection)) {
       selections[selections.length - 1].scrollIntoView({
         behavior: 'smooth',
         block: 'center',
       })
     }
-  
+
     if (selections.length === 0) {
       document.body.removeAttribute('data-after')
     } else {
