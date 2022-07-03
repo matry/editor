@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client'
-import CSSInput from './CSSInput'
+import ImageInput from './ImageInput'
 import './index.css'
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
 
 reactRoot.render(
-  <CSSInput />,
+  <ImageInput />,
 )

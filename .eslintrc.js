@@ -43,5 +43,6 @@ module.exports = {
     'prefer-destructuring': 'off',
     'react/no-array-index-key': 'off',
     'dot-notation': 'off',
+    'quote-props': 'off',
   },
 }

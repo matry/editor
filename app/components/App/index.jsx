@@ -1,7 +1,14 @@
-import { string } from 'prop-types'
+import { object, string } from 'prop-types'
 
-const App = ({ extension }) => {
-  console.log(`extension: ${extension}`)
+const App = ({ extension, params }) => {
+  const queryParams = Object.keys(params)
+    .map((k) => `${k}=${params[k]}`)
+    .join('&')
+
+  let url = `extensions/${extension}/index.html`
+  if (queryParams) {
+    url = `${url}?${queryParams}`
+  }
 
   return (
     <div className="h-screen w-screen overflow-hidden">
@@ -16,7 +23,7 @@ const App = ({ extension }) => {
           key={extension}
           title={extension}
           id={extension}
-          src={`extensions/${extension}/index.html`}
+          src={url}
           className="w-screen h-screen absolute inset-0"
         />
       )}
@@ -26,10 +33,12 @@ const App = ({ extension }) => {
 
 App.propTypes = {
   extension: string,
+  params: object,
 }
 
 App.defaultProps = {
   extension: '',
+  params: {},
 }
 
 export default App

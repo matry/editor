@@ -44,9 +44,9 @@ export const getStylesObjectById = (stylesheet, id) => {
 
 export const getId = (rule) => rule.selectorText.split('#')[1]
 
-export const updateRule = (stylesheet, id, property, value) => {
+export const updateRule = (stylesheet, selectorText, property, value) => {
   const rules = Array.from(stylesheet.cssRules)
-  const index = rules.findIndex((rule) => getId(rule) === id)
+  const index = rules.findIndex((rule) => rule.selectorText === selectorText)
 
   const rule = rules[index]
 
@@ -63,7 +63,7 @@ export const updateRule = (stylesheet, id, property, value) => {
 
   const cssString = Object.entries(newStyles).map(([p, v]) => `${p}: ${v};`).join('\n')
 
-  stylesheet.insertRule(`#${id} { ${cssString} }`)
+  stylesheet.insertRule(`${selectorText} { ${cssString} }`)
 }
 
 export const appendRule = (id, property, value) => {

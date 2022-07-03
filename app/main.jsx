@@ -4,31 +4,31 @@ import App from './components/App'
 import './index.css'
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
-const render = (extension) => {
+const render = ({ extension, extensionProps }) => {
   reactRoot.render(
     <React.StrictMode>
-      <App extension={extension} />
+      <App extension={extension} extensionProps={extensionProps} />
     </React.StrictMode>,
   )
 }
 
-window.addEventListener('message', ({ data }) => {
-  if (!data.action) {
+window.addEventListener('message', (e) => {
+  const message = e.data
+
+  if (!message.action) {
     return
   }
 
-  if (data.action.startsWith('request_extension')) {
-    render('css')
-    return
-  }
-
-  switch (data.action) {
+  switch (message.action) {
+    case 'request_extension':
+      render({ extension: message.data.id, params: message.data.params || {} })
+      break
     case 'exit_extension':
       render('')
       document.getElementById('canvas').contentWindow.focus()
       break
     default:
-      document.getElementById('canvas').contentWindow.postMessage(data)
+      document.getElementById('canvas').contentWindow.postMessage(message)
       break
   }
 })

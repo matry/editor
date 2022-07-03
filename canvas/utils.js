@@ -29,7 +29,7 @@ export const randomImage = () => {
   const width = Math.floor(height * 1.5)
 
   return {
-    url: `https://picsum.photos/${width}/${height}`,
+    url: `https://picsum.photos/${width}/${height}`, // `https://via.placeholder.com/${width}x${height}.png`, // `https://via.placeholder.com/${width}x${height}.png`, // `https://picsum.photos/${width}/${height}`,
     width,
     height,
   }
@@ -71,4 +71,23 @@ export const getKeyboardCommand = (e) => {
   modifiers.push(e.code)
 
   return modifiers.join(' ')
+}
+
+export const getSelectionTypes = (selections) => {
+  const types = {
+    shape: false,
+    text: false,
+    image: false,
+    video: false,
+  }
+
+  selections.forEach((selection) => {
+    const type = selection.getAttribute('data-type')
+
+    if (types.hasOwnProperty(type)) {
+      types[type] = true
+    }
+  })
+
+  return Object.keys(types).filter((type) => types[type])
 }

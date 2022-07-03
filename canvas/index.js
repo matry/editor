@@ -26,6 +26,9 @@ window.addEventListener('message', ({ data }) => {
     case 'update_selection_styles':
       modes['select']['update_selection_style'](window.state.current, data.data.property, data.data.value)
       break
+    case 'confirm_replace_content':
+      modes['select']['confirm_replace_content'](window.state.current, data.data)
+      break
     default:
       break
   }

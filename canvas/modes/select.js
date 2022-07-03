@@ -2,6 +2,7 @@ import { updateRule } from '../cssom'
 import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
+import { getSelectionTypes } from '../utils'
 
 const select = {
   commands: {
@@ -24,18 +25,52 @@ const select = {
     'meta onclick': 'select_another_node',
     Escape: 'clear_selections',
     Backspace: 'delete_selections',
-    Enter: 'edit_selections',
-    Slash: 'style_selections',
+    'Enter': 'edit_selections',
+    'Slash': 'style_selections',
+    'shift Digit4': 'replace_content',
+  },
+
+  replace_content({ selections }) {
+    const types = getSelectionTypes(selections)
+
+    if (types.length > 1) {
+      throw new Error('Sorry, you can only edit one type of content at a time')
+    }
+
+    if (!['text', 'image'].includes(types[0])) {
+      throw new Error('Sorry, this content cannot be edited')
+    }
+
+    window.parent.postMessage({
+      action: 'request_extension',
+      data: {
+        id: types[0],
+        params: {
+          count: selections.length,
+        },
+      },
+    })
+  },
+
+  confirm_replace_content({ selections }, { images }) {
+    selections.forEach((selection, i) => {
+      selection.setAttribute('src', images[i])
+    })
   },
 
   update_selection_style({ stylesheet, selections }, property, value) {
+    if (!selections.length) {
+      updateRule(stylesheet, 'body', property, value)
+      return
+    }
+
     selections.forEach(({ id }) => {
-      updateRule(stylesheet, id, property, value)
+      updateRule(stylesheet, `#${id}`, property, value)
     })
   },
 
   style_selections() {
-    window.parent.postMessage({ action: 'request_extension_css' })
+    window.parent.postMessage({ action: 'request_extension', data: { id: 'css' } })
   },
 
   edit_selections({ selections }) {
