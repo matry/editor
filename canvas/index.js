@@ -47,7 +47,7 @@ window.addEventListener('keydown', async (e) => {
     code,
   ].filter((key) => key !== '').join(' ').trim()
 
-  // console.log(`shortcut: ${keyboardShortcut}`)
+  console.log(`shortcut: ${keyboardShortcut}`)
 
   const mode = modes[window.state.current.mode]
 

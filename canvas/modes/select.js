@@ -1,4 +1,5 @@
-import { updateRule } from '../cssom'
+import { saveAs } from 'file-saver'
+import { replaceAllRules, updateRule } from '../cssom'
 import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
@@ -28,6 +29,55 @@ const select = {
     'Enter': 'edit_selections',
     'Slash': 'style_selections',
     'shift Digit4': 'replace_content',
+    'meta KeyS': 'save_document',
+    'meta KeyO': 'open_document',
+  },
+
+  save_document({ stylesheet }) {
+    const serializer = new XMLSerializer()
+
+    const json = JSON.stringify({
+      cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
+      htmlContent: serializer.serializeToString(document.body),
+    })
+
+    const file = new Blob([json], {
+      type: 'application/json',
+    })
+
+    saveAs(file, 'file.json')
+  },
+
+  open_document({ stylesheet }) {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.setAttribute('accept', '.json')
+    input.onchange = () => {
+      const [file] = Array.from(input.files)
+
+      if (!file) {
+        return
+      }
+
+      const reader = new FileReader()
+
+      reader.addEventListener('load', (e) => {
+        const loadedJson = JSON.parse(e.target.result)
+
+        if (loadedJson.htmlContent) {
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(loadedJson.htmlContent, 'text/html')
+          document.body.innerHTML = doc.body.innerHTML
+        }
+
+        if (loadedJson.cssRules) {
+          replaceAllRules(stylesheet, loadedJson.cssRules)
+        }
+      })
+
+      reader.readAsText(file)
+    }
+    input.click()
   },
 
   replace_content({ selections }) {

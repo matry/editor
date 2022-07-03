@@ -27,6 +27,7 @@ const App = ({ extension, params }) => {
           className="w-screen h-screen absolute inset-0"
         />
       )}
+      {/* <Test /> */}
     </div>
   )
 }

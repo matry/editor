@@ -1,8 +1,13 @@
-export const initStyle = () => {
-  const style = document.createElement('style')
-  style.setAttribute('data-identifier', 'canvas') // for later retrieval if needed
-  document.head.appendChild(style)
-  return style.sheet
+export const initStyle = (sheet) => {
+  // const style = document.createElement('style')
+  // style.setAttribute('data-identifier', 'canvas') // for later retrieval if needed
+  // document.head.appendChild(style)
+  // return style.sheet
+  sheet = sheet || new CSSStyleSheet()
+
+  document.adoptedStyleSheets = [sheet]
+
+  return sheet
 }
 
 export const getStylesById = (stylesheet, id) => {
@@ -43,6 +48,22 @@ export const getStylesObjectById = (stylesheet, id) => {
 }
 
 export const getId = (rule) => rule.selectorText.split('#')[1]
+
+export const replaceAllRules = (stylesheet, cssRules) => {
+  const rules = Array.from(stylesheet.cssRules)
+
+  rules.forEach((rule, i) => {
+    try {
+      stylesheet.deleteRule(i)
+    } catch (error) {
+      // do nothing
+    }
+  })
+
+  cssRules.forEach((cssRule) => {
+    stylesheet.insertRule(cssRule)
+  })
+}
 
 export const updateRule = (stylesheet, selectorText, property, value) => {
   const rules = Array.from(stylesheet.cssRules)
