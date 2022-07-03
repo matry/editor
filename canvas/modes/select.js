@@ -1,5 +1,7 @@
 import { saveAs } from 'file-saver'
-import { replaceAllRules, updateRule } from '../cssom'
+import {
+  getStylesObjectById, replaceAllRules, updateRule,
+} from '../cssom'
 import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
@@ -138,7 +140,7 @@ const select = {
   },
 
   copy_selections(state) {
-    const { selections } = state
+    const { selections, stylesheet } = state
 
     if (!selections.length) {
       return null
@@ -149,7 +151,12 @@ const select = {
       return null
     }
 
-    navigator.clipboard.writeText(serialize(selections[0]))
+    const copiedContent = {
+      htmlContent: serialize(selections[0]),
+      cssRules: getStylesObjectById(stylesheet, selections[0].id),
+    }
+
+    navigator.clipboard.writeText(JSON.stringify(copiedContent))
 
     return null
   },

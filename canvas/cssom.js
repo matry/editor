@@ -29,6 +29,22 @@ export const getStylesById = (stylesheet, id) => {
   return rules
 }
 
+export const getCSSTextById = (stylesheet, id) => {
+  const result = Array.from(stylesheet.cssRules)
+    .map((rule) => {
+      const styleId = rule.selectorText.split('#')[1]
+
+      if (styleId !== id) {
+        return null
+      }
+
+      return rule.cssText
+    })
+    .filter((rule) => rule !== null)
+
+  return result
+}
+
 export const getStylesObjectById = (stylesheet, id) => {
   const styles = {}
 
@@ -40,7 +56,7 @@ export const getStylesObjectById = (stylesheet, id) => {
     }
 
     Array.from(rule.style).forEach((property) => {
-      styles[property] = rule[property]
+      styles[property] = rule.style[property]
     })
   })
 
@@ -112,11 +128,23 @@ export const appendRules = (stylesheet, id, rules) => {
     return `${property}: ${value};`
   }).join('\n')
 
-  const existingString = Object.entries(existingStyles).map(([property, value]) => `${property}: ${value};`)
+  const existingString = Object.entries(existingStyles).map(([property, value]) => `${property}: ${value};`).join('\n')
 
   const finalString = `
     #${id} {
       ${existingString}
+      ${cssString}
+    }
+  `
+
+  stylesheet.insertRule(finalString)
+}
+
+export const appendNewRules = (stylesheet, id, rules) => {
+  const cssString = Object.entries(rules).map(([property, value]) => `${property}: ${value};`).join('\n')
+
+  const finalString = `
+    #${id} {
       ${cssString}
     }
   `

@@ -1,4 +1,4 @@
-import { appendRules } from '../cssom'
+import { appendNewRules, appendRules } from '../cssom'
 import {
   constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent,
 } from '../dom'
@@ -26,9 +26,10 @@ const append = {
       const position = selection === document.body ? 'last' : 'after'
 
       if (state.clipboardText) {
-        const element = appendNode(selection, state.clipboardText, position)
-
+        const { htmlContent, cssRules } = JSON.parse(state.clipboardText)
+        const element = appendNode(selection, htmlContent, position)
         element.id = randomId()
+        appendNewRules(state.stylesheet, element.id, cssRules)
 
         return position === 'last' ? selection.lastElementChild : selection.nextElementSibling
       }
@@ -54,7 +55,11 @@ const append = {
       const position = selection === document.body ? 'last' : 'before'
 
       if (state.clipboardText) {
-        appendNode(selection, state.clipboardText, position)
+        const { htmlContent, cssRules } = JSON.parse(state.clipboardText)
+        const element = appendNode(selection, htmlContent, position)
+        element.id = randomId()
+        appendNewRules(state.stylesheet, element.id, cssRules)
+
         return position === 'last' ? selection.lastElementChild : selection.previousElementSibling
       }
 
@@ -82,7 +87,11 @@ const append = {
       }
 
       if (state.clipboardText) {
-        appendNode(selection, state.clipboardText, 'last')
+        const { htmlContent, cssRules } = JSON.parse(state.clipboardText)
+        const element = appendNode(selection, htmlContent, 'last')
+        element.id = randomId()
+        appendNewRules(state.stylesheet, element.id, cssRules)
+
         return selection.lastElementChild
       }
 
