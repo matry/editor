@@ -22,6 +22,28 @@ window.state = new State({
   })
 })
 
+window.addEventListener('paste', (e) => {
+  const { selections } = window.state.current
+
+  const item = e.clipboardData.items[0]
+
+  if (item.type.startsWith('image')) {
+    const blob = item.getAsFile()
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      selections.forEach((selection) => {
+        if (selection.getAttribute('data-type') !== 'image') {
+          return
+        }
+
+        selection.src = event.target.result
+      })
+    }
+    reader.readAsDataURL(blob)
+  }
+})
+
 window.addEventListener('message', ({ data }) => {
   if (!data.action) {
     return

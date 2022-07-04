@@ -24,7 +24,7 @@ const select = {
     'meta ArrowDown': 'select_last_sibling',
     'meta KeyA': 'select_all',
     'meta KeyC': 'copy_selections',
-    'meta KeyV': 'paste_selections',
+    // 'meta KeyV': 'paste_selections',
     'onclick': 'select_node',
     'meta onclick': 'select_another_node',
     'Escape': 'clear_selections',
@@ -229,6 +229,12 @@ const select = {
 
     if (selections.length === 0) {
       return null
+    }
+
+    if (selections.length === 1 && selections[0].parentElement === document.body) {
+      return {
+        selections: [],
+      }
     }
 
     return {

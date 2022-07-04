@@ -143,6 +143,7 @@ const FormInput = forwardRef(({
               setValue(suggestion)
               setSuggestions([])
               setHighlightIndex(-1)
+              onSubmit(suggestion)
             }}
           >
             {suggestion}

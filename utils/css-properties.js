@@ -121,7 +121,16 @@ export default [
   },
   {
     'property': 'object-fit',
-    'values': null,
+    'values': [
+      'contain',
+      'cover',
+      'fill',
+      'inherit',
+      'none',
+      'revert',
+      'scale-down',
+      'unset',
+    ],
   },
   {
     'property': 'object-position',
