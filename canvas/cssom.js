@@ -1,10 +1,5 @@
 export const initStyle = (sheet) => {
-  // const style = document.createElement('style')
-  // style.setAttribute('data-identifier', 'canvas') // for later retrieval if needed
-  // document.head.appendChild(style)
-  // return style.sheet
   sheet = sheet || new CSSStyleSheet()
-
   document.adoptedStyleSheets = [sheet]
 
   return sheet
