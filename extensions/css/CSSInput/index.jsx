@@ -7,6 +7,7 @@ const cssProperties = all.filter((property) => !property.startsWith('-'))
 
 const CSSInput = () => {
   const propRef = useRef()
+  const valRef = useRef()
   const [prop, setProp] = useState('')
   const [val, setVal] = useState('')
   const [suggestions, setSuggestions] = useState([])
@@ -53,7 +54,7 @@ const CSSInput = () => {
             onChange={(e) => {
               setProp(e.target.value)
               setSuggestions(filter(e.target.value))
-              setHighlightIndex(-1)
+              setHighlightIndex(0)
             }}
             onKeyDown={(e) => {
               if (e.code === 'Escape') {
@@ -77,6 +78,7 @@ const CSSInput = () => {
                   setProp(suggestions[highlightIndex])
                   setSuggestions([])
                   setHighlightIndex(-1)
+                  valRef.current.focus()
                   e.preventDefault()
                   break
                 default:
@@ -85,6 +87,7 @@ const CSSInput = () => {
             }}
           />
           <input
+            ref={valRef}
             type="text"
             value={val}
             className="bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none text-right"
