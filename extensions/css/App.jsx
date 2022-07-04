@@ -54,6 +54,7 @@ const App = () => {
           value={value}
           values={possibleValues}
           setValue={setValue}
+          showAllByDefault
           onSubmit={(newValue) => {
             setValue(newValue)
 

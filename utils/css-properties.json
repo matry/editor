@@ -206,7 +206,6 @@
   {
     "property": "color",
     "values": [
-      "color",
       "initial",
       "inherit"
     ]
@@ -214,7 +213,6 @@
   {
     "property": "opacity",
     "values": [
-      "number",
       "initial",
       "inherit"
     ]
@@ -222,9 +220,6 @@
   {
     "property": "background-position",
     "values": [
-      "left top\r\n      left center\r\n      left bottom\r\n      right top\r\n      right center\r\n      right bottom\r\n      center top\r\n      center center\r\n      center bottom",
-      "x% y%",
-      "xpos ypos",
       "initial",
       "inherit"
     ]
@@ -232,7 +227,6 @@
   {
     "property": "background-image",
     "values": [
-      "url('URL')",
       "none",
       "initial",
       "inherit"
@@ -241,7 +235,6 @@
   {
     "property": "background-color",
     "values": [
-      "color",
       "transparent",
       "initial",
       "inherit"
@@ -297,8 +290,6 @@
       "xx-large",
       "smaller",
       "larger",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -327,7 +318,6 @@
     "property": "background-size",
     "values": [
       "auto",
-      "length",
       "percentage",
       " cover",
       " contain",
@@ -377,7 +367,6 @@
       "medium",
       "thin",
       "thick",
-      "length",
       "initial",
       "inherit"
     ]
@@ -393,7 +382,6 @@
       "lighten",
       "color-dodge",
       "saturation",
-      "color",
       "luminosity"
     ]
   },
@@ -432,7 +420,6 @@
   {
     "property": "animation-duration",
     "values": [
-      "time",
       "initial",
       "inherit"
     ]
@@ -442,7 +429,6 @@
     "values": [
       "none",
       "name",
-      "number",
       "initial",
       "inherit"
     ]
@@ -450,8 +436,6 @@
   {
     "property": "padding-left",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -508,8 +492,6 @@
   {
     "property": "min-height",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -528,8 +510,6 @@
     "property": "max-height",
     "values": [
       "none",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -551,7 +531,6 @@
       "medium",
       "thin",
       "thick",
-      "length",
       "initial",
       "inherit"
     ]
@@ -559,8 +538,6 @@
   {
     "property": "border-image-outset",
     "values": [
-      "length",
-      " number",
       "initial",
       "inherit"
     ]
@@ -579,7 +556,6 @@
   {
     "property": "border-left-color",
     "values": [
-      "color",
       "transparent",
       "initial",
       "inherit"
@@ -589,7 +565,6 @@
     "property": "quotes",
     "values": [
       "none",
-      "string string string string",
       "initial",
       "inherit",
       "",
@@ -618,9 +593,6 @@
   {
     "property": "flex",
     "values": [
-      "flex-grow",
-      "flex-shrink",
-      "flex-basis",
       "auto",
       "initial",
       "none",
@@ -630,11 +602,6 @@
   {
     "property": "border-image",
     "values": [
-      " border-image-source",
-      " border-image-slice",
-      " border-image-width",
-      " border-image-outset",
-      " border-image-repeat",
       "initial",
       "inherit"
     ]
@@ -642,7 +609,6 @@
   {
     "property": "animation-delay",
     "values": [
-      "time",
       "initial",
       "inherit"
     ]
@@ -650,7 +616,6 @@
   {
     "property": "border-color",
     "values": [
-      "color",
       "transparent",
       "initial",
       "inherit"
@@ -673,7 +638,6 @@
       "medium",
       "thin",
       "thick",
-      "length",
       "initial",
       "inherit"
     ]
@@ -703,7 +667,6 @@
       "medium",
       "thin",
       "thick",
-      "length",
       "initial",
       "inherit"
     ]
@@ -740,8 +703,6 @@
   {
     "property": "margin-right",
     "values": [
-      "length",
-      "%",
       "auto",
       "initial",
       "inherit"
@@ -760,7 +721,6 @@
   {
     "property": "border-right-color",
     "values": [
-      "color",
       "transparent",
       "initial",
       "inherit"
@@ -769,8 +729,6 @@
   {
     "property": "margin-top",
     "values": [
-      "length",
-      "%",
       "auto",
       "initial",
       "inherit"
@@ -779,8 +737,6 @@
   {
     "property": "border-radius",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -789,8 +745,6 @@
     "property": "max-width",
     "values": [
       "none",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -798,8 +752,6 @@
   {
     "property": "min-width",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -808,7 +760,6 @@
     "property": "z-index",
     "values": [
       "auto",
-      "number",
       "initial",
       "inherit"
     ]
@@ -816,8 +767,6 @@
   {
     "property": "border-bottom-left-radius",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -836,8 +785,6 @@
   {
     "property": "text-indent",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -871,7 +818,6 @@
   {
     "property": "border-bottom-color",
     "values": [
-      "color",
       "transparent",
       "initial",
       "inherit"
@@ -896,7 +842,6 @@
     "property": "letter-spacing",
     "values": [
       "normal",
-      "length",
       "initial",
       "inherit"
     ]
@@ -916,8 +861,6 @@
   {
     "property": "tab-size",
     "values": [
-      "number",
-      "length",
       "initial",
       "inherit"
     ]
@@ -946,7 +889,6 @@
   {
     "property": "flex-basis",
     "values": [
-      "number",
       "auto",
       "initial",
       "inherit"
@@ -955,7 +897,6 @@
   {
     "property": "flex-shrink",
     "values": [
-      "number",
       "initial",
       "inherit"
     ]
@@ -964,8 +905,6 @@
     "property": "bottom",
     "values": [
       "auto",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -974,7 +913,6 @@
     "property": "clip",
     "values": [
       "auto",
-      "shape",
       "initial",
       "inherit"
     ]
@@ -982,7 +920,6 @@
   {
     "property": "flex-grow",
     "values": [
-      "number",
       "initial",
       "inherit"
     ]
@@ -990,17 +927,6 @@
   {
     "property": "font",
     "values": [
-      "font-style",
-      "font-variant",
-      "font-weight",
-      "font-size/line-height",
-      "font-family",
-      "caption",
-      "icon",
-      "menu",
-      "message-box",
-      "small-caption",
-      "status-bar",
       "initial",
       "inherit"
     ]
@@ -1008,8 +934,6 @@
   {
     "property": "margin-left",
     "values": [
-      "length",
-      "%",
       "auto",
       "initial",
       "inherit"
@@ -1018,7 +942,6 @@
   {
     "property": "text-decoration-color",
     "values": [
-      "color",
       "initial",
       "inherit"
     ]
@@ -1026,8 +949,6 @@
   {
     "property": "border-bottom-right-radius",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1045,8 +966,6 @@
     "property": "top",
     "values": [
       "auto",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1055,8 +974,6 @@
     "property": "right",
     "values": [
       "auto",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1083,8 +1000,6 @@
   {
     "property": "margin-bottom",
     "values": [
-      "length",
-      "%",
       "auto",
       "initial",
       "inherit"
@@ -1093,8 +1008,6 @@
   {
     "property": "padding-bottom",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1102,9 +1015,7 @@
   {
     "property": "border-image-slice",
     "values": [
-      " number",
-      " %",
-      " fill",
+      "fill",
       "initial",
       "inherit"
     ]
@@ -1132,8 +1043,6 @@
     "property": "vertical-align",
     "values": [
       "baseline",
-      "length",
-      "%",
       "sub",
       "super",
       "top",
@@ -1148,8 +1057,6 @@
   {
     "property": "padding-right",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1158,8 +1065,6 @@
     "property": "width",
     "values": [
       "auto",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1180,8 +1085,6 @@
   {
     "property": "padding",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1204,7 +1107,6 @@
       "medium",
       "thin",
       "thick",
-      "length",
       "initial",
       "inherit"
     ]
@@ -1243,7 +1145,6 @@
   {
     "property": "order",
     "values": [
-      "number",
       "initial",
       "inherit"
     ]
@@ -1268,7 +1169,6 @@
   {
     "property": "border-top-color",
     "values": [
-      "color",
       "transparent",
       "initial",
       "inherit"
@@ -1303,8 +1203,6 @@
     "property": "left",
     "values": [
       "auto",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1312,8 +1210,6 @@
   {
     "property": "border-top-left-radius",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1321,8 +1217,6 @@
   {
     "property": "margin",
     "values": [
-      "length",
-      "%",
       "auto",
       "initial",
       "inherit"
@@ -1347,7 +1241,6 @@
       "v-shadow",
       "blur",
       "spread",
-      "color",
       "inset",
       "initial",
       "inherit"
@@ -1356,8 +1249,6 @@
   {
     "property": "border-top-right-radius",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1378,8 +1269,6 @@
     "property": "height",
     "values": [
       "auto",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1414,9 +1303,6 @@
   {
     "property": "border-image-width",
     "values": [
-      "length",
-      "number",
-      "%",
       "auto",
       "initial",
       "inherit"
@@ -1425,9 +1311,11 @@
   {
     "property": "font-family",
     "values": [
-      "family-name\r\n      generic-family",
       "initial",
-      "inherit"
+      "inherit",
+      "monospace",
+      "serif",
+      "sans-serif"
     ]
   },
   {
@@ -1467,7 +1355,6 @@
       "h-shadow",
       "v-shadow",
       "blur-radius",
-      "color",
       "none",
       "initial",
       "inherit"
@@ -1487,8 +1374,6 @@
   {
     "property": "padding-top",
     "values": [
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1565,7 +1450,6 @@
   {
     "property": "font-size-adjust",
     "values": [
-      "number",
       "none",
       "initial",
       "inherit"
@@ -1585,9 +1469,6 @@
     "property": "line-height",
     "values": [
       "normal",
-      "number",
-      "length",
-      "%",
       "initial",
       "inherit"
     ]
@@ -1608,7 +1489,6 @@
     "property": "word-spacing",
     "values": [
       "normal",
-      "length",
       "initial",
       "inherit"
     ]
@@ -1629,7 +1509,6 @@
     "property": "outline-color",
     "values": [
       "invert",
-      "color",
       "initial",
       "inherit"
     ]
@@ -1637,7 +1516,6 @@
   {
     "property": "column-gap",
     "values": [
-      "length",
       "normal",
       "initial",
       "inherit"
@@ -1780,7 +1658,6 @@
       "medium",
       "thin",
       "thick",
-      "length",
       "initial",
       "inherit"
     ]
@@ -1828,14 +1705,6 @@
   {
     "property": "animation",
     "values": [
-      "animation-name",
-      "animation-duration",
-      "\r\n\tanimation-timing-function",
-      "animation-delay",
-      "\r\n\tanimation-iteration-count",
-      "animation-direction",
-      "animation-fill-mode",
-      "animation-play-state",
       "initial",
       "inherit"
     ]
@@ -1844,7 +1713,6 @@
     "property": "nav-index",
     "values": [
       "auto",
-      "number",
       "initial",
       "inherit"
     ]
@@ -1877,7 +1745,6 @@
   {
     "property": "transition-duration",
     "values": [
-      "time",
       "initial",
       "inherit"
     ]
@@ -1885,7 +1752,6 @@
   {
     "property": "perspective",
     "values": [
-      "length",
       "none",
       "initial",
       "inherit"
@@ -1912,7 +1778,6 @@
   {
     "property": "column-count",
     "values": [
-      "number",
       "auto",
       "initial",
       "inherit"
@@ -1921,7 +1786,6 @@
   {
     "property": "transition-delay",
     "values": [
-      "time",
       "initial",
       "inherit"
     ]
@@ -2080,7 +1944,6 @@
     "property": "column-width",
     "values": [
       "auto",
-      "length",
       "initial",
       "inherit"
     ]
@@ -2163,7 +2026,6 @@
   {
     "property": "animation-iteration-count",
     "values": [
-      "number",
       "infinite",
       "initial",
       "inherit"

@@ -28,11 +28,10 @@ export const constructTextTemplate = () => {
   return {
     id,
     cssRules: {
-      display: 'block',
-      width: '100%',
-      padding: '10px',
+      'display': 'block',
+      'width': 'auto',
       'user-select': 'none',
-      'background-color': randomColor(),
+      'line-height': 1,
     },
     template: `<span data-type="text" id="${id}">${text}</span>`,
   }
@@ -45,7 +44,7 @@ export const constructImageTemplate = () => {
   return {
     id,
     cssRules: {
-      display: 'block',
+      'display': 'block',
       'user-select': 'none',
     },
     template: `<img data-type="image" width="${width}px" height="${height}px" id="${id}" src="${url}" />`,
@@ -57,7 +56,7 @@ export const constructVideoTemplate = () => {
   return {
     id,
     cssRules: {
-      display: 'block',
+      'display': 'block',
     },
     template: `
       <iframe data-type="video" id="${id}" width="560" height="315" src="https://www.youtube.com/embed/9ZfN87gSjvI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
