@@ -1,4 +1,4 @@
-import cssProperties from './css-properties.json'
+import cssProperties from './css-properties'
 
 export const rootHelper = [
   'bg-cover',

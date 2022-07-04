@@ -4,7 +4,9 @@ import {
 import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
-import { downloadJSONFile, getSelectionTypes, openJSONFile } from '../utils'
+import {
+  downloadJSONFile, getSelectionTypes, openJSONFile, storeJSONFile,
+} from '../utils'
 
 const select = {
   commands: {
@@ -32,14 +34,24 @@ const select = {
     'shift Digit4': 'replace_content',
     'meta KeyS': 'save_document',
     'meta KeyO': 'open_document',
+    'meta KeyE': 'export_document',
   },
 
   save_document({ stylesheet }) {
-    const serializer = new XMLSerializer()
+    storeJSONFile({
+      cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
+      htmlContent: serialize(document.body),
+    })
+    window.parent.postMessage({
+      action: 'did_save_state',
+      data: {},
+    })
+  },
 
+  export_document({ stylesheet }) {
     downloadJSONFile({
       cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-      htmlContent: serializer.serializeToString(document.body),
+      htmlContent: serialize(document.body),
     })
   },
 

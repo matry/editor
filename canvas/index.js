@@ -15,6 +15,11 @@ window.state = new State({
   Object.keys(update).forEach((updateKey) => {
     window.dispatchEvent(new CustomEvent(`${updateKey}_changed`))
   })
+
+  window.parent.postMessage({
+    action: 'state_did_change',
+    data: {},
+  })
 })
 
 window.addEventListener('message', ({ data }) => {

@@ -134,3 +134,9 @@ export const openJSONFile = () => {
     input.click()
   })
 }
+
+export const storeJSONFile = (jsonData) => {
+  window.localStorage.setItem('file', JSON.stringify(jsonData))
+}
+
+export const retrieveJSONFile = () => window.localStorage.getItem('file')
