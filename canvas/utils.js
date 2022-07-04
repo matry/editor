@@ -1,3 +1,5 @@
+import { saveAs } from 'file-saver'
+
 export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
 
@@ -90,4 +92,45 @@ export const getSelectionTypes = (selections) => {
   })
 
   return Object.keys(types).filter((type) => types[type])
+}
+
+export const downloadJSONFile = (data = {}, fileName = 'file') => {
+  const json = JSON.stringify(data)
+
+  const file = new Blob([json], {
+    type: 'application/json',
+  })
+
+  saveAs(file, `${fileName}.json`)
+}
+
+export const openJSONFile = () => {
+  const input = document.createElement('input')
+  input.type = 'file'
+  input.setAttribute('accept', '.json')
+
+  return new Promise((resolve, reject) => {
+    input.onchange = () => {
+      const [file] = Array.from(input.files)
+
+      if (!file) {
+        return
+      }
+
+      const reader = new FileReader()
+
+      reader.addEventListener('load', (e) => {
+        try {
+          const loadedJson = JSON.parse(e.target.result)
+          resolve(loadedJson)
+        } catch (error) {
+          reject(error)
+        }
+      })
+
+      reader.readAsText(file)
+    }
+
+    input.click()
+  })
 }
