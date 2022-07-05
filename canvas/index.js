@@ -42,6 +42,18 @@ window.addEventListener('paste', (e) => {
     }
     reader.readAsDataURL(blob)
   }
+
+  if (item.type.startsWith('text')) {
+    const text = e.clipboardData.getData('text')
+
+    selections.forEach((selection) => {
+      if (selection.getAttribute('data-type') !== 'text') {
+        return
+      }
+
+      selection.innerHTML = text
+    })
+  }
 })
 
 window.addEventListener('message', ({ data }) => {
@@ -74,7 +86,7 @@ window.addEventListener('keydown', async (e) => {
     code,
   ].filter((key) => key !== '').join(' ').trim()
 
-  console.log(`shortcut: ${keyboardShortcut}`)
+  // console.log(`shortcut: ${keyboardShortcut}`)
 
   const mode = modes[window.state.current.mode]
 

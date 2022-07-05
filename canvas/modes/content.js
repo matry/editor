@@ -1,6 +1,7 @@
 const content = {
   commands: {
-    Escape: 'exit',
+    'Escape': 'exit',
+    'Enter': 'exit',
   },
 
   on_enter({ selections }) {
@@ -9,6 +10,12 @@ const content = {
     if (selection.firstChild && selection.firstChild.nodeType === 3) {
       selection.setAttribute('contenteditable', 'true')
       selection.focus()
+
+      const documentSelection = window.getSelection()
+      const range = document.createRange()
+      range.selectNodeContents(selection)
+      documentSelection.removeAllRanges()
+      documentSelection.addRange(range)
     }
   },
 
