@@ -154,3 +154,25 @@ export const loadJSONFile = (stylesheet, rootElem, { cssRules, htmlContent }) =>
   appendStoredRules(stylesheet, cssRules)
   rootElem.insertAdjacentHTML('afterbegin', htmlContent)
 }
+
+export const readBlobs = (blobs) => {
+  const blobsArray = Array.isArray(blobs) ? blobs : Array.from(blobs)
+  const count = blobsArray.length
+  const results = []
+
+  const reader = new FileReader()
+
+  return new Promise((resolve) => {
+    reader.onload = (event) => {
+      results.push(event.target.result)
+
+      if (results.length === count) {
+        resolve(results)
+      }
+    }
+
+    blobsArray.forEach((blob) => {
+      reader.readAsDataURL(blob)
+    })
+  })
+}

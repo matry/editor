@@ -21,8 +21,8 @@ export const randomStyles = (id) => `#${id} {
     background-color: ${randomColor()};
   }`
 
-export const constructTextTemplate = () => {
-  const text = lorem.generateWords(2)
+export const constructTextTemplate = (options = {}) => {
+  const text = options.text || lorem.generateWords(2)
   const id = randomId()
 
   return {
@@ -37,17 +37,26 @@ export const constructTextTemplate = () => {
   }
 }
 
-export const constructImageTemplate = () => {
+export const constructImageTemplate = (options = {}) => {
   const id = randomId()
-  const { url, width, height } = randomImage()
+
+  let template = ''
+
+  if (options.file) {
+    template = `<img data-type="image" width="auto" height="auto" id="${id}" src="${options.file}" />`
+  } else {
+    const { url, width, height } = randomImage()
+    template = `<img data-type="image" width="${width}px" height="${height}px" id="${id}" src="${url}" />`
+  }
 
   return {
     id,
     cssRules: {
       'display': 'block',
       'user-select': 'none',
+      'max-width': '100%',
     },
-    template: `<img data-type="image" width="${width}px" height="${height}px" id="${id}" src="${url}" />`,
+    template,
   }
 }
 
@@ -80,16 +89,16 @@ export const constructShapeTemplate = () => {
   }
 }
 
-export const constructTemplate = (elementType) => {
+export const constructTemplate = (elementType, options) => {
   switch (elementType) {
     case 'text':
-      return constructTextTemplate()
+      return constructTextTemplate(options)
     case 'image':
-      return constructImageTemplate()
+      return constructImageTemplate(options)
     case 'video':
-      return constructVideoTemplate()
+      return constructVideoTemplate(options)
     default:
-      return constructShapeTemplate()
+      return constructShapeTemplate(options)
   }
 }
 

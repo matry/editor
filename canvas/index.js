@@ -2,7 +2,7 @@ import modes from './modes'
 import { State } from './state'
 import './effects'
 import { initStyle } from './cssom'
-import { loadJSONFile, retrieveJSONFile } from './utils'
+import { loadJSONFile, readBlobs, retrieveJSONFile } from './utils'
 
 window.state = new State({
   mode: 'select',
@@ -11,6 +11,8 @@ window.state = new State({
   cutIds: [],
   appendingElementType: null,
   clipboardText: '',
+  clipboardSelection: null,
+  clipboardFiles: null,
   stylesheet: initStyle(),
 }, (newState, update) => {
   Object.keys(update).forEach((updateKey) => {
@@ -23,37 +25,46 @@ window.state = new State({
   })
 })
 
-window.addEventListener('paste', (e) => {
+window.addEventListener('paste', async (e) => {
   const { selections } = window.state.current
 
+  const file = e.clipboardData.files[0]
   const item = e.clipboardData.items[0]
 
-  if (item.type.startsWith('image')) {
-    const blob = item.getAsFile()
+  if (file) {
+    const clipboardFiles = await readBlobs(e.clipboardData.files)
 
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      selections.forEach((selection) => {
-        if (selection.getAttribute('data-type') !== 'image') {
-          return
+    if (clipboardFiles.length) {
+      const imageSelections = selections.filter((selection) => selection.getAttribute('data-type') === 'image')
+
+      if (imageSelections.length === selections.length) {
+        selections.forEach((selection, i) => {
+          selection.src = clipboardFiles[i] || clipboardFiles[clipboardFiles.length - 1]
+        })
+      } else {
+        window.state.current = {
+          mode: 'append',
+          appendingElementType: 'image',
+          clipboardFiles,
         }
-
-        selection.src = event.target.result
-      })
-    }
-    reader.readAsDataURL(blob)
-  }
-
-  if (item.type.startsWith('text')) {
-    const text = e.clipboardData.getData('text')
-
-    selections.forEach((selection) => {
-      if (selection.getAttribute('data-type') !== 'text') {
-        return
       }
+    }
+  } else if (item && item.type.startsWith('text')) {
+    const clipboardText = e.clipboardData.getData('text')
 
-      selection.innerHTML = text
-    })
+    const textSelections = selections.filter((selection) => selection.getAttribute('data-type') === 'text')
+
+    if (textSelections.length === selections.length) {
+      selections.forEach((selection) => {
+        selection.innerHTML = clipboardText
+      })
+    } else {
+      window.state.current = {
+        mode: 'append',
+        appendingElementType: 'text',
+        clipboardText,
+      }
+    }
   }
 })
 

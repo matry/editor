@@ -22,11 +22,11 @@ const append = {
   add_next_sibling(state) {
     const selections = state.selections.length ? state.selections : [document.body]
 
-    const newNodes = selections.map((selection) => {
+    const newNodes = selections.map((selection, i) => {
       const position = selection === document.body ? 'last' : 'after'
 
-      if (state.clipboardText) {
-        const { htmlContent, cssRules } = JSON.parse(state.clipboardText)
+      if (state.clipboardSelection) {
+        const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
         const element = appendNode(selection, htmlContent, position)
         element.id = randomId()
         appendNewRules(state.stylesheet, element.id, cssRules)
@@ -34,28 +34,39 @@ const append = {
         return position === 'last' ? selection.lastElementChild : selection.nextElementSibling
       }
 
-      const { id, cssRules, template } = constructTemplate(state.appendingElementType)
-      appendRules(state.stylesheet, id, cssRules)
-      appendNode(selection, template, position)
+      const options = {}
+      if (state.clipboardText && state.appendingElementType === 'text') {
+        options.text = state.clipboardText
+      }
 
-      return document.getElementById(id)
+      if (state.clipboardFiles && state.appendingElementType === 'image') {
+        options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
+      }
+
+      const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
+      appendRules(state.stylesheet, id, cssRules)
+      const newElement = appendNode(selection, template, position)
+
+      return newElement
     })
 
     return {
       selections: newNodes,
       mode: 'select',
       clipboardText: '',
+      clipboardSelection: null,
+      clipboardFiles: null,
     }
   },
 
   add_previous_sibling(state) {
     const selections = state.selections.length ? state.selections : [document.body]
 
-    const newNodes = selections.map((selection) => {
+    const newNodes = selections.map((selection, i) => {
       const position = selection === document.body ? 'last' : 'before'
 
-      if (state.clipboardText) {
-        const { htmlContent, cssRules } = JSON.parse(state.clipboardText)
+      if (state.clipboardSelection) {
+        const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
         const element = appendNode(selection, htmlContent, position)
         element.id = randomId()
         appendNewRules(state.stylesheet, element.id, cssRules)
@@ -63,7 +74,16 @@ const append = {
         return position === 'last' ? selection.lastElementChild : selection.previousElementSibling
       }
 
-      const { id, cssRules, template } = constructTemplate(state.appendingElementType)
+      const options = {}
+      if (state.clipboardText && state.appendingElementType === 'text') {
+        options.text = state.clipboardText
+      }
+
+      if (state.clipboardFiles && state.appendingElementType === 'image') {
+        options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
+      }
+
+      const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
 
       appendRules(state.stylesheet, id, cssRules)
 
@@ -75,19 +95,21 @@ const append = {
       selections: newNodes,
       mode: 'select',
       clipboardText: '',
+      clipboardSelection: null,
+      clipboardFiles: null,
     }
   },
 
   add_last_child(state) {
     const { selections } = state
 
-    const newNodes = selections.map((selection) => {
+    const newNodes = selections.map((selection, i) => {
       if (['IMG', 'SPAN'].includes(selection.nodeName)) {
         throw new Error('Sorry, this element cannot have children')
       }
 
-      if (state.clipboardText) {
-        const { htmlContent, cssRules } = JSON.parse(state.clipboardText)
+      if (state.clipboardSelection) {
+        const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
         const element = appendNode(selection, htmlContent, 'last')
         element.id = randomId()
         appendNewRules(state.stylesheet, element.id, cssRules)
@@ -95,7 +117,16 @@ const append = {
         return selection.lastElementChild
       }
 
-      const { id, cssRules, template } = constructTemplate(state.appendingElementType)
+      const options = {}
+      if (state.clipboardText && state.appendingElementType === 'text') {
+        options.text = state.clipboardText
+      }
+
+      if (state.clipboardFiles && state.appendingElementType === 'image') {
+        options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
+      }
+
+      const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
 
       appendRules(state.stylesheet, id, cssRules)
 
@@ -107,6 +138,8 @@ const append = {
       selections: newNodes,
       mode: 'select',
       clipboardText: '',
+      clipboardSelection: null,
+      clipboardFiles: null,
     }
   },
 

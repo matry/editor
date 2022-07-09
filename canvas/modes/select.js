@@ -149,26 +149,6 @@ const select = {
     return null
   },
 
-  async paste_selections(state) {
-    const { selections } = state
-
-    if (!selections.length) {
-      return null
-    }
-
-    if (selections.length > 1) {
-      window.alert('Sorry, multi-line paste is not yet available')
-      return null
-    }
-
-    const clipboardText = await navigator.clipboard.readText()
-
-    return {
-      mode: 'append',
-      clipboardText,
-    }
-  },
-
   append_shape() {
     return {
       mode: 'append',
