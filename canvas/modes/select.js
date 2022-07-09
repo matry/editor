@@ -39,6 +39,17 @@ const select = {
     'meta KeyO': 'open_document',
     'meta KeyE': 'export_document',
     'meta Backspace': 'reset',
+    'shift Slash': 'help',
+  },
+
+  help() {
+    window.parent.postMessage({
+      action: 'request_extension',
+      data: {
+        id: 'help',
+        params: {},
+      },
+    })
   },
 
   reset() {
