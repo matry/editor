@@ -155,6 +155,10 @@ export const loadJSONFile = (stylesheet, rootElem, { cssRules, htmlContent }) =>
   rootElem.insertAdjacentHTML('afterbegin', htmlContent)
 }
 
+export const clearStorage = () => {
+  window.localStorage.clear()
+}
+
 export const readBlobs = (blobs) => {
   const blobsArray = Array.isArray(blobs) ? blobs : Array.from(blobs)
   const count = blobsArray.length

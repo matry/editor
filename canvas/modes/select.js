@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import {
   getStylesObjectById, replaceAllRules, updateRule,
 } from '../cssom'
@@ -5,6 +6,7 @@ import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
 import {
+  clearStorage,
   downloadJSONFile, getSelectionTypes, openJSONFile, storeJSONFile,
 } from '../utils'
 
@@ -36,6 +38,14 @@ const select = {
     'meta KeyS': 'save_document',
     'meta KeyO': 'open_document',
     'meta KeyE': 'export_document',
+    'meta Backspace': 'reset',
+  },
+
+  reset() {
+    if (window.confirm('Are you sure you want to clear the canvas? This cannot be undone.')) {
+      clearStorage()
+      window.location.reload()
+    }
   },
 
   save_document({ stylesheet }) {
