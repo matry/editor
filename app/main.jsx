@@ -22,6 +22,9 @@ window.addEventListener('message', (e) => {
   }
 
   switch (message.action) {
+    case 'canvas_did_load':
+      document.getElementById('canvas').contentWindow.focus()
+      break
     case 'request_extension':
       render({ extension: message.data.id, params: message.data.params || {} })
       break

@@ -2,6 +2,7 @@ import modes from './modes'
 import { State } from './state'
 import './effects'
 import { initStyle } from './cssom'
+import { loadJSONFile, retrieveJSONFile } from './utils'
 
 window.state = new State({
   mode: 'select',
@@ -84,9 +85,7 @@ window.addEventListener('keydown', async (e) => {
     altKey ? 'alt' : '',
     shiftKey ? 'shift' : '',
     code,
-  ].filter((key) => key !== '').join(' ').trim()
-
-  // console.log(`shortcut: ${keyboardShortcut}`)
+  ].filter((k) => k !== '').join(' ').trim()
 
   const mode = modes[window.state.current.mode]
 
@@ -158,4 +157,15 @@ document.body.addEventListener('click', (e) => {
   } catch (error) {
     window.alert(error)
   }
+})
+
+const jsonFile = retrieveJSONFile()
+
+if (jsonFile) {
+  loadJSONFile(window.state.current.stylesheet, document.body, jsonFile)
+}
+
+window.parent.postMessage({
+  action: 'canvas_did_load',
+  data: {},
 })

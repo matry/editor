@@ -16,6 +16,7 @@ const select = {
     'shift KeyV': 'append_video',
     'ArrowUp': 'select_previous_sibling',
     'ArrowDown': 'select_next_sibling',
+    'Tab': 'select_next_sibling',
     'ArrowLeft': 'select_parent',
     'ArrowRight': 'select_first_child',
     'shift ArrowUp': 'shift_selection_up',

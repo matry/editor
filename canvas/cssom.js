@@ -146,3 +146,9 @@ export const appendNewRules = (stylesheet, id, rules) => {
 
   stylesheet.insertRule(finalString)
 }
+
+export const appendStoredRules = (stylesheet, rules) => {
+  rules.forEach((cssText) => {
+    stylesheet.insertRule(cssText)
+  })
+}

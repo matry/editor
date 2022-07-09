@@ -1,4 +1,5 @@
 import { saveAs } from 'file-saver'
+import { appendStoredRules } from './cssom'
 
 export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
@@ -139,4 +140,17 @@ export const storeJSONFile = (jsonData) => {
   window.localStorage.setItem('file', JSON.stringify(jsonData))
 }
 
-export const retrieveJSONFile = () => window.localStorage.getItem('file')
+export const retrieveJSONFile = () => {
+  const json = window.localStorage.getItem('file')
+
+  if (json) {
+    return JSON.parse(json)
+  }
+
+  return null
+}
+
+export const loadJSONFile = (stylesheet, rootElem, { cssRules, htmlContent }) => {
+  appendStoredRules(stylesheet, cssRules)
+  rootElem.insertAdjacentHTML('afterbegin', htmlContent)
+}
