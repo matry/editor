@@ -27,7 +27,6 @@ const select = {
     'meta ArrowDown': 'select_last_sibling',
     'meta KeyA': 'select_all',
     'meta KeyC': 'copy_selections',
-    // 'meta KeyV': 'paste_selections',
     'onclick': 'select_node',
     'meta onclick': 'select_another_node',
     'Escape': 'clear_selections',
@@ -131,7 +130,13 @@ const select = {
   },
 
   style_selections() {
-    window.parent.postMessage({ action: 'request_extension', data: { id: 'css' } })
+    window.parent.postMessage({
+      action: 'request_extension',
+      data: {
+        id: 'css',
+        params: {},
+      },
+    })
   },
 
   edit_selections({ selections }) {
