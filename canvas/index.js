@@ -75,7 +75,7 @@ window.addEventListener('message', ({ data }) => {
 
   switch (data.action) {
     case 'update_selection_styles':
-      modes['select']['update_selection_style'](window.state.current, data.data.property, data.data.value)
+      modes['select']['update_selection_style'](window.state.current, data.data.property, data.data.value, data.data.styles)
       break
     case 'confirm_replace_content':
       modes['select']['confirm_replace_content'](window.state.current, data.data)
@@ -98,7 +98,7 @@ window.addEventListener('keydown', async (e) => {
     code,
   ].filter((k) => k !== '').join(' ').trim()
 
-  console.log(`keyboardShortcut: ${keyboardShortcut}`)
+  // console.log(`keyboardShortcut: ${keyboardShortcut}`)
 
   const mode = modes[window.state.current.mode]
 

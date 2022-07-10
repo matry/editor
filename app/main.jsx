@@ -26,7 +26,7 @@ window.addEventListener('message', (e) => {
       document.getElementById('canvas').contentWindow.focus()
       break
     case 'request_extension':
-      render({ extension: message.data.id, params: message.data.params || {} })
+      render({ extension: message.data.id, extensionProps: message.data.params || {} })
       break
     case 'exit_extension':
       render('')

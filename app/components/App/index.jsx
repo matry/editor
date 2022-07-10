@@ -1,8 +1,8 @@
 import { object, string } from 'prop-types'
 
-const App = ({ extension, params }) => {
-  const queryParams = Object.keys(params)
-    .map((k) => `${k}=${params[k]}`)
+const App = ({ extension, extensionProps }) => {
+  const queryParams = Object.keys(extensionProps)
+    .map((k) => `${k}=${extensionProps[k]}`)
     .join('&')
 
   let url = `extensions/${extension}/index.html`
@@ -11,7 +11,7 @@ const App = ({ extension, params }) => {
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden">
+    <div className="w-screen h-screen overflow-hidden">
       <iframe
         title="canvas"
         id="canvas"
@@ -24,7 +24,7 @@ const App = ({ extension, params }) => {
           title={extension}
           id={extension}
           src={url}
-          className="w-screen h-screen absolute inset-0"
+          className="absolute inset-0 w-screen h-screen"
         />
       )}
       {/* <Test /> */}
@@ -34,12 +34,12 @@ const App = ({ extension, params }) => {
 
 App.propTypes = {
   extension: string,
-  params: object,
+  extensionProps: object,
 }
 
 App.defaultProps = {
   extension: '',
-  params: {},
+  extensionProps: {},
 }
 
 export default App

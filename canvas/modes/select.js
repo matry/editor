@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import {
+  getSharedStylesByIds,
   getStylesObjectById, replaceAllRules, updateRule,
 } from '../cssom'
 import {
@@ -129,12 +130,14 @@ const select = {
     })
   },
 
-  style_selections() {
+  style_selections({ stylesheet, selections }) {
+    const styles = getSharedStylesByIds(stylesheet, selections.map((selection) => selection.id))
+
     window.parent.postMessage({
       action: 'request_extension',
       data: {
         id: 'css',
-        params: {},
+        params: styles,
       },
     })
   },

@@ -58,6 +58,24 @@ export const getStylesObjectById = (stylesheet, id) => {
   return styles
 }
 
+export const getSharedStylesByIds = (stylesheet, ids) => {
+  const styleObjects = ids.map((id) => getStylesObjectById(stylesheet, id))
+
+  const sharedStyles = styleObjects.reduce((previous, current) => {
+    const result = {}
+
+    Object.keys(previous).forEach((key) => {
+      if (previous[key] === current[key]) {
+        result[key] = previous[key]
+      }
+    })
+
+    return result
+  })
+
+  return sharedStyles
+}
+
 export const getId = (rule) => rule.selectorText.split('#')[1]
 
 export const replaceAllRules = (stylesheet, cssRules) => {
