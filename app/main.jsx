@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
-import unsaved from './unsaved.png'
-import originalFavicon from './favicon.svg'
+// import unsaved from './unsaved.png'
+// import originalFavicon from './favicon.svg'
 import './index.css'
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
@@ -32,12 +32,13 @@ window.addEventListener('message', (e) => {
       render('')
       document.getElementById('canvas').contentWindow.focus()
       break
-    case 'did_save_state':
-      document.getElementById('favicon').setAttribute('href', originalFavicon)
-      break
-    case 'state_did_change':
-      document.getElementById('favicon').setAttribute('href', unsaved)
-      break
+    // This was annoying so removing until I find a less-annoying solution
+    // case 'did_save_state':
+    //   document.getElementById('favicon').setAttribute('href', originalFavicon)
+    //   break
+    // case 'state_did_change':
+    //   document.getElementById('favicon').setAttribute('href', unsaved)
+    //   break
     default:
       document.getElementById('canvas').contentWindow.postMessage(message)
       break

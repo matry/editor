@@ -61,7 +61,7 @@ export const getStylesObjectById = (stylesheet, id) => {
 export const getSharedStylesByIds = (stylesheet, ids) => {
   const styleObjects = ids.map((id) => getStylesObjectById(stylesheet, id))
 
-  const sharedStyles = styleObjects.reduce((previous, current) => {
+  const sharedStyles = !styleObjects.length ? {} : styleObjects.reduce((previous, current) => {
     const result = {}
 
     Object.keys(previous).forEach((key) => {
