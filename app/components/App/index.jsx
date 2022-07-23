@@ -2,7 +2,7 @@ import { object, string } from 'prop-types'
 
 const App = ({ extension, extensionProps }) => {
   const queryParams = Object.keys(extensionProps)
-    .map((k) => `${k}=${extensionProps[k]}`)
+    .map((k) => `${k}=${encodeURIComponent(extensionProps[k])}`)
     .join('&')
 
   let url = `extensions/${extension}/index.html`
