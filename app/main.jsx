@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
+import './model'
 // import unsaved from './unsaved.png'
 // import originalFavicon from './favicon.svg'
 import './index.css'
