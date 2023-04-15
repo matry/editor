@@ -32,7 +32,7 @@ const App = ({ styles }) => {
           e.stopPropagation()
         }}
       >
-        <div className="absolute w-full p-5 mb-2 rounded bg-slate-700 bottom-full bg-opacity-90">
+        <div className="absolute w-full p-5 mb-2 overflow-x-hidden rounded bg-slate-700 bottom-full bg-opacity-90 max-h-52">
           <ul>
             {Object.entries(currentStyles).map(([key, val]) => (
               <li key={key} className="flex items-center justify-between w-full mb-1">
