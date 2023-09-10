@@ -33,13 +33,6 @@ window.addEventListener('message', (e) => {
       render('')
       document.getElementById('canvas').contentWindow.focus()
       break
-    // This was annoying so removing until I find a less-annoying solution
-    // case 'did_save_state':
-    //   document.getElementById('favicon').setAttribute('href', originalFavicon)
-    //   break
-    // case 'state_did_change':
-    //   document.getElementById('favicon').setAttribute('href', unsaved)
-    //   break
     default:
       document.getElementById('canvas').contentWindow.postMessage(message)
       break
