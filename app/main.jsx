@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
-import './model'
 // import unsaved from './unsaved.png'
 // import originalFavicon from './favicon.svg'
 import './index.css'
@@ -30,7 +29,7 @@ window.addEventListener('message', (e) => {
       render({ extension: message.data.id, extensionProps: message.data.params || {} })
       break
     case 'exit_extension':
-      render('')
+      render({})
       document.getElementById('canvas').contentWindow.focus()
       break
     default:

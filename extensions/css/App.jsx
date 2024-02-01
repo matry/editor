@@ -21,77 +21,81 @@ const App = ({ styles }) => {
 
   return (
     <div
-      className="absolute top-0 left-0 right-0 z-10 flex items-center justify-center w-screen h-screen"
+      className="z-10 text-xs"
       onClick={() => {
         window.parent.postMessage({ action: 'exit_extension', data: {} })
       }}
     >
       <div
-        className="relative flex gap-2 overflow-visible text-white rounded shadow bg-slate-800 bg-opacity-90"
+        className="relative overflow-visible text-white rounded shadow bg-slate-800 bg-opacity-90"
         onClick={(e) => {
           e.stopPropagation()
         }}
       >
-        <div className="absolute w-full p-5 mb-2 overflow-x-hidden rounded bg-slate-700 bottom-full bg-opacity-90 max-h-52">
+        <div className="p-5 overflow-x-hidden rounded bg-slate-700 bottom-full bg-opacity-90">
           <ul>
             {Object.entries(currentStyles).map(([key, val]) => (
               <li key={key} className="flex items-center justify-between w-full mb-1">
                 <span className="text-slate-300">{key}</span>
-                <span className="font-semibold">{val}</span>
+                <span>{val}</span>
               </li>
             ))}
           </ul>
         </div>
-        <FormInput
-          ref={propRef}
-          value={property}
-          values={cssProperties}
-          setValue={setProperty}
-          onSubmit={(newProperty) => {
-            setProperty(newProperty)
+        <div
+          className="flex"
+        >
+          <FormInput
+            ref={propRef}
+            value={property}
+            values={cssProperties}
+            setValue={setProperty}
+            onSubmit={(newProperty) => {
+              setProperty(newProperty)
 
-            const foundProperty = properties.find((p) => p.property === newProperty)
+              const foundProperty = properties.find((p) => p.property === newProperty)
 
-            if (!foundProperty || !foundProperty.values) {
-              return
-            }
+              if (!foundProperty || !foundProperty.values) {
+                return
+              }
 
-            setPossibleValues(foundProperty.values)
-            valRef.current.focus()
-          }}
-        />
-        <FormInput
-          ref={valRef}
-          align="right"
-          value={value}
-          values={possibleValues}
-          setValue={setValue}
-          showAllByDefault
-          onSubmit={(newValue) => {
-            setValue(newValue)
+              setPossibleValues(foundProperty.values)
+              valRef.current.focus()
+            }}
+          />
+          <FormInput
+            ref={valRef}
+            align="right"
+            value={value}
+            values={possibleValues}
+            setValue={setValue}
+            showAllByDefault
+            onSubmit={(newValue) => {
+              setValue(newValue)
 
-            window.parent.postMessage({
-              action: 'update_selection_styles',
-              data: {
-                property,
-                value: newValue,
-              },
-            })
+              window.parent.postMessage({
+                action: 'update_selection_styles',
+                data: {
+                  property,
+                  value: newValue,
+                },
+              })
 
-            setProperty('')
-            setValue('')
+              setProperty('')
+              setValue('')
 
-            const newCurrentStyles = {
-              ...currentStyles,
-            }
+              const newCurrentStyles = {
+                ...currentStyles,
+              }
 
-            newCurrentStyles[property] = newValue
+              newCurrentStyles[property] = newValue
 
-            setCurrentStyles(newCurrentStyles)
+              setCurrentStyles(newCurrentStyles)
 
-            propRef.current.focus()
-          }}
-        />
+              propRef.current.focus()
+            }}
+          />
+        </div>
       </div>
     </div>
   )

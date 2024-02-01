@@ -11,23 +11,30 @@ const App = ({ extension, extensionProps }) => {
   }
 
   return (
-    <div className="w-screen h-screen overflow-hidden">
-      <iframe
-        title="canvas"
-        id="canvas"
-        src="canvas/index.html"
-        className="w-screen h-screen"
-      />
-      {extension !== '' && (
+    <div className="w-screen h-screen overflow-hidden flex bg-slate-400">
+      <div
+        className="h-full bg-slate-800 relative w-96"
+      >
+        {extension !== '' && (
+          <iframe
+            key={extension}
+            title={extension}
+            id={extension}
+            src={url}
+            className="w-full h-full"
+          />
+        )}
+      </div>
+      <div
+        className="h-full p-5 w-full"
+      >
         <iframe
-          key={extension}
-          title={extension}
-          id={extension}
-          src={url}
-          className="absolute inset-0 w-screen h-screen"
+          title="canvas"
+          id="canvas"
+          src="canvas/index.html"
+          className="w-full h-full"
         />
-      )}
-      {/* <Test /> */}
+      </div>
     </div>
   )
 }

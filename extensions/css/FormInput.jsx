@@ -67,7 +67,7 @@ const FormInput = forwardRef(({
 
         onSubmit(value)
       }}
-      className="relative m-0"
+      className="relative m-0 w-1/2"
     >
       <input
         ref={ref}
@@ -75,7 +75,7 @@ const FormInput = forwardRef(({
         value={value}
         placeholder={placeholder}
         className={classNames(
-          'bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none p-6',
+          'bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none w-full px-5 py-2',
           {
             'text-right': align === 'right',
             'text-left': align === 'left',
@@ -127,7 +127,7 @@ const FormInput = forwardRef(({
       <input type="submit" className="hidden" />
       {suggestions.length > 0 && (
       <ul
-        className="absolute left-0 right-0 w-full py-4 mt-1 overflow-x-hidden rounded top-full bg-slate-700 bg-opacity-90 max-h-72"
+        className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-slate-700 bg-opacity-90 max-h-72"
       >
         {suggestions.map((suggestion, i) => (
           <li
