@@ -15,3 +15,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* #canvas {
+  overflow: hidden;
+  -webkit-transform: scale(7) translate(50px, 0px);
+  -webkit-transform-origin: 0 0;
+} */

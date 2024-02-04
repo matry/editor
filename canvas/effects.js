@@ -1,4 +1,4 @@
-// import { getBox } from 'css-box-model'
+import { getBox } from 'css-box-model'
 import modes from './modes'
 import { isInBounds } from './dom'
 

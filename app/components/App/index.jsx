@@ -1,4 +1,5 @@
 import { object, string } from 'prop-types'
+import { useEffect, useRef, useState } from 'react'
 
 const App = ({ extension, extensionProps }) => {
   const queryParams = Object.keys(extensionProps)
@@ -9,6 +10,8 @@ const App = ({ extension, extensionProps }) => {
   if (queryParams) {
     url = `${url}?${queryParams}`
   }
+
+  const [scale, setScale] = useState(1)
 
   return (
     <div className="w-screen h-screen overflow-hidden flex bg-slate-400">
@@ -26,7 +29,17 @@ const App = ({ extension, extensionProps }) => {
         )}
       </div>
       <div
-        className="h-full p-5 w-full"
+        className="h-full p-5 w-full overflow-hidden origin-top-left"
+        onWheel={(e) => {
+          e.stopPropagation()
+
+          const newScale = Math.max(scale - (e.deltaY / 100), 1)
+          console.log(`scale: ${newScale}`)
+          setScale(newScale)
+        }}
+        style={{
+          transform: `scale(${scale})`
+        }}
       >
         <iframe
           title="canvas"
