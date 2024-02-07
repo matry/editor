@@ -27,12 +27,12 @@ const App = ({ styles }) => {
       }}
     >
       <div
-        className="relative overflow-visible text-white rounded shadow bg-slate-800 bg-opacity-90"
+        className="relative overflow-visible text-white"
         onClick={(e) => {
           e.stopPropagation()
         }}
       >
-        <div className="p-5 overflow-x-hidden rounded bg-slate-700 bottom-full bg-opacity-90">
+        <div className="p-5 overflow-x-hidden rounded bottom-full">
           <ul>
             {Object.entries(currentStyles).map(([key, val]) => (
               <li key={key} className="flex items-center justify-between w-full mb-1">
