@@ -6,6 +6,7 @@ import {
 import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
+import { channel } from '../listener'
 import {
   clearStorage,
   downloadJSONFile, getSelectionTypes, openJSONFile, storeJSONFile,
@@ -43,7 +44,7 @@ const select = {
   },
 
   help() {
-    window.parent.postMessage({
+    channel.post({
       action: 'request_extension',
       data: {
         id: 'help',
@@ -64,7 +65,7 @@ const select = {
       cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
       htmlContent: serialize(document.body),
     })
-    window.parent.postMessage({
+    channel.post({
       action: 'did_save_state',
       data: {},
     })
@@ -102,7 +103,7 @@ const select = {
       throw new Error('Sorry, this content cannot be edited')
     }
 
-    window.parent.postMessage({
+    channel.post({
       action: 'request_extension',
       data: {
         id: types[0],
@@ -133,7 +134,7 @@ const select = {
   style_selections({ stylesheet, selections }) {
     const styles = getSharedStylesByIds(stylesheet, selections.map((selection) => selection.id))
 
-    window.parent.postMessage({
+    channel.post({
       action: 'request_extension',
       data: {
         id: 'css',

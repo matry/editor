@@ -3,6 +3,7 @@ import { State } from './state'
 import './effects'
 import { initStyle } from './cssom'
 import { loadJSONFile, readBlobs, retrieveJSONFile } from './utils'
+import { channel } from './listener'
 
 window.state = new State({
   mode: 'select',
@@ -19,7 +20,7 @@ window.state = new State({
     window.dispatchEvent(new CustomEvent(`${updateKey}_changed`))
   })
 
-  window.parent.postMessage({
+  channel.post({
     action: 'state_did_change',
     data: {},
   })
@@ -68,21 +69,19 @@ window.addEventListener('paste', async (e) => {
   }
 })
 
-window.addEventListener('message', ({ data }) => {
-  if (!data.action) {
-    return
-  }
+channel.listen((e) => {
+  const message = e.data
 
-  switch (data.action) {
+  switch (message.action) {
     case 'update_selection_styles':
-      modes['select']['update_selection_style'](window.state.current, data.data.property, data.data.value, data.data.styles)
+      modes['select']['update_selection_style'](window.state.current, message.data.property, message.data.value, message.data.styles)
       break
     case 'confirm_replace_content':
-      modes['select']['confirm_replace_content'](window.state.current, data.data)
+      modes['select']['confirm_replace_content'](window.state.current, message.data)
       break
     default:
       break
-  }
+  }  
 })
 
 window.addEventListener('keydown', async (e) => {
@@ -178,7 +177,7 @@ if (jsonFile) {
   loadJSONFile(window.state.current.stylesheet, document.body, jsonFile)
 }
 
-window.parent.postMessage({
+channel.post({
   action: 'canvas_did_load',
   data: {},
 })

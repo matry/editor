@@ -5,6 +5,7 @@ import {
 import {
   forwardRef, useEffect, useRef, useState,
 } from 'react'
+import { channel } from '../listener'
 
 const filter = (val, values) => {
   const exactMatches = []
@@ -88,7 +89,7 @@ const FormInput = forwardRef(({
         }}
         onKeyDown={(e) => {
           if (e.code === 'Escape') {
-            window.parent.postMessage({ action: 'exit_extension', data: {} })
+            channel.post({ action: 'exit_extension', data: {} })
           }
 
           if (!suggestions.length) {

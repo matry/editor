@@ -1,6 +1,7 @@
 import { object } from 'prop-types'
 import { useEffect, useState, useRef } from 'react'
 import { properties } from '../../utils/css'
+import { channel } from '../listener'
 import FormInput from './FormInput'
 
 const cssProperties = properties.map(({ property }) => property)
@@ -23,7 +24,7 @@ const App = ({ styles }) => {
     <div
       className="z-10 text-xs"
       onClick={() => {
-        window.parent.postMessage({ action: 'exit_extension', data: {} })
+        channel.post({ action: 'exit_extension', data: {} })
       }}
     >
       <div
@@ -73,7 +74,7 @@ const App = ({ styles }) => {
             onSubmit={(newValue) => {
               setValue(newValue)
 
-              window.parent.postMessage({
+              channel.post({
                 action: 'update_selection_styles',
                 data: {
                   property,

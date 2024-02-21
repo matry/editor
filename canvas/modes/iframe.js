@@ -1,3 +1,5 @@
+import { channel } from "../listener"
+
 export class ExtensionManager {
   isOpeningExtension = false
 
@@ -6,17 +8,15 @@ export class ExtensionManager {
   }
 
   constructor() {
-    window.addEventListener('message', ({ data }) => {
-      if (!data.action) {
-        return
-      }
+    channel.listen((e) => {
+      const message = e.data
 
-      switch (data.action) {
+      switch (message.action) {
         case 'open_extension':
-          this.openExtension(data.data)
+          this.openExtension(message.data)
           break
         case 'extension_did_open':
-          this.extensionDidOpen(data.data)
+          this.extensionDidOpen(message.data)
           break
         default:
           break

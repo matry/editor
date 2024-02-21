@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker'
 import classNames from 'classnames'
 import { number } from 'prop-types'
 import { useRef, useState } from 'react'
+import { channel } from '../listener'
 
 const categories = [
   'abstract',
@@ -32,7 +33,7 @@ const ImageInput = ({ count }) => {
     <div
       className="absolute top-0 left-0 right-0 w-screen h-screen flex justify-center z-10 pt-60 overflow-x-hidden"
       onClick={() => {
-        window.parent.postMessage({ action: 'exit_extension', data: {} })
+        channel.post({ action: 'exit_extension', data: {} })
       }}
     >
       <form
@@ -41,7 +42,7 @@ const ImageInput = ({ count }) => {
         onSubmit={(e) => {
           e.preventDefault()
 
-          window.parent.postMessage({
+          channel.post({
             action: 'update_selection_styles',
             data: {
               // property: prop,
@@ -102,7 +103,7 @@ const ImageInput = ({ count }) => {
                       newImages.push(faker.image[category](100, 100))
                     }
 
-                    window.parent.postMessage({
+                    channel.post({
                       action: 'confirm_replace_content',
                       data: {
                         images: newImages,

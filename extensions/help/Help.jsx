@@ -1,3 +1,5 @@
+import { channel } from "../listener"
+
 const selectCommands = [
   {
     name: 'Select previous sibling',
@@ -55,7 +57,7 @@ const Help = () => (
   <div
     className="z-10 w-screen h-screen"
     onClick={() => {
-      window.parent.postMessage({ action: 'exit_extension', data: {} })
+      channel.post({ action: 'exit_extension', data: {} })
     }}
   >
     <div

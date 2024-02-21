@@ -5,9 +5,52 @@
     <link id="favicon" rel="icon" type="image/svg+xml" href="/app/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stride Editor</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      iframe {
+        border: none;
+      }
+
+      #main {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        background-color: rgb(148 163 184);
+      }
+
+      #editor {
+        width: 384px;
+        height: 100%;
+      }
+
+      #canvas-container {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      #canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/app/main.jsx"></script>
+    <div id="main">
+      <iframe id="editor" src="/editor/index.html"></iframe>
+      <div
+        id="canvas-container"
+      >
+        <iframe
+          id="canvas"
+          src="canvas/index.html"
+        ></iframe>
+      </div>
+    </div>
   </body>
 </html>
