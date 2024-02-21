@@ -85,14 +85,6 @@ window.addEventListener('selections_changed', () => {
         block: 'center',
       })
     }
-
-    if (selections.length === 0) {
-      document.body.removeAttribute('data-after')
-    } else {
-      const firstSelection = `${selections[0].getAttribute('data-type')}#${selections[0].id}`
-      const additionalText = selections.length > 1 ? `, and ${selections.length - 1} others` : ''
-      document.body.setAttribute('data-after', `${firstSelection}${additionalText}`)
-    }
   } catch (error) {
     window.alert(error)
   }
