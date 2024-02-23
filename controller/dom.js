@@ -3,6 +3,7 @@ import {
   randomColor, randomId, randomImage,
 } from './utils'
 import { appendRules } from './cssom'
+import { canvasDocument } from './canvas'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -136,8 +137,10 @@ export const firstSelection = () => window.state.current.selections[0] || null
 export const lastSelection = () => window.state.current.selections[window.state.current.selections.length - 1] || null
 
 export const selectAll = (selections) => {
+  const doc = canvasDocument()
+
   if (!selections.length) {
-    return Array.from(document.body.children)
+    return Array.from(doc.body.children)
   }
 
   return Array.from(selections[0].parentElement.children)
@@ -184,8 +187,10 @@ export const getSelectionSibling = (direction) => {
 }
 
 export const selectNextNode = (selections) => {
+  const doc = canvasDocument()
+
   if (!selections.length) {
-    const bodyChildren = Array.from(document.body.children)
+    const bodyChildren = Array.from(doc.body.children)
 
     if (!bodyChildren) {
       return []

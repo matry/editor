@@ -1,6 +1,11 @@
+import { canvasDocument } from './canvas'
+
 export const initStyle = (sheet) => {
+  const doc = canvasDocument()
+
   sheet = sheet || new CSSStyleSheet()
-  document.adoptedStyleSheets = [sheet]
+
+  doc.adoptedStyleSheets = [sheet]
 
   return sheet
 }

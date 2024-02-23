@@ -43,15 +43,12 @@ const request = window.indexedDB.open('StrideDatabase', 1)
 
 request.onerror = (event) => {
   console.error('request failed')
-  console.log(event)
 }
 
 request.onsuccess = (event) => {
-  console.log(event)
   // db = event.target.result
 }
 
 request.onupgradeneeded = (event) => {
-  console.log('UPGRADE NEEDED')
   initializeDatabase(event.target.result)
 }

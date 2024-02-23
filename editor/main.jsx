@@ -18,9 +18,6 @@ const channel = new Channel('matry')
 channel.listen((e) => {
   const message = e.data
 
-  console.log('DID RECEIVE MESSAGE')
-  console.log(message)
-
   switch (message.action) {
     case 'canvas_did_load':
       // document.getElementById('canvas').contentWindow.focus()

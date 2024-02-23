@@ -11,6 +11,10 @@ import {
   clearStorage,
   downloadJSONFile, getSelectionTypes, openJSONFile, storeJSONFile,
 } from '../utils'
+import { canvasDocument, canvasWindow } from '../canvas'
+
+const doc = canvasDocument()
+const win = canvasWindow()
 
 const select = {
   commands: {
@@ -63,7 +67,7 @@ const select = {
   save_document({ stylesheet }) {
     storeJSONFile({
       cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-      htmlContent: serialize(document.body),
+      htmlContent: serialize(doc.body),
     })
     channel.post({
       action: 'did_save_state',
@@ -74,7 +78,7 @@ const select = {
   export_document({ stylesheet }) {
     downloadJSONFile({
       cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-      htmlContent: serialize(document.body),
+      htmlContent: serialize(doc.body),
     })
   },
 
@@ -84,7 +88,7 @@ const select = {
     if (json.htmlContent) {
       const parser = new DOMParser()
       const doc = parser.parseFromString(json.htmlContent, 'text/html')
-      document.body.innerHTML = doc.body.innerHTML
+      doc.body.innerHTML = doc.body.innerHTML
     }
 
     if (json.cssRules) {
@@ -242,7 +246,7 @@ const select = {
       return null
     }
 
-    if (selections.length === 1 && selections[0].parentElement === document.body) {
+    if (selections.length === 1 && selections[0].parentElement === doc.body) {
       return {
         selections: [],
       }
@@ -250,7 +254,7 @@ const select = {
 
     return {
       selections: selections.map((selection) => {
-        if (selection.parentElement === document.body) {
+        if (selection.parentElement === doc.body) {
           return selection
         }
 
@@ -262,9 +266,9 @@ const select = {
   select_first_child(state) {
     const { selections } = state
 
-    if (selections.length === 0 && document.body.firstElementChild) {
+    if (selections.length === 0 && doc.body.firstElementChild) {
       return {
-        selections: [document.body.firstElementChild],
+        selections: [doc.body.firstElementChild],
       }
     }
 
@@ -286,7 +290,7 @@ const select = {
       }
     }
 
-    const clickedElements = window.document.elementsFromPoint(e.clientX, e.clientY).filter((el) => Boolean(el.id))
+    const clickedElements = doc.elementsFromPoint(e.clientX, e.clientY).filter((el) => Boolean(el.id))
     const clickedIndex = clickedElements.findIndex((el) => el.hasAttribute('data-selected'))
 
     if (clickedIndex === -1 || clickedIndex === (clickedElements.length - 1)) {
@@ -338,7 +342,7 @@ const select = {
         newSelection = selection.parentElement
       }
 
-      if (newSelection === document.body) {
+      if (newSelection === doc.body) {
         return null
       }
 

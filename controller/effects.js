@@ -1,12 +1,15 @@
 import { getBox } from 'css-box-model'
 import modes from './modes'
 import { isInBounds } from './dom'
+import { canvasDocument } from './canvas'
 
 window.addEventListener('selections_changed', () => {
+  const doc = canvasDocument()
+
   try {
     const { selections } = window.state.current
 
-    const previousSelections = document.querySelectorAll('[data-selected="on"]')
+    const previousSelections = doc.querySelectorAll('[data-selected="on"]')
 
     previousSelections.forEach((selection) => selection.removeAttribute('data-selected'))
 
@@ -17,6 +20,8 @@ window.addEventListener('selections_changed', () => {
     //     sel.remove()
     //   }
     // })
+
+    console.log(selections)
 
     selections.forEach((selection) => selection.setAttribute('data-selected', 'on'))
 
@@ -91,6 +96,8 @@ window.addEventListener('selections_changed', () => {
 })
 
 window.addEventListener('mode_changed', async () => {
+  const doc = canvasDocument()
+
   try {
     const currentState = window.state.current
     const mode = modes[currentState.mode]
@@ -103,7 +110,7 @@ window.addEventListener('mode_changed', async () => {
       await mode['on_enter'](currentState)
     }
 
-    document.body.setAttribute('data-mode', currentState.mode)
+    doc.body.setAttribute('data-mode', currentState.mode)
   } catch (error) {
     window.alert(error)
   }

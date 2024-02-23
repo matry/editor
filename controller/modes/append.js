@@ -1,8 +1,11 @@
+import { canvasDocument } from '../canvas'
 import { appendNewRules, appendRules } from '../cssom'
 import {
   constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent,
 } from '../dom'
 import { randomId } from '../utils'
+
+const doc = canvasDocument()
 
 const append = {
   commands: {
@@ -20,10 +23,10 @@ const append = {
   },
 
   add_next_sibling(state) {
-    const selections = state.selections.length ? state.selections : [document.body]
+    const selections = state.selections.length ? state.selections : [doc.body]
 
     const newNodes = selections.map((selection, i) => {
-      const position = selection === document.body ? 'last' : 'after'
+      const position = selection === doc.body ? 'last' : 'after'
 
       if (state.clipboardSelection) {
         const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
@@ -60,10 +63,10 @@ const append = {
   },
 
   add_previous_sibling(state) {
-    const selections = state.selections.length ? state.selections : [document.body]
+    const selections = state.selections.length ? state.selections : [doc.body]
 
     const newNodes = selections.map((selection, i) => {
-      const position = selection === document.body ? 'last' : 'before'
+      const position = selection === doc.body ? 'last' : 'before'
 
       if (state.clipboardSelection) {
         const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
@@ -88,7 +91,7 @@ const append = {
       appendRules(state.stylesheet, id, cssRules)
 
       appendNode(selection, template, position)
-      return document.getElementById(id)
+      return doc.getElementById(id)
     })
 
     return {
@@ -131,7 +134,7 @@ const append = {
       appendRules(state.stylesheet, id, cssRules)
 
       appendNode(selection, template, 'last')
-      return document.getElementById(id)
+      return doc.getElementById(id)
     })
 
     return {

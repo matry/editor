@@ -1,3 +1,8 @@
+import { canvasDocument, canvasWindow } from '../canvas'
+
+const win = canvasWindow()
+const doc = canvasDocument()
+
 const content = {
   commands: {
     'Escape': 'exit',
@@ -11,8 +16,8 @@ const content = {
       selection.setAttribute('contenteditable', 'true')
       selection.focus()
 
-      const documentSelection = window.getSelection()
-      const range = document.createRange()
+      const documentSelection = win.getSelection()
+      const range = doc.createRange()
       range.selectNodeContents(selection)
       documentSelection.removeAllRanges()
       documentSelection.addRange(range)
