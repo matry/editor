@@ -21,8 +21,6 @@ window.addEventListener('selections_changed', () => {
     //   }
     // })
 
-    console.log(selections)
-
     selections.forEach((selection) => selection.setAttribute('data-selected', 'on'))
 
     // selections.forEach((selection) => {

@@ -71,7 +71,7 @@ export function initializeApp() {
       }
     }
   })
-  
+
   channel.listen((e) => {
     const message = e.data
   
@@ -86,7 +86,7 @@ export function initializeApp() {
         break
     }  
   })
-  
+
   window.addEventListener('keydown', async (e) => {
     const {
       metaKey, shiftKey, ctrlKey, altKey, code,
@@ -99,21 +99,21 @@ export function initializeApp() {
       shiftKey ? 'shift' : '',
       code,
     ].filter((k) => k !== '').join(' ').trim()
-  
+
     const mode = modes[window.state.current.mode]
-  
+
     if (!mode) {
       return
     }
-  
+
     const action = mode.commands[keyboardShortcut]
-  
+
     if (typeof mode[action] !== 'function') {
       return
     }
-  
+
     e.preventDefault()
-  
+
     try {
       const currentState = window.state.current
       const newState = await mode[action](currentState, e)
@@ -125,7 +125,7 @@ export function initializeApp() {
       window.alert(error)
     }
   })
-  
+
   // document.body.addEventListener('click', (e) => {
   //   e.preventDefault()
   //   e.stopPropagation()
