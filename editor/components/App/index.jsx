@@ -20,7 +20,7 @@ const App = ({ extension, extensionProps }) => {
           title={extension}
           id={extension}
           src={url}
-          className="w-full h-full"
+          className="w-full h-screen"
         />
       )}
     </div>
