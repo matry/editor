@@ -2,9 +2,17 @@
 export const canvasIframe = document.querySelector('#canvas')
 
 export function canvasDocument() {
-  return canvasIframe.contentDocument || canvasIframe.contentWindow.document
+  if (!canvasIframe.contentDocument) {
+    throw new Error('Canvas Iframe not initialized')
+  }
+
+  return canvasIframe.contentDocument
 }
 
 export function canvasWindow() {
+  if (!canvasIframe.contentWindow) {
+    throw new Error('Canvas Iframe not initialized')
+  }
+
   return canvasIframe.contentWindow
 }

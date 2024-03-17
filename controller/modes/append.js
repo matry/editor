@@ -5,8 +5,6 @@ import {
 } from '../dom'
 import { randomId } from '../utils'
 
-const doc = canvasDocument()
-
 const append = {
   commands: {
     Escape: 'exit_mode',
@@ -23,6 +21,7 @@ const append = {
   },
 
   add_next_sibling(state) {
+    const doc = canvasDocument()
     const selections = state.selections.length ? state.selections : [doc.body]
 
     const newNodes = selections.map((selection, i) => {
@@ -48,9 +47,8 @@ const append = {
 
       const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
       appendRules(state.stylesheet, id, cssRules)
-      const newElement = appendNode(selection, template, position)
 
-      return newElement
+      return appendNode(selection, template, position)
     })
 
     return {
@@ -63,6 +61,7 @@ const append = {
   },
 
   add_previous_sibling(state) {
+    const doc = canvasDocument()
     const selections = state.selections.length ? state.selections : [doc.body]
 
     const newNodes = selections.map((selection, i) => {
@@ -104,6 +103,7 @@ const append = {
   },
 
   add_last_child(state) {
+    const doc = canvasDocument()
     const { selections } = state
 
     const newNodes = selections.map((selection, i) => {
