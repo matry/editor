@@ -78,7 +78,7 @@ const select = {
   export_document({ stylesheet }) {
     downloadJSONFile({
       cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-      htmlContent: serialize(doc.body),
+      htmlContent: serialize(canvasDocument().body),
     })
   },
 
@@ -240,21 +240,16 @@ const select = {
   },
 
   select_parent(state) {
+    const doc = canvasDocument()
     const { selections } = state
 
     if (selections.length === 0) {
       return null
     }
 
-    if (selections.length === 1 && selections[0].parentElement === doc.body) {
-      return {
-        selections: [],
-      }
-    }
-
     return {
       selections: selections.map((selection) => {
-        if (selection.parentElement === doc.body) {
+        if (['HTML'].includes(selection.parentElement.tagName)) {
           return selection
         }
 
@@ -274,7 +269,7 @@ const select = {
 
     return {
       selections: selections.map((selection) => {
-        if (selection.getAttribute('data-type') !== 'shape' || selection.children.length === 0) {
+        if (['text', 'image', 'video'].includes(selection.getAttribute('data-type')) || selection.children.length === 0) {
           return selection
         }
 

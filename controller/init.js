@@ -1,12 +1,14 @@
 import modes from './modes'
 import './effects'
 import { State } from './state'
-import { loadJSONFile, readBlobs, retrieveJSONFile } from './utils'
+import { loadJSONFile, readBlobs, retrieveJSONFile, randomId } from './utils'
 import { canvasDocument } from './canvas'
 import { channel } from './listener'
 
 export function initializeApp() {
   const doc = canvasDocument()
+
+  doc.body.id = randomId()
 
   window.state = new State({
     mode: 'select',
