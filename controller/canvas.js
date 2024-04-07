@@ -1,5 +1,5 @@
 
-export const canvasIframe = document.querySelector('#canvas')
+export const canvasIframe = document.querySelector('#canvas-frame')
 
 export function canvasDocument() {
   if (!canvasIframe.contentDocument) {
