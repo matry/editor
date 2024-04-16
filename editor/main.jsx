@@ -3,12 +3,25 @@ import ReactDOM from 'react-dom/client'
 import App from './components/App'
 import './index.css'
 import { Channel } from '../utils/broadcast-channel'
+import { getCanvasDOM } from './dom-listener'
+
+const appState = {
+  extension: '',
+  extensionProps: {},
+  canvasDOM: null,
+  selections: [],
+}
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
-const render = ({ extension, extensionProps }) => {
+const render = () => {
   reactRoot.render(
     <React.StrictMode>
-      <App extension={extension} extensionProps={extensionProps} />
+      <App
+        extension={appState.extension}
+        extensionProps={appState.extensionProps}
+        canvasDOM={appState.canvasDOM}
+        selections={appState.selections}
+      />
     </React.StrictMode>,
   )
 }
@@ -20,14 +33,22 @@ channel.listen((e) => {
 
   switch (message.action) {
     case 'canvas_did_load':
-      // document.getElementById('canvas').contentWindow.focus()
       break
     case 'request_extension':
-      render({ extension: message.data.id, extensionProps: message.data.params || {} })
+      appState.extension = message.data.id
+      appState.extensionProps =  message.data.params || {}
+      render()
       break
     case 'exit_extension':
-      render({})
+      appState.extension = ''
+      appState.extensionProps = {}
+      render()
       // document.getElementById('canvas').contentWindow.focus()
+      break
+    case 'state_did_change':
+      appState.selections = message.data.selections
+      appState.canvasDOM = getCanvasDOM()
+      render()
       break
     default:
       // in theory this should no longer be needed since the application root is not the coordinator

@@ -1,6 +1,8 @@
 
 export const canvasIframe = document.querySelector('#canvas-frame')
 
+window.canvasIframe = canvasIframe
+
 export function canvasDocument() {
   if (!canvasIframe.contentDocument) {
     throw new Error('Canvas Iframe not initialized')

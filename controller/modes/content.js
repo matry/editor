@@ -1,4 +1,5 @@
 import { canvasDocument, canvasWindow } from '../canvas'
+import { channel } from '../listener'
 
 const win = canvasWindow()
 const doc = canvasDocument()
@@ -14,6 +15,14 @@ const content = {
 
     if (selection.firstChild && selection.firstChild.nodeType === 3) {
       selection.setAttribute('contenteditable', 'true')
+
+      selection.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          channel.post({ action: 'exit_extension', data: {} })
+          selection.blur()
+        }
+      })
+
       selection.focus()
 
       const documentSelection = win.getSelection()

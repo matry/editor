@@ -27,7 +27,16 @@ export function initializeApp() {
 
     channel.post({
       action: 'state_did_change',
-      data: {},
+      data: {
+        mode: newState.mode,
+        selections: newState.selections.map((selection) => selection.id),
+        copiedIds: newState.copiedIds,
+        cutIds: newState.cutIds,
+        appendingElementType: newState.appendingElementType,
+        clipboardText: newState.clipboardText,
+        clipboardSelection: newState.clipboardSelection,
+        clipboardFiles: newState.clipboardFiles,
+      },
     })
   })
 
