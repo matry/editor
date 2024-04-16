@@ -57,18 +57,28 @@ export function initializeApp() {
       }
     } else if (item && item.type.startsWith('text')) {
       const clipboardText = e.clipboardData.getData('text')
-  
-      const textSelections = selections.filter((selection) => selection.getAttribute('data-type') === 'text')
-  
-      if (textSelections.length === selections.length) {
-        selections.forEach((selection) => {
-          selection.innerHTML = clipboardText
-        })
-      } else {
+
+      try {
+        const { htmlContent, cssRules } = JSON.parse(clipboardText)
+
         window.state.current = {
           mode: 'append',
-          appendingElementType: 'text',
-          clipboardText,
+          clipboardSelection: clipboardText,
+        }
+
+      } catch (error) {
+        const textSelections = selections.filter((selection) => selection.getAttribute('data-type') === 'text')
+
+        if (textSelections.length === selections.length) {
+          selections.forEach((selection) => {
+            selection.innerHTML = clipboardText
+          })
+        } else {
+          window.state.current = {
+            mode: 'append',
+            appendingElementType: 'text',
+            clipboardText,
+          }
         }
       }
     }
@@ -86,14 +96,14 @@ export function initializeApp() {
         break
       default:
         break
-    }  
+    }
   })
 
   window.addEventListener('keydown', async (e) => {
     const {
       metaKey, shiftKey, ctrlKey, altKey, code,
     } = e
-  
+
     const keyboardShortcut = [
       metaKey ? 'meta' : '',
       ctrlKey ? 'ctrl' : '',
@@ -127,50 +137,6 @@ export function initializeApp() {
       window.alert(error)
     }
   })
-
-  // document.body.addEventListener('click', (e) => {
-  //   e.preventDefault()
-  //   e.stopPropagation()
-  
-  //   const { target } = e
-  
-  //   if (!target.id) {
-  //     return
-  //   }
-  
-  //   const mode = modes[window.state.current.mode]
-  
-  //   if (!mode) {
-  //     return
-  //   }
-  
-  //   const {
-  //     metaKey, shiftKey, ctrlKey, altKey,
-  //   } = e
-  
-  //   const mouseCommand = [
-  //     metaKey ? 'meta' : '',
-  //     ctrlKey ? 'ctrl' : '',
-  //     altKey ? 'alt' : '',
-  //     shiftKey ? 'shift' : '',
-  //     'onclick',
-  //   ].filter((key) => key !== '').join(' ').trim()
-
-  //   const action = mode.commands[mouseCommand]
-
-  //   if (typeof mode[action] !== 'function') {
-  //     return
-  //   }
-
-  //   try {
-  //     const newState = mode[action](window.state.current, e)
-  //     if (newState) {
-  //       window.state.current = newState
-  //     }
-  //   } catch (error) {
-  //     window.alert(error)
-  //   }
-  // })
 
   const jsonFile = retrieveJSONFile()
 
