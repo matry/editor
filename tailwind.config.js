@@ -1,5 +1,9 @@
 module.exports = {
-  content: ['./app/**/*.{html,js,jsx}', './extensions/**/*.{html,js,jsx}'],
+  content: [
+    './editor/**/*.{html,js,jsx}',
+    './extensions/**/*.{html,js,jsx}',
+    './controller/**/*.{html,js,jsx}',
+  ],
   theme: {
     extend: {},
   },
