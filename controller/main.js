@@ -1,12 +1,15 @@
 import { Channel } from '../utils/broadcast-channel'
 import { canvasIframe } from './canvas'
 import { initializeApp } from './init'
+import { initZoom } from './zoom'
+import './index.css'
 
 const channel = new Channel('matry')
 
 channel.listen((e) => {
   if (e.data.action === 'canvas_did_load') {
     initializeApp()
+    initZoom()
   }
 })
 
