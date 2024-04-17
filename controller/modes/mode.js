@@ -32,4 +32,14 @@ export class Mode {
       mode: 'select',
     }
   }
+
+  toggle_editor() {
+    if (document.body.classList.contains('editor-open')) {
+      document.body.classList.remove('editor-open')
+    } else {
+      document.body.classList.add('editor-open')
+    }
+
+    return null
+  }
 }

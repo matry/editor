@@ -24,6 +24,7 @@ class SelectMode extends Mode {
     this.commands = {
       Escape: this.clear_selections,
       Backspace: this.delete_selections,
+      BracketLeft: this.toggle_editor,
       KeyE: {
         KeyC: this.edit_selections,
         KeyS: this.style_selections,
@@ -48,6 +49,7 @@ class SelectMode extends Mode {
       'meta KeyC': this.copy_selections,
       'meta KeyS': this.save_document,
       'meta KeyE': this.export_document,
+      'meta KeyO': this.open_document,
       'meta Backspace': this.reset,
       'shift Slash': this.help,
     }

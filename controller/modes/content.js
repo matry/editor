@@ -12,6 +12,7 @@ class ContentMode extends Mode {
     this.commands = {
       Escape: this.exit,
       Enter: this.exit,
+      BracketLeft: this.toggle_editor,
     }
   }
 

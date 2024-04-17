@@ -16,6 +16,7 @@ class AppendMode extends Mode {
       ArrowRight: this.add_last_child,
       ArrowDown: this.add_next_sibling,
       ArrowLeft: this.add_parent,
+      BracketLeft: this.toggle_editor,
     }
     this.commandSubPath = this.commands
   }

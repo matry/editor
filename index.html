@@ -16,15 +16,20 @@
         overflow: hidden;
       }
 
-      #editor-frame {
-        height: 100%;
-        width: 320px;
-        pointer-events: none;
-        border: none;
+      #editor {
+        width: 0px;
       }
 
-      #editor {
+      .editor-open #editor {
         width: 320px;
+      }
+
+      #editor-frame {
+        height: 100%;
+        width: 100%;
+        display: block;
+        pointer-events: none;
+        border: none;
       }
 
       #zoom-container {
