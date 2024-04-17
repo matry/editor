@@ -1,9 +1,9 @@
-import select from './select'
-import append from './append'
-import content from './content'
+import { selectMode } from './select'
+import { appendMode } from './append'
+import { contentMode } from './content'
 
 export default {
-  select,
-  append,
-  content,
+  select: selectMode,
+  append: appendMode,
+  content: contentMode,
 }

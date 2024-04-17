@@ -1,14 +1,19 @@
 import { canvasDocument, canvasWindow } from '../canvas'
 import { channel } from '../listener'
+import { Mode } from './mode'
 
 const win = canvasWindow()
 const doc = canvasDocument()
 
-const content = {
-  commands: {
-    'Escape': 'exit',
-    'Enter': 'exit',
-  },
+class ContentMode extends Mode {
+  constructor() {
+    super()
+
+    this.commands = {
+      Escape: this.exit,
+      Enter: this.exit,
+    }
+  }
 
   on_enter({ selections }) {
     const selection = selections[0]
@@ -31,7 +36,7 @@ const content = {
       documentSelection.removeAllRanges()
       documentSelection.addRange(range)
     }
-  },
+  }
 
   exit({ selections }) {
     selections[0].blur()
@@ -40,7 +45,7 @@ const content = {
     return {
       mode: 'select',
     }
-  },
+  }
 }
 
-export default content
+export const contentMode = new ContentMode()

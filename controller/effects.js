@@ -1,7 +1,7 @@
 import { getBox } from 'css-box-model'
-import modes from './modes'
 import { isInBounds } from './dom'
 import { canvasDocument } from './canvas'
+import modes from './modes'
 
 window.addEventListener('selections_changed', () => {
   const doc = canvasDocument()
@@ -104,8 +104,8 @@ window.addEventListener('mode_changed', async () => {
       return
     }
 
-    if (typeof mode['on_enter'] === 'function') {
-      await mode['on_enter'](currentState)
+    if (typeof mode.on_enter === 'function') {
+      await mode.on_enter(currentState)
     }
 
     doc.body.setAttribute('data-mode', currentState.mode)

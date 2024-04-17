@@ -4,21 +4,21 @@ import {
   constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent,
 } from '../dom'
 import { randomId } from '../utils'
+import { Mode } from './mode'
 
-const append = {
-  commands: {
-    Escape: 'exit_mode',
-    ArrowUp: 'add_previous_sibling',
-    ArrowRight: 'add_last_child',
-    ArrowDown: 'add_next_sibling',
-    ArrowLeft: 'add_parent',
-  },
+class AppendMode extends Mode {
+  constructor() {
+    super()
 
-  exit_mode() {
-    return {
-      mode: 'select',
+    this.commands = {
+      Escape: this.exit_mode,
+      ArrowUp: this.add_previous_sibling,
+      ArrowRight: this.add_last_child,
+      ArrowDown: this.add_next_sibling,
+      ArrowLeft: this.add_parent,
     }
-  },
+    this.commandSubPath = this.commands
+  }
 
   add_next_sibling(state) {
     const doc = canvasDocument()
@@ -58,7 +58,7 @@ const append = {
       clipboardSelection: null,
       clipboardFiles: null,
     }
-  },
+  }
 
   add_previous_sibling(state) {
     const doc = canvasDocument()
@@ -100,7 +100,7 @@ const append = {
       clipboardSelection: null,
       clipboardFiles: null,
     }
-  },
+  }
 
   add_last_child(state) {
     const doc = canvasDocument()
@@ -144,7 +144,7 @@ const append = {
       clipboardSelection: null,
       clipboardFiles: null,
     }
-  },
+  }
 
   add_parent({ stylesheet, selections, appendingElementType }) {
     if (appendingElementType !== 'shape') {
@@ -161,7 +161,7 @@ const append = {
       selections: nestIndividuallyWithinParent(stylesheet, selections),
       mode: 'select',
     }
-  },
+  }
 }
 
-export default append
+export const appendMode = new AppendMode()

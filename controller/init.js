@@ -1,9 +1,9 @@
-import modes from './modes'
 import './effects'
 import { State } from './state'
 import { loadJSONFile, readBlobs, retrieveJSONFile, randomId } from './utils'
 import { canvasDocument } from './canvas'
 import { channel } from './listener'
+import modes from './modes'
 
 export function initializeApp() {
   const doc = canvasDocument()
@@ -12,7 +12,7 @@ export function initializeApp() {
 
   window.state = new State({
     mode: 'select',
-    selections: [],
+    selections: [doc.body],
     copiedIds: [],
     cutIds: [],
     appendingElementType: null,
@@ -98,11 +98,11 @@ export function initializeApp() {
   
     switch (message.action) {
       case 'update_selection_styles':
-        modes['select']['update_selection_style'](window.state.current, message.data.property, message.data.value, message.data.styles)
+        modes.select.update_selection_style(window.state.current, message.data.property, message.data.value, message.data.styles)
         break
-      case 'confirm_replace_content':
-        modes['select']['confirm_replace_content'](window.state.current, message.data)
-        break
+      // case 'confirm_replace_content':
+      //   modes['select']['confirm_replace_content'](window.state.current, message.data)
+      //   break
       default:
         break
     }
@@ -121,24 +121,11 @@ export function initializeApp() {
       code,
     ].filter((k) => k !== '').join(' ').trim()
 
-    const mode = modes[window.state.current.mode]
-
-    if (!mode) {
-      return
-    }
-
-    const action = mode.commands[keyboardShortcut]
-
-    if (typeof mode[action] !== 'function') {
-      return
-    }
-
-    e.preventDefault()
-
     try {
-      const currentState = window.state.current
-      const newState = await mode[action](currentState, e)
+      const newState = modes[window.state.current.mode].on_command(keyboardShortcut, window.state.current)
+
       if (newState) {
+        e.preventDefault()
         window.state.current = newState
       }
     } catch (error) {
