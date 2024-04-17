@@ -10,7 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         canvas: resolve(__dirname, 'canvas/index.html'),
-        test: resolve(__dirname, 'test/index.html'),
+        // test: resolve(__dirname, 'test/index.html'),
         css: resolve(__dirname, 'extensions/css/index.html'),
         help: resolve(__dirname, 'extensions/help/index.html'),
       },
