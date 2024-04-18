@@ -53,6 +53,7 @@ class SelectMode extends Mode {
       'meta Backspace': this.reset,
       'shift Slash': this.help,
     }
+    this.commandSubPath = this.commands
   }
 
   help() {
@@ -144,9 +145,7 @@ class SelectMode extends Mode {
   }
 
   style_selections({ stylesheet, selections }) {
-    console.log(1)
     const styles = getSharedStylesByIds(stylesheet, selections.map((selection) => selection.id))
-    console.log(2)
     channel.post({
       action: 'request_extension',
       data: {
