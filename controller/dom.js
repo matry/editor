@@ -18,7 +18,6 @@ const lorem = new LoremIpsum({
 
 export const randomStyles = (id) => `#${id} {
     width: 100%;
-    min-height: 50px;
     background-color: ${randomColor()};
   }`
 
@@ -82,7 +81,6 @@ export const constructShapeTemplate = () => {
     cssRules: {
       display: 'block',
       width: '100$%',
-      'min-height': '50px',
       padding: '10px',
       'background-color': randomColor(),
     },
