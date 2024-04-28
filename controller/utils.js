@@ -1,5 +1,7 @@
 import { saveAs } from 'file-saver'
 import { appendStoredRules } from './cssom'
+import { canvasDocument } from './canvas'
+import { getBox } from 'css-box-model'
 
 export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
@@ -178,5 +180,76 @@ export const readBlobs = (blobs) => {
     blobsArray.forEach((blob) => {
       reader.readAsDataURL(blob)
     })
+  })
+}
+
+export const renderBoxModel = ({ showBoxModel, selections }) => {
+  const doc = canvasDocument()
+
+  if (!showBoxModel) {
+    const dataSelection = doc.querySelector('[data-selection]')
+    if (dataSelection) {
+      dataSelection.remove()
+    }
+
+    return
+  }
+
+  selections.forEach((selection) => {
+    const box = getBox(selection)
+
+    const highlighter = doc.createElement('div')
+    highlighter.setAttribute('data-selection', selection.id)
+    highlighter.style.opacity = 0.75
+    highlighter.style.pointerEvents = 'none'
+
+    const marginBox = doc.createElement('div')
+    marginBox.style.position = 'fixed'
+    marginBox.style.top = box.marginBox.top
+    marginBox.style.right = box.marginBox.right
+    marginBox.style.bottom = box.marginBox.bottom
+    marginBox.style.left = box.marginBox.left
+    marginBox.style.width = box.marginBox.width
+    marginBox.style.height = box.marginBox.height
+    marginBox.style.backgroundColor = '#fdb68d' // red
+
+    const borderBox = doc.createElement('div')
+    borderBox.style.position = 'fixed'
+    borderBox.style.top = box.borderBox.top
+    borderBox.style.right = box.borderBox.right
+    borderBox.style.bottom = box.borderBox.bottom
+    borderBox.style.left = box.borderBox.left
+    borderBox.style.width = box.borderBox.width
+    borderBox.style.height = box.borderBox.height
+    borderBox.style.backgroundColor = '#F8CB9C' // orange
+
+    const paddingBox = doc.createElement('div')
+    paddingBox.style.position = 'fixed'
+    paddingBox.style.top = box.paddingBox.top
+    paddingBox.style.right = box.paddingBox.right
+    paddingBox.style.bottom = box.paddingBox.bottom
+    paddingBox.style.left = box.paddingBox.left
+    paddingBox.style.width = box.paddingBox.width
+    paddingBox.style.height = box.paddingBox.height
+    paddingBox.style.backgroundColor = '#C2DDB6' // green
+
+    const contentBox = doc.createElement('div')
+    contentBox.style.position = 'fixed'
+    contentBox.style.top = box.contentBox.top
+    contentBox.style.right = box.contentBox.right
+    contentBox.style.bottom = box.contentBox.bottom
+    contentBox.style.left = box.contentBox.left
+    contentBox.style.width = box.contentBox.width
+    contentBox.style.height = box.contentBox.height
+    contentBox.style.backgroundColor = '#9FC4E7' // blue
+
+    highlighter.appendChild(marginBox)
+    highlighter.appendChild(borderBox)
+    highlighter.appendChild(paddingBox)
+    highlighter.appendChild(contentBox)
+
+    doc.body.appendChild(highlighter)
+
+    selection.setAttribute('data-selected', 'on')
   })
 }

@@ -4,6 +4,7 @@ import { loadJSONFile, readBlobs, retrieveJSONFile, randomId } from './utils'
 import { canvasDocument } from './canvas'
 import { channel } from './listener'
 import modes from './modes'
+import { renderBoxModel } from './utils'
 
 export function initializeApp() {
   const doc = canvasDocument()
@@ -15,6 +16,7 @@ export function initializeApp() {
     selections: [doc.body],
     copiedIds: [],
     cutIds: [],
+    showBoxModel: false,
     appendingElementType: null,
     clipboardText: '',
     clipboardSelection: null,
@@ -24,6 +26,8 @@ export function initializeApp() {
     Object.keys(update).forEach((updateKey) => {
       window.dispatchEvent(new CustomEvent(`${updateKey}_changed`))
     })
+
+    renderBoxModel(newState)
 
     channel.post({
       action: 'state_did_change',

@@ -34,6 +34,10 @@ export default function CanvasNode({ canvasDOM, selections }) {
       {children.length > 0 && (
         <ul className="mt-1 pl-3">
           {children.map((childElement) => {
+            if (!childElement.id) {
+              return null
+            }
+
             return (
               <CanvasNode
                 key={childElement.id}

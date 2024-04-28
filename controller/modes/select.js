@@ -26,7 +26,6 @@ class SelectMode extends Mode {
       Backspace: this.delete_selections,
       BracketLeft: this.toggle_editor,
       KeyE: {
-        KeyC: this.edit_selections,
         KeyS: this.style_selections,
         KeyT: this.edit_selections_text,
       },
@@ -38,6 +37,7 @@ class SelectMode extends Mode {
         KeyI: this.append_image,
         KeyV: this.append_video,
       },
+      KeyB: this.toggle_box_model,
       ArrowUp: this.select_previous_sibling,
       ArrowDown: this.select_next_sibling,
       ArrowRight: this.select_first_child,
@@ -162,20 +162,6 @@ class SelectMode extends Mode {
         params: styles,
       },
     })
-  }
-
-  edit_selections({ selections }) {
-    if (selections.length === 0 || selections.length > 1) {
-      throw new Error('You can only edit one element at a time')
-    }
-
-    if (selections[0].getAttribute('data-type') === 'text') {
-      return {
-        mode: 'content',
-      }
-    }
-
-    throw new Error('This element does not have editable content')
   }
 
   edit_selections_text(state) {

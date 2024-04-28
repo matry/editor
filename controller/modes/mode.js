@@ -1,4 +1,6 @@
+import { getBox } from 'css-box-model'
 import { channel } from '../listener'
+import { canvasDocument } from '../canvas'
 
 export class Mode {
   commands = {}
@@ -43,5 +45,11 @@ export class Mode {
     }
 
     return null
+  }
+
+  toggle_box_model(state) {
+    return {
+      showBoxModel: !state.showBoxModel,
+    }
   }
 }
