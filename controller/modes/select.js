@@ -28,6 +28,7 @@ class SelectMode extends Mode {
       KeyE: {
         KeyC: this.edit_selections,
         KeyS: this.style_selections,
+        KeyT: this.edit_selections_text,
       },
       KeyD: this.delete_selections,
       Tab: this.select_next_sibling,
@@ -133,6 +134,14 @@ class SelectMode extends Mode {
     })
   }
 
+  update_selection_text({ selections }, textContent) {
+    for (const selection of selections) {
+      if (selection.getAttribute('data-type') === 'text') {
+        selection.innerHTML = textContent
+      }
+    }
+  }
+
   update_selection_style({ stylesheet, selections }, property, value) {
     if (!selections.length) {
       updateRule(stylesheet, 'body', property, value)
@@ -167,6 +176,32 @@ class SelectMode extends Mode {
     }
 
     throw new Error('This element does not have editable content')
+  }
+
+  edit_selections_text(state) {
+    const { selections } = state
+
+    if (selections.length === 0) {
+      throw new Error('You must first select an element to edit')
+    }
+
+    const textContents = {}
+    for (const selection of selections) {
+      if (selection.getAttribute('data-type') === 'text') {
+        textContents[selection.id] = selection.innerHTML
+      }
+    }
+    if (Object.keys(textContents).length > 0) {
+      channel.post({
+        action: 'request_extension',
+        data: {
+          id: 'text_content',
+          params: textContents,
+        },
+      })
+    }
+
+    return null
   }
 
   copy_selections(state) {
@@ -321,6 +356,8 @@ class SelectMode extends Mode {
   }
 
   clear_selections(state) {
+    channel.post({ action: 'exit_extension', data: {} })
+
     if (state.selections.length > 1) {
       return {
         selections: [state.selections[0]],

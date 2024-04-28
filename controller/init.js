@@ -97,12 +97,12 @@ export function initializeApp() {
     const message = e.data
   
     switch (message.action) {
+      case 'update_selection_text':
+        modes.select.update_selection_text(window.state.current, message.data.value)
+        break
       case 'update_selection_styles':
         modes.select.update_selection_style(window.state.current, message.data.property, message.data.value, message.data.styles)
         break
-      // case 'confirm_replace_content':
-      //   modes['select']['confirm_replace_content'](window.state.current, message.data)
-      //   break
       default:
         break
     }

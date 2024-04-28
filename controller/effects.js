@@ -13,25 +13,25 @@ window.addEventListener('selections_changed', () => {
 
     previousSelections.forEach((selection) => selection.removeAttribute('data-selected'))
 
-    // previousSelections.forEach((selection) => {
-    //   selection.removeAttribute('data-selected')
-    //   const sel = document.querySelector(`[data-selection="${selection.id}"]`)
-    //   if (sel) {
-    //     sel.remove()
-    //   }
-    // })
+    previousSelections.forEach((selection) => {
+      selection.removeAttribute('data-selected')
+      const sel = doc.querySelector(`[data-selection="${selection.id}"]`)
+      if (sel) {
+        sel.remove()
+      }
+    })
 
     selections.forEach((selection) => selection.setAttribute('data-selected', 'on'))
 
     // selections.forEach((selection) => {
     //   const box = getBox(selection)
 
-    //   const highlighter = document.createElement('div')
+    //   const highlighter = doc.createElement('div')
     //   highlighter.setAttribute('data-selection', selection.id)
     //   highlighter.style.opacity = 0.75
     //   highlighter.style.pointerEvents = 'none'
 
-    //   const marginBox = document.createElement('div')
+    //   const marginBox = doc.createElement('div')
     //   marginBox.style.position = 'fixed'
     //   marginBox.style.top = box.marginBox.top
     //   marginBox.style.right = box.marginBox.right
@@ -41,7 +41,7 @@ window.addEventListener('selections_changed', () => {
     //   marginBox.style.height = box.marginBox.height
     //   marginBox.style.backgroundColor = '#fdb68d' // red
 
-    //   const borderBox = document.createElement('div')
+    //   const borderBox = doc.createElement('div')
     //   borderBox.style.position = 'fixed'
     //   borderBox.style.top = box.borderBox.top
     //   borderBox.style.right = box.borderBox.right
@@ -51,7 +51,7 @@ window.addEventListener('selections_changed', () => {
     //   borderBox.style.height = box.borderBox.height
     //   borderBox.style.backgroundColor = '#F8CB9C' // orange
 
-    //   const paddingBox = document.createElement('div')
+    //   const paddingBox = doc.createElement('div')
     //   paddingBox.style.position = 'fixed'
     //   paddingBox.style.top = box.paddingBox.top
     //   paddingBox.style.right = box.paddingBox.right
@@ -61,7 +61,7 @@ window.addEventListener('selections_changed', () => {
     //   paddingBox.style.height = box.paddingBox.height
     //   paddingBox.style.backgroundColor = '#C2DDB6' // green
 
-    //   const contentBox = document.createElement('div')
+    //   const contentBox = doc.createElement('div')
     //   contentBox.style.position = 'fixed'
     //   contentBox.style.top = box.contentBox.top
     //   contentBox.style.right = box.contentBox.right
@@ -76,7 +76,7 @@ window.addEventListener('selections_changed', () => {
     //   highlighter.appendChild(paddingBox)
     //   highlighter.appendChild(contentBox)
 
-    //   document.body.appendChild(highlighter)
+    //   doc.body.appendChild(highlighter)
 
     //   selection.setAttribute('data-selected', 'on')
     // })

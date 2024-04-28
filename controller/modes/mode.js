@@ -1,3 +1,4 @@
+import { channel } from '../listener'
 
 export class Mode {
   commands = {}
@@ -28,6 +29,7 @@ export class Mode {
   }
 
   exit_mode() {
+    channel.post({ action: 'exit_extension', data: {} })
     return {
       mode: 'select',
     }
