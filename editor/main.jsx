@@ -33,6 +33,7 @@ channel.listen((e) => {
 
   switch (message.action) {
     case 'canvas_did_load':
+      
       break
     case 'request_extension':
       appState.extension = message.data.id

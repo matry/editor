@@ -75,14 +75,14 @@ class SelectMode extends Mode {
   }
 
   save_document({ stylesheet }) {
-    storeJSONFile({
-      cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-      htmlContent: serialize(doc.body),
-    })
-    channel.post({
-      action: 'did_save_state',
-      data: {},
-    })
+    // storeJSONFile(
+    //   serialize(canvasDocument().body),
+    //   Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
+    // )
+    // channel.post({
+    //   action: 'did_save_state',
+    //   data: {},
+    // })
   }
 
   export_document({ stylesheet }) {

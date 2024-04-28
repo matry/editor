@@ -6,7 +6,7 @@ import { channel } from './listener'
 import modes from './modes'
 import { renderBoxModel } from './utils'
 
-export function initializeApp() {
+export async function initializeApp() {
   const doc = canvasDocument()
 
   doc.body.id = randomId()
@@ -138,9 +138,14 @@ export function initializeApp() {
     }
   })
 
-  const jsonFile = retrieveJSONFile()
-
-  if (jsonFile) {
-    loadJSONFile(window.state.current.stylesheet, doc.body, jsonFile)
-  }
+  // const jsonFile = await retrieveJSONFile()
+  // if (jsonFile) {
+  //   loadJSONFile(window.state.current.stylesheet, doc.body, jsonFile)
+  //   channel.post({
+  //     action: 'state_did_change',
+  //     data: {
+  //       selections: [],
+  //     },
+  //   })
+  // }
 }
