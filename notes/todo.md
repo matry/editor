@@ -2,6 +2,7 @@
 ## now
 
 - [x] make box model togglable
+- [x] fix subpaths not routing correctly on vercel
 - [ ] move selection
 - [ ] show commands at bottom of editor
 - [ ] make sure export/load works
@@ -32,7 +33,6 @@
 ## next
 
 - [ ] paste css code
-- [ ] fix subpaths not routing correctly on vercel
 - [ ] show full page when scrolled out
 - [ ] undo/redo
 - [ ] zoom-proportional highlighting
