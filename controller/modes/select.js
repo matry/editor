@@ -181,7 +181,7 @@ class SelectMode extends Mode {
       channel.post({
         action: 'request_extension',
         data: {
-          id: 'text_content',
+          id: 'text',
           params: textContents,
         },
       })
