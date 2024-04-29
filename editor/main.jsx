@@ -10,6 +10,7 @@ const appState = {
   extensionProps: {},
   canvasDOM: null,
   selections: [],
+  keySequence: [],
 }
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
@@ -21,6 +22,7 @@ const render = () => {
         extensionProps={appState.extensionProps}
         canvasDOM={appState.canvasDOM}
         selections={appState.selections}
+        keySequence={appState.keySequence}
       />
     </React.StrictMode>,
   )
@@ -32,8 +34,19 @@ channel.listen((e) => {
   const message = e.data
 
   switch (message.action) {
+    case 'append_key':
+      appState.keySequence.push(message.data)
+      render()
+      break
+    case 'execute_key':
+      appState.keySequence = []
+      render()
+      break
+    case 'reset_key':
+      appState.keySequence = []
+      render()
+      break
     case 'canvas_did_load':
-      
       break
     case 'request_extension':
       appState.extension = message.data.id
@@ -44,7 +57,6 @@ channel.listen((e) => {
       appState.extension = ''
       appState.extensionProps = {}
       render()
-      // document.getElementById('canvas').contentWindow.focus()
       break
     case 'state_did_change':
       appState.selections = message.data.selections
@@ -52,8 +64,6 @@ channel.listen((e) => {
       render()
       break
     default:
-      // in theory this should no longer be needed since the application root is not the coordinator
-      // channel.post(message)
       break
   }
 })

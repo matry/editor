@@ -3,8 +3,8 @@
 
 - [x] make box model togglable
 - [x] fix subpaths not routing correctly on vercel
-- [ ] move selection
 - [ ] show commands at bottom of editor
+- [ ] move selection
 - [ ] make sure export/load works
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories

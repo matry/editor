@@ -13,13 +13,16 @@ export class Mode {
 
     switch (typeof this.commandSubPath[key]) {
       case 'object':
+        channel.post({ action: 'append_key', data: key })
         this.commandSubPath = this.commandSubPath[key]
         break
       case 'function':
+        channel.post({ action: 'execute_key', data: key })
         newState = this.commandSubPath[key](state)
         this.commandSubPath = this.commands
         break
       default:
+        channel.post({ action: 'reset_key', data: key })
         this.commandSubPath = this.commands
         if (this.exit_mode) {
           this.exit_mode()
