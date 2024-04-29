@@ -45,7 +45,10 @@ export const constructImageTemplate = (options = {}) => {
   if (options.file) {
     template = `<img data-type="image" width="auto" height="auto" id="${id}" src="${options.file}" />`
   } else {
-    const { url, width, height } = randomImage()
+    // const { url, width, height } = randomImage()
+    const url = '/placeholder.svg'
+    const width = '300px'
+    const height = 'auto'
     template = `<img data-type="image" width="${width}px" height="${height}px" id="${id}" src="${url}" />`
   }
 

@@ -3,12 +3,12 @@
 
 - [x] make box model togglable
 - [x] fix subpaths not routing correctly on vercel
-- [ ] show commands at bottom of editor
-- [ ] move selection
+- [x] show commands at bottom of editor
+- [x] default placeholder image
 - [ ] make sure export/load works
+- [ ] move selection
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories
-- [ ] default placeholder image
 - [ ] edit image extension
 - [ ] revamp help extension
 - [ ] store file without exporting
