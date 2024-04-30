@@ -120,13 +120,12 @@ export async function initializeApp() {
     const keyboardShortcut = [
       metaKey ? 'meta' : '',
       ctrlKey ? 'ctrl' : '',
-      altKey ? 'alt' : '',
       shiftKey ? 'shift' : '',
       code,
     ].filter((k) => k !== '').join(' ').trim()
 
     try {
-      const newState = modes[window.state.current.mode].on_command(keyboardShortcut, window.state.current)
+      const newState = modes[window.state.current.mode].on_command(altKey, keyboardShortcut, window.state.current)
 
       if (newState) {
         e.preventDefault()

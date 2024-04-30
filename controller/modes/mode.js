@@ -5,25 +5,38 @@ import { canvasDocument } from '../canvas'
 export class Mode {
   commands = {}
   commandSubPath = {}
+  lockedPath = null
 
   constructor() {}
 
-  on_command(key, state) {
+  on_command(lock, key, state) {
     let newState = null
 
-    switch (typeof this.commandSubPath[key]) {
+    const subPath = this.lockedPath || this.commandSubPath
+
+    switch (typeof subPath[key]) {
       case 'object':
         channel.post({ action: 'append_key', data: key })
-        this.commandSubPath = this.commandSubPath[key]
+        if (lock) {
+          this.lockedPath = this.commandSubPath
+        }
+        this.commandSubPath = subPath[key]
+
         break
       case 'function':
         channel.post({ action: 'execute_key', data: key })
-        newState = this.commandSubPath[key](state)
+        newState = subPath[key](state)
         this.commandSubPath = this.commands
         break
       default:
         channel.post({ action: 'reset_key', data: key })
-        this.commandSubPath = this.commands
+
+        if (this.lockedPath) {
+          this.commandSubPath = this.lockedPath
+        } else {
+          this.commandSubPath = this.commands
+        }
+
         if (this.exit_mode) {
           this.exit_mode()
         }
