@@ -13,7 +13,7 @@ const App = ({ extension, extensionProps, canvasDOM, selections, keySequence }) 
 
   return (
     <div
-      className="h-full bg-slate-800 relative w-full"
+      className="h-full bg-gray-900 relative w-full"
     >
       {canvasDOM !== null && (
         <>
@@ -38,7 +38,7 @@ const App = ({ extension, extensionProps, canvasDOM, selections, keySequence }) 
       )}
 
       {extension !== '' && (
-        <div className="w-full h-screen z-10 bg-slate-800 relative">
+        <div className="w-full h-screen z-10 bg-gray-900 relative">
           <iframe
             key={extension}
             title={extension}

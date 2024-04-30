@@ -37,7 +37,7 @@ const ImageInput = ({ count }) => {
       }}
     >
       <form
-        className="bg-slate-800 text-white p-6 rounded relative overflow-visible shadow h-fit"
+        className="bg-gray-900 text-white p-6 rounded relative overflow-visible shadow h-fit"
         onClick={(e) => e.stopPropagation()}
         onSubmit={(e) => {
           e.preventDefault()

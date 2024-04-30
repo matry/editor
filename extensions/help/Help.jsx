@@ -61,7 +61,7 @@ const Help = () => (
     }}
   >
     <div
-      className="p-5 overflow-x-hidden bg-slate-800 text-slate-300"
+      className="p-5 overflow-x-hidden bg-gray-900 text-slate-300"
       onClick={(e) => e.stopPropagation()}
     >
       <h1 className="pb-1 mb-5 text-lg font-semibold text-white border-b border-dashed border-slate-600">Keyboard Shortcuts</h1>
