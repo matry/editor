@@ -242,7 +242,6 @@ class SelectMode extends Mode {
     }
 
     if (selections.length > 1) {
-      window.alert('Sorry, multi-line copy is not yet available')
       return null
     }
 
