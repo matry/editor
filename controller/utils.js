@@ -109,6 +109,14 @@ export const downloadJSONFile = (data = {}, fileName = 'file') => {
   saveAs(file, `${fileName}.json`)
 }
 
+export const downloadHTMLFile = (data = '', fileName = 'file') => {
+  const file = new Blob([data], {
+    type: 'application/html',
+  })
+
+  saveAs(file, `${fileName}.html`)
+}
+
 export const openJSONFile = () => {
   const input = document.createElement('input')
   input.type = 'file'

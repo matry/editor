@@ -79,8 +79,6 @@ const ImageInput = ({ count }) => {
                       urls.push(faker.image[e.target.value](100, 100))
                     }
 
-                    console.log(urls)
-
                     channel.post({
                       action: 'confirm_replace_content',
                       data: {

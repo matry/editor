@@ -14,6 +14,7 @@ import {
 import { canvasDocument, canvasWindow } from '../canvas'
 import { Mode } from './mode'
 import { randomImage } from '../utils'
+import { downloadHTMLFile } from '../utils'
 
 const doc = canvasDocument()
 const win = canvasWindow()
@@ -90,10 +91,24 @@ class SelectMode extends Mode {
   }
 
   export_document({ stylesheet }) {
-    downloadJSONFile({
-      cssRules: Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-      htmlContent: serialize(canvasDocument().body),
+    const canvas = canvasDocument()
+    const doc = canvas.cloneNode(true)
+
+    const scripts = doc.querySelectorAll('script')
+    scripts.forEach((script) => {
+      script.remove()
     })
+
+    const cssRules = Array.from(stylesheet.cssRules).map((rule) => rule.cssText).join('\n')
+
+    const style = doc.createElement('style')
+    style.textContent = cssRules
+    doc.head.appendChild(style)
+
+    const serializer = new XMLSerializer()
+    const serializedDoc = serializer.serializeToString(doc)
+
+    downloadHTMLFile(serializedDoc)
   }
 
   async open_document({ stylesheet }) {
