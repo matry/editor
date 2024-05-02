@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/no-autofocus */
 import { faker } from '@faker-js/faker'
-import classNames from 'classnames'
 import { number } from 'prop-types'
 import { useRef, useState } from 'react'
 import { channel } from '../listener'
@@ -26,29 +23,22 @@ const categories = [
 const ImageInput = ({ count }) => {
   const propRef = useRef()
   const [url, setUrl] = useState('')
-  // const [selectedCategory, setSelectedCategory] = useState('')
-  // const [images, setImages] = useState([])
 
   return (
     <div
-      className="absolute top-0 left-0 right-0 w-screen h-screen flex justify-center z-10 pt-60 overflow-x-hidden"
+      className="w-screen h-screen z-10 pt-60 overflow-x-hidden"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}
     >
       <form
-        className="bg-gray-900 text-white p-6 rounded relative overflow-visible shadow h-fit"
+        className="bg-gray-900 text-white p-6 rounded relative overflow-visible shadow"
         onClick={(e) => e.stopPropagation()}
+        onBlur={() => {
+          channel.post({ action: 'exit_extension', data: {} })
+        }}
         onSubmit={(e) => {
           e.preventDefault()
-
-          channel.post({
-            action: 'update_selection_styles',
-            data: {
-              // property: prop,
-              // value: val,
-            },
-          })
 
           propRef.current.focus()
         }}
@@ -71,69 +61,40 @@ const ImageInput = ({ count }) => {
             onChange={(e) => {
               setUrl(e.target.value)
             }}
-          />
-          <button
-            type="submit"
-            disabled={!url}
-            className="p-2 text-white bg-blue-600 hover:bg-blue-700 cursor-pointer text-sm leading-none mt-3 rounded-full px-4 disabled:opacity-40"
-          >
-            Ok
-          </button>
-        </div>
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                try {
+                  const url = new URL(e.target.value)
 
-        <div>
-          <label
-            className="mr-1 block text-xs mb-3"
-          >
-            Or choose a category
-          </label>
-          <ul className="grid grid-cols-3 gap-2">
-            {categories.map((category) => (
-              <li
-                key={category}
-              >
-                <button
-                  type="button"
-                  className={classNames(
-                    'hover:text-blue-500 text-slate-200 bg-transparent cursor-pointer text-sm border border-slate-600 rounded leading-none p-3 w-full',
-                  )}
-                  onClick={() => {
-                    const newImages = []
+                  channel.post({
+                    action: 'confirm_replace_content',
+                    data: {
+                      urls: [e.target.value],
+                    },
+                  })
+                } catch (error) {
+                  if (categories.includes(e.target.value)) {
+                    const urls = []
                     for (let i = 0; i < count; i++) {
-                      newImages.push(faker.image[category](100, 100))
+                      urls.push(faker.image[e.target.value](100, 100))
                     }
+
+                    console.log(urls)
 
                     channel.post({
                       action: 'confirm_replace_content',
                       data: {
-                        images: newImages,
+                        urls,
                       },
                     })
-                  }}
-                >
-                  {category}
-                </button>
-              </li>
-            ))}
-          </ul>
+                  } else {
+                    channel.post({ action: 'exit_extension', data: {} })
+                  }
+                }
+              }
+            }}
+          />
         </div>
-
-        {/* <input type="submit" className="hidden" /> */}
-
-        {/* {images.length > 0 && (
-        <ul
-          className="top-full absolute left-0 right-0 mt-1 max-w-full max-h-72 overflow-y-hidden flex gap-2"
-        >
-          {images.map((image) => (
-            <li
-              key={image}
-              className="overflow-hidden rounded"
-            >
-              <img src={image} alt="suggested" />
-            </li>
-          ))}
-        </ul>
-        )} */}
       </form>
     </div>
   )

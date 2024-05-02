@@ -101,6 +101,9 @@ export async function initializeApp() {
     const message = e.data
   
     switch (message.action) {
+      case 'confirm_replace_content':
+        modes.select.confirm_replace_content(window.state.current, { urls: message.data.urls })
+        break
       case 'update_selection_text':
         modes.select.update_selection_text(window.state.current, message.data.value)
         break

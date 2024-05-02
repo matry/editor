@@ -63,6 +63,11 @@ channel.listen((e) => {
       appState.canvasDOM = getCanvasDOM()
       render()
       break
+    case 'confirm_replace_content':
+      appState.extension = ''
+      appState.extensionProps = {}
+      render()
+      break
     default:
       break
   }

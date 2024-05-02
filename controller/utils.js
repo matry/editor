@@ -31,9 +31,9 @@ export const randomNumber = (max, min = 100) => {
 
 export const randomPercent = (min = 0) => `${randomNumber(100, min)}%`
 
-export const randomImage = () => {
-  const height = Math.floor(randomNumber(400, 100))
-  const width = Math.floor(height * 1.5)
+export const randomImage = (w, h) => {
+  const height = Math.floor(h || randomNumber(400, 100))
+  const width = Math.floor(w || (height * 1.5))
 
   return {
     url: `https://picsum.photos/${width}/${height}`, // `https://via.placeholder.com/${width}x${height}.png`, // `https://via.placeholder.com/${width}x${height}.png`, // `https://picsum.photos/${width}/${height}`,

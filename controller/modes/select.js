@@ -13,6 +13,7 @@ import {
 } from '../utils'
 import { canvasDocument, canvasWindow } from '../canvas'
 import { Mode } from './mode'
+import { randomImage } from '../utils'
 
 const doc = canvasDocument()
 const win = canvasWindow()
@@ -26,6 +27,9 @@ class SelectMode extends Mode {
       Backspace: this.delete_selections,
       BracketLeft: this.toggle_editor,
       KeyE: {
+        KeyI: {
+          KeyR: this.replace_random_image,
+        },
         KeyS: this.style_selections,
         KeyT: this.edit_selections_text,
       },
@@ -128,9 +132,20 @@ class SelectMode extends Mode {
     })
   }
 
-  confirm_replace_content({ selections }, { images }) {
+  confirm_replace_content({ selections }, { images, urls }) {
     selections.forEach((selection, i) => {
-      selection.setAttribute('src', images[i])
+      if (selection.getAttribute('data-type') === 'image') {
+        selection.setAttribute('src', urls[i] || urls[0])
+      }
+    })
+  }
+
+  replace_random_image({ selections, stylesheet }) {
+    selections.forEach((selection, i) => {
+      if (selection.getAttribute('data-type') === 'image') {
+        const image = randomImage(selection.offsetWidth, selection.offsetHeight)
+        selection.setAttribute('src', image.url)
+      }
     })
   }
 
@@ -160,6 +175,35 @@ class SelectMode extends Mode {
       data: {
         id: 'css',
         params: styles,
+      },
+    })
+  }
+
+  edit_selections_image(state) {
+    const { selections } = state
+
+    if (selections.length === 0) {
+      throw new Error('You must first select an element to edit')
+    }
+
+    let imagesSelected = 0
+    for (const selection of selections) {
+      if (selection.getAttribute('data-type') === 'image') {
+        imagesSelected += 1
+      }
+    }
+
+    if (imagesSelected === 0) {
+      return null
+    }
+
+    channel.post({
+      action: 'request_extension',
+      data: {
+        id: 'image',
+        params: {
+          count: imagesSelected,
+        },
       },
     })
   }

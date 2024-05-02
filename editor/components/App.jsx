@@ -25,15 +25,6 @@ const App = ({ extension, extensionProps, canvasDOM, selections, keySequence }) 
               selections={selections}
             />
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-6 bg-slate-700">
-            {keySequence.map((key, i) => {
-              return (
-                <span key={`${key}_${i}`} className="inline-block text-white leading-6 px-2 text-xs">
-                  {key}
-                </span>
-              )
-            })}
-          </div>
         </>
       )}
 
