@@ -80,17 +80,17 @@ export async function initializeApp() {
         }
 
       } catch (error) {
-        const textSelections = selections.filter((selection) => selection.getAttribute('data-type') === 'text')
-
-        if (textSelections.length === selections.length) {
-          selections.forEach((selection) => {
+        for (const selection of selections) {
+          const type = selection.getAttribute('data-type')
+          if (type === 'text') {
             selection.innerHTML = clipboardText
-          })
-        } else {
-          window.state.current = {
-            mode: 'append',
-            appendingElementType: 'text',
-            clipboardText,
+          } else if (type === 'image') {
+            try {
+              const url = new URL(clipboardText)
+              selection.setAttribute('src', url)
+            } catch (error) {
+              // do nothing
+            }
           }
         }
       }
