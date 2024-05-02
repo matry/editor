@@ -5,12 +5,12 @@
 - [x] fix subpaths not routing correctly on vercel
 - [x] show commands at bottom of editor
 - [x] default placeholder image
+- [x] edit image extension
 - [ ] add intra-mode stages
 - [ ] make sure export/load works
 - [ ] move selection
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories
-- [ ] edit image extension
 - [ ] revamp help extension
 - [ ] store file without exporting
 - [ ] add ability to create new files
