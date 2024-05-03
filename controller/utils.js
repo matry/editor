@@ -208,8 +208,7 @@ export const readBlobs = (blobs) => {
 }
 
 export const renderBoxModel = ({ showBoxModel, selections }) => {
-  const doc = window.document
-  const overlay = doc.querySelector('#overlay')
+  const doc = canvasDocument()
 
   if (!showBoxModel) {
     const dataSelection = doc.querySelector('[data-selection]')
@@ -273,7 +272,7 @@ export const renderBoxModel = ({ showBoxModel, selections }) => {
     highlighter.appendChild(paddingBox)
     highlighter.appendChild(contentBox)
 
-    overlay.appendChild(highlighter)
+    doc.body.appendChild(highlighter)
 
     selection.setAttribute('data-selected', 'on')
   })
