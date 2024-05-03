@@ -10,6 +10,10 @@ export function initZoom() {
   })
 
   function onWheel(e: WheelEvent) {
+    if (document.visibilityState === 'hidden') {
+      return
+    }
+
     if (!e.ctrlKey) {
       return
     }
@@ -24,6 +28,10 @@ export function initZoom() {
   }
 
   function onDblClick() {
+    if (document.visibilityState === 'hidden') {
+      return
+    }
+
     instance.panTo({
       originX: 0,
       originY: 0,
@@ -32,6 +40,10 @@ export function initZoom() {
   }
 
   function onMouseMove(e: MouseEvent) {
+    if (document.visibilityState === 'hidden') {
+      return
+    }
+
     if (!e.shiftKey) {
       return
     }
@@ -42,6 +54,10 @@ export function initZoom() {
       originY: e.movementY,
     })
   }
+
+  container.addEventListener('wheel', onWheel)
+  container.addEventListener('dblclick', onDblClick)
+  container.addEventListener('mousemove', onMouseMove)
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
