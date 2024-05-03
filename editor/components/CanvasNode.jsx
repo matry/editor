@@ -29,28 +29,43 @@ export default function CanvasNode({ canvasDOM, selections }) {
       id={canvasDOM.id}
       className="mb-1 relative"
     >
-      <span>
-        <pre className="inline">&lt;</pre>
-        <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
-        <pre className="inline">&gt;</pre>
-      </span>
+      {children.length === 0 && (
+        <span>
+          <pre className="inline">&lt;</pre>
+          <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
+          <pre className="inline"> &#47;&gt;</pre>
+        </span>
+      )}
 
       {children.length > 0 && (
-        <ul className="mt-1 pl-4 border-l border-slate-800 border-dashed">
-          {children.map((childElement) => {
-            if (!childElement.id) {
-              return null
-            }
+        <>
+          <span>
+            <pre className="inline">&lt;</pre>
+            <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
+            <pre className="inline">&gt;</pre>
+          </span>
+          <ul className={`mt-1 pl-4 border-l border-dashed ${isActive ? 'border-slate-500' : 'border-slate-800'}`}>
+            {children.map((childElement) => {
+              if (!childElement.id) {
+                return null
+              }
 
-            return (
-              <CanvasNode
-                key={childElement.id}
-                canvasDOM={childElement}
-                selections={selections}
-              />
-            )
-          })}
-        </ul>
+              return (
+                <CanvasNode
+                  key={childElement.id}
+                  canvasDOM={childElement}
+                  selections={selections}
+                />
+              )
+            })}
+          </ul>
+
+          <span>
+            <pre className="inline">&lt;&#47;</pre>
+            <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
+            <pre className="inline">&gt;</pre>
+          </span>
+        </>
       )}
     </li>
   )
