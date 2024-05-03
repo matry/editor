@@ -6,8 +6,8 @@
 - [x] show commands at bottom of editor
 - [x] default placeholder image
 - [x] edit image extension
+- [x] make sure export/load works
 - [ ] add intra-mode stages
-- [ ] make sure export/load works
 - [ ] move selection
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories

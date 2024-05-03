@@ -1,9 +1,10 @@
+import localforage from 'localforage'
 import { saveAs } from 'file-saver'
 import { appendStoredRules } from './cssom'
 import { canvasDocument } from './canvas'
 import { getBox } from 'css-box-model'
 import { channel } from './listener'
-import { initDB, storeFile, getLastEditedFile } from './store'
+import { storeFile, getLastEditedFile } from './store'
 
 export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
@@ -149,36 +150,27 @@ export const openJSONFile = () => {
 }
 
 export const storeJSONFile = async (htmlFile, cssFile) => {
-  await storeFile(htmlFile, 'html', 'default')
-  await storeFile(cssFile, 'css', 'default')
+  await Promise.all([
+    localforage.setItem('html', htmlFile),
+    localforage.setItem('css', cssFile),
+  ])
 }
 
 export const retrieveJSONFile = async () => {
-  try {
-    await initDB()
-    const lastFile = await getLastEditedFile()
+  const [htmlFile, cssFile] = await Promise.all([
+    localforage.getItem('html'),
+    localforage.getItem('css'),
+  ])
 
-    if (lastFile) {
-      return lastFile
-    } else {
-      return null
-    }
-
-    // try {
-    //   const lastCSS = await getCSSByPageId(lastHTML.pageId)
-    // } catch (error) {
-    //   console.error(error)
-    // }
-
-  } catch (error) {
-    console.error(error)
-    return null
+  return {
+    htmlFile,
+    cssFile,
   }
 }
 
-export const loadJSONFile = (stylesheet, rootElem, file) => {
-  appendStoredRules(stylesheet, file.lastEditedCSS)
-  rootElem.insertAdjacentHTML('afterbegin', file.lastEditedHTML)
+export const loadFile = (stylesheet, rootElem, files) => {
+  appendStoredRules(stylesheet, files.cssFile)
+  rootElem.insertAdjacentHTML('afterbegin', files.htmlFile)
 }
 
 export const clearStorage = () => {

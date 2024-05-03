@@ -1,3 +1,4 @@
+import localforage from 'localforage'
 
 export async function initDB() {
   return new Promise((resolve, reject) => {
@@ -24,26 +25,8 @@ export async function initDB() {
   })
 }
 
-export async function storeFile(fileContent, fileType, pageId) {
-  return new Promise((resolve, reject) => {
-    const transaction = window.db.transaction(['files'], 'readwrite')
-    const store = transaction.objectStore('files')
-    const data = {
-      pageId,
-      content: fileContent,
-      type: fileType,
-      lastModified: new Date(),
-    }
-    const req = store.put(data)
-
-    req.onsuccess = () => {
-      resolve(req.result)
-    }
-
-    req.onerror = () => {
-      reject('Error storing file')
-    }
-  })
+export async function storeFile(fileContent, fileType) {
+  await localforage.setItem(fileType, fileContent)
 }
 
 export async function getLastEditedFile() {

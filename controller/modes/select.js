@@ -80,14 +80,19 @@ class SelectMode extends Mode {
   }
 
   save_document({ stylesheet }) {
-    // storeJSONFile(
-    //   serialize(canvasDocument().body),
-    //   Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-    // )
-    // channel.post({
-    //   action: 'did_save_state',
-    //   data: {},
-    // })
+    storeJSONFile(
+      serialize(canvasDocument().body),
+      Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
+    )
+
+    channel.post({
+      action: 'did_save_state',
+      data: {},
+    })
+
+    return {
+      hasUnsavedChanges: false,
+    }
   }
 
   export_document({ stylesheet }) {
@@ -153,6 +158,10 @@ class SelectMode extends Mode {
         selection.setAttribute('src', urls[i] || urls[0])
       }
     })
+
+    return {
+      hasUnsavedChanges: true,
+    }
   }
 
   replace_random_image({ selections, stylesheet }) {
@@ -162,6 +171,10 @@ class SelectMode extends Mode {
         selection.setAttribute('src', image.url)
       }
     })
+
+    return {
+      hasUnsavedChanges: true,
+    }
   }
 
   update_selection_text({ selections }, textContent) {
@@ -169,6 +182,10 @@ class SelectMode extends Mode {
       if (selection.getAttribute('data-type') === 'text') {
         selection.innerHTML = textContent
       }
+    }
+
+    return {
+      hasUnsavedChanges: true,
     }
   }
 
@@ -181,6 +198,10 @@ class SelectMode extends Mode {
     selections.forEach(({ id }) => {
       updateRule(stylesheet, `#${id}`, property, value)
     })
+
+    return {
+      hasUnsavedChanges: true,
+    }
   }
 
   style_selections({ stylesheet, selections }) {
@@ -192,6 +213,10 @@ class SelectMode extends Mode {
         params: styles,
       },
     })
+
+    return {
+      hasUnsavedChanges: true,
+    }
   }
 
   edit_selections_image(state) {
@@ -442,6 +467,7 @@ class SelectMode extends Mode {
 
     return {
       selections: newSelections,
+      hasUnsavedChanges: true,
     }
   }
 

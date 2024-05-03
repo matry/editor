@@ -58,6 +58,7 @@ class AppendMode extends Mode {
       clipboardText: '',
       clipboardSelection: null,
       clipboardFiles: null,
+      hasUnsavedChanges: true,
     }
   }
 
@@ -100,6 +101,7 @@ class AppendMode extends Mode {
       clipboardText: '',
       clipboardSelection: null,
       clipboardFiles: null,
+      hasUnsavedChanges: true,
     }
   }
 
@@ -144,6 +146,7 @@ class AppendMode extends Mode {
       clipboardText: '',
       clipboardSelection: null,
       clipboardFiles: null,
+      hasUnsavedChanges: true,
     }
   }
 
@@ -156,11 +159,13 @@ class AppendMode extends Mode {
       return {
         selections: [nestGroupWithinParent(stylesheet, selections)],
         mode: 'select',
+        hasUnsavedChanges: true,
       }
     }
     return {
       selections: nestIndividuallyWithinParent(stylesheet, selections),
       mode: 'select',
+      hasUnsavedChanges: true,
     }
   }
 }

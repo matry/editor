@@ -1,7 +1,7 @@
 import { object, string } from 'prop-types'
 import CanvasNode from './CanvasNode'
 
-const App = ({ extension, extensionProps, canvasDOM, selections, keySequence }) => {
+const App = ({ extension, extensionProps, canvasDOM, selections, hasUnsavedChanges, keySequence }) => {
   const queryParams = Object.keys(extensionProps)
     .map((k) => `${k}=${encodeURIComponent(extensionProps[k])}`)
     .join('&')
@@ -38,6 +38,12 @@ const App = ({ extension, extensionProps, canvasDOM, selections, keySequence }) 
             className="w-full h-full"
           />
         </div>
+      )}
+
+      {!!hasUnsavedChanges && (
+        <div
+          className="absolute w-2 h-2 rounded-full bg-blue-500 top-2 right-2 origin-top-right"
+        />
       )}
     </div>
   )

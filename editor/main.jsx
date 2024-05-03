@@ -11,6 +11,7 @@ const appState = {
   canvasDOM: null,
   selections: [],
   keySequence: [],
+  hasUnsavedChanges: false,
 }
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
@@ -23,6 +24,7 @@ const render = () => {
         canvasDOM={appState.canvasDOM}
         selections={appState.selections}
         keySequence={appState.keySequence}
+        hasUnsavedChanges={appState.hasUnsavedChanges}
       />
     </React.StrictMode>,
   )
@@ -59,6 +61,7 @@ channel.listen((e) => {
       render()
       break
     case 'state_did_change':
+      appState.hasUnsavedChanges = message.data.hasUnsavedChanges
       appState.selections = message.data.selections
       appState.canvasDOM = getCanvasDOM()
       render()

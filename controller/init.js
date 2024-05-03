@@ -1,6 +1,6 @@
 import './effects'
 import { State } from './state'
-import { loadJSONFile, readBlobs, retrieveJSONFile, randomId } from './utils'
+import { loadFile, readBlobs, retrieveJSONFile, randomId } from './utils'
 import { canvasDocument } from './canvas'
 import { channel } from './listener'
 import modes from './modes'
@@ -12,6 +12,7 @@ export async function initializeApp() {
   doc.body.id = randomId()
 
   window.state = new State({
+    hasUnsavedChanges: false,
     mode: 'select',
     selections: [doc.body],
     copiedIds: [],
@@ -40,6 +41,7 @@ export async function initializeApp() {
         clipboardText: newState.clipboardText,
         clipboardSelection: newState.clipboardSelection,
         clipboardFiles: newState.clipboardFiles,
+        hasUnsavedChanges: newState.hasUnsavedChanges,
       },
     })
   })
@@ -140,14 +142,14 @@ export async function initializeApp() {
     }
   })
 
-  // const jsonFile = await retrieveJSONFile()
-  // if (jsonFile) {
-  //   loadJSONFile(window.state.current.stylesheet, doc.body, jsonFile)
-  //   channel.post({
-  //     action: 'state_did_change',
-  //     data: {
-  //       selections: [],
-  //     },
-  //   })
-  // }
+  const files = await retrieveJSONFile()
+  if (files) {
+    loadFile(window.state.current.stylesheet, doc.body, files)
+    channel.post({
+      action: 'state_did_change',
+      data: {
+        selections: [],
+      },
+    })
+  }
 }
