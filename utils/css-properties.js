@@ -1517,6 +1517,14 @@ export default [
     ],
   },
   {
+    'property': 'row-gap',
+    'values': [
+      'normal',
+      'initial',
+      'inherit',
+    ],
+  },
+  {
     'property': 'column-gap',
     'values': [
       'normal',
