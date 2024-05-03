@@ -9,7 +9,7 @@ export function initZoom() {
     scaleSensitivity: 50,
   })
 
-  container.addEventListener('wheel', (e) => {
+  function onWheel(e: WheelEvent) {
     if (!e.ctrlKey) {
       return
     }
@@ -21,17 +21,17 @@ export function initZoom() {
       x: e.pageX,
       y: e.pageY,
     })
-  })
+  }
 
-  container.addEventListener('dblclick', () => {
+  function onDblClick() {
     instance.panTo({
       originX: 0,
       originY: 0,
       scale: 1,
     })
-  })
+  }
 
-  container.addEventListener('mousemove', (e) => {
+  function onMouseMove(e: MouseEvent) {
     if (!e.shiftKey) {
       return
     }
@@ -41,5 +41,17 @@ export function initZoom() {
       originX: e.movementX,
       originY: e.movementY,
     })
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      container.removeEventListener('wheel', onWheel)
+      container.removeEventListener('dblclick', onDblClick)
+      container.removeEventListener('mousemove', onMouseMove)
+    } else {
+      container.addEventListener('wheel', onWheel)
+      container.addEventListener('dblclick', onDblClick)
+      container.addEventListener('mousemove', onMouseMove)
+    }
   })
 }

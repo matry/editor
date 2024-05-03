@@ -29,7 +29,11 @@ export default function CanvasNode({ canvasDOM, selections }) {
       id={canvasDOM.id}
       className="mb-1"
     >
-      <span className={isActive ? 'text-white' : ''}>{canvasDOM.getAttribute('data-type')}</span>
+      <span>
+        <pre className="inline">&lt;</pre>
+        <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
+        <pre className="inline">&gt;</pre>
+      </span>
 
       {children.length > 0 && (
         <ul className="mt-1 pl-3">
