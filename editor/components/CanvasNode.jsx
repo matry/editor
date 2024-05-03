@@ -27,7 +27,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
     <li
       key={canvasDOM.id}
       id={canvasDOM.id}
-      className="mb-1"
+      className="mb-1 relative"
     >
       <span>
         <pre className="inline">&lt;</pre>
@@ -36,7 +36,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
       </span>
 
       {children.length > 0 && (
-        <ul className="mt-1 pl-3">
+        <ul className="mt-1 pl-4 border-l border-slate-800 border-dashed">
           {children.map((childElement) => {
             if (!childElement.id) {
               return null
