@@ -269,3 +269,23 @@ export const renderBoxModel = ({ showBoxModel, selections }) => {
     selection.setAttribute('data-selected', 'on')
   })
 }
+
+export const selectionGuard = (selections) => {
+  const result = selections.filter((selection) => {
+    if (!selection) {
+      return false
+    }
+
+    if (typeof selection.hasAttribute === 'function' && selection.hasAttribute('data-type')) {
+      return true
+    }
+
+    return false
+  })
+
+  if (result.length === 0) {
+    return [canvasDocument().body]
+  }
+
+  return result
+}

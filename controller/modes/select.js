@@ -16,6 +16,7 @@ import { Mode } from './mode'
 import { randomImage } from '../utils'
 import { downloadHTMLFile } from '../utils'
 import { isSiblings } from '../dom'
+import { selectionGuard } from '../utils'
 
 const doc = canvasDocument()
 const win = canvasWindow()
@@ -360,13 +361,13 @@ class SelectMode extends Mode {
 
   select_first_sibling(state) {
     return {
-      selections: selectFirstSiblingNode(state.selections),
+      selections: selectionGuard(selectFirstSiblingNode(state.selections)),
     }
   }
 
   select_last_sibling(state) {
     return {
-      selections: selectLastSiblingNode(state.selections),
+      selections: selectionGuard(selectLastSiblingNode(state.selections)),
     }
   }
 
@@ -383,7 +384,7 @@ class SelectMode extends Mode {
     }
 
     return {
-      selections: selectPreviousNode(selections),
+      selections: selectionGuard(selectPreviousNode(selections)),
     }
   }
 
@@ -392,12 +393,12 @@ class SelectMode extends Mode {
 
     if (selections.length === 0) {
       return {
-        selections: [doc.querySelector('[data-type="html"]')],
+        selections: [canvasDocument().querySelector('[data-type="html"]')],
       }
     }
 
     return {
-      selections: selectNextNode(selections),
+      selections: selectionGuard(selectNextNode(selections)),
     }
   }
 
@@ -407,18 +408,18 @@ class SelectMode extends Mode {
 
     if (selections.length === 0) {
       return {
-        selections: [doc.querySelector('[data-type="html"]')],
+        selections: [canvasDocument().querySelector('[data-type="html"]')],
       }
     }
 
     return {
-      selections: selections.map((selection) => {
+      selections: selectionGuard(selections.map((selection) => {
         if (selection.getAttribute('data-type') === 'html') {
           return selection
         }
 
         return selection.parentElement
-      }),
+      })),
     }
   }
 
@@ -427,19 +428,19 @@ class SelectMode extends Mode {
 
     if (selections.length === 0) {
       return {
-        selections: [doc.querySelector('[data-type="html"]')],
+        selections: [canvasDocument().querySelector('[data-type="html"]')],
       }
     }
 
     return {
-      selections: selections.map((selection) => {
+      selections: selectionGuard(selections.map((selection) => {
         if (['text', 'image', 'video'].includes(selection.getAttribute('data-type')) || selection.children.length === 0) {
           return selection
         }
 
         return selection.querySelector('[data-type]')
         // return selection.firstElementChild
-      }),
+      })),
     }
   }
 
@@ -455,24 +456,24 @@ class SelectMode extends Mode {
 
     if (clickedIndex === -1 || clickedIndex === (clickedElements.length - 1)) {
       return {
-        selections: [e.target],
+        selections: selectionGuard([e.target]),
       }
     }
 
     return {
-      selections: [clickedElements[clickedIndex + 1]],
+      selections: selectionGuard([clickedElements[clickedIndex + 1]]),
     }
   }
 
   select_another_node(state, e) {
     return {
-      selections: [...state.selections, e.target],
+      selections: selectionGuard([...state.selections, e.target]),
     }
   }
 
   select_all(state) {
     return {
-      selections: selectAll(state.selections),
+      selections: selectionGuard(selectAll(state.selections)),
     }
   }
 
@@ -481,12 +482,12 @@ class SelectMode extends Mode {
 
     if (state.selections.length > 1) {
       return {
-        selections: [state.selections[0]],
+        selections: selectionGuard([state.selections[0]]),
       }
     }
 
     return {
-      selections: [canvasDocument().body],
+      selections: selectionGuard([canvasDocument().body]),
     }
   }
 
@@ -535,7 +536,7 @@ class SelectMode extends Mode {
     deleteElements(selections)
 
     return {
-      selections: newSelections,
+      selections: selectionGuard(newSelections),
       hasUnsavedChanges: true,
     }
   }
@@ -559,12 +560,12 @@ class SelectMode extends Mode {
       const newSelections = [...selections]
       newSelections.pop()
       return {
-        selections: newSelections,
+        selections: selectionGuard(newSelections),
       }
     }
 
     return {
-      selections: [...selections, previousElement],
+      selections: selectionGuard(...selections, previousElement),
     }
   }
 
@@ -587,12 +588,12 @@ class SelectMode extends Mode {
       const newSelections = [...selections]
       newSelections.pop()
       return {
-        selections: newSelections,
+        selections: selectionGuard(newSelections),
       }
     }
 
     return {
-      selections: [...selections, nextElement],
+      selections: selectionGuard([...selections, nextElement]),
     }
   }
 }
