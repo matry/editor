@@ -295,28 +295,72 @@ class SelectMode extends Mode {
     return null
   }
 
-  append_shape() {
+  append_shape(state) {
+    let isValid = true
+    for (const selection of state.selections) {
+      if (selection.getAttribute('data-type') === 'html') {
+        isValid = false
+      }
+    }
+
+    if (!isValid) {
+      return null
+    }
+
     return {
       mode: 'append',
       appendingElementType: 'shape',
     }
   }
 
-  append_text() {
+  append_text(state) {
+    let isValid = true
+    for (const selection of state.selections) {
+      if (selection.getAttribute('data-type') === 'html') {
+        isValid = false
+      }
+    }
+
+    if (!isValid) {
+      return null
+    }
+
     return {
       mode: 'append',
       appendingElementType: 'text',
     }
   }
 
-  append_image() {
+  append_image(state) {
+    let isValid = true
+    for (const selection of state.selections) {
+      if (selection.getAttribute('data-type') === 'html') {
+        isValid = false
+      }
+    }
+
+    if (!isValid) {
+      return null
+    }
+
     return {
       mode: 'append',
       appendingElementType: 'image',
     }
   }
 
-  append_video() {
+  append_video(state) {
+    let isValid = true
+    for (const selection of state.selections) {
+      if (selection.getAttribute('data-type') === 'html') {
+        isValid = false
+      }
+    }
+
+    if (!isValid) {
+      return null
+    }
+
     return {
       mode: 'append',
       appendingElementType: 'video',

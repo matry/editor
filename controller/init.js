@@ -9,21 +9,7 @@ import { renderBoxModel } from './utils'
 export async function initializeApp() {
   const doc = canvasDocument()
 
-  doc.body.id = randomId()
-
-  window.state = new State({
-    hasUnsavedChanges: false,
-    mode: 'select',
-    selections: [doc.body],
-    copiedIds: [],
-    cutIds: [],
-    showBoxModel: false,
-    appendingElementType: null,
-    clipboardText: '',
-    clipboardSelection: null,
-    clipboardFiles: null,
-    stylesheet: doc.adoptedStyleSheets[0],
-  }, (newState, update) => {
+  window.state = new State({}, (newState, update) => {
     Object.keys(update).forEach((updateKey) => {
       window.dispatchEvent(new CustomEvent(`${updateKey}_changed`))
     })
@@ -45,6 +31,21 @@ export async function initializeApp() {
       },
     })
   })
+
+  // initialize the state so that it triggers a channel message
+  window.state.current = {
+    hasUnsavedChanges: false,
+    mode: 'select',
+    selections: [doc.body],
+    copiedIds: [],
+    cutIds: [],
+    showBoxModel: false,
+    appendingElementType: null,
+    clipboardText: '',
+    clipboardSelection: null,
+    clipboardFiles: null,
+    stylesheet: doc.adoptedStyleSheets[0],
+  }
 
   window.addEventListener('paste', async (e) => {
     const { selections } = window.state.current
@@ -143,7 +144,7 @@ export async function initializeApp() {
   })
 
   const files = await retrieveJSONFile()
-  if (files) {
+  if (files.htmlFile && files.cssFile) {
     loadFile(window.state.current.stylesheet, doc.body, files)
     channel.post({
       action: 'state_did_change',
