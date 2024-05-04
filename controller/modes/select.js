@@ -37,7 +37,6 @@ class SelectMode extends Mode {
         KeyS: this.style_selections,
         KeyT: this.edit_selections_text,
       },
-      KeyD: this.delete_selections,
       Tab: this.select_next_sibling,
       KeyA: {
         KeyS: this.append_shape,

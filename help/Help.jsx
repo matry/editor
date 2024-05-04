@@ -20,7 +20,7 @@ const editorCommands = [
   ],
   [
     {
-      name: 'Toggle box model',
+      name: 'Toggle box model overlay',
       tooltip: 'up',
       keys: ['b'],
     }
@@ -97,6 +97,13 @@ const addCommands = [
 ]
 
 const editCommands = [
+  [
+    {
+      name: 'Delete element',
+      tooltip: 'up',
+      keys: ['⌫'],
+    }
+  ],
   [
     {
       name: 'Edit styles',
