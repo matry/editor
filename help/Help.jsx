@@ -153,10 +153,12 @@ const Help = () => (
     >
       <h1 className="pb-1 mb-5 text-lg font-semibold text-white border-b border-dashed border-slate-600">Cheat Sheet</h1>
 
-      <p className="text-slate-300 text-xs">This editor is primarily driven by keyboard commands. Refer to the list below.</p>
+      <p className="text-slate-300 text-xs max-w-xl">
+        This editor is primarily keyboard-driven.
+        Below is a cheatsheet showing the available list of commands.
+      </p>
 
       <div className="flex flex-wrap gap-8 mt-6">
-
         <LegendMenu
           title="Selecting Elements"
           commands={selectCommands}
@@ -171,7 +173,6 @@ const Help = () => (
           title="Editing Elements"
           commands={editCommands}
         />
-
       </div>
     </div>
   </div>
