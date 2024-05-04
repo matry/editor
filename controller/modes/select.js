@@ -15,6 +15,7 @@ import { canvasDocument, canvasWindow } from '../canvas'
 import { Mode } from './mode'
 import { randomImage } from '../utils'
 import { downloadHTMLFile } from '../utils'
+import { isSiblings } from '../dom'
 
 const doc = canvasDocument()
 const win = canvasWindow()
@@ -492,7 +493,9 @@ class SelectMode extends Mode {
   delete_selections(state) {
     const { selections } = state
 
-    const newSelections = selections.map((selection) => {
+    const siblings = isSiblings(selections)
+
+    let newSelections = selections.map((selection) => {
       let newSelection = selection.nextElementSibling
 
       if (['html', 'body'].includes(selection.getAttribute('data-type'))) {
@@ -517,6 +520,17 @@ class SelectMode extends Mode {
 
       return newSelection
     }).filter((selection) => selection !== null)
+
+    if (newSelections.length === 0) {
+      if (siblings) {
+        const parent = selections[0].parentElement
+        if (parent && parent.hasAttribute('data-type')) {
+          newSelections = [parent]
+        }
+      } else {
+        newSelections = [canvasDocument().body]
+      }
+    }
 
     deleteElements(selections)
 
