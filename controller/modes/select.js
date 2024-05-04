@@ -495,7 +495,7 @@ class SelectMode extends Mode {
     }
 
     return {
-      selections: [],
+      selections: [canvasDocument().body],
     }
   }
 

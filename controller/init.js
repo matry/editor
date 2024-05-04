@@ -146,11 +146,8 @@ export async function initializeApp() {
   const files = await retrieveJSONFile()
   if (files.htmlFile && files.cssFile) {
     loadFile(window.state.current.stylesheet, doc.body, files)
-    channel.post({
-      action: 'state_did_change',
-      data: {
-        selections: [],
-      },
-    })
+    window.state.current = {
+      selections: [doc.body],
+    }
   }
 }
