@@ -70,6 +70,6 @@ export class Mode {
   }
 
   help() {
-    window.open('/help', '_blank').focus()
+    window.open('/help/index.html', '_blank').focus()
   }
 }
