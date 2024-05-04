@@ -2,7 +2,7 @@
 export default function LegendMenu({ title, commands }) {
   return (
     <div className="border border-dashed border-slate-700">
-      <h2 className="p-4 font-semibold text-white border-b border-dashed border-slate-700">{title}</h2>
+      <h2 className="p-4 font-semibold text-white border-b border-dashed border-slate-700 leading-none">{title}</h2>
       <ul className="flex flex-col select-none gap-5 py-5">
         {commands.map((subGroup, i) => {
           return (
