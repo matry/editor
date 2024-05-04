@@ -565,7 +565,7 @@ class SelectMode extends Mode {
     }
 
     return {
-      selections: selectionGuard(...selections, previousElement),
+      selections: selectionGuard([...selections, previousElement]),
     }
   }
 
