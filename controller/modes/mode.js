@@ -68,4 +68,8 @@ export class Mode {
       showBoxModel: !state.showBoxModel,
     }
   }
+
+  help() {
+    window.open('/help', '_blank').focus()
+  }
 }

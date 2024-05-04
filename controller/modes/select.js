@@ -62,16 +62,6 @@ class SelectMode extends Mode {
     this.commandSubPath = this.commands
   }
 
-  help() {
-    channel.post({
-      action: 'request_extension',
-      data: {
-        id: 'help',
-        params: {},
-      },
-    })
-  }
-
   reset() {
     if (window.confirm('Are you sure you want to clear the canvas? This cannot be undone.')) {
       clearStorage()

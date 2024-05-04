@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import Help from './Help'
 import './index.css'
-import { channel } from '../listener'
+import { channel } from '../extensions/listener'
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
 

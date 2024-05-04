@@ -7,11 +7,11 @@
 - [x] default placeholder image
 - [x] edit image extension
 - [x] make sure export/load works
+- [x] revamp help extension
 - [ ] add intra-mode stages
 - [ ] move selection
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories
-- [ ] revamp help extension
 - [ ] store file without exporting
 - [ ] add ability to create new files
 - [ ] file navigator
