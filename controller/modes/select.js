@@ -336,7 +336,16 @@ class SelectMode extends Mode {
   }
 
   select_previous_sibling(state) {
+    const doc = canvasDocument()
     const { selections } = state
+
+    if (!selections.length) {
+      const html = doc.querySelector('[data-type="html"]')
+
+      return {
+        selections: [html],
+      }
+    }
 
     return {
       selections: selectPreviousNode(selections),
@@ -346,6 +355,11 @@ class SelectMode extends Mode {
   select_next_sibling(state) {
     const { selections } = state
 
+    if (selections.length === 0) {
+      return {
+        selections: [doc.querySelector('[data-type="html"]')],
+      }
+    }
 
     return {
       selections: selectNextNode(selections),
@@ -357,12 +371,14 @@ class SelectMode extends Mode {
     const { selections } = state
 
     if (selections.length === 0) {
-      return null
+      return {
+        selections: [doc.querySelector('[data-type="html"]')],
+      }
     }
 
     return {
       selections: selections.map((selection) => {
-        if (['HTML'].includes(selection.parentElement.tagName)) {
+        if (selection.getAttribute('data-type') === 'html') {
           return selection
         }
 
@@ -374,9 +390,9 @@ class SelectMode extends Mode {
   select_first_child(state) {
     const { selections } = state
 
-    if (selections.length === 0 && doc.body.firstElementChild) {
+    if (selections.length === 0) {
       return {
-        selections: [doc.body.firstElementChild],
+        selections: [doc.querySelector('[data-type="html"]')],
       }
     }
 
@@ -386,7 +402,8 @@ class SelectMode extends Mode {
           return selection
         }
 
-        return selection.firstElementChild
+        return selection.querySelector('[data-type]')
+        // return selection.firstElementChild
       }),
     }
   }
@@ -443,6 +460,10 @@ class SelectMode extends Mode {
 
     const newSelections = selections.map((selection) => {
       let newSelection = selection.nextElementSibling
+
+      if (['html', 'body'].includes(selection.getAttribute('data-type'))) {
+        return selection
+      }
 
       if (newSelection === null) {
         newSelection = selection.previousElementSibling

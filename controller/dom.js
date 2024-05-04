@@ -274,6 +274,10 @@ export const getSelectionDirection = (selections) => {
 
 export const deleteElements = (elements) => {
   elements.forEach((element) => {
+    if (['html', 'body'].includes(element.getAttribute('data-type'))) {
+      return
+    }
+
     element.remove()
   })
 }
@@ -323,12 +327,16 @@ export const nestGroupWithinParent = (stylesheet, elements) => {
 
 export const nestIndividuallyWithinParent = (stylesheet, elements) => {
   const parentElements = elements.map((element) => {
+    if (['html', 'body'].includes(element.parentElement.getAttribute('data-type'))) {
+      return null
+    }
+
     const { id, cssRules, template } = constructShapeTemplate()
     appendRules(stylesheet, id, cssRules)
     const parentElement = appendNode(element, template, 'before')
     parentElement.appendChild(element)
     return parentElement
-  })
+  }).filter(el => el !== null)
 
   return parentElements
 }

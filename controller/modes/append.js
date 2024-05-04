@@ -162,6 +162,7 @@ class AppendMode extends Mode {
         hasUnsavedChanges: true,
       }
     }
+
     return {
       selections: nestIndividuallyWithinParent(stylesheet, selections),
       mode: 'select',

@@ -7,27 +7,14 @@ export default function CanvasNode({ canvasDOM, selections }) {
   const children = Array.from(canvasDOM.children)
   const isActive = selections.includes(canvasDOM.id)
 
-  if (canvasDOM.tagName === 'BODY') {
-    return (
-      <ul className="root p-5 text-xs text-slate-500">
-        {children.map((childElement) => {
-          return (
-            <CanvasNode
-              key={childElement.id}
-              canvasDOM={childElement}
-              selections={selections}
-            />
-          )
-        })}
-      </ul>
-    )
-  }
+  const ElementType = canvasDOM.getAttribute('data-type') === 'html' ? 'ul' : 'li'
+  const elementClass = canvasDOM.getAttribute('data-type') === 'html' ? 'root p-5 text-xs text-slate-500' : 'mb-1 relative'
 
   return (
-    <li
+    <ElementType
       key={canvasDOM.id}
       id={canvasDOM.id}
-      className="mb-1 relative"
+      className={elementClass}
     >
       {children.length === 0 && (
         <span>
@@ -67,6 +54,6 @@ export default function CanvasNode({ canvasDOM, selections }) {
           </span>
         </>
       )}
-    </li>
+    </ElementType>
   )
 }
