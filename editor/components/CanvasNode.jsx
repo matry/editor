@@ -20,7 +20,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
         <span>
           <pre className="inline">&lt;</pre>
           <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
-          <pre className="inline"> &#47;&gt;</pre>
+          <pre className="inline">&#47;&gt;</pre>
         </span>
       )}
 
