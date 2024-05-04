@@ -25,7 +25,6 @@ window.addEventListener('selections_changed', () => {
     const lastSelection = selections[selections.length - 1]
     if (lastSelection && !isInBounds(lastSelection)) {
       selections[selections.length - 1].scrollIntoView({
-        behavior: 'smooth',
         block: 'center',
       })
     }
