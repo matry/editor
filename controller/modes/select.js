@@ -45,6 +45,7 @@ class SelectMode extends Mode {
         KeyV: this.append_video,
       },
       KeyB: this.toggle_box_model,
+      KeyH: this.help,
       ArrowUp: this.select_previous_sibling,
       ArrowDown: this.select_next_sibling,
       ArrowRight: this.select_first_child,

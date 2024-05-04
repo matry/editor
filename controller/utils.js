@@ -173,6 +173,12 @@ export const loadFile = (stylesheet, rootElem, files) => {
   rootElem.insertAdjacentHTML('afterbegin', files.htmlFile)
 }
 
+export const loadDefaultContent = (rootElem) => {
+  rootElem.insertAdjacentHTML('afterbegin', `
+    <span data-type="text" id="placeholder-content">Welcome to the Stride Editor, a keyboard-driven tool for designing in the browser. Press 'h' for help.</span>
+  `)
+}
+
 export const clearStorage = () => {
   window.localStorage.clear()
 }

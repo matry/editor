@@ -5,6 +5,7 @@ import { canvasDocument } from './canvas'
 import { channel } from './listener'
 import modes from './modes'
 import { renderBoxModel } from './utils'
+import { loadDefaultContent } from './utils'
 
 export async function initializeApp() {
   const doc = canvasDocument()
@@ -146,6 +147,11 @@ export async function initializeApp() {
   const files = await retrieveJSONFile()
   if (files.htmlFile && files.cssFile) {
     loadFile(window.state.current.stylesheet, doc.body, files)
+    window.state.current = {
+      selections: [doc.body],
+    }
+  } else {
+    loadDefaultContent(doc.body)
     window.state.current = {
       selections: [doc.body],
     }

@@ -20,6 +20,11 @@ const editorCommands = [
   ],
   [
     {
+      name: 'Open help (cheatsheet)',
+      tooltip: 'up',
+      keys: ['h'],
+    },
+    {
       name: 'Toggle box model overlay',
       tooltip: 'up',
       keys: ['b'],
@@ -188,13 +193,13 @@ const Help = () => (
       <h1 className="pb-1 mb-5 text-lg font-semibold text-white border-b border-dashed border-slate-600">Cheat Sheet</h1>
 
       <p className="text-slate-300 text-xs max-w-xl">
-        This editor is primarily keyboard-driven.
+        The Stride Editor (working title) is primarily keyboard-driven.
         Below is a cheatsheet showing the available list of commands.
       </p>
 
       <div className="flex flex-wrap gap-8 mt-6">
         <LegendMenu
-          title="Editor"
+          title="General"
           commands={editorCommands}
         />
 
