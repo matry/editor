@@ -17,6 +17,7 @@ import { randomImage } from '../utils'
 import { downloadHTMLFile } from '../utils'
 import { isSiblings } from '../dom'
 import { selectionGuard } from '../utils'
+import localforage from 'localforage'
 
 const doc = canvasDocument()
 const win = canvasWindow()
@@ -66,7 +67,7 @@ class SelectMode extends Mode {
 
   reset() {
     if (window.confirm('Are you sure you want to clear the canvas? This cannot be undone.')) {
-      clearStorage()
+      localforage.clear()
       window.location.reload()
     }
   }

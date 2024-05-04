@@ -9,7 +9,7 @@
 - [x] make sure export/load works
 - [x] revamp help extension
 - [ ] add intra-mode stages
-- [ ] move selection
+- [ ] move selection layer to outer frame
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories
 - [ ] store file without exporting

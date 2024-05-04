@@ -1,70 +1,97 @@
 import LegendMenu from "./LegendMenu"
 
+const editorCommands = [
+  [
+    {
+      name: 'Save file',
+      tooltip: 'up',
+      keys: ['⌘', '+', 's'],
+    },
+    {
+      name: 'Export file',
+      tooltip: 'up',
+      keys: ['⌘', '+', 'e'],
+    },
+    {
+      name: 'Clear file',
+      tooltip: 'up',
+      keys: ['⌘', '+', '⌫'],
+    },
+  ],
+  [
+    {
+      name: 'Toggle box model',
+      tooltip: 'up',
+      keys: ['b'],
+    }
+  ],
+]
+
 const addCommands = [
   [
     {
       name: 'Add shape as previous sibling',
       tooltip: 'up',
-      keys: ['a', 's', '↑'],
+      keys: ['a', '›', 's', '›', '↑'],
     },
     {
       name: 'Add shape as next sibling',
       tooltip: 'down',
-      keys: ['a', 's', '↓'],
+      keys: ['a', '›', 's', '›', '↓'],
     },
     {
       name: 'Add shape as first child',
       tooltip: 'right',
-      keys: ['a', 's', '→'],
+      keys: ['a', '›', 's', '›', '→'],
     },
     {
       name: 'Add shape as parent',
       tooltip: 'left',
-      keys: ['a', 's', '←'],
+      keys: ['a', '›', 's','›',  '←'],
     },
   ],
   [
     {
       name: 'Add text as previous sibling',
       tooltip: 'up',
-      keys: ['a', 't', '↑'],
+      keys: ['a', '›', 't', '›', '↑'],
     },
     {
       name: 'Add text as next sibling',
       tooltip: 'down',
-      keys: ['a', 't', '↓'],
+      keys: ['a', '›', 't', '›', '↓'],
     },
     {
       name: 'Add text as first child',
       tooltip: 'right',
-      keys: ['a', 't', '→'],
+      keys: ['a', '›', 't', '›', '→'],
     },
     {
       name: 'Add text as parent',
       tooltip: 'left',
-      keys: ['a', 't', '←'],
+      keys: ['a', '›', 't', '›', '←'],
     },
   ],
   [
     {
       name: 'Add image as previous sibling',
       tooltip: 'up',
-      keys: ['a', 'i', '↑'],
+      keys: ['a', '›', 'i', '›', '↑'],
     },
     {
       name: 'Add image as next sibling',
       tooltip: 'down',
-      keys: ['a', 'i', '↓'],
+      keys: ['a', '›', 'i', '›', '↓'],
     },
     {
       name: 'Add image as first child',
       tooltip: 'right',
-      keys: ['a', 'i', '→'],
+      keys: ['a', '›', 'i', '›', '→'],
     },
     {
       name: 'Add image as parent',
       tooltip: 'left',
-      keys: ['a', 'i', '←'],
+      keys: ['a', '›', 'i', '›', '←'],
     },
   ],
 ]
@@ -74,17 +101,17 @@ const editCommands = [
     {
       name: 'Edit styles',
       tooltip: 'up',
-      keys: ['e', 's'],
+      keys: ['e', '›', 's'],
     },
     {
       name: 'Edit text',
       tooltip: 'up',
-      keys: ['e', 't'],
+      keys: ['e', '›', 't'],
     },
     {
       name: 'Edit image randomly',
       tooltip: 'up',
-      keys: ['e', 'i', 'r'],
+      keys: ['e', '›', 'i', '›', 'r'],
     },
   ],
 ]
@@ -116,29 +143,29 @@ const selectCommands = [
     {
       name: 'Expand selection to previous sibling',
       tooltip: 'shift + up',
-      keys: ['⇧', '↑'],
+      keys: ['⇧', '+', '↑'],
     },
     {
       name: 'Expand selection to next sibling',
       tooltip: 'shift + down',
-      keys: ['⇧', '↓'],
+      keys: ['⇧', '+', '↓'],
     },
   ],
   [
     {
       name: 'Select last sibling',
       tooltip: 'cmd + down',
-      keys: ['⌘', '↓'],
+      keys: ['⌘', '+', '↓'],
     },
     {
       name: 'Select first sibling',
       tooltip: 'cmd + up',
-      keys: ['⌘', '↑'],
+      keys: ['⌘', '+', '↑'],
     },
     {
       name: 'Select all siblings',
       tooltip: 'cmd + a',
-      keys: ['⌘', 'a'],
+      keys: ['⌘', '+', 'a'],
     },
   ],
 ]
@@ -148,7 +175,7 @@ const Help = () => (
     className="z-10 w-screen h-full"
   >
     <div
-      className="p-5 overflow-x-hidden text-slate-300"
+      className="p-5 overflow-x-hidden text-slate-400"
       onClick={(e) => e.stopPropagation()}
     >
       <h1 className="pb-1 mb-5 text-lg font-semibold text-white border-b border-dashed border-slate-600">Cheat Sheet</h1>
@@ -159,6 +186,11 @@ const Help = () => (
       </p>
 
       <div className="flex flex-wrap gap-8 mt-6">
+        <LegendMenu
+          title="Editor"
+          commands={editorCommands}
+        />
+
         <LegendMenu
           title="Selecting Elements"
           commands={selectCommands}
