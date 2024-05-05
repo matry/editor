@@ -40,11 +40,9 @@ const App = ({ extension, extensionProps, canvasDOM, selections, hasUnsavedChang
         </div>
       )}
 
-      {!!hasUnsavedChanges && (
-        <div
-          className="absolute w-2 h-2 rounded-full bg-blue-500 top-2 right-2 origin-top-right"
-        />
-      )}
+      <div
+        className={`absolute top-0 left-0 triangle ${hasUnsavedChanges ? 'active' : ''}`}
+      />
     </div>
   )
 }

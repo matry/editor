@@ -21,7 +21,7 @@ export async function initializeApp() {
       action: 'state_did_change',
       data: {
         mode: newState.mode,
-        selections: newState.selections.map((selection) => selection.id),
+        selections: newState.selections.map((selection) => selection.id), // selections holds the elements themselves, and they do not serialize
         copiedIds: newState.copiedIds,
         cutIds: newState.cutIds,
         appendingElementType: newState.appendingElementType,
