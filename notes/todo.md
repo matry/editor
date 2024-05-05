@@ -8,20 +8,17 @@
 - [x] edit image extension
 - [x] make sure export/load works
 - [x] revamp help extension
-- [ ] add intra-mode stages
+- [x] show body in editor panel
+- [x] store file without exporting
+- [ ] quick command menu
 - [ ] move selection layer to outer frame
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories
-- [ ] store file without exporting
 - [ ] add ability to create new files
-- [ ] file navigator
-- [ ] file branch
-- [ ] static fork
 - [ ] add any element
 - [ ] search for icons
 - [ ] search for fonts
 - [ ] re-add ability to click-to-select
-- [ ] show body in editor panel
 - [ ] quick-command styles
 - [ ] ability to name elements
 - [ ] ability to see both user-defined and computed styles
@@ -33,6 +30,10 @@
 
 ## next
 
+- [ ] static fork
+- [ ] file navigator
+- [ ] file branch
+- [ ] add intra-mode stages
 - [ ] paste css code
 - [ ] show full page when scrolled out
 - [ ] undo/redo

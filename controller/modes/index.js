@@ -1,7 +1,7 @@
-import { selectMode } from './select'
+import { normalMode } from './normal'
 import { appendMode } from './append'
 
 export default {
-  select: selectMode,
+  normal: normalMode,
   append: appendMode,
 }

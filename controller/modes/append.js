@@ -55,7 +55,7 @@ class AppendMode extends Mode {
 
     return {
       selections: newNodes,
-      mode: 'select',
+      mode: 'normal',
       clipboardText: '',
       clipboardSelection: null,
       clipboardFiles: null,
@@ -98,7 +98,7 @@ class AppendMode extends Mode {
 
     return {
       selections: newNodes,
-      mode: 'select',
+      mode: 'normal',
       clipboardText: '',
       clipboardSelection: null,
       clipboardFiles: null,
@@ -143,7 +143,7 @@ class AppendMode extends Mode {
 
     return {
       selections: newNodes,
-      mode: 'select',
+      mode: 'normal',
       clipboardText: '',
       clipboardSelection: null,
       clipboardFiles: null,
@@ -159,14 +159,14 @@ class AppendMode extends Mode {
     if (isSiblings(selections)) {
       return {
         selections: [nestGroupWithinParent(stylesheet, selections)],
-        mode: 'select',
+        mode: 'normal',
         hasUnsavedChanges: true,
       }
     }
 
     return {
       selections: nestIndividuallyWithinParent(stylesheet, selections),
-      mode: 'select',
+      mode: 'normal',
       hasUnsavedChanges: true,
     }
   }

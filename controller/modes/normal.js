@@ -22,7 +22,7 @@ import localforage from 'localforage'
 const doc = canvasDocument()
 const win = canvasWindow()
 
-class SelectMode extends Mode {
+class NormalMode extends Mode {
   constructor() {
     super()
 
@@ -599,4 +599,4 @@ class SelectMode extends Mode {
   }
 }
 
-export const selectMode = new SelectMode()
+export const normalMode = new NormalMode()

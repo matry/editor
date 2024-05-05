@@ -36,7 +36,7 @@ export async function initializeApp() {
   // initialize the state so that it triggers a channel message
   window.state.current = {
     hasUnsavedChanges: false,
-    mode: 'select',
+    mode: 'normal',
     selections: [doc.body],
     copiedIds: [],
     cutIds: [],
@@ -106,13 +106,13 @@ export async function initializeApp() {
   
     switch (message.action) {
       case 'confirm_replace_content':
-        modes.select.confirm_replace_content(window.state.current, { urls: message.data.urls })
+        modes.normal.confirm_replace_content(window.state.current, { urls: message.data.urls })
         break
       case 'update_selection_text':
-        modes.select.update_selection_text(window.state.current, message.data.value)
+        modes.normal.update_selection_text(window.state.current, message.data.value)
         break
       case 'update_selection_styles':
-        modes.select.update_selection_style(window.state.current, message.data.property, message.data.value, message.data.styles)
+        modes.normal.update_selection_style(window.state.current, message.data.property, message.data.value, message.data.styles)
         break
       default:
         break
