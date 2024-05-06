@@ -1,16 +1,8 @@
 import { object, string } from 'prop-types'
 import CanvasNode from './CanvasNode'
+import Extension from './Extension'
 
 const App = ({ extension, extensionProps, canvasDOM, selections, hasUnsavedChanges, keySequence }) => {
-  const queryParams = Object.keys(extensionProps)
-    .map((k) => `${k}=${encodeURIComponent(extensionProps[k])}`)
-    .join('&')
-
-  let url = `/extensions/${extension}/index.html`
-  if (queryParams) {
-    url = `${url}?${queryParams}`
-  }
-
   return (
     <div
       className="h-full bg-gray-900 relative w-full"
@@ -28,17 +20,10 @@ const App = ({ extension, extensionProps, canvasDOM, selections, hasUnsavedChang
         </>
       )}
 
-      {extension !== '' && (
-        <div className="w-full h-screen z-10 bg-gray-900 relative">
-          <iframe
-            key={extension}
-            title={extension}
-            id={extension}
-            src={url}
-            className="w-full h-full"
-          />
-        </div>
-      )}
+      <Extension
+        extension={extension}
+        extensionProps={extensionProps}
+      />
 
       <div
         className={`absolute top-0 left-0 triangle ${hasUnsavedChanges ? 'active' : ''}`}

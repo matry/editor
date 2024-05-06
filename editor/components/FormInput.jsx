@@ -5,7 +5,9 @@ import {
 import {
   forwardRef, useEffect, useRef, useState,
 } from 'react'
-import { channel } from '../listener'
+import { Channel } from '../../utils/broadcast-channel'
+
+const channel = new Channel('matry')
 
 const filter = (val, values) => {
   const exactMatches = []

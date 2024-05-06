@@ -1,12 +1,14 @@
 import { object } from 'prop-types'
 import { useEffect, useState, useRef } from 'react'
+import { Channel } from '../../utils/broadcast-channel'
 import { properties } from '../../utils/css'
-import { channel } from '../listener'
 import FormInput from './FormInput'
+
+const channel = new Channel('matry')
 
 const cssProperties = properties.map(({ property }) => property)
 
-const App = ({ styles }) => {
+const StyleForm = ({ styles }) => {
   const [possibleValues, setPossibleValues] = useState([])
   const [property, setProperty] = useState('')
   const [currentStyles, setCurrentStyles] = useState(styles)
@@ -22,7 +24,7 @@ const App = ({ styles }) => {
 
   return (
     <div
-      className="z-10 text-xs"
+      className="z-10 text-xs h-full bg-gray-900"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}
@@ -102,8 +104,8 @@ const App = ({ styles }) => {
   )
 }
 
-App.propTypes = {
+StyleForm.propTypes = {
   styles: object.isRequired,
 }
 
-export default App
+export default StyleForm

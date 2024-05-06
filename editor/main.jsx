@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
 import './index.css'
-import { Channel } from '../utils/broadcast-channel'
 import { getCanvasDOM } from './dom-listener'
+import { Channel } from '../utils/broadcast-channel'
+
+const channel = new Channel('matry')
 
 const appState = {
   extension: '',
@@ -29,8 +31,6 @@ const render = () => {
     </React.StrictMode>,
   )
 }
-
-const channel = new Channel('matry')
 
 channel.listen((e) => {
   const message = e.data

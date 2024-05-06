@@ -105,6 +105,12 @@ export async function initializeApp() {
     const message = e.data
   
     switch (message.action) {
+      case 'exit_extension':
+        window.state.current = {
+          mode: 'normal',
+        }
+        window.focus()
+        break
       case 'confirm_replace_content':
         modes.normal.confirm_replace_content(window.state.current, { urls: message.data.urls })
         break
