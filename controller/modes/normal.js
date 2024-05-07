@@ -33,6 +33,7 @@ class NormalMode extends Mode {
       KeyE: {
         KeyI: {
           KeyR: this.replace_random_image,
+          Enter: this.replace_content,
         },
         KeyS: this.style_selections,
         KeyT: this.edit_selections_text,
@@ -124,22 +125,20 @@ class NormalMode extends Mode {
   }
 
   replace_content({ selections }) {
-    const types = getSelectionTypes(selections)
+    const imageSelections = selections.filter((selection) => {
+      return selection.getAttribute('data-type') === 'image'
+    })
 
-    if (types.length > 1) {
-      throw new Error('Sorry, you can only edit one type of content at a time')
-    }
-
-    if (!['text', 'image'].includes(types[0])) {
-      throw new Error('Sorry, this content cannot be edited')
+    if (!imageSelections.length) {
+      return null
     }
 
     channel.post({
       action: 'request_extension',
       data: {
-        id: types[0],
+        id: 'image',
         params: {
-          count: selections.length,
+          count: imageSelections.length,
         },
       },
     })

@@ -1,7 +1,9 @@
 import { faker } from '@faker-js/faker'
 import { number } from 'prop-types'
 import { useRef, useState } from 'react'
-import { channel } from '../listener'
+import { Channel } from '../../utils/broadcast-channel'
+
+const channel = new Channel('matry')
 
 const categories = [
   'abstract',
@@ -48,7 +50,7 @@ const ImageInput = ({ count }) => {
             htmlFor="imgurl"
             className="mr-1 block text-xs"
           >
-            Link
+            Search
           </label>
           <input
             id="imgurl"
@@ -60,36 +62,6 @@ const ImageInput = ({ count }) => {
             className="bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none w-56 text-sm"
             onChange={(e) => {
               setUrl(e.target.value)
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                try {
-                  const url = new URL(e.target.value)
-
-                  channel.post({
-                    action: 'confirm_replace_content',
-                    data: {
-                      urls: [e.target.value],
-                    },
-                  })
-                } catch (error) {
-                  if (categories.includes(e.target.value)) {
-                    const urls = []
-                    for (let i = 0; i < count; i++) {
-                      urls.push(faker.image[e.target.value](100, 100))
-                    }
-
-                    channel.post({
-                      action: 'confirm_replace_content',
-                      data: {
-                        urls,
-                      },
-                    })
-                  } else {
-                    channel.post({ action: 'exit_extension', data: {} })
-                  }
-                }
-              }
             }}
           />
         </div>
