@@ -24,7 +24,7 @@ const StyleForm = ({ styles }) => {
 
   return (
     <div
-      className="z-10 text-xs h-full bg-gray-900"
+      className="text-xs h-screen bg-gray-900 relative"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}

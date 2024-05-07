@@ -1,4 +1,5 @@
 import StyleForm from './StyleForm'
+import TextContent from './TextContent'
 
 export default function Extension({ extension, extensionProps }) {
   const queryParams = Object.keys(extensionProps)
@@ -13,6 +14,13 @@ export default function Extension({ extension, extensionProps }) {
   let content = null
 
   switch (extension) {
+    case 'text':
+      content = (
+        <TextContent
+          textContents={extensionProps}
+        />
+      )
+      break
     case 'css':
       content = (
         <StyleForm
@@ -37,9 +45,6 @@ export default function Extension({ extension, extensionProps }) {
       )
       break
   }
-
-  console.log('new content')
-  console.log(content)
 
   return content
 }
