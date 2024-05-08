@@ -49,6 +49,8 @@ channel.listen((e) => {
       render()
       break
     case 'canvas_did_load':
+      appState.canvasDOM = getCanvasDOM()
+      render()
       break
     case 'request_extension':
       appState.extension = message.data.id
