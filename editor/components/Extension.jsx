@@ -1,5 +1,6 @@
 import StyleForm from './StyleForm'
 import TextContent from './TextContent'
+import QuickCommands from './QuickCommands'
 
 export default function Extension({ extension, extensionProps }) {
   const queryParams = Object.keys(extensionProps)
@@ -14,6 +15,13 @@ export default function Extension({ extension, extensionProps }) {
   let content = null
 
   switch (extension) {
+    case 'quick':
+      content = (
+        <QuickCommands
+          
+        />
+      )
+      break
     case 'text':
       content = (
         <TextContent
