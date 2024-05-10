@@ -1,7 +1,9 @@
 import ReactDOM from 'react-dom/client'
 import Help from './Help'
 import './index.css'
-import { channel } from '../extensions/listener'
+import { Channel } from '../utils/broadcast-channel'
+
+const channel = new Channel('matry')
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
 
