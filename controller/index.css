@@ -10,3 +10,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.triangle {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 12px 12px 0 0;
+  border-color: rgb(51 65 85) transparent transparent transparent;
+  transform: rotate(0deg);
+}
+
+.triangle.active {
+  border-color: #10CFFF transparent transparent transparent;
+}
+
+.textarea {
+  word-wrap: break-word;
+  text-wrap: unrestricted;
+}

@@ -70,6 +70,9 @@ const FormInput = forwardRef(({
 
         onSubmit(value)
       }}
+      onKeyDown={(e) => {
+        e.stopPropagation()
+      }}
       className="relative m-0 w-1/2"
     >
       <input

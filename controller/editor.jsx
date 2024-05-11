@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './components/App'
-import './index.css'
-import { getCanvasDOM } from './dom-listener'
 import { Channel } from '../utils/broadcast-channel'
+
+function getCanvasDOM() {
+  return window.canvasIframe.contentDocument.querySelector('html').cloneNode(true)
+}
 
 const channel = new Channel('matry')
 
@@ -16,7 +18,7 @@ const appState = {
   hasUnsavedChanges: false,
 }
 
-const reactRoot = ReactDOM.createRoot(document.getElementById('root'))
+const reactRoot = ReactDOM.createRoot(document.getElementById('editor'))
 const render = () => {
   reactRoot.render(
     <React.StrictMode>

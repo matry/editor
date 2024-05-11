@@ -3,6 +3,7 @@ import { State } from './state'
 import { loadFile, readBlobs, retrieveJSONFile, randomId, renderBoxModel, loadDefaultContent } from './utils'
 import { channel } from './listener'
 import modes from './modes'
+import './editor.jsx'
 
 import './effects'
 import './store'
