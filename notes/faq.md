@@ -1,7 +1,7 @@
 
 ## what is Matry
 
-Matry is a new type of UI design tool.
+Matry is a keyboard-driven UI design tool.
 
 - allow designers to own their data, while also providing collaborative editing
 - design in the target medium
