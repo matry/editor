@@ -193,7 +193,10 @@ const Help = () => (
       <h1 className="pb-1 mb-5 text-lg font-semibold text-white border-b border-dashed border-slate-600">Cheat Sheet</h1>
 
       <p className="text-slate-300 text-xs max-w-xl">
-        The Stride Editor (working title) is primarily keyboard-driven.
+        Stride (working title) is a keyboard-driven structured editor for UI design.
+      </p>
+
+      <p className="text-slate-300 text-xs max-w-xl">
         Below is a cheatsheet showing the available list of commands.
       </p>
 
