@@ -94,7 +94,12 @@ const FormInput = forwardRef(({
         }}
         onKeyDown={(e) => {
           if (e.code === 'Escape') {
-            channel.post({ action: 'exit_extension', data: {} })
+            if (highlightIndex > -1) {
+              setHighlightIndex(-1)
+              setSuggestions([])
+            } else {
+              channel.post({ action: 'exit_extension', data: {} })
+            }
           }
 
           if (!suggestions.length) {
