@@ -114,7 +114,7 @@ class NormalMode extends Mode {
     })
   }
 
-  confirm_replace_content({ selections }, { images, urls }) {
+  confirm_replace_content({ selections }, { urls }) {
     selections.forEach((selection, i) => {
       if (selection.getAttribute('data-type') === 'image') {
         selection.setAttribute('src', urls[i] || urls[0])
@@ -126,7 +126,7 @@ class NormalMode extends Mode {
     }
   }
 
-  replace_random_image({ selections, stylesheet }) {
+  replace_random_image({ selections }) {
     selections.forEach((selection, i) => {
       if (selection.getAttribute('data-type') === 'image') {
         const image = randomImage(selection.offsetWidth, selection.offsetHeight)
