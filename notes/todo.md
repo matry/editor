@@ -1,4 +1,11 @@
 
+# Roadmap
+
+- Fleshed out documentation. You'll be able to see full explanation of what every command and style property does, all within the editor.
+- Component system
+- Collaborative editing
+- Package registry
+
 ## now
 
 - [x] make box model togglable
