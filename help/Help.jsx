@@ -196,7 +196,7 @@ const Help = () => (
 
       <p className="text-slate-300 text-xs max-w-xl mb-1">
         Matry is a keyboard-driven tool for designing in the browser.
-        It uses a mnemonic keyboard command system that feels like natural language.
+        It uses a mnemonic keyboard command system that is intended to feel like natural language.
         For instance, typing "a" "s" tells Matry to "add a shape".
       </p>
 
