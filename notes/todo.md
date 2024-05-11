@@ -10,6 +10,7 @@
 - [x] revamp help extension
 - [x] show body in editor panel
 - [x] store file without exporting
+- [ ] fix multiple box model overlays
 - [ ] quick command menu
 - [ ] move selection layer to outer frame
 - [ ] when pasting images, write to indexeddb
