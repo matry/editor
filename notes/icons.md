@@ -15,3 +15,10 @@ a user should be able to...
 while all these are useful, we could probably deploy with a subset of features:
 - browse icons across all families
 - search for icons across all families
+
+how should the remote store be conceived of?
+
+1. we have a dedicated server for asset handling, which we hide behind a paywall
+2. we have a package registry which handles assets, and our built-in assets are really just our standard library
+
+the latter means that our engineering effort gives us the biggest bang for the buck

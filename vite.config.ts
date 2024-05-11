@@ -12,8 +12,6 @@ export default defineConfig({
         canvas: resolve(__dirname, 'canvas/index.html'),
         editor: resolve(__dirname, 'editor/index.html'),
         help: resolve(__dirname, 'help/index.html'),
-        text: resolve(__dirname, 'extensions/text/index.html'),
-        css: resolve(__dirname, 'extensions/css/index.html'),
       },
     },
   },
