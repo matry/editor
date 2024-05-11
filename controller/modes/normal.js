@@ -7,14 +7,10 @@ import {
   deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
 import { channel } from '../listener'
-import {
-  clearStorage,
-  downloadJSONFile, getSelectionTypes, openJSONFile, storeJSONFile,
-} from '../utils'
-import { canvasDocument, canvasWindow } from '../canvas'
+import { openJSONFile } from '../utils'
+import { canvasDocument } from '../canvas'
 import { Mode } from './mode'
 import { randomImage } from '../utils'
-import { downloadHTMLFile } from '../utils'
 import { isSiblings } from '../dom'
 import { selectionGuard } from '../utils'
 import localforage from 'localforage'
@@ -28,7 +24,6 @@ class NormalMode extends Mode {
     this.commands = {
       Escape: this.clear_selections,
       Backspace: this.delete_selections,
-      BracketLeft: this.toggle_editor,
       KeyE: {
         KeyI: {
           KeyR: this.replace_random_image,
@@ -45,6 +40,7 @@ class NormalMode extends Mode {
         KeyV: this.append_video,
       },
       KeyT: {
+        KeyS: this.toggle_editor,
         KeyB: this.toggle_box_model,
       },
       KeyH: this.help,
@@ -63,7 +59,6 @@ class NormalMode extends Mode {
       'meta KeyE': this.export_document,
       'meta KeyO': this.open_document,
       'meta Backspace': this.reset,
-      'shift Slash': this.help,
     }
     this.commandSubPath = this.commands
   }
@@ -73,43 +68,6 @@ class NormalMode extends Mode {
       localforage.clear()
       window.location.reload()
     }
-  }
-
-  save_document({ stylesheet }) {
-    storeJSONFile(
-      serialize(canvasDocument().body),
-      Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-    )
-
-    channel.post({
-      action: 'did_save_state',
-      data: {},
-    })
-
-    return {
-      hasUnsavedChanges: false,
-    }
-  }
-
-  export_document({ stylesheet }) {
-    const canvas = canvasDocument()
-    const doc = canvas.cloneNode(true)
-
-    const scripts = doc.querySelectorAll('script')
-    scripts.forEach((script) => {
-      script.remove()
-    })
-
-    const cssRules = Array.from(stylesheet.cssRules).map((rule) => rule.cssText).join('\n')
-
-    const style = doc.createElement('style')
-    style.textContent = cssRules
-    doc.head.appendChild(style)
-
-    const serializer = new XMLSerializer()
-    const serializedDoc = serializer.serializeToString(doc)
-
-    downloadHTMLFile(serializedDoc)
   }
 
   async open_document({ stylesheet }) {

@@ -1,6 +1,7 @@
-import { getBox } from 'css-box-model'
-import { channel } from '../listener'
 import { canvasDocument } from '../canvas'
+import { serialize } from '../dom'
+import { channel } from '../listener'
+import { downloadHTMLFile, storeJSONFile } from '../utils'
 
 export class Mode {
   commands = {}
@@ -71,5 +72,42 @@ export class Mode {
 
   help() {
     window.open('/help/index.html', '_blank').focus()
+  }
+
+  save_document({ stylesheet }) {
+    storeJSONFile(
+      serialize(canvasDocument().body),
+      Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
+    )
+
+    channel.post({
+      action: 'did_save_state',
+      data: {},
+    })
+
+    return {
+      hasUnsavedChanges: false,
+    }
+  }
+
+  export_document({ stylesheet }) {
+    const canvas = canvasDocument()
+    const doc = canvas.cloneNode(true)
+
+    const scripts = doc.querySelectorAll('script')
+    scripts.forEach((script) => {
+      script.remove()
+    })
+
+    const cssRules = Array.from(stylesheet.cssRules).map((rule) => rule.cssText).join('\n')
+
+    const style = doc.createElement('style')
+    style.textContent = cssRules
+    doc.head.appendChild(style)
+
+    const serializer = new XMLSerializer()
+    const serializedDoc = serializer.serializeToString(doc)
+
+    downloadHTMLFile(serializedDoc)
   }
 }

@@ -10,7 +10,7 @@
 - [x] revamp help extension
 - [x] show body in editor panel
 - [x] store file without exporting
-- [ ] fix multiple box model overlays
+- [x] fix multiple box model overlays
 - [ ] quick command menu
 - [ ] move selection layer to outer frame
 - [ ] when pasting images, write to indexeddb
@@ -25,6 +25,7 @@
 - [ ] ability to see both user-defined and computed styles
 - [ ] spike: how to represent structured styles (filters, shadows, etc)
 - [ ] spike: how to handle shorthand styles
+- [ ] spike: how to think about assets (images/icons/fonts/etc), legal implications, storage, etc
 - [ ] command auto-complete
 - [ ] spike: maps
 - [ ] spike: css variables vs tokens vs "used values"

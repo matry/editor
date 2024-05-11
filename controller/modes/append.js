@@ -18,6 +18,7 @@ class AppendMode extends Mode {
       ArrowLeft: this.add_parent,
       BracketLeft: this.toggle_editor,
       'shift Slash': this.help,
+      'meta KeyS': this.save_document,
     }
     this.commandSubPath = this.commands
   }

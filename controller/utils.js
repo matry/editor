@@ -270,6 +270,12 @@ export const renderBoxModel = ({ showBoxModel, selections }) => {
     highlighter.appendChild(paddingBox)
     highlighter.appendChild(contentBox)
 
+    const existingHighlighter = doc.querySelector(`[data-selection="${selection.id}"]`)
+
+    if (existingHighlighter) {
+      existingHighlighter.remove()
+    }
+
     doc.body.appendChild(highlighter)
 
     selection.setAttribute('data-selected', 'on')
