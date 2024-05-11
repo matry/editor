@@ -24,10 +24,12 @@ const editorCommands = [
       tooltip: 'up',
       keys: ['h'],
     },
+  ],
+  [
     {
       name: 'Toggle box model overlay',
       tooltip: 'up',
-      keys: ['b'],
+      keys: ['t', '›', 'b'],
     }
   ],
 ]

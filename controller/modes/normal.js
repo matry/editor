@@ -20,7 +20,6 @@ import { selectionGuard } from '../utils'
 import localforage from 'localforage'
 
 const doc = canvasDocument()
-const win = canvasWindow()
 
 class NormalMode extends Mode {
   constructor() {
@@ -45,7 +44,9 @@ class NormalMode extends Mode {
         KeyI: this.append_image,
         KeyV: this.append_video,
       },
-      KeyB: this.toggle_box_model,
+      KeyT: {
+        KeyB: this.toggle_box_model,
+      },
       KeyH: this.help,
       ArrowUp: this.select_previous_sibling,
       ArrowDown: this.select_next_sibling,
