@@ -48,7 +48,7 @@ class NormalMode extends Mode {
       ArrowDown: this.select_next_sibling,
       ArrowRight: this.select_first_child,
       ArrowLeft: this.select_parent,
-      // Slash: this.open_quick_command, // TODO: implement this
+      Slash: this.open_quick_command,
       'shift ArrowUp': this.shift_selection_up,
       'shift ArrowDown': this.shift_selection_down,
       'meta ArrowUp': this.select_first_sibling,

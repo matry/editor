@@ -37,8 +37,7 @@ const filter = (val, values) => {
   ]
 }
 
-const FormInput = forwardRef(({
-  align,
+const QuickInput = forwardRef(({
   value,
   setValue,
   values,
@@ -70,6 +69,9 @@ const FormInput = forwardRef(({
 
         onSubmit(value)
       }}
+      onKeyDown={(e) => {
+        e.stopPropagation()
+      }}
       className="relative m-0 w-1/2"
     >
       <input
@@ -77,13 +79,7 @@ const FormInput = forwardRef(({
         type="text"
         value={value}
         placeholder={placeholder}
-        className={classNames(
-          'bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none w-full px-5 py-2',
-          {
-            'text-right': align === 'right',
-            'text-left': align === 'left',
-          },
-        )}
+        className="bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none w-full px-5 py-2"
         onChange={(e) => {
           setValue(e.target.value)
           setSuggestions(filter(e.target.value, values))
@@ -158,8 +154,7 @@ const FormInput = forwardRef(({
   )
 })
 
-FormInput.propTypes = {
-  align: string,
+QuickInput.propTypes = {
   placeholder: string,
   value: string,
   values: arrayOf(string),
@@ -168,12 +163,11 @@ FormInput.propTypes = {
   onSubmit: func.isRequired,
 }
 
-FormInput.defaultProps = {
-  align: 'left',
+QuickInput.defaultProps = {
   placeholder: '',
   value: '',
   values: [],
   showAllByDefault: false,
 }
 
-export default FormInput
+export default QuickInput
