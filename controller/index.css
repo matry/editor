@@ -23,8 +23,3 @@ body {
 .triangle.active {
   border-color: #10CFFF transparent transparent transparent;
 }
-
-.textarea {
-  word-wrap: break-word;
-  text-wrap: unrestricted;
-}

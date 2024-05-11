@@ -30,7 +30,7 @@ export default function TextContent({ textContents }) {
       <textarea
         ref={inputRef}
         placeholder="write some text here"
-        className="text-slate-50 placeholder:text-slate-300 appearance-none bg-none border-none bg-transparent focus:outline-none fixed inset-0 p-5 text-xs max-w-full textarea"
+        className="text-slate-50 placeholder:text-slate-300 appearance-none bg-none border-none bg-transparent focus:outline-none absolute inset-0 p-5 text-xs"
         id="textarea"
         spellCheck="false"
         value={value}
