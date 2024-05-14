@@ -33,11 +33,6 @@ export default function ImageSearch() {
       searchRef.current?.focus()
     }
 
-    // const el = document.getElementById(activeItem.id)
-    // if (!isInBounds(el)) {
-    //   el.scrollIntoView()
-    // }
-
   }, [activeIndex])
 
   return (
@@ -50,7 +45,7 @@ export default function ImageSearch() {
 
           setIsLoading(true)
 
-          const response = await fetch(`/api/image-search&q=${searchText}`)
+          const response = await fetch(`/api/image-search?q=${searchText}`)
           const data = await response.json()
           setSearchResults(data)
           setIsLoading(false)
