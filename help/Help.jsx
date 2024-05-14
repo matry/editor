@@ -73,11 +73,6 @@ const addCommands = [
       tooltip: 'right',
       keys: ['a', '›', 't', '›', '→'],
     },
-    {
-      name: 'Add text as parent',
-      tooltip: 'left',
-      keys: ['a', '›', 't', '›', '←'],
-    },
   ],
   [
     {
@@ -94,11 +89,6 @@ const addCommands = [
       name: 'Add image as first child',
       tooltip: 'right',
       keys: ['a', '›', 'i', '›', '→'],
-    },
-    {
-      name: 'Add image as parent',
-      tooltip: 'left',
-      keys: ['a', '›', 'i', '›', '←'],
     },
   ],
 ]

@@ -25,10 +25,11 @@ class NormalMode extends Mode {
       Escape: this.clear_selections,
       Backspace: this.delete_selections,
       KeyE: {
-        KeyI: {
-          KeyR: this.replace_random_image,
-          Enter: this.replace_content,
-        },
+        // KeyI: {
+        //   KeyR: this.replace_random_image,
+        //   Enter: this.replace_content,
+        // },
+        KeyI: this.edit_selections_image,
         KeyS: this.style_selections,
         KeyT: this.edit_selections_text,
       },

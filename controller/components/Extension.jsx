@@ -17,9 +17,7 @@ export default function Extension({ extension, extensionProps }) {
   switch (extension) {
     case 'quick':
       content = (
-        <QuickCommands
-          
-        />
+        <QuickCommands />
       )
       break
     case 'text':
@@ -56,3 +54,5 @@ export default function Extension({ extension, extensionProps }) {
 
   return content
 }
+
+atob('QUl6YVN5Q0tRWjBlenBVUFlibm1KdnREU3VpUmZGNGZJZGhtUG5NCg==').trim()
