@@ -30,7 +30,7 @@ const editorCommands = [
       name: 'Toggle box model overlay',
       tooltip: 'up',
       keys: ['t', '›', 'b'],
-    }
+    },
   ],
 ]
 
@@ -113,9 +113,9 @@ const editCommands = [
       keys: ['e', '›', 't'],
     },
     {
-      name: 'Edit image randomly',
+      name: 'Edit image',
       tooltip: 'up',
-      keys: ['e', '›', 'i', '›', 'r'],
+      keys: ['e', '›', 'i'],
     },
   ],
 ]
