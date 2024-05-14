@@ -50,12 +50,9 @@ export default function ImageSearch() {
 
           setIsLoading(true)
 
-          const response = await fetch(`${url}&q=${searchText}`)
+          const response = await fetch(`/api/image-search&q=${searchText}`)
           const data = await response.json()
-          setSearchResults(data.items.map((item) => {
-            item.id = randomId()
-            return item
-          }))
+          setSearchResults(data)
           setIsLoading(false)
         }}
         onKeyDown={(e) => {
@@ -166,13 +163,13 @@ export default function ImageSearch() {
               return (
                 <li
                   tabIndex="0"
-                  data-link={result.link}
+                  data-link={result.src}
                   id={result.id}
                   key={`link_${i}`}
                   className="aspect-square overflow-hidden border-slate-700 border-2 focus:outline-none focus:border-white focus:shadow-md focus:shadow-teal-500"
                 >
                   <img
-                    src={result.link}
+                    src={result.src}
                     className="w-full h-full object-cover"
                   />
                 </li>
