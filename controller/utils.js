@@ -173,7 +173,7 @@ export const loadFile = (stylesheet, rootElem, files) => {
 
 export const loadDefaultContent = (rootElem) => {
   rootElem.insertAdjacentHTML('afterbegin', `
-    <span data-type="text" id="placeholder-content">Welcome to Matry, a keyboard-driven tool for designing in the browser. Press 'h' for help.</span>
+    <span data-type="text" id="placeholder-content">Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.</span>
   `)
 }
 

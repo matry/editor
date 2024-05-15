@@ -184,13 +184,13 @@ const Help = () => (
     >
       <h1 className="pb-1 mb-5 text-lg font-semibold text-white border-b border-dashed border-slate-600">Cheat Sheet</h1>
 
-      <p className="text-slate-300 text-xs max-w-xl mb-1">
-        Matry is a keyboard-driven tool for designing in the browser.
+      <p className="text-slate-300 text-sm max-w-prose mb-1">
+        The Stride editor is a keyboard-driven tool for designing in the browser.
         It uses a mnemonic keyboard command system that is intended to feel like natural language.
-        For instance, typing "a" "s" tells Matry to "add a shape".
+        For instance, typing "a" "s" tells Stride to "add a shape".
       </p>
 
-      <p className="text-slate-300 text-xs max-w-xl mb-6">
+      <p className="text-slate-300 text-sm max-w-prose mb-6">
         Below is a cheatsheet showing the available list of commands.
       </p>
 
