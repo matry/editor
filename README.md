@@ -1,3 +1,6 @@
+
+![the logo for stride, an S surrounded by a pink rounded rectangle](https://github.com/danielvaughn/stride-editor/blob/main/public/stride_logo.svg?raw=true)
+
 ## Stride
 
 The Stride Editor is a side project that I'm currently working on,
