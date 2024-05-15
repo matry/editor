@@ -2,6 +2,7 @@ import { canvasIframe, canvasDocument } from './canvas'
 import { State } from './state'
 import { loadFile, readBlobs, retrieveJSONFile, randomId, renderBoxModel, loadDefaultContent } from './utils'
 import { channel } from './listener'
+// import { initZoom } from './zoom'
 import modes from './modes'
 import './editor.jsx'
 
@@ -12,6 +13,7 @@ import './index.css'
 channel.listen((e) => {
   if (e.data.action === 'canvas_did_load') {
     initializeApp()
+    // initZoom()
   }
 })
 
