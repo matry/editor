@@ -5,7 +5,7 @@ import Extension from './Extension'
 const App = ({ extension, extensionProps, canvasDOM, selections, hasUnsavedChanges, keySequence }) => {
   return (
     <div
-      className="h-full bg-gray-900 relative w-full"
+      className="h-full bg-black relative w-full"
     >
       {canvasDOM !== null && (
         <>

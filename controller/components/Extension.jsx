@@ -39,7 +39,7 @@ export default function Extension({ extension, extensionProps }) {
       break
     default:
       content = (
-        <div className="w-full h-screen z-10 bg-gray-900 relative">
+        <div className="w-full h-screen z-10 bg-black relative">
           <iframe
             key={extension}
             title={extension}
@@ -54,5 +54,3 @@ export default function Extension({ extension, extensionProps }) {
 
   return content
 }
-
-atob('QUl6YVN5Q0tRWjBlenBVUFlibm1KdnREU3VpUmZGNGZJZGhtUG5NCg==').trim()

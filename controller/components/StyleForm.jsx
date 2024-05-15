@@ -24,7 +24,7 @@ const StyleForm = ({ styles }) => {
 
   return (
     <div
-      className="text-xs h-screen bg-gray-900 relative"
+      className="text-xs h-screen bg-black relative"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}
@@ -39,7 +39,7 @@ const StyleForm = ({ styles }) => {
           <ul>
             {Object.entries(currentStyles).map(([key, val]) => (
               <li key={key} className="flex items-center justify-between w-full mb-1">
-                <span className="text-slate-300">{key}</span>
+                <span className="text-gray-300">{key}</span>
                 <span>{val}</span>
               </li>
             ))}

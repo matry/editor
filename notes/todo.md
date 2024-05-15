@@ -18,7 +18,8 @@
 - [x] show body in editor panel
 - [x] store file without exporting
 - [x] fix multiple box model overlays
-- [ ] quick command menu
+- [x] quick command menu
+- [ ] selection jumps
 - [ ] move selection layer to outer frame
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories

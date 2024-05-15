@@ -81,7 +81,7 @@ const FormInput = forwardRef(({
         value={value}
         placeholder={placeholder}
         className={classNames(
-          'bg-transparent focus:outline-none text-slate-50 selection:bg-slate-600 border-none w-full px-5 py-2',
+          'bg-transparent focus:outline-none text-gray-50 selection:bg-gray-600 border-none w-full px-5 py-2',
           {
             'text-right': align === 'right',
             'text-left': align === 'left',
@@ -138,15 +138,15 @@ const FormInput = forwardRef(({
       <input type="submit" className="hidden" />
       {suggestions.length > 0 && (
       <ul
-        className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-slate-700 bg-opacity-90 max-h-72"
+        className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-gray-700 bg-opacity-90 max-h-72"
       >
         {suggestions.map((suggestion, i) => (
           <li
             key={suggestion}
             className={classNames(
-              'py-2 px-6 hover:bg-slate-400 transition-all hover:text-white cursor-pointer whitespace-nowrap',
+              'py-2 px-6 hover:bg-gray-400 transition-all hover:text-white cursor-pointer whitespace-nowrap',
               {
-                'bg-slate-400': highlightIndex === i,
+                'bg-gray-400': highlightIndex === i,
                 'bg-transparent': highlightIndex !== i,
               },
             )}
