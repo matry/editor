@@ -5,9 +5,7 @@ import { channel } from './listener'
 // import { initZoom } from './zoom'
 import modes from './modes'
 import './editor.jsx'
-
 import './effects'
-import './store'
 import './index.css'
 
 channel.listen((e) => {
