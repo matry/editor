@@ -12,11 +12,14 @@ export default function TextContent({ textContents }) {
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
-      inputRef.current.select()
     }
   }, [])
 
   useEffect(() => {
+    if (inputRef.current?.innerHTML !== value) {
+      inputRef.current.innerHTML = value
+    }
+
     channel.post({
       action: 'update_selection_text',
       data: {
@@ -27,26 +30,20 @@ export default function TextContent({ textContents }) {
 
   return (
     <div className="flex justify-center items-center h-screen w-full bg-gray-900 relative overflow-x-hidden" id="root">
-      <textarea
+      <div
         ref={inputRef}
+        contentEditable
+        tabIndex={0}
+        role="textbox"
         placeholder="write some text here"
         className="text-gray-50 placeholder:text-gray-300 appearance-none bg-none border-none bg-transparent focus:outline-none absolute inset-0 p-5 text-xs"
-        id="textarea"
-        spellCheck="false"
-        value={value}
-        autoFocus
-
         onInput={(e) => {
           e.stopPropagation()
-          setValue(e.target.value)
+          setValue(e.target.innerHTML)
         }}
 
         onBlur={() => {
           channel.post({ action: 'exit_extension', data: {} })
-        }}
-
-        onChange={(e) => {
-          e.stopPropagation()
         }}
 
         onKeyDown={(e) => {
