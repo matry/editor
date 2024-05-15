@@ -10,6 +10,7 @@ function getCanvasDOM() {
 const channel = new Channel('matry')
 
 const appState = {
+  currentView: 'editor',
   extension: '',
   extensionProps: {},
   canvasDOM: null,
@@ -23,6 +24,7 @@ const render = () => {
   reactRoot.render(
     <React.StrictMode>
       <App
+        currentView={appState.currentView}
         extension={appState.extension}
         extensionProps={appState.extensionProps}
         canvasDOM={appState.canvasDOM}

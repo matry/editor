@@ -3,8 +3,6 @@ import { saveAs } from 'file-saver'
 import { appendStoredRules } from './cssom'
 import { canvasDocument } from './canvas'
 import { getBox } from 'css-box-model'
-import { channel } from './listener'
-import { storeFile, getLastEditedFile } from './store'
 
 export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
