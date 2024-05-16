@@ -14,7 +14,7 @@ You can [view a demo here](https://stride-editor.vercel.app). WARNING - this too
 
 Stride is governed by a few key principles:
 
-1. **Efficiency begets power**. The primary motto of a professional tool should be to empower you, and most of the time that means *getting out of your way*.
+1. **Efficiency begets power**. The raison d'etre of a professional tool should be to empower you, and most of the time that means *getting out of your way*.
 2. **Power over familiarity**. Professional tools shouldn't be afraid to depart dramatically from long-standing conventions, if doing so empowers their users.
 3. **Design should be performed in the target medium**. If you're designing for the web, then the browser should be your working environment.
 4. **Drawing tools are not equipped to solve modern design problems**. At scale, designing a product often means creating a system, and text is better suited for that purpose than graphical illustrations.
