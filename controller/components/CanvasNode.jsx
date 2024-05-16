@@ -10,7 +10,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
   const dataType = canvasDOM.getAttribute('data-type')
   const ElementType = dataType === 'html' ? 'ul' : 'li'
   const elementClass = dataType === 'html' ? 'root p-5 text-xs text-gray-500' : 'mb-1 relative'
-  const isSelfClosingTag = children.length === 0 && !['html', 'body'].includes(dataType)
+  const hasChildren = children.length !== 0 && ['html', 'body', 'shape'].includes(dataType)
 
   return (
     <ElementType
@@ -18,7 +18,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
       id={canvasDOM.id}
       className={elementClass}
     >
-      {isSelfClosingTag && (
+      {!hasChildren && (
         <span>
           <pre className="inline">&lt;</pre>
           <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
@@ -26,7 +26,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
         </span>
       )}
 
-      {!isSelfClosingTag && (
+      {hasChildren && (
         <>
           <span>
             <pre className="inline">&lt;</pre>

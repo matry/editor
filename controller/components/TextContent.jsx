@@ -29,7 +29,7 @@ export default function TextContent({ textContents }) {
   }, [value])
 
   return (
-    <div className="flex justify-center items-center h-screen w-full bg-gray-900 relative overflow-x-hidden" id="root">
+    <div className="flex justify-center items-center h-screen w-full bg-black relative overflow-x-hidden" id="root">
       <div
         ref={inputRef}
         contentEditable
