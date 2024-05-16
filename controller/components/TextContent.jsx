@@ -16,6 +16,10 @@ export default function TextContent({ textContents }) {
   }, [])
 
   useEffect(() => {
+    if (!value) {
+      return
+    }
+
     if (inputRef.current?.innerHTML !== value) {
       inputRef.current.innerHTML = value
     }
