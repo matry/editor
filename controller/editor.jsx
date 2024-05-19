@@ -10,7 +10,7 @@ function getCanvasDOM() {
 const channel = new Channel('matry')
 
 const appState = {
-  currentView: 'editor',
+  currentView: 'file',
   extension: '',
   extensionProps: {},
   canvasDOM: null,

@@ -1,35 +1,23 @@
 import { object, string } from 'prop-types'
-import CanvasNode from './CanvasNode'
-import Extension from './Extension'
+import FileView from './FileView'
+import WorkspaceView from './WorkspaceView'
 
-const App = ({ currentView, extension, extensionProps, canvasDOM, selections, hasUnsavedChanges, keySequence }) => {
-  if (currentView === 'editor') {
+const App = ({ currentView, extension, extensionProps, canvasDOM, selections, hasUnsavedChanges }) => {
+  if (currentView === 'file') {
     return (
-      <div
-        className="h-full bg-black relative w-full"
-      >
-        {canvasDOM !== null && (
-          <>
-            <div
-              className="w-full h-full absolute inset-0"
-            >
-              <CanvasNode
-                canvasDOM={canvasDOM}
-                selections={selections}
-              />
-            </div>
-          </>
-        )}
+      <FileView
+        canvasDOM={canvasDOM}
+        selections={selections}
+        extension={extension}
+        extensionProps={extensionProps}
+        hasUnsavedChanges={hasUnsavedChanges}
+      />
+    )
+  }
 
-        <Extension
-          extension={extension}
-          extensionProps={extensionProps}
-        />
-
-        <div
-          className={`absolute top-0 left-0 triangle ${hasUnsavedChanges ? 'active' : ''}`}
-        />
-      </div>
+  if (currentView === 'workspace') {
+    return (
+      <WorkspaceView />
     )
   }
 
