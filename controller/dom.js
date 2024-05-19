@@ -208,6 +208,60 @@ export const selectNextNode = (selections) => {
   }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
+export const leapNextNode = (selections) => {
+  if (!selections.length) {
+    return selections
+  }
+
+  const newSelections = selections.map((selection) => {
+    if (!selection.parentElement || !selection.parentElement.nextElementSibling) {
+      return null
+    }
+
+    if (selection.parentElement.nextElementSibling.getAttribute('data-type') !== selection.parentElement.getAttribute('data-type')) {
+      return null
+    }
+
+    const selectionIndex = Array.from(selection.parentElement.children).indexOf(selection)
+    const cousin = selection.parentElement.nextElementSibling.children[selectionIndex]
+
+    if (!cousin || cousin.getAttribute('data-type') !== selection.getAttribute('data-type')) {
+      return null
+    }
+
+    return cousin
+  })
+
+  return newSelections.filter((selection) => selection !== null)
+}
+
+export const leapPreviousNode = (selections) => {
+  if (!selections.length) {
+    return selections
+  }
+
+  const newSelections = selections.map((selection) => {
+    if (!selection.parentElement || !selection.parentElement.previousElementSibling) {
+      return null
+    }
+
+    if (selection.parentElement.previousElementSibling.getAttribute('data-type') !== selection.parentElement.getAttribute('data-type')) {
+      return null
+    }
+
+    const selectionIndex = Array.from(selection.parentElement.children).indexOf(selection)
+    const cousin = selection.parentElement.previousElementSibling.children[selectionIndex]
+
+    if (!cousin || cousin.getAttribute('data-type') !== selection.getAttribute('data-type')) {
+      return null
+    }
+
+    return cousin
+  })
+
+  return newSelections.filter((selection) => selection !== null)
+}
+
 export const selectPreviousNode = (selections) => {
   if (!selections.length) {
     return selections

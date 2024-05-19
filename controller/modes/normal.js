@@ -4,7 +4,7 @@ import {
   getStylesObjectById, replaceAllRules, updateRule,
 } from '../cssom'
 import {
-  deleteElements, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
+  deleteElements, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
 import { channel } from '../listener'
 import { openJSONFile } from '../utils'
@@ -50,6 +50,8 @@ class NormalMode extends Mode {
       ArrowRight: this.select_first_child,
       ArrowLeft: this.select_parent,
       Slash: this.open_quick_command,
+      BracketLeft: this.select_previous_cousin,
+      BracketRight: this.select_next_cousin,
       'shift ArrowUp': this.shift_selection_up,
       'shift ArrowDown': this.shift_selection_down,
       'meta ArrowUp': this.select_first_sibling,
@@ -360,16 +362,38 @@ class NormalMode extends Mode {
   }
 
   select_next_sibling(state) {
-    const { selections } = state
-
-    if (selections.length === 0) {
+    if (state.selections.length === 0) {
       return {
         selections: [canvasDocument().querySelector('[data-type="html"]')],
       }
     }
 
     return {
-      selections: selectionGuard(selectNextNode(selections)),
+      selections: selectionGuard(selectNextNode(state.selections)),
+    }
+  }
+
+  select_previous_cousin(state) {
+    const newSelections = leapPreviousNode(state.selections)
+
+    if (!newSelections.length) {
+      return null
+    }
+
+    return {
+      selections: selectionGuard(newSelections),
+    }
+  }
+
+  select_next_cousin(state) {
+    const newSelections = leapNextNode(state.selections)
+
+    if (!newSelections.length) {
+      return null
+    }
+
+    return {
+      selections: selectionGuard(newSelections),
     }
   }
 
