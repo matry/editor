@@ -1,7 +1,7 @@
 import CanvasNode from './CanvasNode'
 import Extension from './Extension'
 
-export default function FileView({ canvasDOM, selections, extension, extensionProps, hasUnsavedChanges }) {
+export default function FileView({ canvasDOM, selections, extension, extensionProps }) {
   return (
     <div
       className="h-full bg-black relative w-full"
@@ -24,9 +24,9 @@ export default function FileView({ canvasDOM, selections, extension, extensionPr
         extensionProps={extensionProps}
       />
 
-      <div
+      {/* <div
         className={`absolute top-0 left-0 triangle ${hasUnsavedChanges ? 'active' : ''}`}
-      />
+      /> */}
     </div>
   )
 }

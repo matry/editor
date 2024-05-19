@@ -9,7 +9,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
 
   const dataType = canvasDOM.getAttribute('data-type')
   const ElementType = dataType === 'html' ? 'ul' : 'li'
-  const elementClass = dataType === 'html' ? 'root p-5 text-xs text-gray-500' : 'mb-1 relative'
+  const elementClass = dataType === 'html' ? 'root px-5 text-xs text-gray-500' : 'mb-1 relative'
   const hasChildren = children.length !== 0 && ['html', 'body', 'shape'].includes(dataType)
 
   return (

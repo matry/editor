@@ -30,3 +30,8 @@ b: branch
 o: open
   f: open file
   p: open project
+
+
+## navigation
+
+by default, users will be presented with a file editor
