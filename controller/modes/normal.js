@@ -136,6 +136,18 @@ class NormalMode extends Mode {
     }
   }
 
+  update_selection_attributes(state, data) {
+    for (const selection of state.selections) {
+      for (const k in data) {
+        selection.setAttribute(k, data[k])
+      }
+    }
+
+    return {
+      hasUnsavedChanges: true,
+    }
+  }
+
   update_selection_text({ selections }, textContent) {
     for (const selection of selections) {
       if (selection.getAttribute('data-type') === 'text') {

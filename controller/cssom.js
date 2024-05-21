@@ -1,23 +1,5 @@
 import { canvasDocument, canvasWindow } from './canvas'
 
-export const getStylesObjectById = (stylesheet, id) => {
-  // const styles = {}
-
-  // Array.from(stylesheet.cssRules).forEach((rule) => {
-  //   const styleId = rule.selectorText.split('#')[1]
-
-  //   if (id !== styleId) {
-  //     return
-  //   }
-
-  //   Array.from(rule.style).forEach((property) => {
-  //     styles[property] = rule.style[property]
-  //   })
-  // })
-
-  // return styles
-}
-
 export const getSharedStyles = (elements) => {
   const styleObjects = elements.map((element) => {
     const styles = JSON.parse(element.dataset.styles)
@@ -39,21 +21,17 @@ export const getSharedStyles = (elements) => {
   return sharedStyles
 }
 
-export const getId = (rule) => rule.selectorText.split('#')[1]
-
 export const resetRules = () => {
-  const win = canvasWindow()
+  const sheet = canvasWindow()?.baseStyleSheet
 
-  if (win.baseStyleSheet) {
-    const rules = Array.from(win.baseStyleSheet.cssRules)
-
-    rules.forEach((rule, i) => {
+  if (sheet) {
+    for (let i = 0, l = Array.from(sheet.cssRules).length; i < l; i++) {
       try {
-        win.baseStyleSheet.deleteRule(i)
+        sheet.deleteRule(i)
       } catch (error) {
         // do nothing
       }
-    })
+    }
   }
 }
 
@@ -73,22 +51,4 @@ export const updateRule = (selectorText, property, value) => {
   } catch (error) {
     // do nothing
   }
-}
-
-export const appendNewRules = (stylesheet, id, rules) => {
-  // const cssString = Object.entries(rules).map(([property, value]) => `${property}: ${value};`).join('\n')
-
-  // const finalString = `
-  //   #${id} {
-  //     ${cssString}
-  //   }
-  // `
-
-  // stylesheet.insertRule(finalString)
-}
-
-export const appendStoredRules = (stylesheet, rules) => {
-  // rules.forEach((cssText) => {
-  //   stylesheet.insertRule(cssText)
-  // })
 }

@@ -76,11 +76,18 @@ const StyleForm = ({ styles }) => {
             onSubmit={(newValue) => {
               setValue(newValue)
 
+              const data = {}
+              data[property] = newValue
+
               channel.post({
-                action: 'update_selection_styles',
+                action: 'update_selection_attributes',
                 data: {
-                  property,
-                  value: newValue,
+                  'data-styles': JSON.stringify({
+                    base: {
+                      ...styles,
+                      [property]: newValue,
+                    }
+                  })
                 },
               })
 

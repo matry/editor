@@ -131,6 +131,9 @@ async function initializeApp() {
       case 'update_selection_styles':
         modes.normal.update_selection_style(window.state.current, message.data.property, message.data.value, message.data.styles)
         break
+      case 'update_selection_attributes':
+        modes.normal.update_selection_attributes(window.state.current, message.data)
+        break
       default:
         break
     }

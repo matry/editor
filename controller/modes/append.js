@@ -1,10 +1,12 @@
 import { canvasDocument } from '../canvas'
-import { appendNewRules } from '../cssom'
-import {
-  constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent,
-} from '../dom'
-import { randomId } from '../utils'
 import { Mode } from './mode'
+import {
+  constructTemplate,
+  appendNode,
+  nestGroupWithinParent,
+  isSiblings,
+  nestIndividuallyWithinParent,
+} from '../dom'
 
 class AppendMode extends Mode {
   constructor() {
