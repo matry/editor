@@ -79,7 +79,6 @@ From this mode, users can enter any other mode.
     - s (shape)  
     - i (image)  
     - t (text)  
-    - v (video)  
     - f (iframe)  
   2. direction  
     - up (append as previous sibling)  
@@ -91,11 +90,10 @@ From this mode, users can enter any other mode.
 
 Content mode allows users to alter the content embedded within certain elements.
 It's worth pointing out that not all elements are allowed to have content.
-At the time of this writing, the "contentful" elements are text, image, and video.
+At the time of this writing, the "contentful" elements are text and image.
 
 - When editing the content for a text element, the editor sidebar becomes a rich text editor.
 - When editing the content for an image element, the editor displays options for (a) selecting existing assets, (b) loading a new image from your computer or from a url, and (c) generating a placeholder image with AI.
-- When editing the content for a video element, the editor has similar options as when editing image content.
 
 ## style mode
 

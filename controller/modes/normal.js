@@ -38,7 +38,6 @@ class NormalMode extends Mode {
         KeyS: this.append_shape,
         KeyT: this.append_text,
         KeyI: this.append_image,
-        KeyV: this.append_video,
       },
       KeyT: {
         KeyS: this.toggle_editor,
@@ -154,14 +153,14 @@ class NormalMode extends Mode {
     }
   }
 
-  update_selection_style({ stylesheet, selections }, property, value) {
+  update_selection_style({ selections }, property, value) {
     if (!selections.length) {
-      updateRule(stylesheet, 'body', property, value)
+      updateRule('body', property, value)
       return
     }
 
     selections.forEach(({ id }) => {
-      updateRule(stylesheet, `#${id}`, property, value)
+      updateRule(`#${id}`, property, value)
     })
 
     return {
@@ -240,7 +239,7 @@ class NormalMode extends Mode {
   }
 
   copy_selections(state) {
-    const { selections, stylesheet } = state
+    const { selections } = state
 
     if (!selections.length) {
       return null
@@ -250,12 +249,9 @@ class NormalMode extends Mode {
       return null
     }
 
-    const copiedContent = {
-      htmlContent: serialize(selections[0]),
-      cssRules: getStylesObjectById(stylesheet, selections[0].id),
-    }
-
-    navigator.clipboard.writeText(JSON.stringify(copiedContent))
+    navigator.clipboard.writeText(JSON.stringify({
+      htmlContent: selections.map(serialize),
+    }))
 
     return null
   }
@@ -311,24 +307,6 @@ class NormalMode extends Mode {
     return {
       mode: 'append',
       appendingElementType: 'image',
-    }
-  }
-
-  append_video(state) {
-    let isValid = true
-    for (const selection of state.selections) {
-      if (selection.getAttribute('data-type') === 'html') {
-        isValid = false
-      }
-    }
-
-    if (!isValid) {
-      return null
-    }
-
-    return {
-      mode: 'append',
-      appendingElementType: 'video',
     }
   }
 
@@ -429,7 +407,7 @@ class NormalMode extends Mode {
 
     return {
       selections: selectionGuard(selections.map((selection) => {
-        if (['text', 'image', 'video'].includes(selection.getAttribute('data-type')) || selection.children.length === 0) {
+        if (['text', 'image'].includes(selection.getAttribute('data-type')) || selection.children.length === 0) {
           return selection
         }
 

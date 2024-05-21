@@ -1,5 +1,5 @@
 import { canvasDocument } from '../canvas'
-import { appendNewRules, appendRules } from '../cssom'
+import { appendNewRules } from '../cssom'
 import {
   constructTemplate, appendNode, nestGroupWithinParent, isSiblings, nestIndividuallyWithinParent,
 } from '../dom'
@@ -31,12 +31,8 @@ class AppendMode extends Mode {
       const position = selection === doc.body ? 'last' : 'after'
 
       if (state.clipboardSelection) {
-        const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
-        const element = appendNode(selection, htmlContent, position)
-        element.id = randomId()
-        appendNewRules(state.stylesheet, element.id, cssRules)
-
-        return position === 'last' ? selection.lastElementChild : selection.nextElementSibling
+        const { htmlContent } = JSON.parse(state.clipboardSelection)
+        return appendNode(selection, htmlContent, position)
       }
 
       const options = {}
@@ -48,8 +44,7 @@ class AppendMode extends Mode {
         options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
       }
 
-      const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
-      appendRules(state.stylesheet, id, cssRules)
+      const { template } = constructTemplate(state.appendingElementType, options)
 
       return appendNode(selection, template, position)
     })
@@ -72,12 +67,8 @@ class AppendMode extends Mode {
       const position = selection === doc.body ? 'last' : 'before'
 
       if (state.clipboardSelection) {
-        const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
-        const element = appendNode(selection, htmlContent, position)
-        element.id = randomId()
-        appendNewRules(state.stylesheet, element.id, cssRules)
-
-        return position === 'last' ? selection.lastElementChild : selection.previousElementSibling
+        const { htmlContent } = JSON.parse(state.clipboardSelection)
+        return appendNode(selection, htmlContent, position)
       }
 
       const options = {}
@@ -89,12 +80,9 @@ class AppendMode extends Mode {
         options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
       }
 
-      const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
+      const { template } = constructTemplate(state.appendingElementType, options)
 
-      appendRules(state.stylesheet, id, cssRules)
-
-      appendNode(selection, template, position)
-      return doc.getElementById(id)
+      return appendNode(selection, template, position)
     })
 
     return {
@@ -117,12 +105,8 @@ class AppendMode extends Mode {
       }
 
       if (state.clipboardSelection) {
-        const { htmlContent, cssRules } = JSON.parse(state.clipboardSelection)
-        const element = appendNode(selection, htmlContent, 'last')
-        element.id = randomId()
-        appendNewRules(state.stylesheet, element.id, cssRules)
-
-        return selection.lastElementChild
+        const { htmlContent } = JSON.parse(state.clipboardSelection)
+        return appendNode(selection, htmlContent, 'last')
       }
 
       const options = {}
@@ -134,12 +118,9 @@ class AppendMode extends Mode {
         options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
       }
 
-      const { id, cssRules, template } = constructTemplate(state.appendingElementType, options)
+      const { template } = constructTemplate(state.appendingElementType, options)
 
-      appendRules(state.stylesheet, id, cssRules)
-
-      appendNode(selection, template, 'last')
-      return doc.getElementById(id)
+      return appendNode(selection, template, 'last')
     })
 
     return {

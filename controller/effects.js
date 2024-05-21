@@ -29,7 +29,7 @@ window.addEventListener('selections_changed', () => {
       })
     }
   } catch (error) {
-    window.alert(error)
+    console.error(error)
   }
 })
 
@@ -50,6 +50,6 @@ window.addEventListener('mode_changed', async () => {
 
     doc.body.setAttribute('data-mode', currentState.mode)
   } catch (error) {
-    window.alert(error)
+    console.error(error)
   }
 })

@@ -157,7 +157,6 @@ async function initializeApp() {
       }
     } catch (error) {
       console.error(error)
-      window.alert(error)
     }
   })
 

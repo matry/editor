@@ -84,7 +84,6 @@ export const getSelectionTypes = (selections) => {
     shape: false,
     text: false,
     image: false,
-    video: false,
   }
 
   selections.forEach((selection) => {

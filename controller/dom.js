@@ -2,7 +2,6 @@ import { LoremIpsum } from 'lorem-ipsum'
 import {
   randomColor, randomId, randomImage,
 } from './utils'
-import { appendRules } from './cssom'
 import { canvasDocument } from './canvas'
 
 const lorem = new LoremIpsum({
@@ -23,70 +22,73 @@ export const randomStyles = (id) => `#${id} {
 
 export const constructTextTemplate = (options = {}) => {
   const text = options.text || lorem.generateWords(2)
-  const id = randomId()
 
-  return {
-    id,
-    cssRules: {
+  const styles = JSON.stringify({
+    base: {
       'display': 'block',
       'width': 'auto',
       'user-select': 'none',
       'line-height': 1,
-    },
-    template: `<span data-type="text" id="${id}">${text}</span>`,
-  }
-}
-
-export const constructImageTemplate = (options = {}) => {
-  const id = randomId()
-
-  let template = ''
-
-  if (options.file) {
-    template = `<img data-type="image" width="auto" height="auto" id="${id}" src="${options.file}" />`
-  } else {
-    const url = '/placeholder-square.jpg'
-    const width = '100px'
-    const height = '100px'
-    template = `<img data-type="image" width="${width}px" height="${height}px" id="${id}" src="${url}" />`
-  }
+    }
+  })
 
   return {
-    id,
-    cssRules: {
-      'display': 'block',
-      'user-select': 'none',
-      'max-width': '100%',
-    },
-    template,
-  }
-}
-
-export const constructVideoTemplate = () => {
-  const id = randomId()
-  return {
-    id,
-    cssRules: {
-      'display': 'block',
-    },
     template: `
-      <iframe data-type="video" id="${id}" width="560" height="315" src="https://www.youtube.com/embed/9ZfN87gSjvI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <span
+        data-type="text"
+        data-styles='${styles}'
+      >
+        ${text}
+      </span>
     `,
   }
 }
 
-export const constructShapeTemplate = () => {
-  const id = randomId()
+export const constructImageTemplate = (options = {}) => {
+  let template = ''
+
+  const styles = JSON.stringify({
+    base: {
+      'display': 'block',
+      'user-select': 'none',
+      'max-width': '100%',
+    },
+  })
+
+  if (options.file) {
+    template = `<img data-type="image" data-styles='${styles}' width="auto" height="auto" src="${options.file}" />`
+  } else {
+    const url = '/placeholder-square.jpg'
+    const width = '100px'
+    const height = '100px'
+    template = `<img data-type="image" data-styles='${styles}' width="${width}px" height="${height}px" src="${url}" />`
+  }
 
   return {
-    id,
-    cssRules: {
+    template,
+  }
+}
+
+export const constructShapeTemplate = () => {
+  const styles = JSON.stringify({
+    base: {
       display: 'block',
-      width: '100$%',
+      width: '100%',
       padding: '10px',
       'background-color': randomColor(),
     },
-    template: `<div data-type="shape" id=${id}></div>`,
+  })
+
+  const template = `
+    <div
+      data-type="shape"
+      data-styles='${styles}'
+    >
+    </div>
+  `
+
+  return {
+    template,
   }
 }
 
@@ -96,8 +98,6 @@ export const constructTemplate = (elementType, options) => {
       return constructTextTemplate(options)
     case 'image':
       return constructImageTemplate(options)
-    case 'video':
-      return constructVideoTemplate(options)
     default:
       return constructShapeTemplate(options)
   }
@@ -125,11 +125,22 @@ export const appendNode = (target, template, position) => {
 
   const parser = new DOMParser()
 
-  const doc = parser.parseFromString(template, 'text/html')
-  const element = doc.body.firstElementChild
+  const parseDoc = parser.parseFromString(template, 'text/html')
+  const element = parseDoc.body.firstElementChild
+
+  flushIds(element)
+
   target.insertAdjacentElement(insertionPoint, element)
 
   return element
+}
+
+export const flushIds = (element) => {
+  element.id = randomId()
+
+  for (let i = 0, l = element.children.length; i < l; i++) {
+    flushIds(element.children[i])
+  }
 }
 
 export const firstSelection = () => window.state.current.selections[0] || null
@@ -367,8 +378,7 @@ export const isSiblings = (elements) => {
 }
 
 export const nestGroupWithinParent = (stylesheet, elements) => {
-  const { id, cssRules, template } = constructShapeTemplate()
-  appendRules(stylesheet, id, cssRules)
+  const { template } = constructShapeTemplate()
   const parentElement = appendNode(elements[0], template, 'before')
 
   elements.forEach((element) => {
@@ -384,8 +394,8 @@ export const nestIndividuallyWithinParent = (stylesheet, elements) => {
       return null
     }
 
-    const { id, cssRules, template } = constructShapeTemplate()
-    appendRules(stylesheet, id, cssRules)
+    const { template } = constructShapeTemplate()
+
     const parentElement = appendNode(element, template, 'before')
     parentElement.appendChild(element)
     return parentElement

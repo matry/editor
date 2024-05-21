@@ -25,7 +25,7 @@ but is there another model?
 
 ultimately we're talking about copies of three things:
 1. element structure
-2. media content (text/image/video/etc)
+2. media content (text/image/etc)
 3. styles
 
 I see a few features that, if combined, could reduce the need for complex component manipulation.

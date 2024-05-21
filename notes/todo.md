@@ -19,7 +19,7 @@
 - [x] store file without exporting
 - [x] fix multiple box model overlays
 - [x] quick command menu
-- [ ] selection jumps
+- [x] selection jumps
 - [ ] move selection layer to outer frame
 - [ ] when pasting images, write to indexeddb
 - [ ] export/load directories
