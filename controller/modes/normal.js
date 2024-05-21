@@ -1,8 +1,5 @@
 /* eslint-disable no-alert */
-import {
-  getSharedStylesByIds,
-  getStylesObjectById, replaceAllRules, updateRule,
-} from '../cssom'
+import { getSharedStyles, resetRules, updateRule } from '../cssom'
 import {
   deleteElements, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
@@ -72,17 +69,15 @@ class NormalMode extends Mode {
     }
   }
 
-  async open_document({ stylesheet }) {
+  async open_document() {
     const json = await openJSONFile()
 
     if (json.htmlContent) {
+      resetRules()
+
       const parser = new DOMParser()
       const doc = parser.parseFromString(json.htmlContent, 'text/html')
       doc.body.innerHTML = doc.body.innerHTML
-    }
-
-    if (json.cssRules) {
-      replaceAllRules(stylesheet, json.cssRules)
     }
   }
 
@@ -168,13 +163,12 @@ class NormalMode extends Mode {
     }
   }
 
-  style_selections({ stylesheet, selections }) {
-    const styles = getSharedStylesByIds(stylesheet, selections.map((selection) => selection.id))
+  style_selections({ selections }) {
     channel.post({
       action: 'request_extension',
       data: {
         id: 'css',
-        params: styles,
+        params: getSharedStyles(selections),
       },
     })
 

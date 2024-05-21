@@ -1,6 +1,5 @@
 import localforage from 'localforage'
 import { saveAs } from 'file-saver'
-import { appendStoredRules } from './cssom'
 import { canvasDocument } from './canvas'
 import { getBox } from 'css-box-model'
 
@@ -146,28 +145,16 @@ export const openJSONFile = () => {
   })
 }
 
-export const storeJSONFile = async (htmlFile, cssFile) => {
-  await Promise.all([
-    localforage.setItem('html', htmlFile),
-    localforage.setItem('css', cssFile),
-  ])
+export const storeJSONFile = async (htmlFile) => {
+  return localforage.setItem('html', htmlFile)
 }
 
 export const retrieveJSONFile = async () => {
-  const [htmlFile, cssFile] = await Promise.all([
-    localforage.getItem('html'),
-    localforage.getItem('css'),
-  ])
-
-  return {
-    htmlFile,
-    cssFile,
-  }
+  return localforage.getItem('html')
 }
 
-export const loadFile = (stylesheet, rootElem, files) => {
-  appendStoredRules(stylesheet, files.cssFile)
-  rootElem.insertAdjacentHTML('afterbegin', files.htmlFile)
+export const loadFile = (rootElem, htmlFile) => {
+  rootElem.insertAdjacentHTML('afterbegin', htmlFile)
 }
 
 export const loadDefaultContent = (rootElem) => {

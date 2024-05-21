@@ -1,49 +1,4 @@
-import { canvasDocument } from './canvas'
-
-export const initStyle = (sheet) => {
-  const doc = canvasDocument()
-
-  sheet = sheet || new CSSStyleSheet()
-
-  doc.adoptedStyleSheets = [sheet]
-
-  return sheet
-}
-
-export const getStylesById = (stylesheet, id) => {
-  // const rules = []
-
-  // Array.from(stylesheet.cssRules).forEach((rule) => {
-  //   const styleId = rule.selectorText.split('#')[1]
-
-  //   if (id !== styleId) {
-  //     return
-  //   }
-
-  //   rules.push({
-  //     property: rule.style[0],
-  //     value: rule.style[rule.style[0]],
-  //   })
-  // })
-
-  // return rules
-}
-
-export const getCSSTextById = (stylesheet, id) => {
-  // const result = Array.from(stylesheet.cssRules)
-  //   .map((rule) => {
-  //     const styleId = rule.selectorText.split('#')[1]
-
-  //     if (styleId !== id) {
-  //       return null
-  //     }
-
-  //     return rule.cssText
-  //   })
-  //   .filter((rule) => rule !== null)
-
-  // return result
-}
+import { canvasDocument, canvasWindow } from './canvas'
 
 export const getStylesObjectById = (stylesheet, id) => {
   // const styles = {}
@@ -63,40 +18,43 @@ export const getStylesObjectById = (stylesheet, id) => {
   // return styles
 }
 
-export const getSharedStylesByIds = (stylesheet, ids) => {
-  // const styleObjects = ids.map((id) => getStylesObjectById(stylesheet, id))
+export const getSharedStyles = (elements) => {
+  const styleObjects = elements.map((element) => {
+    const styles = JSON.parse(element.dataset.styles)
+    return styles.base
+  })
 
-  // const sharedStyles = !styleObjects.length ? {} : styleObjects.reduce((previous, current) => {
-  //   const result = {}
+  const sharedStyles = !styleObjects.length ? {} : styleObjects.reduce((previous, current) => {
+    const result = {}
 
-  //   Object.keys(previous).forEach((key) => {
-  //     if (previous[key] === current[key]) {
-  //       result[key] = previous[key]
-  //     }
-  //   })
+    Object.keys(previous).forEach((key) => {
+      if (previous[key] === current[key]) {
+        result[key] = previous[key]
+      }
+    })
 
-  //   return result
-  // })
+    return result
+  })
 
-  // return sharedStyles
+  return sharedStyles
 }
 
 export const getId = (rule) => rule.selectorText.split('#')[1]
 
-export const replaceAllRules = (stylesheet, cssRules) => {
-  // const rules = Array.from(stylesheet.cssRules)
+export const resetRules = () => {
+  const win = canvasWindow()
 
-  // rules.forEach((rule, i) => {
-  //   try {
-  //     stylesheet.deleteRule(i)
-  //   } catch (error) {
-  //     // do nothing
-  //   }
-  // })
+  if (win.baseStyleSheet) {
+    const rules = Array.from(win.baseStyleSheet.cssRules)
 
-  // cssRules.forEach((cssRule) => {
-  //   stylesheet.insertRule(cssRule)
-  // })
+    rules.forEach((rule, i) => {
+      try {
+        win.baseStyleSheet.deleteRule(i)
+      } catch (error) {
+        // do nothing
+      }
+    })
+  }
 }
 
 export const updateRule = (selectorText, property, value) => {

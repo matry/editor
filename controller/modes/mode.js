@@ -74,11 +74,8 @@ export class Mode {
     window.open('/help/index.html', '_blank').focus()
   }
 
-  save_document({ stylesheet }) {
-    storeJSONFile(
-      serialize(canvasDocument().body),
-      Array.from(stylesheet.cssRules).map((rule) => rule.cssText),
-    )
+  save_document() {
+    storeJSONFile(serialize(canvasDocument().body))
 
     channel.post({
       action: 'did_save_state',

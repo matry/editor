@@ -160,9 +160,9 @@ async function initializeApp() {
     }
   })
 
-  const files = await retrieveJSONFile()
-  if (files.htmlFile && files.cssFile) {
-    loadFile(window.state.current.stylesheet, doc.body, files)
+  const htmlFile = await retrieveJSONFile()
+  if (htmlFile) {
+    loadFile(doc.body, htmlFile)
     window.state.current = {
       selections: [doc.body],
     }
