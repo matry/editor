@@ -159,7 +159,13 @@ export const loadFile = (rootElem, htmlFile) => {
 
 export const loadDefaultContent = (rootElem) => {
   rootElem.insertAdjacentHTML('afterbegin', `
-    <span data-type="text" id="placeholder-content">Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.</span>
+    <span
+      data-type="text"
+      id="placeholder-content"
+      data-styles='{"base":{}}'
+    >
+      Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.
+    </span>
   `)
 }
 

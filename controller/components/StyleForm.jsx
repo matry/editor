@@ -37,12 +37,23 @@ const StyleForm = ({ styles }) => {
       >
         <div className="p-5 overflow-x-hidden rounded bottom-full">
           <ul>
-            {Object.entries(currentStyles).map(([key, val]) => (
-              <li key={key} className="flex items-center justify-between w-full mb-1">
-                <span className="text-gray-300">{key}</span>
-                <span>{val}</span>
-              </li>
-            ))}
+            {Object.entries(currentStyles).map(([stateKey, stateVal]) => {
+              return (
+                <li key={stateKey} className="w-full">
+                  <h3 className="text-gray-100 font-semibold mb-2 text-sm">{stateKey}</h3>
+                  <ul>
+                    {Object.entries(stateVal).map(([styleKey, styleVal]) => {
+                      return (
+                        <li key={styleKey} className="flex items-center justify-between w-full mb-1">
+                          <span className="text-gray-300">{styleKey}</span>
+                          <span>{styleVal}</span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </li>
+              )
+            })}
           </ul>
         </div>
         <div
@@ -74,33 +85,30 @@ const StyleForm = ({ styles }) => {
             setValue={setValue}
             showAllByDefault
             onSubmit={(newValue) => {
-              setValue(newValue)
-
-              const data = {}
-              data[property] = newValue
-
               channel.post({
-                action: 'update_selection_attributes',
+                action: 'update_selection_styles',
                 data: {
-                  'data-styles': JSON.stringify({
-                    base: {
-                      ...styles,
-                      [property]: newValue,
-                    }
-                  })
+                  property: property,
+                  value: newValue,
                 },
               })
 
-              setProperty('')
-              setValue('')
-
               const newCurrentStyles = {
-                ...currentStyles,
+                base: {
+                  ...currentStyles.base,
+                },
               }
 
-              newCurrentStyles[property] = newValue
+              if (newValue === '') {
+                delete newCurrentStyles.base[property]
+              } else {
+                newCurrentStyles.base[property] = newValue
+              }
 
               setCurrentStyles(newCurrentStyles)
+
+              setProperty('')
+              setValue('')
 
               propRef.current.focus()
             }}

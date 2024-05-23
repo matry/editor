@@ -118,3 +118,17 @@ For example...
 3. `:before` uses the before pseudo class
 4. `:b` generates a selector for all bold elements within the selected text element (only for text elements, used for rich text)
 5. `:even` generates a selector for all even children within an iterable element (only for iterables such as `li` and `tr`)
+
+
+
+
+## commands
+
+resize sidebar
+open/close sidebar
+toggle zoom
+zoom in
+zoom out
+reset zoom
+toggle box model overlay
+switch to outline mode

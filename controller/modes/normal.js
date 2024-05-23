@@ -27,7 +27,7 @@ class NormalMode extends Mode {
         //   Enter: this.replace_content,
         // },
         KeyI: this.edit_selections_image,
-        KeyS: this.style_selections,
+        KeyS: this.edit_selections_styles,
         KeyT: this.edit_selections_text,
       },
       Tab: this.select_next_sibling,
@@ -160,7 +160,7 @@ class NormalMode extends Mode {
     }
   }
 
-  update_selection_style({ selections }, property, value) {
+  update_selection_styles({ selections }, property, value) {
     if (!selections.length) {
       updateRule('body', property, value)
       return
@@ -175,7 +175,7 @@ class NormalMode extends Mode {
     }
   }
 
-  style_selections({ selections }) {
+  edit_selections_styles({ selections }) {
     channel.post({
       action: 'request_extension',
       data: {

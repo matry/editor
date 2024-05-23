@@ -2,16 +2,28 @@ import { canvasDocument, canvasWindow } from './canvas'
 
 export const getSharedStyles = (elements) => {
   const styleObjects = elements.map((element) => {
-    const styles = JSON.parse(element.dataset.styles)
-    return styles.base
+    let styles = null
+
+    try {
+      styles = JSON.parse(element.dataset.styles)
+    } catch (error) {
+      console.error(error)
+      styles = {
+        base: {},
+      }
+    }
+
+    return styles
   })
 
-  const sharedStyles = !styleObjects.length ? {} : styleObjects.reduce((previous, current) => {
-    const result = {}
+  const sharedStyles = styleObjects.reduce((previous, current) => {
+    const result = {
+      base: {},
+    }
 
-    Object.keys(previous).forEach((key) => {
-      if (previous[key] === current[key]) {
-        result[key] = previous[key]
+    Object.keys(previous.base).forEach((key) => {
+      if (previous[key] === current.base[key]) {
+        result.base[key] = previous[key]
       }
     })
 
@@ -46,7 +58,13 @@ export const updateRule = (selectorText, property, value) => {
 
   try {
     const styles = JSON.parse(element.dataset.styles)
-    styles.base[property] = value
+
+    if (value !== '') {
+      styles.base[property] = value
+    } else {
+      delete styles.base[property]
+    }
+
     element.setAttribute('data-styles', JSON.stringify(styles))
   } catch (error) {
     // do nothing
