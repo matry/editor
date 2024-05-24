@@ -1,12 +1,13 @@
 import { canvasIframe, canvasDocument } from './canvas'
 import { State } from './state'
-import { loadFile, readBlobs, retrieveJSONFile, randomId, renderBoxModel, loadDefaultContent } from './utils'
+import { loadFile, readBlobs, renderBoxModel } from './utils'
 import { channel } from './listener'
 // import { initZoom } from './zoom'
 import modes from './modes'
 import './editor.jsx'
 import './effects'
 import './index.css'
+import { initDirectory } from '../utils/storage.js'
 
 channel.listen((e) => {
   if (e.data.action === 'canvas_did_load') {
@@ -46,6 +47,8 @@ async function initializeApp() {
 
   // initialize the state so that it triggers a channel message
   window.state.current = {
+    activeProjectId: '',
+    activeFileId: '',
     hasUnsavedChanges: false,
     mode: 'normal',
     selections: [doc.body],
@@ -163,16 +166,13 @@ async function initializeApp() {
     }
   })
 
-  const htmlFile = await retrieveJSONFile()
-  if (htmlFile) {
-    loadFile(doc.body, htmlFile)
-    window.state.current = {
-      selections: [doc.body],
-    }
-  } else {
-    loadDefaultContent(doc.body)
-    window.state.current = {
-      selections: [doc.body],
-    }
+  const directory = await initDirectory()
+
+  loadFile(doc.body, directory.activeFile)
+
+  window.state.current = {
+    selections: [doc.body],
+    activeFileId: directory.activeFile.id,
+    activeProjectId: directory.activeProject.id,
   }
 }

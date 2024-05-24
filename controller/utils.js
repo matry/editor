@@ -1,4 +1,3 @@
-import localforage from 'localforage'
 import { saveAs } from 'file-saver'
 import { canvasDocument } from './canvas'
 import { getBox } from 'css-box-model'
@@ -145,28 +144,16 @@ export const openJSONFile = () => {
   })
 }
 
-export const storeJSONFile = async (htmlFile) => {
-  return localforage.setItem('html', htmlFile)
-}
+export const loadFile = (rootElem, file) => {
+  rootElem.insertAdjacentHTML('afterbegin', file.content)
 
-export const retrieveJSONFile = async () => {
-  return localforage.getItem('html')
-}
+  if (file.rootAttributes['data-styles']) {
+    rootElem.closest('html').setAttribute('data-styles', file.rootAttributes['data-styles'])
+  }
 
-export const loadFile = (rootElem, htmlFile) => {
-  rootElem.insertAdjacentHTML('afterbegin', htmlFile)
-}
-
-export const loadDefaultContent = (rootElem) => {
-  rootElem.insertAdjacentHTML('afterbegin', `
-    <span
-      data-type="text"
-      id="placeholder-content"
-      data-styles='{"base":{}}'
-    >
-      Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.
-    </span>
-  `)
+  if (file.bodyAttributes['data-styles']) {
+    rootElem.closest('body').setAttribute('data-styles', file.bodyAttributes['data-styles'])
+  }
 }
 
 export const clearStorage = () => {

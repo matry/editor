@@ -11,6 +11,7 @@ import { randomImage } from '../utils'
 import { isSiblings } from '../dom'
 import { selectionGuard } from '../utils'
 import localforage from 'localforage'
+import { clearFile } from '../../utils/storage'
 
 const doc = canvasDocument()
 
@@ -62,9 +63,9 @@ class NormalMode extends Mode {
     this.commandSubPath = this.commands
   }
 
-  reset() {
+  async reset(state) {
     if (window.confirm('Are you sure you want to clear the canvas? This cannot be undone.')) {
-      localforage.clear()
+      await clearFile(state.activeFileId)
       window.location.reload()
     }
   }

@@ -9,6 +9,18 @@ export const filesStore = localforage.createInstance({
   name: 'files',
 })
 
+export async function initDirectory() {
+  const projects = await initProjects()
+  const files = await initFiles(projects[0].id)
+
+  return {
+    projects,
+    files,
+    activeProject: projects[0],
+    activeFile: files[0],
+  }
+}
+
 export async function initProjects() {
   const projectIds = await projectsStore.keys()
   const projects = await Promise.all(projectIds.map(async (id) => {
@@ -20,12 +32,11 @@ export async function initProjects() {
     return projects
   }
 
-  projects.push(
-    await createProject({
-      id: 'default',
-      name: 'Default Project',
-    })
-  )
+  const defaultProject = await createProject({
+    id: 'default',
+    name: 'Default Project',
+  })
+  projects.push(defaultProject)
 
   return projects
 }
@@ -41,25 +52,25 @@ export async function initFiles(defaultProjectId = '') {
     return files
   }
 
-  files.push(
-    await createFile({
-      id: 'default',
-      project_id: defaultProjectId,
-      name: 'Default File',
-    })
-  )
+  const defaultFile = await createFile({
+    id: 'default',
+    project_id: defaultProjectId,
+    name: 'Default File',
+    rootAttributes: {},
+    bodyAttributes: {},
+    content: `
+      <span
+        data-type="text"
+        id="placeholder-content"
+        data-styles='{"base":{}}'
+      >
+        Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.
+      </span>
+    `,
+  })
+  files.push(defaultFile)
 
   return files
-}
-
-export async function initDirectory() {
-  const projects = await initProjects()
-  const files = await initFiles(projects[0].id)
-
-  return {
-    projects,
-    files,
-  }
 }
 
 export async function createProject(data) {
@@ -83,8 +94,46 @@ export async function createFile(data) {
     name: data.name || id,
     type: 'html',
     created_at: Date.now(),
-    data: '',
+    rootAttributes: data.rootAttributes || {},
+    bodyAttributes: data.bodyAttributes || {},
+    content: '',
   })
 
   return newFile
+}
+
+export async function saveFile(id, content, rootAttributes, bodyAttributes) {
+  const file = await filesStore.getItem(id)
+
+  if (!file) {
+    console.warn(`file ${id} not found`)
+    return
+  }
+
+  file.content = content
+  file.rootAttributes = rootAttributes || {}
+  file.bodyAttributes = bodyAttributes || {}
+
+  await filesStore.setItem(id, file)
+}
+
+export async function clearFile(id) {
+  const file = await filesStore.getItem(id)
+
+  if (!file) {
+    return
+  }
+
+  file.rootAttributes = {}
+  file.content = `
+    <span
+      data-type="text"
+      id="placeholder-content"
+      data-styles='{"base":{}}'
+    >
+      Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.
+    </span>
+  `
+
+  await filesStore.setItem(id, file)
 }

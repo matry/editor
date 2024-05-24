@@ -1,7 +1,8 @@
+import { saveFile } from '../../utils/storage'
 import { canvasDocument } from '../canvas'
 import { serialize } from '../dom'
 import { channel } from '../listener'
-import { downloadHTMLFile, storeJSONFile } from '../utils'
+import { downloadHTMLFile } from '../utils'
 
 export class Mode {
   commands = {}
@@ -74,8 +75,19 @@ export class Mode {
     window.open('/help/index.html', '_blank').focus()
   }
 
-  save_document() {
-    storeJSONFile(serialize(canvasDocument().body))
+  save_document(state) {
+    const doc = canvasDocument()
+
+    saveFile(
+      state.activeFileId,
+      serialize(doc.body),
+      {
+        'data-styles': doc.querySelector('html').getAttribute('data-styles'),
+      },
+      {
+        'data-styles': doc.body.getAttribute('data-styles'),
+      },
+    )
 
     channel.post({
       action: 'did_save_state',
