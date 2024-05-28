@@ -132,3 +132,15 @@ zoom out
 reset zoom
 toggle box model overlay
 switch to outline mode
+
+
+## editor hierarchy
+
+account view
+  - list workspaces
+workspace view
+  - list projects
+project view
+  - list files
+file view
+  - list elements
