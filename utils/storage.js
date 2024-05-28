@@ -1,5 +1,5 @@
 import localforage from 'localforage'
-import { randomId } from '../controller/utils'
+import { randomId } from '../editor/utils'
 
 export const projectsStore = localforage.createInstance({
   name: 'projects',

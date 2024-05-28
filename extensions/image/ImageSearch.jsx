@@ -1,6 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import { randomId } from '../../controller/utils'
-import { isInBounds } from '../../controller/dom'
 import { Channel } from '../../utils/broadcast-channel'
 
 const channel = new Channel('matry')
