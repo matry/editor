@@ -1,7 +1,5 @@
 import { LoremIpsum } from 'lorem-ipsum'
-import {
-  randomColor, randomId, randomImage,
-} from './utils'
+import { randomColor, randomId } from './utils'
 import { canvasDocument } from './canvas'
 
 const lorem = new LoremIpsum({
@@ -128,18 +126,18 @@ export const appendNode = (target, template, position) => {
   const parseDoc = parser.parseFromString(template, 'text/html')
   const element = parseDoc.body.firstElementChild
 
-  flushIds(element)
+  resetIds(element)
 
   target.insertAdjacentElement(insertionPoint, element)
 
   return element
 }
 
-export const flushIds = (element) => {
+export const resetIds = (element) => {
   element.id = randomId()
 
   for (let i = 0, l = element.children.length; i < l; i++) {
-    flushIds(element.children[i])
+    resetIds(element.children[i])
   }
 }
 
