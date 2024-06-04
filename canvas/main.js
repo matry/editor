@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.adoptedStyleSheets = [window.baseStyleSheet]
 
   const observer = new MutationObserver((mutations) => {
+    const styleUpdates = new Map()
+
     for (const mutation of mutations) {
       switch (mutation.type) {
         case 'childList':
@@ -32,24 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
           break
         case 'attributes':
           if (mutation.attributeName === 'data-styles') {
-            const styles = JSON.parse(mutation.target.dataset.styles)
-
-            const selectorText = `#${mutation.target.id}`
-            const rules = Array.from(window.baseStyleSheet.cssRules)
-            const index = rules.findIndex((rule) => rule.selectorText === selectorText)
-
-            if (index !== -1) {
-              window.baseStyleSheet.deleteRule(index)
-            }
-
-            const cssString = Object.entries(styles.base).map(([p, v]) => `${p}: ${v};`).join('\n')
-            const ruleText = `
-              ${selectorText} {
-                ${cssString}
-              }
-            `
-
-            window.baseStyleSheet.insertRule(ruleText)
+            const target = mutation.target
+            const styles = JSON.parse(target.dataset.styles || '{"base":{}}')
+            styleUpdates.set(`#${target.id}`, styles.base)
           }
 
           break
@@ -59,6 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
           break
       }
     }
+
+    for (const cssRule of window.baseStyleSheet.cssRules) {
+      if (styleUpdates.has(cssRule.selectorText)) {
+        let styles = styleUpdates.get(cssRule.selectorText)
+        for (const styleProp in styles) {
+          let styleVal = styles[styleProp]
+          if (styleVal !== cssRule.styleMap.get(styleProp)) {
+            cssRule.styleMap.delete(styleProp)
+            cssRule.styleMap.set(styleProp, styles[styleProp])
+          }
+        }
+      }
+    }
+
   })
 
   observer.observe(document.querySelector('html'), {
