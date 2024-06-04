@@ -39,18 +39,12 @@ export const randomImage = (w, h) => {
   }
 }
 
-export const randomColor = () => {
-  const hexChars = [7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f']
-  const hexArr = [0, 0, 0, 0, 0, 0]
+export const randomColor = (preferPastel = true) => {
+  const h = randomNumber(360, 0)
+  const s = preferPastel ? randomNumber(100, 70) : randomNumber(60, 20)
+  const l = preferPastel ? randomNumber(100, 70) : randomNumber(50, 20)
 
-  const resultHexArr = hexArr.map(() => {
-    const index = Math.floor(Math.random() * hexChars.length)
-    return hexChars[index]
-  })
-
-  const result = `#${resultHexArr.join('')}`
-
-  return result
+  return `hsl(${h}deg, ${s}%, ${l}%)`
 }
 
 export const getKeyboardCommand = (e) => {
