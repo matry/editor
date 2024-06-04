@@ -8,29 +8,27 @@ export const getSharedStyles = (elements) => {
       styles = JSON.parse(element.dataset.styles)
     } catch (error) {
       console.error(error)
-      styles = {
-        base: {},
-      }
+      styles = {}
     }
 
-    return styles
+    return styles.base
   })
 
   const sharedStyles = styleObjects.reduce((previous, current) => {
-    const result = {
-      base: {},
-    }
+    const result = {}
 
-    Object.keys(previous.base).forEach((key) => {
-      if (previous[key] === current.base[key]) {
-        result.base[key] = previous[key]
+    Object.keys(previous).forEach((key) => {
+      if (previous[key] === current[key]) {
+        result[key] = previous[key]
       }
     })
 
     return result
   })
 
-  return sharedStyles
+  return {
+    base: sharedStyles,
+  }
 }
 
 export const resetRules = () => {
