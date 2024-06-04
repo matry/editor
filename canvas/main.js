@@ -2,6 +2,32 @@ import { Channel } from '../utils/broadcast-channel'
 
 const channel = new Channel('matry')
 
+function appendRule(nodes) {
+  for (const node of nodes) {
+    try {
+      const styles = JSON.parse(node.dataset.styles)
+
+      const rule = `
+        #${node.id} {
+          ${
+            Object.entries(styles.base).map(([k, v]) => {
+              return `${k}: ${v};`
+            }).join(' ')
+          }
+        }
+      `
+
+      window.baseStyleSheet.insertRule(rule)
+
+      if (node.childNodes.length) {
+        appendRule(node.childNodes)
+      }
+    } catch (error) {
+      // do nothing
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   window.baseStyleSheet = new CSSStyleSheet()
   document.adoptedStyleSheets = [window.baseStyleSheet]
@@ -12,25 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const mutation of mutations) {
       switch (mutation.type) {
         case 'childList':
-          for (const addedNode of mutation.addedNodes) {
-            try {
-              const styles = JSON.parse(addedNode.dataset.styles)
-
-              const rule = `
-                #${addedNode.id} {
-                  ${
-                    Object.entries(styles.base).map(([k, v]) => {
-                      return `${k}: ${v};`
-                    }).join(' ')
-                  }
-                }
-              `
-
-              window.baseStyleSheet.insertRule(rule)
-            } catch (error) {
-              // do nothing
-            }
-          }
+          appendRule(mutation.addedNodes)
           break
         case 'attributes':
           if (mutation.attributeName === 'data-styles') {
