@@ -125,6 +125,7 @@ export async function clearFile(id) {
   }
 
   file.rootAttributes = {}
+  file.bodyAttributes = {}
   file.content = `
     <span
       data-type="text"
