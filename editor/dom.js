@@ -278,3 +278,14 @@ export const nestIndividuallyWithinParent = (stylesheet, elements) => {
 
   return parentElements
 }
+
+export const getAllChildrenByType = (elements, type) => {
+  let results = []
+
+  for (const element of elements) {
+    let localResults = element.querySelectorAll(`[data-type="${type}"]`)
+    results.push(...localResults)
+  }
+
+  return results
+}

@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import { getSharedStyles, resetRules, updateRule } from '../cssom'
 import {
-  deleteElements, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
+  deleteElements, getAllChildrenByType, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
 import { channel } from '../listener'
 import { openJSONFile } from '../utils'
@@ -22,6 +22,10 @@ class NormalMode extends Mode {
     this.commands = {
       Escape: this.clear_selections,
       Backspace: this.delete_selections,
+      KeyS: {
+        KeyT: this.select_all_text,
+        KeyI: this.select_all_image,
+      },
       KeyE: {
         // KeyI: {
         //   KeyR: this.replace_random_image,
@@ -625,6 +629,18 @@ class NormalMode extends Mode {
 
     return {
       selections: selectionGuard([...selections, nextElement]),
+    }
+  }
+
+  select_all_text({ selections }) {
+    return {
+      selections: selectionGuard(getAllChildrenByType(selections, 'text'))
+    }
+  }
+
+  select_all_image({ selections }) {
+    return {
+      selections: selectionGuard(getAllChildrenByType(selections, 'image'))
     }
   }
 }
