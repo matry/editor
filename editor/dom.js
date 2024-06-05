@@ -3,35 +3,38 @@ import { canvasDocument } from './canvas'
 import { config } from './config'
 
 export const constructTextTemplate = (options = {}) => {
+  const tag = config.defaults.text.tag
   const styles = config.defaults.text.styles()
   const content = config.defaults.text.content()
 
   return {
     template: `
-      <span
+      <${tag}
         data-type="text"
         data-styles='${styles}'
       >
         ${options.text || content}
-      </span>
+      </${tag}>
     `,
   }
 }
 
 export const constructImageTemplate = (options = {}) => {
+  const tag = config.defaults.image.tag
   const styles = JSON.stringify(config.defaults.image.styles())
   const content = config.defaults.image.content()
 
   return {
-    template: `<img data-type="image" data-styles='${styles}' width="100px" height="100px" src="${options.file || content}" />`,
+    template: `<${tag} data-type="image" data-styles='${styles}' width="100px" height="100px" src="${options.file || content}" />`,
   }
 }
 
 export const constructShapeTemplate = () => {
+  const tag = config.defaults.shape.tag
   const styles = JSON.stringify(config.defaults.shape.styles())
 
   return {
-    template: `<div data-type="shape" data-styles='${styles}'></div>`,
+    template: `<${tag} data-type="shape" data-styles='${styles}'></${tag}>`,
   }
 }
 
@@ -86,10 +89,6 @@ export const resetIds = (element) => {
   }
 }
 
-export const firstSelection = () => window.state.current.selections[0] || null
-
-export const lastSelection = () => window.state.current.selections[window.state.current.selections.length - 1] || null
-
 export const selectAll = (selections) => {
   const doc = canvasDocument()
 
@@ -97,47 +96,13 @@ export const selectAll = (selections) => {
     return Array.from(doc.body.children)
   }
 
-  return Array.from(selections[0].parentElement.children)
-}
+  return selections.map((selection) => {
+    if (!selection.parentElement || selection.parentElement.id === 'html') {
+      return [selection]
+    }
 
-export const addNodeToSelection = (state, node) => {
-  const { selections } = state
-
-  return {
-    selections: [...selections, node],
-  }
-}
-
-export const selectNode = (state, node) => {
-  if (!node) {
-    return null
-  }
-
-  return {
-    selections: [node],
-  }
-}
-
-export const getSelectionSibling = (direction) => {
-  const { selections } = window.current.state
-  const index = direction === 'next' ? selections.length - 1 : 0
-  const currentSelection = selections[index]
-
-  if (!currentSelection) {
-    return null
-  }
-
-  let resultNode = null
-
-  if (direction === 'previous') {
-    resultNode = currentSelection.previousElementSibling
-  }
-
-  if (direction === 'next') {
-    resultNode = currentSelection.nextElementSibling
-  }
-
-  return resultNode
+    return [...selection.parentElement.children]
+  }).flat()
 }
 
 export const selectNextNode = (selections) => {
@@ -244,39 +209,6 @@ export const selectLastSiblingNode = (selections) => {
   }
 
   return selections.map((selection) => selection.parentElement.lastElementChild).filter((selection, index, self) => self.indexOf(selection) === index)
-}
-
-export const getSelectionDirection = (selections) => {
-  let isUp = true
-  let isDown = true
-
-  selections.forEach((selection, i) => {
-    const nextElement = selection.nextElementSibling
-    const previousElement = selection.previousElementSibling
-
-    const nextSelection = selections[i + 1]
-    if (!nextSelection) {
-      return
-    }
-
-    if (nextSelection !== nextElement) {
-      isDown = false
-    }
-
-    if (nextSelection !== previousElement) {
-      isUp = false
-    }
-  })
-
-  if (isUp) {
-    return 'up'
-  }
-
-  if (isDown) {
-    return 'down'
-  }
-
-  return null
 }
 
 export const deleteElements = (elements) => {

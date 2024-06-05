@@ -6,6 +6,7 @@ const lorem = new LoremIpsum()
 export const config = {
   defaults: {
     shape: {
+      tag: 'div',
       styles: () => {
         return {
           base: {
@@ -22,6 +23,7 @@ export const config = {
       },
     },
     text: {
+      tag: 'span',
       styles: () => {
         return {
           base: {
@@ -38,6 +40,7 @@ export const config = {
       },
     },
     image: {
+      tag: 'img',
       styles: () => {
         return {
           base: {
