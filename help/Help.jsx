@@ -172,6 +172,18 @@ const selectCommands = [
       keys: ['⌘', '+', 'a'],
     },
   ],
+  [
+    {
+      name: 'Select all text elements',
+      tooltip: 's t',
+      keys: ['s', 't'],
+    },
+    {
+      name: 'Select all image elements',
+      tooltip: 's i',
+      keys: ['s', 'i'],
+    },
+  ],
 ]
 
 const Help = () => (
