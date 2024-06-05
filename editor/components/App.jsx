@@ -24,7 +24,7 @@ const App = ({ currentView, extension, extensionProps, canvasDOM, selections, ha
 
   if (content) {
     return (
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full pb-4">
         <div className="text-neutral-600 text-3xl py-2 px-4 flex select-none flex-grow-0">
           <span title="project" className="px-1 py-2 leading-none cursor-pointer hover:text-white">›</span>
           <span title="file" className={`px-1 py-2 leading-none cursor-pointer ${hasUnsavedChanges ? 'text-[#10CFFF]' : 'text-white'}`}>›</span>
