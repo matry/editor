@@ -4,7 +4,7 @@ import { config } from './config'
 
 export const constructTextTemplate = (options = {}) => {
   const tag = config.defaults.text.tag
-  const styles = config.defaults.text.styles()
+  const styles = JSON.stringify(config.defaults.text.styles())
   const content = config.defaults.text.content()
 
   return {
