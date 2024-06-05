@@ -10,7 +10,7 @@ import { Mode } from './mode'
 import { randomImage } from '../utils'
 import { isSiblings } from '../dom'
 import { selectionGuard } from '../utils'
-import localforage from 'localforage'
+import { uniqBy } from 'lodash'
 import { clearFile } from '../../utils/storage'
 
 const doc = canvasDocument()
@@ -53,6 +53,8 @@ class NormalMode extends Mode {
       Slash: this.open_quick_command,
       BracketLeft: this.select_previous_cousin,
       BracketRight: this.select_next_cousin,
+      'shift BracketLeft': this.shift_select_previous_cousin,
+      'shift BracketRight': this.shift_select_next_cousin,
       'alt ArrowUp': this.move_selections_up,
       'alt ArrowDown': this.move_selections_down,
       'alt ArrowLeft': this.move_selections_left,
@@ -434,6 +436,34 @@ class NormalMode extends Mode {
 
     return {
       selections: selectionGuard(newSelections),
+    }
+  }
+
+  shift_select_previous_cousin(state) {
+    const newSelections = leapPreviousNode(state.selections)
+
+    if (!newSelections.length) {
+      return null
+    }
+
+    return {
+      selections: selectionGuard(
+        uniqBy([...newSelections, ...state.selections], (s) => s.id)
+      )
+    }
+  }
+
+  shift_select_next_cousin(state) {
+    const newSelections = leapNextNode(state.selections)
+
+    if (!newSelections.length) {
+      return null
+    }
+
+    return {
+      selections: selectionGuard(
+        uniqBy([...newSelections, ...state.selections], (s) => s.id)
+      )
     }
   }
 
