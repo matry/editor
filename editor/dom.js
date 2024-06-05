@@ -1,34 +1,10 @@
-import { LoremIpsum } from 'lorem-ipsum'
-import { randomColor, randomId } from './utils'
+import { randomId } from './utils'
 import { canvasDocument } from './canvas'
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4,
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-})
-
-export const randomStyles = (id) => `#${id} {
-    width: 100%;
-    background-color: ${randomColor()};
-  }`
+import { config } from './config'
 
 export const constructTextTemplate = (options = {}) => {
-  const text = options.text || lorem.generateWords(2)
-
-  const styles = JSON.stringify({
-    base: {
-      'display': 'block',
-      'width': 'auto',
-      'user-select': 'none',
-      'line-height': 1,
-    }
-  })
+  const styles = config.defaults.text.styles()
+  const content = config.defaults.text.content()
 
   return {
     template: `
@@ -36,57 +12,26 @@ export const constructTextTemplate = (options = {}) => {
         data-type="text"
         data-styles='${styles}'
       >
-        ${text}
+        ${options.text || content}
       </span>
     `,
   }
 }
 
 export const constructImageTemplate = (options = {}) => {
-  let template = ''
-
-  const styles = JSON.stringify({
-    base: {
-      'display': 'block',
-      'user-select': 'none',
-      'max-width': '100%',
-    },
-  })
-
-  if (options.file) {
-    template = `<img data-type="image" data-styles='${styles}' width="auto" height="auto" src="${options.file}" />`
-  } else {
-    const url = '/placeholder-square.jpg'
-    const width = '100px'
-    const height = '100px'
-    template = `<img data-type="image" data-styles='${styles}' width="${width}px" height="${height}px" src="${url}" />`
-  }
+  const styles = JSON.stringify(config.defaults.image.styles())
+  const content = config.defaults.image.content()
 
   return {
-    template,
+    template: `<img data-type="image" data-styles='${styles}' width="100px" height="100px" src="${options.file || content}" />`,
   }
 }
 
 export const constructShapeTemplate = () => {
-  const styles = JSON.stringify({
-    base: {
-      display: 'block',
-      width: '100%',
-      padding: '10px',
-      'background-color': randomColor(),
-    },
-  })
-
-  const template = `
-    <div
-      data-type="shape"
-      data-styles='${styles}'
-    >
-    </div>
-  `
+  const styles = JSON.stringify(config.defaults.shape.styles())
 
   return {
-    template,
+    template: `<div data-type="shape" data-styles='${styles}'></div>`,
   }
 }
 
