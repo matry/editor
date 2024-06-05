@@ -58,6 +58,7 @@ class NormalMode extends Mode {
       'alt ArrowUp': this.move_selections_up,
       'alt ArrowDown': this.move_selections_down,
       'alt ArrowLeft': this.move_selections_left,
+      'alt ArrowRight': this.move_selections_right,
       'shift ArrowUp': this.shift_selection_up,
       'shift ArrowDown': this.shift_selection_down,
       'meta ArrowUp': this.select_first_sibling,
@@ -112,6 +113,22 @@ class NormalMode extends Mode {
 
       if (selection.nextElementSibling) {
         selection.nextElementSibling.after(selection)
+      }
+    }
+
+    return {
+      hasUnsavedChanges: true,
+    }
+  }
+
+  move_selections_right(state) {
+    for (const selection of state.selections) {
+      if (['html', 'body'].includes(selection.id)) {
+        continue
+      }
+
+      if (selection.nextElementSibling) {
+        selection.nextElementSibling.prepend(selection)
       }
     }
 
