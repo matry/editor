@@ -126,7 +126,7 @@ const QuickInput = forwardRef(({
       <input type="submit" className="hidden" />
       {suggestions.length > 0 && (
       <ul
-        className="absolute left-0 right-0 max-w-full mb-1 overflow-x-hidden bottom-full bg-gray-700 bg-opacity-90 max-h-72"
+        className="absolute left-0 right-0 max-w-full mb-[1px] overflow-x-hidden bottom-full bg-gray-700 bg-opacity-90 max-h-72"
       >
         {suggestions.map((suggestion, i) => (
           <li

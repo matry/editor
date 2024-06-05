@@ -20,7 +20,7 @@ const QuickForm = () => {
 
   return (
     <div
-      className="text-xs absolute bottom-4 left-0 right-0"
+      className="text-xs absolute bottom-4 left-4 right-4"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}
@@ -42,7 +42,7 @@ const QuickForm = () => {
           </ul>
         </div> */}
         <div
-          className="flex"
+          className="flex bg-black"
         >
           <QuickInput
             ref={cmdRef}

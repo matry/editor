@@ -9,7 +9,7 @@ export default function FileView({ canvasDOM, selections, extension, extensionPr
       {canvasDOM !== null && (
         <>
           <div
-            className="w-full h-full absolute inset-0"
+            className="w-full h-full absolute inset-0 overflow-hidden"
           >
             <CanvasNode
               canvasDOM={canvasDOM}
