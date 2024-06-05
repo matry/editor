@@ -49,6 +49,9 @@ class NormalMode extends Mode {
       Slash: this.open_quick_command,
       BracketLeft: this.select_previous_cousin,
       BracketRight: this.select_next_cousin,
+      'alt ArrowUp': this.move_selections_up,
+      'alt ArrowDown': this.move_selections_down,
+      'alt ArrowLeft': this.move_selections_left,
       'shift ArrowUp': this.shift_selection_up,
       'shift ArrowDown': this.shift_selection_down,
       'meta ArrowUp': this.select_first_sibling,
@@ -61,6 +64,54 @@ class NormalMode extends Mode {
       'meta Backspace': this.reset,
     }
     this.commandSubPath = this.commands
+  }
+
+  move_selections_left(state) {
+    for (const selection of state.selections) {
+      if (['html', 'body'].includes(selection.id)) {
+        continue
+      }
+
+      if (selection.parentElement && !['html', 'body'].includes(selection.parentElement.id)) {
+        selection.parentElement.before(selection)
+      }
+    }
+
+    return {
+      hasUnsavedChanges: true,
+    }
+  }
+
+  move_selections_up(state) {
+    for (const selection of state.selections) {
+      if (['html', 'body'].includes(selection.id)) {
+        continue
+      }
+
+      if (selection.previousElementSibling) {
+        selection.previousElementSibling.before(selection)
+      }
+    }
+
+    return {
+      hasUnsavedChanges: true,
+    }
+  }
+
+  move_selections_down(state) {
+    for (const selection of state.selections) {
+      if (['html', 'body'].includes(selection.id)) {
+        continue
+      }
+
+      if (selection.nextElementSibling) {
+        selection.nextElementSibling.after(selection)
+      }
+    }
+
+    return {
+      hasUnsavedChanges: true,
+    }
   }
 
   async reset(state) {

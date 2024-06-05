@@ -151,6 +151,7 @@ async function initializeApp() {
       metaKey ? 'meta' : '',
       ctrlKey ? 'ctrl' : '',
       shiftKey ? 'shift' : '',
+      altKey ? 'alt' : '',
       code,
     ].filter((k) => k !== '').join(' ').trim()
 
