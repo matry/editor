@@ -62,7 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
           let styleVal = styles[styleProp]
           if (styleVal !== cssRule.styleMap.get(styleProp)) {
             cssRule.styleMap.delete(styleProp)
-            cssRule.styleMap.set(styleProp, styles[styleProp])
+            try {
+              // since the CSSOM is typed, this can fail
+              cssRule.styleMap.set(styleProp, styles[styleProp])
+            } catch (error) {
+              console.warn(error)
+            }
           }
         }
       }
