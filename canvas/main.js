@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.baseStyleSheet = new CSSStyleSheet()
   document.adoptedStyleSheets = [window.baseStyleSheet]
 
+  // I hate having to do this
+  window.baseStyleSheet.insertRule('#html {}')
+  window.baseStyleSheet.insertRule('#body {}')
+
   const observer = new MutationObserver((mutations) => {
     const styleUpdates = new Map()
 
@@ -75,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   })
 
-  observer.observe(document.querySelector('html'), {
+  observer.observe(document.getElementById('html'), {
     attributes: true,
     childList: true,
     subtree: true,
