@@ -12,6 +12,19 @@ export default function CanvasNode({ canvasDOM, selections }) {
   const elementClass = dataType === 'html' ? 'root px-5 text-xs text-gray-500' : 'mb-1 relative'
   const hasChildren = children.length !== 0 && ['html', 'body', 'shape'].includes(dataType)
 
+  const openingTag = (
+    <span>
+      <pre className="inline">&lt;</pre>
+      <span className={`inline ${isActive ? 'text-white' : ''}`}>{dataType}</span>
+      <pre className="inline">
+        {!hasChildren && (
+          <>&#47;</>
+        )}
+        &gt;
+      </pre>
+    </span>
+  )
+
   return (
     <ElementType
       key={canvasDOM.id}
@@ -19,20 +32,14 @@ export default function CanvasNode({ canvasDOM, selections }) {
       className={elementClass}
     >
       {!hasChildren && (
-        <span>
-          <pre className="inline">&lt;</pre>
-          <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
-          <pre className="inline">&#47;&gt;</pre>
-        </span>
+        <>
+          {openingTag}
+        </>
       )}
 
       {hasChildren && (
         <>
-          <span>
-            <pre className="inline">&lt;</pre>
-            <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
-            <pre className="inline">&gt;</pre>
-          </span>
+          {openingTag}
           <ul className={`mt-1 pl-4 border-l border-dashed ${isActive ? 'border-gray-500' : 'border-gray-800'}`}>
             {children.map((childElement) => {
               if (!childElement.id) {
@@ -51,7 +58,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
 
           <span>
             <pre className="inline">&lt;&#47;</pre>
-            <span className={`inline ${isActive ? 'text-white' : ''}`}>{canvasDOM.getAttribute('data-type')}</span>
+            <span className={`inline ${isActive ? 'text-white' : ''}`}>{dataType}</span>
             <pre className="inline">&gt;</pre>
           </span>
         </>

@@ -72,6 +72,9 @@ const QuickInput = forwardRef(({
       onKeyDown={(e) => {
         e.stopPropagation()
       }}
+      onClick={(e) => {
+        e.stopPropagation()
+      }}
       className="relative m-0 w-full bg-neutral-800"
     >
       <input

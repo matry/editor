@@ -1,6 +1,6 @@
 import StyleForm from './StyleForm'
 import TextContent from './TextContent'
-import QuickCommands from './QuickCommands'
+import QuickForm from './QuickForm'
 
 export default function Extension({ extension, extensionProps }) {
   const queryParams = Object.keys(extensionProps)
@@ -17,7 +17,7 @@ export default function Extension({ extension, extensionProps }) {
   switch (extension) {
     case 'quick':
       content = (
-        <QuickCommands />
+        <QuickForm />
       )
       break
     case 'text':
