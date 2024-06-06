@@ -20,7 +20,7 @@ const QuickForm = () => {
 
   return (
     <div
-      className="text-xs absolute bottom-4 left-4 right-4"
+      className="text-xs absolute bottom-0 left-0 right-0 flex justify-end flex-col px-5 pt-32 bg-gradient-to-t from-black to-transparent text-neutral-300"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}

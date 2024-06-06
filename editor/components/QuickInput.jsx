@@ -72,7 +72,7 @@ const QuickInput = forwardRef(({
       onKeyDown={(e) => {
         e.stopPropagation()
       }}
-      className="relative m-0 w-1/2"
+      className="relative m-0 w-full bg-neutral-800"
     >
       <input
         ref={ref}
@@ -126,16 +126,16 @@ const QuickInput = forwardRef(({
       <input type="submit" className="hidden" />
       {suggestions.length > 0 && (
       <ul
-        className="absolute left-0 right-0 max-w-full mb-[1px] overflow-x-hidden bottom-full bg-gray-700 bg-opacity-90 max-h-72"
+        className="absolute left-0 right-0 max-w-full mb-1 overflow-x-hidden bottom-full bg-neutral-800 max-h-72"
       >
         {suggestions.map((suggestion, i) => (
           <li
             key={suggestion}
             className={classNames(
-              'py-2 px-6 hover:bg-gray-400 transition-all hover:text-white cursor-pointer whitespace-nowrap',
+              'py-2 px-5 hover:bg-neutral-400 transition-all hover:text-white cursor-pointer whitespace-nowrap',
               {
-                'bg-gray-400': highlightIndex === i,
-                'bg-transparent': highlightIndex !== i,
+                'bg-neutral-400 text-white': highlightIndex === i,
+                'bg-transparent text-neutral-500': highlightIndex !== i,
               },
             )}
             onClick={() => {
