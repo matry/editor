@@ -1,4 +1,4 @@
-import { canvasDocument, canvasWindow } from './canvas'
+import { canvasDocument, canvasStyleSheet, canvasWindow } from './canvas'
 
 export const getSharedStyles = (elements) => {
   const styleObjects = elements.map((element) => {
@@ -67,4 +67,37 @@ export const updateRule = (selectorText, property, value) => {
   } catch (error) {
     // do nothing
   }
+}
+
+export function appendRule(nodes) {
+  const sheet = canvasStyleSheet()
+
+  for (const node of nodes) {
+    try {
+      const styles = JSON.parse(node.dataset.styles)
+
+      const rule = `
+        #${node.id} {
+          ${
+            Object.entries(styles.base).map(([k, v]) => {
+              return `${k}: ${v};`
+            }).join(' ')
+          }
+        }
+      `
+
+      sheet.insertRule(rule)
+
+      if (node.childNodes.length) {
+        appendRule(node.childNodes)
+      }
+    } catch (error) {
+      // do nothing
+    }
+  }
+}
+
+export function styleInitialCanvas() {
+  const doc = canvasDocument()
+  appendRule([doc.querySelector('html')])
 }

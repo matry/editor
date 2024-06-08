@@ -1,5 +1,10 @@
 import localforage from 'localforage'
 import { randomId } from '../editor/utils'
+import { config } from '../editor/config'
+
+export const activityStore = localforage.createInstance({
+  name: 'activity',
+})
 
 export const projectsStore = localforage.createInstance({
   name: 'projects',
@@ -9,76 +14,79 @@ export const filesStore = localforage.createInstance({
   name: 'files',
 })
 
-export async function initDirectory() {
-  const projects = await initProjects()
-  const files = await initFiles(projects[0].id)
+export async function initStorage() {
+  const activeProjectId = await activityStore.getItem('last_active_project')
+  const activeFileId = await activityStore.getItem('last_active_file')
+
+  const projects = await getAllProjects()
+  if (!projects.length) {
+    projects.push(await createProject())
+  }
+
+  const activeProject = projects.find((p) => {
+    return p.id === activeProjectId
+  }) ?? projects[0]
+
+  const files = await getFilesByProjectId(activeProject.id)
+  if (!files.length) {
+    files.push(await createFile({
+      project_id: activeProject.id,
+      is_default: true,
+    }))
+  }
+
+  const activeFile = files.find((f) => {
+    return f.id === activeFileId
+  }) ?? files[0]
+
+  await activityStore.setItem('last_active_project', activeProject.id)
+  await activityStore.setItem('last_active_file', activeFile.id)
 
   return {
     projects,
     files,
-    activeProject: projects[0],
-    activeFile: files[0],
+    activeProject,
+    activeFile,
   }
 }
 
-export async function initProjects() {
+export async function getAllProjects() {
   const projectIds = await projectsStore.keys()
   const projects = await Promise.all(projectIds.map(async (id) => {
     const project = await projectsStore.getItem(id)
     return project
   }))
 
-  if (projects.length) {
-    return projects
-  }
-
-  const defaultProject = await createProject({
-    id: 'default',
-    name: 'Default Project',
-  })
-  projects.push(defaultProject)
-
   return projects
 }
 
-export async function initFiles(defaultProjectId = '') {
+export async function getFilesByProjectId(projectId) {
+  if (!projectId) {
+    return []
+  }
+
   const fileIds = await filesStore.keys()
   const files = await Promise.all(fileIds.map(async (id) => {
     const file = await filesStore.getItem(id)
-    return file
+
+    if (file.project_id === projectId) {
+      return file
+    }
+
+    return null
   }))
 
-  if (files.length) {
-    return files
-  }
-
-  const defaultFile = await createFile({
-    id: 'default',
-    project_id: defaultProjectId,
-    name: 'Default File',
-    rootAttributes: {},
-    bodyAttributes: {},
-    content: `
-      <span
-        data-type="text"
-        id="placeholder-content"
-        data-styles='{"base":{}}'
-      >
-        Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.
-      </span>
-    `,
+  return files.filter((f) => {
+    return f !== null
   })
-  files.push(defaultFile)
-
-  return files
 }
 
-export async function createProject(data) {
-  const id = data.id || randomId('project_')
+export async function createProject() {
+  const id = randomId('project_')
 
   const newProject = await projectsStore.setItem(id, {
     id,
-    name: data.name || id,
+    name: '',
     created_at: Date.now(),
   })
 
@@ -91,18 +99,17 @@ export async function createFile(data) {
   const newFile = await filesStore.setItem(id, {
     id,
     project_id: data.project_id,
-    name: data.name || id,
+    name: data.name || '',
     type: 'html',
     created_at: Date.now(),
-    rootAttributes: data.rootAttributes || {},
-    bodyAttributes: data.bodyAttributes || {},
-    content: '',
+    last_modified: Date.now(),
+    content: data.is_default ? config.defaults.file.content() : '',
   })
 
   return newFile
 }
 
-export async function saveFile(id, content, rootAttributes, bodyAttributes) {
+export async function saveFile(id, data) {
   const file = await filesStore.getItem(id)
 
   if (!file) {
@@ -110,31 +117,30 @@ export async function saveFile(id, content, rootAttributes, bodyAttributes) {
     return
   }
 
-  file.content = content
-  file.rootAttributes = rootAttributes || {}
-  file.bodyAttributes = bodyAttributes || {}
+  if (data.content) {
+    file.content = data.content
+  }
+
+  if (data.name) {
+    file.name = data.name
+  }
+
+  file.last_modified = Date.now()
 
   await filesStore.setItem(id, file)
 }
 
 export async function clearFile(id) {
+  await filesStore.removeItem(id)
   const file = await filesStore.getItem(id)
 
   if (!file) {
     return
   }
 
-  file.rootAttributes = {}
-  file.bodyAttributes = {}
-  file.content = `
-    <span
-      data-type="text"
-      id="placeholder-content"
-      data-styles='{"base":{}}'
-    >
-      Welcome to Stride, a keyboard-driven tool for designing in the browser. Press 'h' for help.
-    </span>
-  `
+  file.content = config.defaults.file.content()
 
   await filesStore.setItem(id, file)
+
+  return file
 }

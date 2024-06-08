@@ -77,17 +77,11 @@ export class Mode {
 
   save_document(state) {
     const doc = canvasDocument()
+    const html = doc.querySelector('html')
 
-    saveFile(
-      state.activeFileId,
-      serialize(doc.body),
-      {
-        'data-styles': doc.querySelector('html').getAttribute('data-styles'),
-      },
-      {
-        'data-styles': doc.body.getAttribute('data-styles'),
-      },
-    )
+    saveFile(state.activeFileId, {
+      content: serialize(html),
+    })
 
     channel.post({
       action: 'did_save_state',

@@ -1,26 +1,27 @@
-import { canvasIframe, canvasDocument } from './canvas'
-import { State } from './state'
-import { loadFile, readBlobs, renderBoxModel } from './utils'
+import { canvasDocument, populateCanvas } from './canvas'
+import { State } from './state.js'
+import { readBlobs, renderBoxModel } from './utils'
 import { channel } from './listener'
 // import { initZoom } from './zoom'
 import modes from './modes'
 import './editor.jsx'
 import './effects'
+import { initCanvasDOMObserver } from './observer'
 import './index.css'
-import { initDirectory } from '../utils/storage.js'
+import { initStorage } from '../utils/storage.js'
+import { styleInitialCanvas } from './cssom.js'
 
-channel.listen((e) => {
-  if (e.data.action === 'canvas_did_load') {
-    initializeApp()
-    // initZoom()
-  }
-})
+initApp()
 
-// this is done so that we can guarantee to receive the onload event. If the src is defined in the html, it introduces a race condition.
-canvasIframe.setAttribute('src', 'canvas/index.html')
+async function initApp() {
+  const storage = await initStorage()
 
-async function initializeApp() {
+  populateCanvas(storage.activeFile)
+  styleInitialCanvas()
+
   const doc = canvasDocument()
+
+  initCanvasDOMObserver()
 
   window.state = new State({}, (newState, update) => {
     Object.keys(update).forEach((updateKey) => {
@@ -117,7 +118,7 @@ async function initializeApp() {
 
   channel.listen((e) => {
     const message = e.data
-  
+
     switch (message.action) {
       case 'exit_extension':
         window.state.current = {
@@ -167,13 +168,9 @@ async function initializeApp() {
     }
   })
 
-  const directory = await initDirectory()
-
-  loadFile(doc.body, directory.activeFile)
-
   window.state.current = {
     selections: [doc.body],
-    activeFileId: directory.activeFile.id,
-    activeProjectId: directory.activeProject.id,
+    activeFileId: storage.activeFile.id,
+    activeProjectId: storage.activeProject.id,
   }
 }

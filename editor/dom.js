@@ -236,6 +236,8 @@ export const isInBounds = (element) => {
 export const serialize = (element) => {
   const serializer = new XMLSerializer()
 
+  element.normalize()
+
   return serializer.serializeToString(element)
 }
 

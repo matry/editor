@@ -138,18 +138,6 @@ export const openJSONFile = () => {
   })
 }
 
-export const loadFile = (rootElem, file) => {
-  rootElem.insertAdjacentHTML('afterbegin', file.content)
-
-  if (file.rootAttributes['data-styles']) {
-    rootElem.closest('html').setAttribute('data-styles', file.rootAttributes['data-styles'])
-  }
-
-  if (file.bodyAttributes['data-styles']) {
-    rootElem.closest('body').setAttribute('data-styles', file.bodyAttributes['data-styles'])
-  }
-}
-
 export const clearStorage = () => {
   window.localStorage.clear()
 }

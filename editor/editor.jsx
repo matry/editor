@@ -4,7 +4,13 @@ import App from './components/App'
 import { Channel } from '../utils/broadcast-channel'
 
 function getCanvasDOM() {
-  return window.canvasIframe.contentDocument.querySelector('html').cloneNode(true)
+  try {
+    const html = document.getElementById('canvas-frame').contentDocument.querySelector('html').cloneNode(true)
+    return html
+  } catch (error) {
+    // do nothing
+    return null
+  }
 }
 
 const channel = new Channel('matry')
