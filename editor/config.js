@@ -32,6 +32,7 @@ export const config = {
       styles: () => {
         return {
           base: {
+            'display': 'block',
             'padding': '10px',
             'color': randomColor(false),
             'box-sizing': 'border-box',
