@@ -60,7 +60,6 @@ async function initApp() {
     clipboardText: '',
     clipboardSelection: null,
     clipboardFiles: null,
-    stylesheet: doc.adoptedStyleSheets[0],
   }
 
   window.addEventListener('paste', async (e) => {

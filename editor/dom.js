@@ -254,7 +254,7 @@ export const isSiblings = (elements) => {
   return result
 }
 
-export const nestGroupWithinParent = (stylesheet, elements) => {
+export const nestGroupWithinParent = (elements) => {
   const { template } = constructShapeTemplate()
   const parentElement = appendNode(elements[0], template, 'before')
 
@@ -265,7 +265,7 @@ export const nestGroupWithinParent = (stylesheet, elements) => {
   return parentElement
 }
 
-export const nestIndividuallyWithinParent = (stylesheet, elements) => {
+export const nestIndividuallyWithinParent = (elements) => {
   const parentElements = elements.map((element) => {
     if (['html', 'body'].includes(element.parentElement.getAttribute('data-type'))) {
       return null

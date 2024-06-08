@@ -93,23 +93,10 @@ export class Mode {
     }
   }
 
-  export_document({ stylesheet }) {
-    const canvas = canvasDocument()
-    const doc = canvas.cloneNode(true)
-
-    const scripts = doc.querySelectorAll('script')
-    scripts.forEach((script) => {
-      script.remove()
-    })
-
-    const cssRules = Array.from(stylesheet.cssRules).map((rule) => rule.cssText).join('\n')
-
-    const style = doc.createElement('style')
-    style.textContent = cssRules
-    doc.head.appendChild(style)
-
+  export_document() {
+    const doc = canvasDocument()
     const serializer = new XMLSerializer()
-    const serializedDoc = serializer.serializeToString(doc)
+    const serializedDoc = serializer.serializeToString(doc.querySelector('html'))
 
     downloadHTMLFile(serializedDoc)
   }

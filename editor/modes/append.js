@@ -135,21 +135,21 @@ class AppendMode extends Mode {
     }
   }
 
-  add_parent({ stylesheet, selections, appendingElementType }) {
+  add_parent({ selections, appendingElementType }) {
     if (appendingElementType !== 'shape') {
       window.alert(`${appendingElementType} elements cannot have children`)
     }
 
     if (isSiblings(selections)) {
       return {
-        selections: [nestGroupWithinParent(stylesheet, selections)],
+        selections: [nestGroupWithinParent(selections)],
         mode: 'normal',
         hasUnsavedChanges: true,
       }
     }
 
     return {
-      selections: nestIndividuallyWithinParent(stylesheet, selections),
+      selections: nestIndividuallyWithinParent(selections),
       mode: 'normal',
       hasUnsavedChanges: true,
     }
