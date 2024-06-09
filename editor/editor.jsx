@@ -5,8 +5,7 @@ import { Channel } from '../utils/broadcast-channel'
 
 function getCanvasDOM() {
   try {
-    const html = document.getElementById('canvas-frame').contentDocument.querySelector('html').cloneNode(true)
-    return html
+    return document.getElementById('canvas-frame').contentDocument.querySelector('html').cloneNode(true)
   } catch (error) {
     // do nothing
     return null

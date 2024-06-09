@@ -94,10 +94,6 @@ export class Mode {
   }
 
   export_document() {
-    const doc = canvasDocument()
-    const serializer = new XMLSerializer()
-    const serializedDoc = serializer.serializeToString(doc.querySelector('html'))
-
-    downloadHTMLFile(serializedDoc)
+    downloadHTMLFile(serialize(canvasDocument().querySelector('html')))
   }
 }

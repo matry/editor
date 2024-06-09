@@ -7,16 +7,7 @@ export const constructTextTemplate = (options = {}) => {
   const styles = JSON.stringify(config.defaults.text.styles())
   const content = config.defaults.text.content()
 
-  return {
-    template: `
-      <${tag}
-        data-type="text"
-        data-styles='${styles}'
-      >
-        ${options.text || content}
-      </${tag}>
-    `,
-  }
+  return `<${tag} data-type="text" data-styles='${styles}'>${options.text || content}</${tag}>`
 }
 
 export const constructImageTemplate = (options = {}) => {
@@ -24,18 +15,14 @@ export const constructImageTemplate = (options = {}) => {
   const styles = JSON.stringify(config.defaults.image.styles())
   const content = config.defaults.image.content()
 
-  return {
-    template: `<${tag} data-type="image" data-styles='${styles}' width="100px" height="100px" src="${options.file || content}" />`,
-  }
+  return `<${tag} data-type="image" data-styles='${styles}' width="100px" height="100px" src="${options.file || content}" />`
 }
 
 export const constructShapeTemplate = () => {
   const tag = config.defaults.shape.tag
   const styles = JSON.stringify(config.defaults.shape.styles())
 
-  return {
-    template: `<${tag} data-type="shape" data-styles='${styles}'></${tag}>`,
-  }
+  return `<${tag} data-type="shape" data-styles='${styles}'></${tag}>`
 }
 
 export const constructTemplate = (elementType, options) => {
@@ -82,6 +69,7 @@ export const appendNode = (target, template, position) => {
 }
 
 export const resetIds = (element) => {
+
   element.id = randomId()
 
   for (let i = 0, l = element.children.length; i < l; i++) {
@@ -255,7 +243,7 @@ export const isSiblings = (elements) => {
 }
 
 export const nestGroupWithinParent = (elements) => {
-  const { template } = constructShapeTemplate()
+  const template = constructShapeTemplate()
   const parentElement = appendNode(elements[0], template, 'before')
 
   elements.forEach((element) => {
@@ -271,7 +259,7 @@ export const nestIndividuallyWithinParent = (elements) => {
       return null
     }
 
-    const { template } = constructShapeTemplate()
+    const template = constructShapeTemplate()
 
     const parentElement = appendNode(element, template, 'before')
     parentElement.appendChild(element)

@@ -46,7 +46,7 @@ class AppendMode extends Mode {
         options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
       }
 
-      const { template } = constructTemplate(state.appendingElementType, options)
+      const template = constructTemplate(state.appendingElementType, options)
 
       return appendNode(selection, template, position)
     })
@@ -82,7 +82,7 @@ class AppendMode extends Mode {
         options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
       }
 
-      const { template } = constructTemplate(state.appendingElementType, options)
+      const template = constructTemplate(state.appendingElementType, options)
 
       return appendNode(selection, template, position)
     })
@@ -98,7 +98,6 @@ class AppendMode extends Mode {
   }
 
   add_last_child(state) {
-    const doc = canvasDocument()
     const { selections } = state
 
     const newNodes = selections.map((selection, i) => {
@@ -120,7 +119,7 @@ class AppendMode extends Mode {
         options.file = state.clipboardFiles[i] || state.clipboardFiles[state.clipboardFiles.length - 1]
       }
 
-      const { template } = constructTemplate(state.appendingElementType, options)
+      const template = constructTemplate(state.appendingElementType, options)
 
       return appendNode(selection, template, 'last')
     })
