@@ -18,6 +18,14 @@ window.addEventListener('selections_changed', () => {
   }
 })
 
+window.addEventListener('overlay_changed', () => {
+  try {
+    renderOverlay(window.state.current)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 window.addEventListener('did_render', () => {
   try {
     renderOverlay(window.state.current)

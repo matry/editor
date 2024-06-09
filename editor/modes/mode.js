@@ -65,9 +65,15 @@ export class Mode {
     return null
   }
 
-  toggle_box_model(state) {
+  toggle_box_model() {
     return {
-      showBoxModel: !state.showBoxModel,
+      overlay: 'box_model',
+    }
+  }
+
+  toggle_outline() {
+    return {
+      overlay: 'outline',
     }
   }
 
