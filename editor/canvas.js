@@ -1,7 +1,7 @@
 export const canvasIframe = document.querySelector('#canvas-frame')
 
-export function canvasDocument() {
-  const iframe = document.getElementById('canvas-frame')
+export function canvasDocument(doc = null) {
+  const iframe = (doc || document).getElementById('canvas-frame')
 
   if (!iframe.contentDocument) {
     throw new Error('Canvas Iframe not initialized')
@@ -10,12 +10,14 @@ export function canvasDocument() {
   return iframe.contentDocument
 }
 
-export function canvasWindow() {
-  if (!canvasIframe.contentWindow) {
+export function canvasWindow(doc = null) {
+  const frame = (doc || document).querySelector('#canvas-frame')
+
+  if (!frame || !frame.contentWindow) {
     throw new Error('Canvas Iframe not initialized')
   }
 
-  return canvasIframe.contentWindow
+  return frame.contentWindow
 }
 
 export function canvasStyleSheet(layer = 'base') {

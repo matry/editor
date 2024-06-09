@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         help: resolve(__dirname, 'help/index.html'),
+        overlay: resolve(__dirname, 'overlay/index.html'),
         image: resolve(__dirname, 'extensions/image/index.html'),
       },
     },

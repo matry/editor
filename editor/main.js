@@ -25,12 +25,22 @@ async function initApp() {
 
   window.state = new State({}, (newState, update) => {
     Object.keys(update).forEach((updateKey) => {
-      window.dispatchEvent(new CustomEvent(`${updateKey}_changed`))
+      let data = update[updateKey]
+
+      if (updateKey === 'selections') {
+        data = newState.selections.map((s) => s.id)
+      }
+
+      channel.post({
+        action: `${updateKey}_changed`,
+        data,
+      })
     })
 
     channel.post({
       action: 'state_did_change',
       data: {
+        overlay: newState.overlay,
         mode: newState.mode,
         selections: newState.selections.map((selection) => selection.id), // selections holds the elements themselves, and they do not serialize
         copiedIds: newState.copiedIds,

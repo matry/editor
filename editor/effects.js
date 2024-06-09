@@ -1,11 +1,11 @@
-import { isInBounds, renderOverlay } from './dom'
-import { canvasDocument } from './canvas'
-import modes from './modes'
+import { isInBounds } from './dom'
+import { Channel } from '../utils/broadcast-channel'
 
-window.addEventListener('selections_changed', () => {
-  try {
+const channel = new Channel('matry')
+
+channel.listen((e) => {
+  if (e.data.action === 'selections_changed') {
     const state = window.state.current
-    renderOverlay(state)
 
     const lastSelection = state.selections[state.selections.length - 1]
     if (lastSelection && !isInBounds(lastSelection)) {
@@ -13,44 +13,5 @@ window.addEventListener('selections_changed', () => {
         block: 'center',
       })
     }
-  } catch (error) {
-    console.error(error)
-  }
-})
-
-window.addEventListener('overlay_changed', () => {
-  try {
-    renderOverlay(window.state.current)
-  } catch (error) {
-    console.error(error)
-  }
-})
-
-window.addEventListener('did_render', () => {
-  try {
-    renderOverlay(window.state.current)
-  } catch (error) {
-    console.error(error)
-  }
-})
-
-window.addEventListener('mode_changed', async () => {
-  const doc = canvasDocument()
-
-  try {
-    const currentState = window.state.current
-    const mode = modes[currentState.mode]
-
-    if (!mode) {
-      return
-    }
-
-    if (typeof mode.on_enter === 'function') {
-      await mode.on_enter(currentState)
-    }
-
-    doc.body.setAttribute('data-mode', currentState.mode)
-  } catch (error) {
-    console.error(error)
   }
 })

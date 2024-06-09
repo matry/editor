@@ -1,5 +1,8 @@
+import { Channel } from '../utils/broadcast-channel'
 import { canvasDocument, canvasStyleSheet } from './canvas'
 import { appendRule } from './cssom'
+
+const channel = new Channel('matry')
 
 export function initCanvasDOMObserver() {
   const doc = canvasDocument()
@@ -56,7 +59,8 @@ export function initCanvasDOMObserver() {
         }
       }
     }
-    window.dispatchEvent(new CustomEvent('did_render'))
+
+    channel.post({ action: 'canvas_did_render' })
   })
 
   const html = doc.querySelector('html')
