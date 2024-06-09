@@ -65,13 +65,13 @@ export class Mode {
     return null
   }
 
-  toggle_box_model() {
-    return {
-      overlay: 'box_model',
+  toggle_box_model(state) {
+    if (state.overlay === 'outline') {
+      return {
+        overlay: 'box_model'
+      }
     }
-  }
 
-  toggle_outline() {
     return {
       overlay: 'outline',
     }

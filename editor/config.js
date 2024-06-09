@@ -33,7 +33,6 @@ export const config = {
         return {
           base: {
             'display': 'block',
-            'padding': '10px',
             'color': randomColor(false),
             'box-sizing': 'border-box',
             'user-select': 'none',

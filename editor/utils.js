@@ -242,7 +242,15 @@ export const renderBoxModel = ({ showBoxModel, selections }) => {
 }
 
 export const selectionGuard = (selections) => {
+  const existingIds = []
+
   const result = selections.filter((selection) => {
+    if (existingIds.includes(selection.id)) {
+      return false
+    } else {
+      existingIds.push(selection.id)
+    }
+
     if (!selection) {
       return false
     }

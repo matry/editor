@@ -5,8 +5,18 @@ import { Channel } from '../utils/broadcast-channel'
 const reactRoot = ReactDOM.createRoot(document.getElementById('selections'))
 
 function render() {
+  if (!window.parent || !window.parent.state || !window.parent.state.current) {
+    return
+  }
+
+  const state = window.parent.state.current
+
   reactRoot.render(
-    <Overlay />,
+    <Overlay
+      overlay={state.overlay}
+      mode={state.mode}
+      selections={state.selections}
+    />,
   )
 }
 

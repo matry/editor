@@ -45,12 +45,6 @@ class NormalMode extends Mode {
         KeyS: this.toggle_editor,
         KeyB: this.toggle_box_model,
       },
-      KeyS: {
-        KeyO: {
-          KeyB: this.toggle_box_model,
-          KeyO: this.toggle_outline,
-        },
-      },
       KeyH: this.help,
       ArrowUp: this.select_previous_sibling,
       ArrowDown: this.select_next_sibling,
@@ -491,7 +485,6 @@ class NormalMode extends Mode {
   }
 
   select_parent(state) {
-    const doc = canvasDocument()
     const { selections } = state
 
     if (selections.length === 0) {
@@ -500,7 +493,7 @@ class NormalMode extends Mode {
       }
     }
 
-    return {
+    const s = {
       selections: selectionGuard(selections.map((selection) => {
         if (selection.getAttribute('data-type') === 'html') {
           return selection
@@ -509,6 +502,8 @@ class NormalMode extends Mode {
         return selection.parentElement
       })),
     }
+
+    return s
   }
 
   select_first_child(state) {
