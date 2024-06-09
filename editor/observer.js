@@ -56,7 +56,7 @@ export function initCanvasDOMObserver() {
         }
       }
     }
-
+    window.dispatchEvent(new CustomEvent('did_render'))
   })
 
   const html = doc.querySelector('html')

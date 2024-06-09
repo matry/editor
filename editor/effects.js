@@ -1,31 +1,26 @@
-import { isInBounds } from './dom'
+import { isInBounds, renderOverlay } from './dom'
 import { canvasDocument } from './canvas'
 import modes from './modes'
 
 window.addEventListener('selections_changed', () => {
-  const doc = canvasDocument()
-
   try {
-    const { selections } = window.state.current
+    const state = window.state.current
+    renderOverlay(state)
 
-    const previousSelections = doc.querySelectorAll('[data-selected="on"]')
-    previousSelections.forEach((selection) => selection.removeAttribute('data-selected'))
-    previousSelections.forEach((selection) => {
-      selection.removeAttribute('data-selected')
-      const sel = doc.querySelector(`[data-selection="${selection.id}"]`)
-      if (sel) {
-        sel.remove()
-      }
-    })
-
-    selections.forEach((selection) => selection.setAttribute('data-selected', 'on'))
-
-    const lastSelection = selections[selections.length - 1]
+    const lastSelection = state.selections[state.selections.length - 1]
     if (lastSelection && !isInBounds(lastSelection)) {
-      selections[selections.length - 1].scrollIntoView({
+      state.selections[state.selections.length - 1].scrollIntoView({
         block: 'center',
       })
     }
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+window.addEventListener('did_render', () => {
+  try {
+    renderOverlay(window.state.current)
   } catch (error) {
     console.error(error)
   }

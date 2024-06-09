@@ -1,6 +1,6 @@
 import { canvasDocument, populateCanvas } from './canvas'
 import { State } from './state.js'
-import { readBlobs, renderBoxModel } from './utils'
+import { readBlobs } from './utils'
 import { channel } from './listener'
 // import { initZoom } from './zoom'
 import modes from './modes'
@@ -28,8 +28,6 @@ async function initApp() {
       window.dispatchEvent(new CustomEvent(`${updateKey}_changed`))
     })
 
-    renderBoxModel(newState)
-
     channel.post({
       action: 'state_did_change',
       data: {
@@ -56,6 +54,7 @@ async function initApp() {
     copiedIds: [],
     cutIds: [],
     showBoxModel: false,
+    overlay: 'outline',
     appendingElementType: null,
     clipboardText: '',
     clipboardSelection: null,
