@@ -168,10 +168,10 @@ export const renderBoxModel = ({ showBoxModel, selections }) => {
   const doc = canvasDocument()
 
   if (!showBoxModel) {
-    const dataSelection = doc.querySelector('[data-selection]')
-    if (dataSelection) {
+    const dataSelections = doc.querySelectorAll('[data-selection]')
+    dataSelections.forEach((dataSelection) => {
       dataSelection.remove()
-    }
+    })
 
     return
   }
