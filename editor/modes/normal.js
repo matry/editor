@@ -10,7 +10,7 @@ import { Mode } from './mode'
 import { randomImage } from '../utils'
 import { isSiblings } from '../dom'
 import { selectionGuard } from '../utils'
-import { uniqBy } from 'lodash'
+import { isEmpty, uniqBy } from 'lodash'
 import { clearFile } from '../../utils/storage'
 
 const doc = canvasDocument()
@@ -45,6 +45,9 @@ class NormalMode extends Mode {
         KeyS: this.toggle_editor,
         KeyB: this.toggle_box_model,
       },
+      KeyN: {
+        KeyP: this.navigate_to_project,
+      },
       KeyH: this.help,
       ArrowUp: this.select_previous_sibling,
       ArrowDown: this.select_next_sibling,
@@ -71,6 +74,12 @@ class NormalMode extends Mode {
       'meta Backspace': this.reset,
     }
     this.commandSubPath = this.commands
+  }
+
+  navigate_to_project() {
+    return {
+      mode: 'project',
+    }
   }
 
   move_selections_left(state) {
@@ -165,25 +174,19 @@ class NormalMode extends Mode {
       return null
     }
 
-    channel.post({
-      action: 'request_extension',
-      data: {
-        id: 'image',
-        params: {
-          count: imageSelections.length,
-        },
-      },
-    })
+    return {
+      extension: 'image',
+      extensionProps: {
+        count: imageSelections.length,
+      }
+    }
   }
 
   open_quick_command() {
-    channel.post({
-      action: 'request_extension',
-      data: {
-        id: 'quick',
-        params: {},
-      },
-    })
+    return {
+      extension: 'quick',
+      extensionProps: {},
+    }
   }
 
   confirm_replace_content({ selections }, { urls }) {
@@ -251,16 +254,10 @@ class NormalMode extends Mode {
   }
 
   edit_selections_styles({ selections }) {
-    channel.post({
-      action: 'request_extension',
-      data: {
-        id: 'css',
-        params: getSharedStyles(selections),
-      },
-    })
-
     return {
       hasUnsavedChanges: true,
+      extension: 'css',
+      extensionProps: getSharedStyles(selections),
     }
   }
 
@@ -282,15 +279,12 @@ class NormalMode extends Mode {
       return null
     }
 
-    channel.post({
-      action: 'request_extension',
-      data: {
-        id: 'image',
-        params: {
-          count: imagesSelected,
-        },
-      },
-    })
+    return {
+      extension: 'image',
+      extensionProps: {
+        count: imagesSelected,
+      }
+    }
   }
 
   edit_selections_text(state) {
@@ -306,17 +300,15 @@ class NormalMode extends Mode {
         textContents[selection.id] = selection.innerHTML
       }
     }
-    if (Object.keys(textContents).length > 0) {
-      channel.post({
-        action: 'request_extension',
-        data: {
-          id: 'text',
-          params: textContents,
-        },
-      })
+
+    if (isEmpty(textContents)) {
+      return null
     }
 
-    return null
+    return {
+      extension: 'text',
+      extensionProps: textContents,
+    }
   }
 
   copy_selections(state) {

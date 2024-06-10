@@ -2,19 +2,19 @@ import StyleForm from './StyleForm'
 import TextContent from './TextContent'
 import QuickForm from './QuickForm'
 
-export default function Extension({ extension, extensionProps }) {
-  const queryParams = Object.keys(extensionProps)
-    .map((k) => `${k}=${encodeURIComponent(extensionProps[k])}`)
+export default function Extension(props) {
+  const queryParams = Object.keys(props.extensionProps)
+    .map((k) => `${k}=${encodeURIComponent(props.extensionProps[k])}`)
     .join('&')
 
-  let url = `/extensions/${extension}/index.html`
+  let url = `/extensions/${props.extension}/index.html`
   if (queryParams) {
     url = `${url}?${queryParams}`
   }
 
   let content = null
 
-  switch (extension) {
+  switch (props.extension) {
     case 'quick':
       content = (
         <QuickForm />
@@ -23,14 +23,14 @@ export default function Extension({ extension, extensionProps }) {
     case 'text':
       content = (
         <TextContent
-          textContents={extensionProps}
+          textContents={props.extensionProps}
         />
       )
       break
     case 'css':
       content = (
         <StyleForm
-          styles={extensionProps}
+          styles={props.extensionProps}
         />
       )
       break
@@ -41,9 +41,9 @@ export default function Extension({ extension, extensionProps }) {
       content = (
         <div className="w-full h-screen z-10 bg-black relative">
           <iframe
-            key={extension}
-            title={extension}
-            id={extension}
+            key={props.extension}
+            title={props.extension}
+            id={props.extension}
             src={url}
             className="w-full h-full"
           />

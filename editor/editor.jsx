@@ -13,29 +13,19 @@ function getCanvasDOM() {
 }
 
 const channel = new Channel('matry')
-
-const appState = {
-  currentView: 'file',
-  extension: '',
-  extensionProps: {},
-  canvasDOM: null,
-  selections: [],
-  keySequence: [],
-  hasUnsavedChanges: false,
-}
-
 const reactRoot = ReactDOM.createRoot(document.getElementById('editor'))
-const render = () => {
+let canvasDOM = getCanvasDOM()
+
+function render(editorState) {
+  if (!editorState) {
+    return
+  }
+
   reactRoot.render(
     <React.StrictMode>
       <App
-        currentView={appState.currentView}
-        extension={appState.extension}
-        extensionProps={appState.extensionProps}
-        canvasDOM={appState.canvasDOM}
-        selections={appState.selections}
-        keySequence={appState.keySequence}
-        hasUnsavedChanges={appState.hasUnsavedChanges}
+        {...editorState}
+        canvasDOM={canvasDOM}
       />
     </React.StrictMode>,
   )
@@ -45,46 +35,26 @@ channel.listen((e) => {
   const message = e.data
 
   switch (message.action) {
-    case 'append_key':
-      appState.keySequence.push(message.data)
-      render()
-      break
-    case 'execute_key':
-      appState.keySequence = []
-      render()
-      break
-    case 'reset_key':
-      appState.keySequence = []
-      render()
-      break
-    case 'canvas_did_load':
-      appState.canvasDOM = getCanvasDOM()
-      render()
-      break
-    case 'request_extension':
-      appState.extension = message.data.id
-      appState.extensionProps =  message.data.params || {}
-      render()
-      break
-    case 'exit_extension':
-      appState.extension = ''
-      appState.extensionProps = {}
-      render()
-      break
+    // case 'append_key':
+    //   render()
+    //   break
+    // case 'execute_key':
+    //   render()
+    //   break
+    // case 'reset_key':
+    //   render()
+    //   break
+    // case 'exit_extension':
+    //   render()
+    //   break
     case 'state_did_change':
-      appState.hasUnsavedChanges = message.data.hasUnsavedChanges
-      appState.selections = message.data.selections
-      appState.canvasDOM = getCanvasDOM()
-      render()
+      canvasDOM = getCanvasDOM()
+      render(message.data)
       break
     case 'confirm_replace_content':
-      appState.extension = ''
-      appState.extensionProps = {}
       render()
       break
     default:
       break
   }
 })
-
-render('')

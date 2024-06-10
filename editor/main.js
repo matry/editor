@@ -40,6 +40,12 @@ async function initApp() {
     channel.post({
       action: 'state_did_change',
       data: {
+        projects: newState.projects,
+        files: newState.files,
+        activeProjectId: newState.activeProjectId,
+        activeFileId: newState.activeFileId,
+        extension: newState.extension,
+        extensionProps: newState.extensionProps,
         overlay: newState.overlay,
         mode: newState.mode,
         selections: newState.selections.map((selection) => selection.id), // selections holds the elements themselves, and they do not serialize
@@ -56,6 +62,8 @@ async function initApp() {
 
   // initialize the state so that it triggers a channel message
   window.state.current = {
+    projects: storage.projects,
+    files: storage.files,
     activeProjectId: '',
     activeFileId: '',
     hasUnsavedChanges: false,
@@ -69,6 +77,8 @@ async function initApp() {
     clipboardText: '',
     clipboardSelection: null,
     clipboardFiles: null,
+    extension: '',
+    extensionProps: {},
   }
 
   window.addEventListener('paste', async (e) => {
@@ -131,6 +141,8 @@ async function initApp() {
       case 'exit_extension':
         window.state.current = {
           mode: 'normal',
+          extension: '',
+          extensionProps: {},
         }
         window.focus()
         break

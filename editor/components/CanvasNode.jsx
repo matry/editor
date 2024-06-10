@@ -1,15 +1,15 @@
 
-export default function CanvasNode({ canvasDOM, selections }) {
-  if (!canvasDOM) {
+export default function CanvasNode(props) {
+  if (!props.canvasDOM) {
     return null
   }
 
-  const children = Array.from(canvasDOM.children)
-  const isActive = selections.includes(canvasDOM.id)
+  const children = Array.from(props.canvasDOM.children)
+  const isActive = props.selections.includes(props.canvasDOM.id)
 
-  const dataType = canvasDOM.getAttribute('data-type')
+  const dataType = props.canvasDOM.getAttribute('data-type')
   const ElementType = dataType === 'html' ? 'ul' : 'li'
-  const elementClass = dataType === 'html' ? 'root px-5 text-xs text-gray-500' : 'mb-1 relative'
+  const elementClass = dataType === 'html' ? 'root px-5 text-xs text-neutral-500' : 'mb-1 relative'
   const hasChildren = children.length !== 0 && ['html', 'body', 'shape'].includes(dataType)
 
   const openingTag = (
@@ -27,8 +27,8 @@ export default function CanvasNode({ canvasDOM, selections }) {
 
   return (
     <ElementType
-      key={canvasDOM.id}
-      id={canvasDOM.id}
+      key={props.canvasDOM.id}
+      id={props.canvasDOM.id}
       className={elementClass}
     >
       {!hasChildren && (
@@ -50,7 +50,7 @@ export default function CanvasNode({ canvasDOM, selections }) {
                 <CanvasNode
                   key={childElement.id}
                   canvasDOM={childElement}
-                  selections={selections}
+                  selections={props.selections}
                 />
               )
             })}

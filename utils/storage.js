@@ -44,7 +44,17 @@ export async function initStorage() {
 
   return {
     projects,
-    files,
+    files: files.map((file) => {
+      // stripping out the content so we don't hold large files in memory
+      return {
+        id: file.id,
+        project_id: file.project_id,
+        name: file.name,
+        type: file.type,
+        created_at: file.created_at,
+        last_modified: file.last_modified,
+      }
+    }),
     activeProject,
     activeFile,
   }
