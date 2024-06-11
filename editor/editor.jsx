@@ -1,20 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './components/App'
 import { Channel } from '../utils/broadcast-channel'
-
-function getCanvasDOM() {
-  try {
-    return document.getElementById('canvas-frame').contentDocument.querySelector('html').cloneNode(true)
-  } catch (error) {
-    // do nothing
-    return null
-  }
-}
+import App from './components/App'
+import { cloneCanvas } from './canvas'
 
 const channel = new Channel('matry')
 const reactRoot = ReactDOM.createRoot(document.getElementById('editor'))
-let canvasDOM = getCanvasDOM()
+let canvasDOM = cloneCanvas()
 
 function render(editorState) {
   if (!editorState) {
@@ -35,20 +27,8 @@ channel.listen((e) => {
   const message = e.data
 
   switch (message.action) {
-    // case 'append_key':
-    //   render()
-    //   break
-    // case 'execute_key':
-    //   render()
-    //   break
-    // case 'reset_key':
-    //   render()
-    //   break
-    // case 'exit_extension':
-    //   render()
-    //   break
     case 'state_did_change':
-      canvasDOM = getCanvasDOM()
+      canvasDOM = cloneCanvas()
       render(message.data)
       break
     case 'confirm_replace_content':

@@ -23,10 +23,6 @@ export default function FileView(props) {
         extension={props.extension}
         extensionProps={props.extensionProps}
       />
-
-      {/* <div
-        className={`absolute top-0 left-0 triangle ${hasUnsavedChanges ? 'active' : ''}`}
-      /> */}
     </div>
   )
 }

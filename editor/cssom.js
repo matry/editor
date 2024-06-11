@@ -1,6 +1,6 @@
 import { canvasDocument, canvasStyleSheet, canvasWindow } from './canvas'
 
-export const getSharedStyles = (elements) => {
+export function getSharedStyles(elements) {
   const styleObjects = elements.map((element) => {
     let styles = null
 
@@ -31,7 +31,7 @@ export const getSharedStyles = (elements) => {
   }
 }
 
-export const resetRules = () => {
+export function resetRules() {
   const sheet = canvasWindow()?.baseStyleSheet
 
   if (sheet) {
@@ -45,7 +45,7 @@ export const resetRules = () => {
   }
 }
 
-export const updateRule = (selectorText, property, value) => {
+export function updateRule(selectorText, property, value) {
   const doc = canvasDocument()
 
   const element = doc.querySelector(selectorText)

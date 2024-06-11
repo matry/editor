@@ -1,4 +1,5 @@
-export const getParams = (search) => {
+
+export function getParams(search) {
   const urlParams = new URLSearchParams(search)
 
   const result = {}

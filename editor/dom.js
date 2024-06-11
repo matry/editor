@@ -1,9 +1,8 @@
-import { getBox } from 'css-box-model'
 import { randomId } from './utils'
 import { canvasDocument, canvasWindow } from './canvas'
 import { config } from './config'
 
-export const constructTextTemplate = (options = {}) => {
+export function constructTextTemplate(options = {}) {
   const tag = config.defaults.text.tag
   const styles = JSON.stringify(config.defaults.text.styles())
   const content = config.defaults.text.content()
@@ -11,7 +10,7 @@ export const constructTextTemplate = (options = {}) => {
   return `<${tag} data-type="text" data-styles='${styles}'>${options.text || content}</${tag}>`
 }
 
-export const constructImageTemplate = (options = {}) => {
+export function constructImageTemplate(options = {}) {
   const tag = config.defaults.image.tag
   const styles = JSON.stringify(config.defaults.image.styles())
   const content = config.defaults.image.content()
@@ -19,14 +18,14 @@ export const constructImageTemplate = (options = {}) => {
   return `<${tag} data-type="image" data-styles='${styles}' width="100px" height="100px" src="${options.file || content}" />`
 }
 
-export const constructShapeTemplate = () => {
+export function constructShapeTemplate() {
   const tag = config.defaults.shape.tag
   const styles = JSON.stringify(config.defaults.shape.styles())
 
   return `<${tag} data-type="shape" data-styles='${styles}'></${tag}>`
 }
 
-export const constructTemplate = (elementType, options) => {
+export function constructTemplate(elementType, options) {
   switch (elementType) {
     case 'text':
       return constructTextTemplate(options)
@@ -37,7 +36,7 @@ export const constructTemplate = (elementType, options) => {
   }
 }
 
-export const appendNode = (target, template, position) => {
+export function appendNode(target, template, position) {
   let insertionPoint = 'beforeend'
 
   switch (position) {
@@ -69,8 +68,7 @@ export const appendNode = (target, template, position) => {
   return element
 }
 
-export const resetIds = (element) => {
-
+export function resetIds(element) {
   element.id = randomId()
 
   for (let i = 0, l = element.children.length; i < l; i++) {
@@ -78,7 +76,7 @@ export const resetIds = (element) => {
   }
 }
 
-export const selectAll = (selections) => {
+export function selectAll(selections) {
   const doc = canvasDocument()
 
   if (!selections.length) {
@@ -94,7 +92,7 @@ export const selectAll = (selections) => {
   }).flat()
 }
 
-export const selectNextNode = (selections) => {
+export function selectNextNode(selections) {
   const doc = canvasDocument()
 
   if (!selections.length) {
@@ -116,7 +114,7 @@ export const selectNextNode = (selections) => {
   }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
-export const leapNextNode = (selections) => {
+export function leapNextNode(selections) {
   if (!selections.length) {
     return selections
   }
@@ -143,7 +141,7 @@ export const leapNextNode = (selections) => {
   return newSelections.filter((selection) => selection !== null)
 }
 
-export const leapPreviousNode = (selections) => {
+export function leapPreviousNode(selections) {
   if (!selections.length) {
     return selections
   }
@@ -170,7 +168,7 @@ export const leapPreviousNode = (selections) => {
   return newSelections.filter((selection) => selection !== null)
 }
 
-export const selectPreviousNode = (selections) => {
+export function selectPreviousNode(selections) {
   if (!selections.length) {
     return selections
   }
@@ -184,7 +182,7 @@ export const selectPreviousNode = (selections) => {
   }).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
-export const selectFirstSiblingNode = (selections) => {
+export function selectFirstSiblingNode(selections) {
   if (!selections.length) {
     return selections
   }
@@ -192,7 +190,7 @@ export const selectFirstSiblingNode = (selections) => {
   return selections.map((selection) => selection.parentElement.firstElementChild).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
-export const selectLastSiblingNode = (selections) => {
+export function selectLastSiblingNode(selections) {
   if (!selections.length) {
     return selections
   }
@@ -200,7 +198,7 @@ export const selectLastSiblingNode = (selections) => {
   return selections.map((selection) => selection.parentElement.lastElementChild).filter((selection, index, self) => self.indexOf(selection) === index)
 }
 
-export const deleteElements = (elements) => {
+export function deleteElements(elements) {
   elements.forEach((element) => {
     if (['html', 'body'].includes(element.getAttribute('data-type'))) {
       return
@@ -210,7 +208,7 @@ export const deleteElements = (elements) => {
   })
 }
 
-export const isInBounds = (element) => {
+export function isInBounds(element) {
   if (!element) {
     return true
   }
@@ -224,15 +222,14 @@ export const isInBounds = (element) => {
   return top >= 0 && left >= 0 && right <= win.innerWidth && bottom <= win.innerHeight
 }
 
-export const serialize = (element) => {
+export function serialize(element) {
   const serializer = new XMLSerializer()
-
   element.normalize()
 
   return serializer.serializeToString(element)
 }
 
-export const isSiblings = (elements) => {
+export function isSiblings(elements) {
   const parent = elements[0].parentElement
   let result = true
 
@@ -245,7 +242,7 @@ export const isSiblings = (elements) => {
   return result
 }
 
-export const nestGroupWithinParent = (elements) => {
+export function nestGroupWithinParent(elements) {
   const template = constructShapeTemplate()
   const parentElement = appendNode(elements[0], template, 'before')
 
@@ -256,7 +253,7 @@ export const nestGroupWithinParent = (elements) => {
   return parentElement
 }
 
-export const nestIndividuallyWithinParent = (elements) => {
+export function nestIndividuallyWithinParent(elements) {
   const parentElements = elements.map((element) => {
     if (['html', 'body'].includes(element.parentElement.getAttribute('data-type'))) {
       return null
@@ -272,7 +269,7 @@ export const nestIndividuallyWithinParent = (elements) => {
   return parentElements
 }
 
-export const getAllChildrenByType = (elements, type) => {
+export function getAllChildrenByType(elements, type) {
   let results = []
 
   for (const element of elements) {

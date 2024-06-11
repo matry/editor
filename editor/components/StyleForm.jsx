@@ -1,7 +1,7 @@
 import { object } from 'prop-types'
 import { useEffect, useState, useRef } from 'react'
 import { Channel } from '../../utils/broadcast-channel'
-import { properties } from '../../utils/css'
+import properties from '../../utils/css-properties'
 import FormInput from './FormInput'
 
 const channel = new Channel('matry')
