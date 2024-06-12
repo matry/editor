@@ -4,72 +4,34 @@
     <meta charset="UTF-8" />
     <link id="favicon" rel="icon" type="image/svg+xml" href="/stride_logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Stride Editor - it's like Vim but for UI designers</title>
+    <title>Vim for UI designers</title>
     <style>
-      * {
-        margin: 0px;
-      }
-
-      #main {
-        height: 100vh;
-        display: flex;
-        overflow: hidden;
-      }
-
-      #editor {
-        width: 0px;
-      }
-
       .editor-open #editor {
-        width: 320px;
-      }
-
-      #editor-frame {
-        height: 100%;
-        width: 100%;
-        display: block;
-        pointer-events: none;
-        border: none;
-      }
-
-      #zoom-container {
-        flex: 1 1 0%;
-        overflow: hidden;
-        user-select: none;
-        position: relative;
-      }
-
-      #canvas-frame, #overlay-frame {
-        display: block;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-      }
-
-      #overlay-frame {
-        position: absolute;
-        inset: 0px;
+        @apply w-80;
       }
     </style>
     <script type="module" src="/editor/main.js"></script>
   </head>
   <body class="editor-open">
-    <main id="main">
-      <section id="editor" class="bg-black">
+    <main class="h-screen flex overflow-hidden">
+      <section id="editor" class="bg-black w-0">
       </section>
       <section
         id="zoom-container"
+        class="overflow-hidden select-none relative flex-1"
       >
         <iframe
           id="canvas-frame"
           tabindex="-1"
           src="about:blank"
+          class="block w-full h-full pointer-events-none"
         >
         </iframe>
         <iframe
           id="overlay-frame"
           tabindex="-1"
           src="/overlay/index.html"
+          class="block w-full h-full pointer-events-none absolute inset-0"
         >
         </iframe>
       </section>

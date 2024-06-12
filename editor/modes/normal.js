@@ -3,7 +3,6 @@ import { getSharedStyles, resetRules, updateRule } from '../cssom'
 import {
   deleteElements, getAllChildrenByType, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
-import { channel } from '../listener'
 import { openJSONFile } from '../utils'
 import { canvasDocument } from '../canvas'
 import { Mode } from './mode'
@@ -12,6 +11,9 @@ import { isSiblings } from '../dom'
 import { selectionGuard } from '../utils'
 import { isEmpty, uniqBy } from 'lodash'
 import { clearFile } from '../../utils/storage'
+import { Channel } from '../../utils/broadcast-channel'
+
+const channel = new Channel('matry')
 
 const doc = canvasDocument()
 

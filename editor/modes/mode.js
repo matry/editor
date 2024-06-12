@@ -1,8 +1,10 @@
+import { Channel } from '../../utils/broadcast-channel'
 import { saveFile } from '../../utils/storage'
 import { canvasDocument } from '../canvas'
 import { serialize } from '../dom'
-import { channel } from '../listener'
 import { downloadHTMLFile } from '../utils'
+
+const channel = new Channel('matry')
 
 export class Mode {
   commands = {}

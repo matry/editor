@@ -42,7 +42,7 @@ export const randomImage = (w, h) => {
 export const randomColor = (preferPastel = true) => {
   const h = randomNumber(360, 0)
   const s = preferPastel ? randomNumber(100, 70) : randomNumber(60, 20)
-  const l = preferPastel ? randomNumber(100, 70) : randomNumber(50, 20)
+  const l = preferPastel ? randomNumber(100, 70) : randomNumber(30, 10)
 
   return `hsl(${h}deg, ${s}%, ${l}%)`
 }
