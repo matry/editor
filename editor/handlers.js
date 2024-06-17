@@ -92,16 +92,19 @@ export function handleChannelMessage(e) {
       window.focus()
       break
     case 'confirm_replace_content':
-      modes.normal.confirm_replace_content(window.state.current, { urls: message.data.urls })
+      window.state.current = modes.normal.confirm_replace_content(window.state.current, { urls: message.data.urls })
       break
     case 'update_selection_text':
-      modes.normal.update_selection_text(window.state.current, message.data.value)
+      window.state.current = modes.normal.update_selection_text(window.state.current, message.data.value)
       break
     case 'update_selection_styles':
-      modes.normal.update_selection_styles(window.state.current, message.data.property, message.data.value, message.data.styles)
+      window.state.current = modes.normal.update_selection_styles(window.state.current, message.data.property, message.data.value, message.data.styles)
       break
     case 'update_selection_attributes':
-      modes.normal.update_selection_attributes(window.state.current, message.data)
+      window.state.current = modes.normal.update_selection_attributes(window.state.current, message.data)
+      break
+    case 'set_selections':
+      window.state.current = modes.normal.set_selections(window.state.current, message.data)
       break
     default:
       break

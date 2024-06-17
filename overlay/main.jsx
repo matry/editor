@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import Overlay from './Overlay'
 import { Channel } from '../utils/broadcast-channel'
+import './events'
 
 const reactRoot = ReactDOM.createRoot(document.getElementById('selections'))
 

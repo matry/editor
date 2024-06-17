@@ -279,3 +279,18 @@ export function getAllChildrenByType(elements, type) {
 
   return results
 }
+
+export function getAllByIds(ids = []) {
+  const doc = canvasDocument()
+
+  const results = []
+
+  for (const id of ids) {
+    const element = doc.getElementById(id)
+    if (element) {
+      results.push(element)
+    }
+  }
+
+  return results
+}

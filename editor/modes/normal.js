@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import { getSharedStyles, resetRules, updateRule } from '../cssom'
 import {
-  deleteElements, getAllChildrenByType, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
+  deleteElements, getAllByIds, getAllChildrenByType, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
 } from '../dom'
 import { openJSONFile } from '../utils'
 import { canvasDocument } from '../canvas'
@@ -82,6 +82,14 @@ class NormalMode extends Mode {
     return {
       mode: 'project',
     }
+  }
+
+  set_selections(state, selection_ids) {
+    const result = {
+      selections: getAllByIds(selection_ids)
+    }
+
+    return result
   }
 
   move_selections_left(state) {
