@@ -46,6 +46,7 @@ const QuickInput = forwardRef(({
   onSubmit,
 }, ref) => {
   const formRef = useRef()
+  const selectedRef = useRef()
   const [suggestions, setSuggestions] = useState([])
   const [highlightIndex, setHighlightIndex] = useState(-1)
 
@@ -100,10 +101,20 @@ const QuickInput = forwardRef(({
           switch (e.code) {
             case 'ArrowDown':
               e.preventDefault()
+
+              if (selectedRef.current && selectedRef.current.nextElementSibling) {
+                selectedRef.current.nextElementSibling.scrollIntoView({ block: 'end' })
+              }
+
               setHighlightIndex(Math.min(highlightIndex + 1, suggestions.length - 1))
               break
             case 'ArrowUp':
               e.preventDefault()
+
+              if (selectedRef.current && selectedRef.current.previousElementSibling) {
+                selectedRef.current.previousElementSibling.scrollIntoView({ block: 'end' })
+              }
+
               setHighlightIndex(Math.max(highlightIndex - 1, 0))
               break
             case 'Tab':
@@ -141,6 +152,7 @@ const QuickInput = forwardRef(({
                 'bg-transparent text-neutral-500': highlightIndex !== i,
               },
             )}
+            ref={highlightIndex === i ? selectedRef : null}
             onClick={() => {
               setValue(suggestion)
               setSuggestions([])
