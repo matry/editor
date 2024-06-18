@@ -18,3 +18,10 @@ document.body.addEventListener('click', (e) => {
   }
   window.parent.focus()
 })
+
+// TODO: figure out how on earth we're going to make this play nicely with other features
+// const canvasDoc = canvasDocument(window.parent.document)
+// document.body.addEventListener('wheel', (e) => {
+//   canvasDoc.body.scrollTop += e.deltaY
+//   window.parent.focus()
+// })
