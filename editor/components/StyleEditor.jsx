@@ -1,16 +1,15 @@
 import { object } from 'prop-types'
 import { useEffect, useState, useRef } from 'react'
 import { Channel } from '../../utils/broadcast-channel'
-import properties from '../../utils/css-properties'
-import FormInput from './FormInput'
+import StyleInput from './StyleInput'
+import StylePropertyInput from './StylePropertyInput'
 
 const channel = new Channel('matry')
 
-const cssProperties = properties.map(({ property }) => property)
-
-const StyleForm = ({ styles }) => {
+const StyleEditor = ({ styles }) => {
   const [possibleValues, setPossibleValues] = useState([])
   const [property, setProperty] = useState('')
+  const [styleProperty, setStyleProperty] = useState('')
   const [currentStyles, setCurrentStyles] = useState(styles)
   const [value, setValue] = useState('')
   const propRef = useRef()
@@ -56,71 +55,71 @@ const StyleForm = ({ styles }) => {
             })}
           </ul>
         </div>
-        <div
-          className="flex"
-        >
-          <FormInput
+        <div>
+          <StylePropertyInput
             ref={propRef}
             value={property}
-            values={cssProperties}
             setValue={setProperty}
-            onSubmit={(newProperty) => {
-              setProperty(newProperty)
-
-              const foundProperty = properties.find((p) => p.property === newProperty)
-
-              if (!foundProperty || !foundProperty.values) {
-                return
-              }
-
-              setPossibleValues(foundProperty.values)
-              valRef.current.focus()
-            }}
-          />
-          <FormInput
-            ref={valRef}
-            align="right"
-            value={value}
-            values={possibleValues}
-            setValue={setValue}
-            showAllByDefault
-            onSubmit={(newValue) => {
-              channel.post({
-                action: 'update_selection_styles',
-                data: {
-                  property: property,
-                  value: newValue,
-                },
-              })
-
-              const newCurrentStyles = {
-                base: {
-                  ...currentStyles.base,
-                },
-              }
-
-              if (newValue === '') {
-                delete newCurrentStyles.base[property]
+            onSubmit={(newProperty, newPossibleValues) => {
+              if (typeof newProperty === 'object' && newProperty.hasOwnProperty('values')) {
+                // setProperty(newProperty.property)
+                // setStyleProperty(newProperty.property)
               } else {
-                newCurrentStyles.base[property] = newValue
+                if (newPossibleValues) {
+                  setPossibleValues(newPossibleValues)
+                }
+
+                setProperty(newProperty)
+                setStyleProperty(newProperty)
               }
-
-              setCurrentStyles(newCurrentStyles)
-
-              setProperty('')
-              setValue('')
-
-              propRef.current.focus()
             }}
           />
+          {styleProperty !== '' && (
+            <StyleInput
+              ref={valRef}
+              value={value}
+              values={possibleValues}
+              setValue={setValue}
+              showAllByDefault
+              onSubmit={(newValue) => {
+                channel.post({
+                  action: 'update_selection_styles',
+                  data: {
+                    property: property,
+                    value: newValue,
+                  },
+                })
+
+                const newCurrentStyles = {
+                  base: {
+                    ...currentStyles.base,
+                  },
+                }
+
+                if (newValue === '') {
+                  delete newCurrentStyles.base[property]
+                } else {
+                  newCurrentStyles.base[property] = newValue
+                }
+
+                setCurrentStyles(newCurrentStyles)
+
+                setProperty('')
+                setStyleProperty('')
+                setValue('')
+
+                propRef.current.focus()
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-StyleForm.propTypes = {
+StyleEditor.propTypes = {
   styles: object.isRequired,
 }
 
-export default StyleForm
+export default StyleEditor

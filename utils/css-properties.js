@@ -2,122 +2,173 @@ import colors from './colors'
 
 const colorsList = Object.keys(colors)
 
+export const globalCSSValues = [
+  'inherit',
+  'initial',
+  'revert',
+  'revert-layer',
+  'unset',
+]
+
 export default [
   {
     'property': 'box-decoration-break',
-    'values': null,
+    'values': ['slice', 'clone'],
   },
   {
     'property': 'hyphens',
-    'values': null,
+    'values': ['none', 'manual', 'auto'],
   },
   {
     'property': 'line-break',
-    'values': null,
+    'values': ['auto', 'loose', 'normal', 'strict', 'anywhere'],
   },
   {
     'property': 'overflow-wrap',
-    'values': null,
+    'values': ['normal', 'break-word', 'anywhere'],
   },
   {
     'property': 'text-underline-position',
-    'values': null,
-  },
-  {
-    'property': '@font-feature-values',
-    'values': null,
-  },
-  {
-    'property': 'font-feature-settings',
-    'values': null,
+    'values': ['auto', 'under', 'left', 'right'],
   },
   {
     'property': 'font-kerning',
-    'values': null,
-  },
-  {
-    'property': 'font-language-override',
-    'values': null,
+    'values': ['auto', 'normal', 'none'],
   },
   {
     'property': 'font-synthesis',
-    'values': null,
-  },
-  {
-    'property': 'font-variant-alternates',
-    'values': null,
+    'values': ['none', 'weight', 'style', 'position', 'small-caps-style'],
   },
   {
     'property': 'font-variant-caps',
-    'values': null,
+    'values': ['normal', 'small-caps', 'all-small-caps', 'petite-caps', 'all-petite-caps', 'unicase', 'titling-caps'],
   },
   {
     'property': 'font-variant-east-asian',
-    'values': null,
+    'values': ['normal', 'ruby', 'jis78', 'jis83', 'jis90', 'jis04', 'simplified', 'traditional', 'full-width', 'proportional-width'],
   },
   {
     'property': 'font-variant-ligatures',
-    'values': null,
+    'values': [
+      'normal',
+      'none',
+      'common-ligatures',
+      'no-common-ligatures',
+      'discretionary-ligatures',
+      'no-discretionary-ligatures',
+      'historical-ligatures',
+      'no-historical-ligatures',
+      'contextual',
+      'no-contextual',
+    ],
   },
   {
     'property': 'font-variant-numeric',
-    'values': null,
+    'values': [
+      'normal',
+      'ordinal',
+      'slashed-zero',
+      'lining-nums',
+      'oldstyle-nums',
+      'proportional-nums',
+      'tabular-nums',
+      'diagonal-fractions',
+      'stacked-fractions',
+      'oldstyle-nums stacked-fractions',
+    ],
   },
   {
     'property': 'font-variant-position',
-    'values': null,
+    'values': ['normal', 'sub', 'super'],
   },
   {
     'property': 'text-orientation',
-    'values': null,
+    'values': [
+      'mixed',
+      'upright',
+      'sideways-right',
+      'sideways',
+      'use-glyph-orientation',
+    ],
   },
   {
     'property': 'text-combine-upright',
-    'values': null,
+    'values': ['none', 'all', 'digits'],
   },
   {
     'property': 'writing-mode',
-    'values': null,
-  },
-  {
-    'property': 'ime-mode',
-    'values': null,
+    'values': ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
   },
   {
     'property': 'break-after',
-    'values': null,
+    'values': [
+      'auto',
+      'avoid',
+      'always',
+      'all',
+      'avoid-page',
+      'page',
+      'left',
+      'right',
+      'recto',
+      'verso',
+      'avoid-column',
+      'column',
+      'avoid-region',
+      'region',
+    ],
   },
   {
     'property': 'break-before',
-    'values': null,
+    'values': [
+      'auto',
+      'avoid',
+      'always',
+      'all',
+      'avoid-page',
+      'page',
+      'left',
+      'right',
+      'recto',
+      'verso',
+      'avoid-column',
+      'column',
+      'avoid-region',
+      'region',
+    ],
   },
   {
     'property': 'break-inside',
-    'values': null,
+    'values': [
+      'auto',
+      'avoid',
+      'avoid-page',
+      'avoid-column',
+      'avoid-region',
+    ],
   },
   {
     'property': 'widows',
-    'values': null,
+    'values': ['1', '2', '3', '4', '5'],
   },
   {
     'property': 'orphans',
-    'values': null,
-  },
-  {
-    'property': 'marks',
-    'values': null,
+    'values': ['1', '2', '3', '4', '5'],
   },
   {
     'property': 'image-orientation',
-    'values': null,
+    'values': [
+      'none',
+      'from-image',
+    ],
   },
   {
     'property': 'image-rendering',
-    'values': null,
-  },
-  {
-    'property': 'image-resolution',
-    'values': null,
+    'values': [
+      'auto',
+      'crisp-edges',
+      'pixelated',
+    ],
   },
   {
     'property': 'object-fit',
@@ -125,7 +176,6 @@ export default [
       'contain',
       'cover',
       'fill',
-      'inherit',
       'none',
       'revert',
       'scale-down',
@@ -134,116 +184,59 @@ export default [
   },
   {
     'property': 'object-position',
-    'values': null,
+    'values': [
+      'top',
+      'bottom',
+      'left',
+      'right',
+      'center',
+    ],
   },
   {
     'property': 'mask',
-    'values': null,
+    'values': [],
   },
   {
     'property': 'mask-type',
-    'values': null,
-  },
-  {
-    'property': 'mark',
-    'values': null,
-  },
-  {
-    'property': 'mark-after',
-    'values': null,
-  },
-  {
-    'property': 'mark-before',
-    'values': null,
-  },
-  {
-    'property': 'phonemes',
-    'values': null,
-  },
-  {
-    'property': 'rest',
-    'values': null,
-  },
-  {
-    'property': 'rest-after',
-    'values': null,
-  },
-  {
-    'property': 'rest-before',
-    'values': null,
-  },
-  {
-    'property': 'voice-balance',
-    'values': null,
-  },
-  {
-    'property': 'voice-duration',
-    'values': null,
-  },
-  {
-    'property': 'voice-pitch',
-    'values': null,
-  },
-  {
-    'property': 'voice-pitch-range',
-    'values': null,
-  },
-  {
-    'property': 'voice-rate',
-    'values': null,
-  },
-  {
-    'property': 'voice-stress',
-    'values': null,
-  },
-  {
-    'property': 'voice-volume',
-    'values': null,
-  },
-  {
-    'property': 'marquee-direction',
-    'values': null,
-  },
-  {
-    'property': 'marquee-play-count',
-    'values': null,
-  },
-  {
-    'property': 'marquee-speed',
-    'values': null,
-  },
-  {
-    'property': 'marquee-style',
-    'values': null,
+    'values': ['luminance', 'alpha'],
   },
   {
     'property': 'color',
     'values': [
       ...colorsList,
-      'initial',
-      'inherit',
+      'transparent',
     ],
   },
   {
     'property': 'opacity',
     'values': [
-      'initial',
-      'inherit',
+      '0',
+      '0.1',
+      '0.2',
+      '0.3',
+      '0.4',
+      '0.5',
+      '0.6',
+      '0.7',
+      '0.8',
+      '0.9',
+      '1',
     ],
   },
   {
     'property': 'background-position',
     'values': [
-      'initial',
-      'inherit',
+      'top',
+      'right',
+      'bottom',
+      'left',
+      'center',
     ],
   },
   {
     'property': 'background-image',
     'values': [
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -251,18 +244,11 @@ export default [
     'values': [
       ...colorsList,
       'transparent',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border',
     'values': [
-      'border-width',
-      'border-style',
-      'border-color',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -270,27 +256,6 @@ export default [
     'values': [
       'normal',
       'break-word',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'direction',
-    'values': [
-      'ltr',
-      'rtl',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'unicode-bidi',
-    'values': [
-      'normal',
-      'embed',
-      'bidi-override',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -305,8 +270,6 @@ export default [
       'xx-large',
       'smaller',
       'larger',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -316,8 +279,7 @@ export default [
       'underline',
       'overline',
       'line-through',
-      'initial',
-      'inherit',
+      'blink',
     ],
   },
   {
@@ -325,8 +287,6 @@ export default [
     'values': [
       'separate',
       'collapse',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -336,8 +296,6 @@ export default [
       'percentage',
       ' cover',
       ' contain',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -364,16 +322,6 @@ export default [
       'upper-alpha',
       'upper-latin',
       'upper-roman',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': '@keyframes',
-    'values': [
-      'animationname',
-      'keyframes-selector',
-      'css-styles',
     ],
   },
   {
@@ -382,33 +330,38 @@ export default [
       'medium',
       'thin',
       'thick',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'background-blend-mode',
     'values': [
-      'normal',
-      'multiply',
-      'screen',
-      'overlay',
-      'darken',
-      'lighten',
+      'color',
+      'color-burn',
       'color-dodge',
-      'saturation',
+      'darken',
+      'difference',
+      'exclusion',
+      'hard-light',
+      'hue',
+      'lighten',
       'luminosity',
+      'multiply',
+      'normal',
+      'overlay',
+      'saturation',
+      'screen',
+      'soft-light',
     ],
   },
   {
     'property': 'background-repeat',
     'values': [
+      'no-repeat',
       'repeat',
       'repeat-x',
       'repeat-y',
-      'no-repeat',
-      'initial',
-      'inherit',
+      'round',
+      'space',
     ],
   },
   {
@@ -417,8 +370,7 @@ export default [
       'border-box',
       'padding-box',
       'content-box',
-      'initial',
-      'inherit',
+      'text',
     ],
   },
   {
@@ -428,31 +380,23 @@ export default [
       'reverse',
       'alternate',
       'alternate-reverse',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'animation-duration',
     'values': [
-      'initial',
-      'inherit',
+      'auto',
     ],
   },
   {
     'property': 'counter-reset',
     'values': [
       'none',
-      'name',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'padding-left',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -468,8 +412,6 @@ export default [
       'ridge',
       'inset',
       'outset',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -478,17 +420,12 @@ export default [
       'list-style-type',
       'list-style-position',
       'list-style-image',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'counter-increment',
     'values': [
       'none',
-      'id number',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -500,15 +437,11 @@ export default [
       'flex-start',
       'flex-end',
       'baseline',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'min-height',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -517,16 +450,12 @@ export default [
       'visible',
       'hidden',
       'collapse',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'max-height',
     'values': [
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -536,25 +465,20 @@ export default [
       'absolute',
       'fixed',
       'relative',
-      'initial',
-      'inherit',
+      'sticky',
     ],
   },
   {
     'property': 'border-left-width',
     'values': [
-      'medium',
       'thin',
+      'medium',
       'thick',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-image-outset',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -564,8 +488,6 @@ export default [
       'hidden',
       'scroll',
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -573,60 +495,33 @@ export default [
     'values': [
       ...colorsList,
       'transparent',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'quotes',
-    'values': [
-      'none',
-      'initial',
-      'inherit',
-      '',
-      '"',
-      "'",
-      '‹',
-      '›',
-      '«',
-      '»',
-      '‘',
-      '’',
-      '“',
-      '”',
-      '„',
     ],
   },
   {
     'property': 'perspective-origin',
     'values': [
-      'x-axis',
-      'y-axis',
-      'initial',
-      'inherit',
+      'top',
+      'right',
+      'bottom',
+      'left',
+      'center',
     ],
   },
   {
     'property': 'flex',
     'values': [
       'auto',
-      'initial',
       'none',
-      'inherit',
     ],
   },
   {
     'property': 'border-image',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'animation-delay',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -634,8 +529,6 @@ export default [
     'values': [
       ...colorsList,
       'transparent',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -645,38 +538,29 @@ export default [
       'left',
       'right',
       'both',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-width',
     'values': [
-      'medium',
       'thin',
+      'medium',
       'thick',
-      'initial',
-      'inherit',
     ],
   },
   {
-    'property': 'overflow\r\n    ',
+    'property': 'overflow',
     'values': [
       'visible',
       'hidden',
       'scroll',
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'column-rule-color',
     'values': [
       ...colorsList,
-      ' color',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -685,17 +569,11 @@ export default [
       'medium',
       'thin',
       'thick',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-image-source',
     'values': [
-      ' none',
-      ' image',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -704,30 +582,22 @@ export default [
       'scroll',
       'fixed',
       'local',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-right',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'margin-right',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-bottom',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -735,53 +605,43 @@ export default [
     'values': [
       ...colorsList,
       'transparent',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'margin-top',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-radius',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'max-width',
     'values': [
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'min-width',
     'values': [
-      'initial',
-      'inherit',
+      'none',
+      'max-content',
+      'min-content',
+      'fit-content',
     ],
   },
   {
     'property': 'z-index',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-bottom-left-radius',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -791,15 +651,11 @@ export default [
       'capitalize',
       'uppercase',
       'lowercase',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'text-indent',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -813,8 +669,6 @@ export default [
       'kashida',
       'trim',
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -824,8 +678,6 @@ export default [
       'right',
       'center',
       'justify',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -833,23 +685,17 @@ export default [
     'values': [
       ...colorsList,
       'transparent',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'background',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'letter-spacing',
     'values': [
       'normal',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -860,15 +706,11 @@ export default [
       'flex-start',
       'flex-end',
       'baseline',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'tab-size',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -877,8 +719,6 @@ export default [
       'nowrap',
       'wrap',
       'wrap-reverse',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -888,76 +728,56 @@ export default [
       'row-reverse',
       'column',
       'column-reverse',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'flex-basis',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'flex-shrink',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'bottom',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'clip',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'flex-grow',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'font',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'margin-left',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'text-decoration-color',
     'values': [
       ...colorsList,
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-bottom-right-radius',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -965,24 +785,18 @@ export default [
     'values': [
       'inside',
       'outside',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'top',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'right',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -991,8 +805,6 @@ export default [
       'padding-box',
       'border-box',
       'content-box',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1000,40 +812,34 @@ export default [
     'values': [
       'auto',
       'fixed',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'margin-bottom',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'padding-bottom',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-image-slice',
     'values': [
-      'fill',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'flex-flow',
     'values': [
-      'flex-direction',
-      'flex-wrap',
-      'initial',
-      'inherit',
+      'row',
+      'row-reverse',
+      'column',
+      'column-reverse',
+      'nowrap',
+      'wrap',
+      'wrap-reverse',
     ],
   },
   {
@@ -1042,8 +848,20 @@ export default [
       'none',
       'left',
       'right',
-      'initial',
-      'inherit',
+      'both',
+      'inline',
+      'inline-block',
+      'inline-table',
+      'table-row',
+      'table-row-group',
+      'table-column',
+      'table-column-group',
+      'table-cell',
+      'table-caption',
+      'table-header-group',
+      'table-footer-group',
+      'inline-flex',
+      'inline-grid',
     ],
   },
   {
@@ -1057,23 +875,17 @@ export default [
       'middle',
       'bottom',
       'text-bottom',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'padding-right',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'width',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1085,15 +897,11 @@ export default [
       'flex-end',
       'space-between',
       'space-around',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'padding',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1104,8 +912,6 @@ export default [
       'last',
       'allow-end',
       'force-end',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1114,8 +920,6 @@ export default [
       'medium',
       'thin',
       'thick',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1131,8 +935,6 @@ export default [
       'ridge',
       'inset',
       'outset',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1145,15 +947,11 @@ export default [
       'justify',
       'start',
       'end',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'order',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1169,8 +967,6 @@ export default [
       'ridge',
       'inset',
       'outset',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1178,8 +974,6 @@ export default [
     'values': [
       ...colorsList,
       'transparent',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1203,31 +997,23 @@ export default [
       'table-column',
       'table-row',
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'left',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-top-left-radius',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'margin',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1237,8 +1023,6 @@ export default [
       ' repeat',
       ' round',
       'space',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1250,15 +1034,11 @@ export default [
       'blur',
       'spread',
       'inset',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-top-right-radius',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1269,16 +1049,12 @@ export default [
       'dotted',
       'dashed',
       'wavy',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'height',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1294,30 +1070,22 @@ export default [
       'ridge',
       'inset',
       'outset',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-left',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-image-width',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'font-family',
     'values': [
-      'initial',
-      'inherit',
       'monospace',
       'serif',
       'sans-serif',
@@ -1326,8 +1094,6 @@ export default [
   {
     'property': 'border-top',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1335,8 +1101,6 @@ export default [
     'values': [
       'show',
       'hide',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1347,8 +1111,6 @@ export default [
       'center',
       'space-between',
       'space-around',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1358,8 +1120,6 @@ export default [
       'v-shadow',
       'blur-radius',
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1369,15 +1129,11 @@ export default [
       'hidden',
       'scroll',
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'padding-top',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1393,17 +1149,11 @@ export default [
       'ridge',
       'inset',
       'outset',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'border-spacing',
-    'values': [
-      'length length',
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'word-break',
@@ -1411,19 +1161,6 @@ export default [
       'normal',
       'break-all',
       'keep-all ',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': '@font-face',
-    'values': [
-      'font-family',
-      'src',
-      'font-stretch',
-      'font-style',
-      'font-weight',
-      'unicode-range',
     ],
   },
   {
@@ -1433,8 +1170,6 @@ export default [
       'underline',
       'overline',
       'line-through',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1445,16 +1180,12 @@ export default [
       'pre',
       'pre-line',
       'pre-wrap',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'font-size-adjust',
     'values': [
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1463,16 +1194,12 @@ export default [
       'normal',
       'italic',
       'oblique',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'line-height',
     'values': [
       'normal',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1491,16 +1218,12 @@ export default [
       '700',
       '800',
       '900',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'word-spacing',
     'values': [
       'normal',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1511,8 +1234,6 @@ export default [
       'avoid',
       'left',
       'right',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1520,31 +1241,23 @@ export default [
     'values': [
       ...colorsList,
       'invert',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'row-gap',
     'values': [
       'normal',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'column-gap',
     'values': [
       'normal',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'column-rule',
     'values': [
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1553,8 +1266,6 @@ export default [
       'auto',
       'column-width',
       'column-count',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1570,8 +1281,6 @@ export default [
       ' ridge',
       ' inset',
       ' outset',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1579,8 +1288,13 @@ export default [
     'values': [
       'normal',
       'small-caps',
-      'initial',
-      'inherit',
+    ],
+  },
+  {
+    'property': 'font-variation-settings',
+    'values': [
+      'normal',
+      'small-caps',
     ],
   },
   {
@@ -1590,8 +1304,6 @@ export default [
       ' thin',
       ' thick',
       ' length',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1628,14 +1340,11 @@ export default [
       'se-resize',
       'sw-resize',
       'text',
-      'URL',
       'vertical-text',
       'w-resize',
       'wait',
       'zoom-in',
       'zoom-out',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1643,8 +1352,6 @@ export default [
     'values': [
       'balance',
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1654,18 +1361,6 @@ export default [
       'forwards',
       'backwards',
       'both',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'nav-left',
-    'values': [
-      'auto',
-      'id',
-      'target-name',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1674,61 +1369,15 @@ export default [
       'medium',
       'thin',
       'thick',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'nav-right',
-    'values': [
-      'auto',
-      'id',
-      'target-name',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'nav-up',
-    'values': [
-      'auto',
-      'id',
-      'target-name',
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'nav-down',
-    'values': [
-      'auto',
-      'id',
-      'target-name',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'outline',
-    'values': [
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'animation',
-    'values': [
-      'initial',
-      'inherit',
-    ],
-  },
-  {
-    'property': 'nav-index',
-    'values': [
-      'auto',
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'font-stretch',
@@ -1742,8 +1391,6 @@ export default [
       'expanded',
       'extra-expanded',
       'ultra-expanded',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1751,23 +1398,16 @@ export default [
     'values': [
       'none',
       'url',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'transition-duration',
-    'values': [
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'perspective',
     'values': [
       'none',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1775,8 +1415,6 @@ export default [
     'values': [
       'paused',
       'running',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1784,52 +1422,22 @@ export default [
     'values': [
       'visible',
       'hidden',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'column-count',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'transition-delay',
-    'values': [
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'transform',
     'values': [
       'none',
-      'matrix(n,n,n,n,n,n)',
-      'matrix3d\r\n\t(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n)',
-      'translate(x,y)',
-      'translate3d(x,y,z)',
-      'translateX(x)',
-      'translateY(y)',
-      'translateZ(z)',
-      'scale(x,y)',
-      'scale3d(x,y,z)',
-      'scaleX(x)',
-      'scaleY(y)',
-      'scaleZ(z)',
-      'rotate(angle)',
-      'rotate3d(x,y,z,angle)',
-      'rotateX(angle)',
-      'rotateY(angle)',
-      'rotateZ(angle)',
-      'skew(x-angle,y-angle)',
-      'skewX(angle)',
-      'skewY(angle)',
-      'perspective(n)',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1839,8 +1447,6 @@ export default [
       ' both',
       ' horizontal',
       ' vertical',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1849,8 +1455,6 @@ export default [
       'clip',
       'ellipsis',
       'string',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1858,27 +1462,12 @@ export default [
     'values': [
       'top',
       'bottom',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'filter',
     'values': [
       'none',
-      'blur(px)',
-      'brightness(%)',
-      'contrast(%)',
-      'drop-shadow(h-shadow v-shadow blur spread color)',
-      'grayscale(%)',
-      'hue-rotate(deg)',
-      'invert(%)',
-      'opacity(%)',
-      'saturate(%)',
-      'sepia(%)',
-      'url()',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1887,15 +1476,10 @@ export default [
       'normal',
       'none',
       'counter',
-      'attr(attribute)',
-      'string',
       'open-quote',
       'close-quote',
       'no-open-quote',
       'no-close-quote',
-      'url(url)',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1906,18 +1490,13 @@ export default [
       'ease-in',
       'ease-out',
       'ease-in-out',
-      'cubic-bezier(n,n,n,n)',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'box-sizing',
     'values': [
-      ' content-box',
-      ' border-box',
-      'initial',
-      'inherit',
+      'border-box',
+      'content-box',
     ],
   },
   {
@@ -1928,8 +1507,6 @@ export default [
       'avoid',
       'left',
       'right',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1940,25 +1517,16 @@ export default [
       'ease-in',
       'ease-out',
       'ease-in-out',
-      'cubic-bezier(n,n,n,n)',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'outline-offset',
-    'values': [
-      ' length',
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'column-width',
     'values': [
       'auto',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -1974,27 +1542,17 @@ export default [
       'ridge',
       'inset',
       'outset',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'transform-origin',
-    'values': [
-      'x-axis',
-      'y-axis',
-      'z-axis',
-      'initial',
-      'inherit',
-    ],
+    'values': [],
   },
   {
     'property': 'transform-style',
     'values': [
       'flat',
       'preserve-3d',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -2004,8 +1562,6 @@ export default [
       'transition-duration',
       'transition-timing-function',
       'transition-delay',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -2013,17 +1569,12 @@ export default [
     'values': [
       'auto',
       'avoid',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'column-span',
     'values': [
-      '1',
       'all',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -2032,16 +1583,12 @@ export default [
       'none',
       'all',
       'property',
-      'initial',
-      'inherit',
     ],
   },
   {
     'property': 'animation-iteration-count',
     'values': [
       'infinite',
-      'initial',
-      'inherit',
     ],
   },
   {
@@ -2049,8 +1596,6 @@ export default [
     'values': [
       'keyframename',
       'none',
-      'initial',
-      'inherit',
     ],
   },
 ]

@@ -37,7 +37,7 @@ const filter = (val, values) => {
   ]
 }
 
-const FormInput = forwardRef(({
+const StyleInput = forwardRef(({
   align,
   value,
   setValue,
@@ -62,6 +62,12 @@ const FormInput = forwardRef(({
     setSuggestions(values)
   }, [values])
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.focus()
+    }
+  }, [])
+
   return (
     <form
       ref={formRef}
@@ -73,7 +79,7 @@ const FormInput = forwardRef(({
       onKeyDown={(e) => {
         e.stopPropagation()
       }}
-      className="relative m-0 w-1/2"
+      className="relative m-0"
     >
       <input
         ref={ref}
@@ -166,7 +172,7 @@ const FormInput = forwardRef(({
   )
 })
 
-FormInput.propTypes = {
+StyleInput.propTypes = {
   align: string,
   placeholder: string,
   value: string,
@@ -176,7 +182,7 @@ FormInput.propTypes = {
   onSubmit: func.isRequired,
 }
 
-FormInput.defaultProps = {
+StyleInput.defaultProps = {
   align: 'left',
   placeholder: '',
   value: '',
@@ -184,4 +190,4 @@ FormInput.defaultProps = {
   showAllByDefault: false,
 }
 
-export default FormInput
+export default StyleInput

@@ -1,4 +1,4 @@
-import StyleForm from './StyleForm'
+import StyleEditor from './StyleEditor'
 import TextContent from './TextContent'
 import QuickForm from './QuickForm'
 
@@ -29,7 +29,7 @@ export default function Extension(props) {
       break
     case 'css':
       content = (
-        <StyleForm
+        <StyleEditor
           styles={props.extensionProps}
         />
       )
