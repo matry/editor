@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link id="favicon" rel="icon" type="image/svg+xml" href="/stride_logo.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vim for UI designers</title>
-    <style>
-      .editor-open #editor {
-        @apply w-80;
-      }
-    </style>
-    <script type="module" src="/editor/main.js"></script>
-  </head>
-  <body class="editor-open">
-    <main class="h-screen flex overflow-hidden">
-      <section id="editor" class="bg-black w-0">
-      </section>
-      <section
-        id="zoom-container"
-        class="overflow-hidden select-none relative flex-1"
-      >
-        <iframe
-          id="canvas-frame"
-          tabindex="-1"
-          src="about:blank"
-          class="block w-full h-full pointer-events-none"
-        >
-        </iframe>
-        <iframe
-          id="overlay-frame"
-          tabindex="-1"
-          src="/overlay/index.html"
-          class="block w-full h-full pointer-events-none absolute inset-0"
-        >
-        </iframe>
-      </section>
-    </main>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link id="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matry</title>
+  <style>
+    .editor-open #editor {
+      @apply w-80;
+    }
+  </style>
+  <script type="module" src="/editor/main.js"></script>
+</head>
+
+<body class="editor-open">
+  <main class="h-screen flex overflow-hidden">
+    <section id="editor" class="bg-black w-0">
+    </section>
+    <section id="zoom-container" class="overflow-hidden select-none relative flex-1">
+      <iframe id="canvas-frame" tabindex="-1" src="about:blank" class="block w-full h-full pointer-events-none">
+      </iframe>
+      <iframe id="overlay-frame" tabindex="-1" src="/overlay/index.html"
+        class="block w-full h-full pointer-events-none absolute inset-0">
+      </iframe>
+    </section>
+  </main>
+</body>
+
 </html>

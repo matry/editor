@@ -1,7 +1,6 @@
+## what is Matry
 
-## what is Stride
-
-Stride is a keyboard-driven UI design tool.
+Matry is a keyboard-driven UI design tool.
 
 - allow designers to own their data, while also providing collaborative editing
 - design in the target medium
@@ -9,12 +8,12 @@ Stride is a keyboard-driven UI design tool.
 - prioritize efficiency over familiarity
 - active collaboration between designers and developers
 
-## why was Stride created
+## why was Matry created
 
 Because while design tools have built some incredible features over the past 2 decades, they still aren't innovating enough.
 All design tools are essentially drawing tools with some extra features built in.
-One of Stride's core ideas is that a drawing tool is ill-suited for the needs of modern design teams.
+One of Matry's core ideas is that a drawing tool is ill-suited for the needs of modern design teams.
 
-## who created Stride
+## who created Matry
 
 My name is Daniel Vaughn, and I'm a frontend developer who has long been interested in the working relationship between developers and designers.

@@ -1,7 +1,6 @@
+## Matry
 
-## stride
-
-Stride is a design tool for designing in the browser.
+Matry is a design tool for designing in the browser.
 But it's more than that.
 At it's heart is a command language for creating interfaces.
 This language enables the user to invoke commands through carefully crafted keyboard shortcuts.
@@ -19,16 +18,16 @@ As design tools are made for designers,
 they trend towards flashier design that's more visually impressive,
 in an attempt to win designers over with first impressions.
 
-Stride goes in the complete opposite direction.
+Matry goes in the complete opposite direction.
 
-It requires dedication and discipline to be able to use Stride effectively.
+It requires dedication and discipline to be able to use Matry effectively.
 But at the end of that learning curve is a powerhouse unlike anything that's come before it.
 
-Though the first instance of Stride is in the browser,
+Though the first instance of Matry is in the browser,
 it is in fact platform agnostic.
 There's no reason why you couldn't have a similar version for other platforms such as iOS, Android, etc.
 
-While Stride aims to be as flexible as possible, there are some rules it uses to constrain complexity.
+While Matry aims to be as flexible as possible, there are some rules it uses to constrain complexity.
 
 1. There are no selectors. Styles must be applied to elements directly.
 2. A style property can only be defined once. While we cannot block the cascade, we do block the ability to arbitrarily re-declare styles for elements.
@@ -37,20 +36,17 @@ While Stride aims to be as flexible as possible, there are some rules it uses to
 
 ## said differently
 
-Stride is a textual interface for design engineers.
+Matry is a textual interface for design engineers.
 It intends to sit between design and development, providing a robust toolset that empowers those who can perform in both domains.
 
 By targeting this unique group of professionals, the tool stands to help bridge the gap between design and development.
 
 It intends to sharpen the OODA loop by whittling down bits of "micro toil" that exist in the creative process.
 
-
-
-
 ## modes
-  - normal
-  - edit
 
+- normal
+- edit
 
 ## select mode
 
@@ -58,33 +54,37 @@ Select mode is the default mode when editing a document.
 It allows users to traverse the dom and add/edit/delete elements.
 From this mode, users can enter any other mode.
 
-  - escape (exit focus)
-  - up (select previous sibling)
-  - down (select next sibling)
-  - right (select first child)
-  - left (select parent)
-  - shift + up (add previous sibling to selection)
-  - shift + down (add next sibling to selection)
-  - shift + a (add all siblings to selection)
-  - cmd + s (save)
-  - cmd + up (select first sibling)
-  - cmd + down (select last sibling)
-  - cmd + left (select outermost parent)
-  - cmd + right (select first leaf)
-  - enter (enter content mode)
-  - / (enter style mode)
+- escape (exit focus)
+- up (select previous sibling)
+- down (select next sibling)
+- right (select first child)
+- left (select parent)
+- shift + up (add previous sibling to selection)
+- shift + down (add next sibling to selection)
+- shift + a (add all siblings to selection)
+- cmd + s (save)
+- cmd + up (select first sibling)
+- cmd + down (select last sibling)
+- cmd + left (select outermost parent)
+- cmd + right (select first leaf)
+- enter (enter content mode)
+- / (enter style mode)
 
-  #### a (append sequence)
-  1. element  
-    - s (shape)  
-    - i (image)  
-    - t (text)  
-    - f (iframe)  
-  2. direction  
-    - up (append as previous sibling)  
-    - down (append as next sibling)  
-    - right (append as first child)  
-    - left (append as parent of current selection(s))  
+#### a (append sequence)
+
+1. element
+
+   - s (shape)
+   - i (image)
+   - t (text)
+   - f (iframe)
+
+2. direction
+
+   - up (append as previous sibling)
+   - down (append as next sibling)
+   - right (append as first child)
+   - left (append as parent of current selection(s))
 
 ## content mode
 
@@ -119,9 +119,6 @@ For example...
 4. `:b` generates a selector for all bold elements within the selected text element (only for text elements, used for rich text)
 5. `:even` generates a selector for all even children within an iterable element (only for iterables such as `li` and `tr`)
 
-
-
-
 ## commands
 
 resize sidebar
@@ -133,14 +130,14 @@ reset zoom
 toggle box model overlay
 switch to outline mode
 
-
 ## editor hierarchy
 
 account view
-  - list workspaces
-workspace view
-  - list projects
-project view
-  - list files
-file view
-  - list elements
+
+- list workspaces
+  workspace view
+- list projects
+  project view
+- list files
+  file view
+- list elements
