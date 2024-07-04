@@ -18,7 +18,7 @@ class AppendMode extends Mode {
       ArrowRight: this.add_last_child,
       ArrowDown: this.add_next_sibling,
       ArrowLeft: this.add_parent,
-      BracketLeft: this.toggle_editor,
+      BracketLeft: this.toggle_sidebar,
       'shift Slash': this.help,
       'meta KeyS': this.save_document,
     }

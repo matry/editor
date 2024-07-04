@@ -7,14 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matry</title>
   <style>
-    .editor-open #editor {
+    #editor {
+      overflow-x: hidden;
+    }
+
+    .sidebar-open #editor {
       @apply w-80;
     }
   </style>
   <script type="module" src="/editor/main.js"></script>
 </head>
 
-<body class="editor-open">
+<body class="sidebar-open">
   <main class="h-screen flex overflow-hidden">
     <section id="editor" class="bg-black w-0">
     </section>

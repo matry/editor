@@ -57,11 +57,11 @@ export class Mode {
     }
   }
 
-  toggle_editor() {
-    if (document.body.classList.contains('editor-open')) {
-      document.body.classList.remove('editor-open')
+  toggle_sidebar() {
+    if (document.body.classList.contains('sidebar-open')) {
+      document.body.classList.remove('sidebar-open')
     } else {
-      document.body.classList.add('editor-open')
+      document.body.classList.add('sidebar-open')
     }
 
     return null
@@ -103,5 +103,19 @@ export class Mode {
 
   export_document() {
     downloadHTMLFile(serialize(canvasDocument().querySelector('html')))
+  }
+
+  focus_editor() {
+    return {
+      active: true,
+      mode: 'normal',
+    }
+  }
+
+  blur_editor() {
+    return {
+      active: false,
+      mode: 'normal',
+    }
   }
 }

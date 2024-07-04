@@ -7,7 +7,7 @@ import { initCanvasDOMObserver } from './observer'
 import './index.css'
 import { initStorage } from '../utils/storage.js'
 import { styleInitialCanvas } from './cssom.js'
-import { handleChannelMessage, handleKeydown, handlePaste } from './handlers.js'
+import { handleChannelMessage, handlePaste, handleBlurredKeydown, handleFocusedKeydown } from './handlers.js'
 
 const channel = new Channel('matry')
 
@@ -61,6 +61,7 @@ async function initApp() {
 
   // initialize the state so that it triggers a channel message
   window.state.current = {
+    active: false,
     projects: storage.projects,
     files: storage.files,
     activeProjectId: '',
@@ -81,8 +82,6 @@ async function initApp() {
   }
 
   window.addEventListener('paste', handlePaste)
-
-  window.addEventListener('keydown', handleKeydown)
 
   channel.listen(handleChannelMessage)
 

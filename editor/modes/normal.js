@@ -44,7 +44,7 @@ class NormalMode extends Mode {
         KeyI: this.append_image,
       },
       KeyT: {
-        KeyS: this.toggle_editor,
+        KeyS: this.toggle_sidebar,
         KeyB: this.toggle_box_model,
       },
       KeyN: {
@@ -74,6 +74,7 @@ class NormalMode extends Mode {
       'meta KeyE': this.export_document,
       'meta KeyO': this.open_document,
       'meta Backspace': this.reset,
+      'meta Escape': this.blur_editor,
     }
     this.commandSubPath = this.commands
   }
