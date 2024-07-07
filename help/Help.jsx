@@ -3,6 +3,16 @@ import LegendMenu from "./LegendMenu"
 const editorCommands = [
   [
     {
+      name: 'Enter edit mode',
+      tooltip: 'up',
+      keys: ['⌘', '+', 'enter'],
+    },
+    {
+      name: 'Exit edit mode',
+      tooltip: 'up',
+      keys: ['⌘', '+', 'escape'],
+    },
+    {
       name: 'Save file',
       tooltip: 'up',
       keys: ['⌘', '+', 's'],
