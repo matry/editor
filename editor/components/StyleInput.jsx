@@ -1,8 +1,5 @@
 import classNames from 'classnames'
 import {
-  func, arrayOf, string, bool,
-} from 'prop-types'
-import {
   forwardRef, useEffect, useRef, useState,
 } from 'react'
 import { Channel } from '../../utils/broadcast-channel'
@@ -171,23 +168,5 @@ const StyleInput = forwardRef(({
     </form>
   )
 })
-
-StyleInput.propTypes = {
-  align: string,
-  placeholder: string,
-  value: string,
-  values: arrayOf(string),
-  showAllByDefault: bool,
-  setValue: func.isRequired,
-  onSubmit: func.isRequired,
-}
-
-StyleInput.defaultProps = {
-  align: 'left',
-  placeholder: '',
-  value: '',
-  values: [],
-  showAllByDefault: false,
-}
 
 export default StyleInput

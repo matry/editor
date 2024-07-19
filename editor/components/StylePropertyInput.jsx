@@ -1,8 +1,5 @@
 import classNames from 'classnames'
 import {
-  func, arrayOf, string, bool,
-} from 'prop-types'
-import {
   forwardRef, useEffect, useRef, useState,
 } from 'react'
 import properties from '../../utils/css-properties'
@@ -193,23 +190,5 @@ const StylePropertyInput = forwardRef(({
     </form>
   )
 })
-
-StylePropertyInput.propTypes = {
-  align: string,
-  placeholder: string,
-  value: string,
-  values: arrayOf(string),
-  showAllByDefault: bool,
-  setValue: func.isRequired,
-  onSubmit: func.isRequired,
-}
-
-StylePropertyInput.defaultProps = {
-  align: 'left',
-  placeholder: '',
-  value: '',
-  values: [],
-  showAllByDefault: false,
-}
 
 export default StylePropertyInput

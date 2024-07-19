@@ -80,7 +80,7 @@ export class Mode {
   }
 
   help() {
-    window.open('/help/index.html', '_blank').focus()
+    window.open('/help/', '_blank').focus()
   }
 
   save_document(state) {

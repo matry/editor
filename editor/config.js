@@ -7,7 +7,7 @@ export const config = {
   defaults: {
     file: {
       content: () => {
-        return `<html data-type="html" id="${randomId()}" data-styles='{"base":{}}'><head><style data-style-layer="base"></style></head><body data-type="body" id="${randomId()}" data-styles='{"base":{}}'><span id="${randomId()}" data-type="text" data-styles='{"base":{}}'>Welcome to Matry, a keyboard-driven tool for designing in the browser. Press 'h' for help.</span></body></html>`
+        return `<html data-type="html" id="${randomId()}" data-styles='{"base":{}}'><head><style data-style-layer="base"></style></head><body data-type="body" id="${randomId()}" data-styles='{"base":{}}'><span id="${randomId()}" data-type="text" data-styles='{"base":{}}'>press h for help</span></body></html>`
       },
     },
     shape: {

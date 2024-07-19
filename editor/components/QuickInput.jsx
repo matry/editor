@@ -1,8 +1,5 @@
 import classNames from 'classnames'
 import {
-  func, arrayOf, string, bool,
-} from 'prop-types'
-import {
   forwardRef, useEffect, useRef, useState,
 } from 'react'
 import { Channel } from '../../utils/broadcast-channel'
@@ -168,21 +165,5 @@ const QuickInput = forwardRef(({
     </form>
   )
 })
-
-QuickInput.propTypes = {
-  placeholder: string,
-  value: string,
-  values: arrayOf(string),
-  showAllByDefault: bool,
-  setValue: func.isRequired,
-  onSubmit: func.isRequired,
-}
-
-QuickInput.defaultProps = {
-  placeholder: '',
-  value: '',
-  values: [],
-  showAllByDefault: false,
-}
 
 export default QuickInput

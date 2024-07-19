@@ -1,4 +1,3 @@
-import { object } from 'prop-types'
 import { useEffect, useState, useRef } from 'react'
 import { Channel } from '../../utils/broadcast-channel'
 import StyleInput from './StyleInput'
@@ -116,10 +115,6 @@ const StyleEditor = ({ styles }) => {
       </div>
     </div>
   )
-}
-
-StyleEditor.propTypes = {
-  styles: object.isRequired,
 }
 
 export default StyleEditor

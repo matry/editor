@@ -1,4 +1,3 @@
-import { object, string } from 'prop-types'
 import FileView from './FileView'
 import WorkspaceView from './WorkspaceView'
 import ProjectView from './ProjectView'
@@ -77,18 +76,6 @@ const App = (props) => {
   return (
     <div>no view selected, this is an illegal state</div>
   )
-}
-
-App.propTypes = {
-  currentView: string,
-  extension: string,
-  extensionProps: object,
-}
-
-App.defaultProps = {
-  currentView: 'editor',
-  extension: '',
-  extensionProps: {},
 }
 
 export default App

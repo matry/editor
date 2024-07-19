@@ -67,7 +67,7 @@ export async function handleBlurredKeydown(e) {
       console.error(error)
     }
   } else if (e.key === 'h') {
-    window.open('/help/index.html', '_blank').focus()
+    window.open('/help/', '_blank').focus()
   }
 }
 
