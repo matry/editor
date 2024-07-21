@@ -101,3 +101,14 @@ export function styleInitialCanvas() {
   const doc = canvasDocument()
   appendRule([doc.querySelector('html')])
 }
+
+export function serializeCSS() {
+  const sheet = canvasStyleSheet()
+
+  const result = []
+  for (const rule of sheet.cssRules) {
+    result.push(rule.cssText)
+  }
+
+  return result.join(' ')
+}

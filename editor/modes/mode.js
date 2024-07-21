@@ -1,6 +1,7 @@
 import { Channel } from '../../utils/broadcast-channel'
 import { saveFile } from '../../utils/storage'
 import { canvasDocument } from '../canvas'
+import { serializeCSS } from '../cssom'
 import { serializeHTML } from '../dom'
 import { downloadHTMLFile } from '../utils'
 
@@ -102,7 +103,13 @@ export class Mode {
   }
 
   export_document() {
-    downloadHTMLFile(serializeHTML(canvasDocument().querySelector('html')))
+    const html = canvasDocument().querySelector('html').cloneNode(true)
+    const style = document.createElement('style')
+    style.innerText = serializeCSS()
+
+    html.querySelector('head').appendChild(style)
+
+    downloadHTMLFile(serializeHTML(html))
   }
 
   toggle_interactive_mode(state) {
