@@ -12,6 +12,12 @@ export default function TextContent({ textContents }) {
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
+
+      const range = document.createRange()
+      const selection = window.getSelection()
+      range.selectNodeContents(inputRef.current)
+      selection.removeAllRanges()
+      selection.addRange(range)
     }
   }, [])
 
