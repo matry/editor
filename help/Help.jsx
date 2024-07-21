@@ -204,7 +204,7 @@ const Help = () => (
       <p className="text-slate-300 text-sm max-w-3xl mb-1">
         Matry is a keyboard-driven tool for designing in the browser.
         It uses a mnemonic keyboard command system that is intended to feel like natural language.
-        You can <a className="text-teal-500 underline" href="https://github.com/matry/editor">visit the GitHub repo</a> to learn more.
+        You can <a className="text-blue-500 underline" href="https://github.com/matry/editor">visit the GitHub repo</a> to learn more.
       </p>
 
       <p className="text-slate-300 text-sm max-w-prose mb-6">
