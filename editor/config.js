@@ -35,7 +35,6 @@ export const config = {
             'display': 'block',
             'color': randomColor(false),
             'box-sizing': 'border-box',
-            'user-select': 'none',
             'line-height': '1',
           },
         }
