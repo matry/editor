@@ -68,6 +68,8 @@ class NormalMode extends Mode {
       'shift ArrowDown': this.shift_selection_down,
       'meta ArrowUp': this.select_first_sibling,
       'meta ArrowDown': this.select_last_sibling,
+      'meta ArrowLeft': this.clear_selections,
+      'meta ArrowRight': this.select_first_leaf,
       'meta KeyA': this.select_all,
       'meta KeyC': this.copy_selections,
       'meta KeyS': this.save_document,
@@ -527,6 +529,28 @@ class NormalMode extends Mode {
         return selection.querySelector('[data-type]')
         // return selection.firstElementChild
       })),
+    }
+  }
+
+  select_first_leaf(state) {
+    let { selections } = state
+
+    const doc = canvasDocument()
+
+    if (selections.length === 0) {
+      selections = [doc.body]
+    }
+
+    function walk(node) {
+      if (node.firstElementChild === null) {
+        return node
+      }
+
+      return walk(node.firstElementChild)
+    }
+
+    return {
+      selections: selectionGuard(selections.map(walk)),
     }
   }
 
