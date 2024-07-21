@@ -38,12 +38,12 @@ const StyleEditor = ({ styles }) => {
             {Object.entries(currentStyles).map(([stateKey, stateVal]) => {
               return (
                 <li key={stateKey} className="w-full">
-                  <h3 className="text-gray-100 font-semibold mb-2 text-sm">{stateKey}</h3>
+                  <h3 className="text-neutral-100 font-semibold mb-2">{stateKey}</h3>
                   <ul>
                     {Object.entries(stateVal).map(([styleKey, styleVal]) => {
                       return (
                         <li key={styleKey} className="flex items-center justify-between w-full mb-1">
-                          <span className="text-gray-300">{styleKey}</span>
+                          <span className="text-neutral-300">{styleKey}</span>
                           <span>{styleVal}</span>
                         </li>
                       )

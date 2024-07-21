@@ -48,9 +48,9 @@ export default function WorkspaceView() {
     <div
       className="p-4 bg-black h-full"
     >
-      <h2 className="text-gray-200 text-sm leading-none mb-3">Projects</h2>
+      <h2 className="text-neutral-200 text-sm leading-none mb-3">Projects</h2>
 
-      <ul className="text-gray-400 text-xs leading-none">
+      <ul className="text-neutral-400 text-xs leading-none">
         {projects.map((project, i) => {
           return (
             <li

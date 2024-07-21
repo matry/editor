@@ -80,7 +80,7 @@ const QuickInput = forwardRef(({
         type="text"
         value={value}
         placeholder={placeholder}
-        className="bg-transparent focus:outline-none text-gray-50 selection:bg-gray-600 border-none w-full px-5 py-2"
+        className="bg-transparent focus:outline-none text-neutral-50 selection:bg-neutral-600 border-none w-full px-5 py-2"
         onChange={(e) => {
           setValue(e.target.value)
           setSuggestions(filter(e.target.value, values))

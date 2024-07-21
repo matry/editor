@@ -40,7 +40,7 @@ export default function CanvasNode(props) {
       {hasChildren && (
         <>
           {openingTag}
-          <ul className={`mt-1 pl-4 border-l border-dashed ${isActive ? 'border-gray-500' : 'border-gray-800'}`}>
+          <ul className={`mt-1 pl-4 border-l border-dashed ${isActive ? 'border-neutral-500' : 'border-neutral-800'}`}>
             {children.map((childElement) => {
               if (!childElement.id) {
                 return null

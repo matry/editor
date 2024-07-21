@@ -46,7 +46,7 @@ export default function TextContent({ textContents }) {
         tabIndex={0}
         role="textbox"
         placeholder="write some text here"
-        className="text-gray-50 placeholder:text-gray-300 appearance-none bg-none border-none bg-transparent focus:outline-none absolute inset-0 p-5 text-xs"
+        className="text-neutral-50 placeholder:text-neutral-300 appearance-none bg-none border-none bg-transparent focus:outline-none absolute inset-0 p-5 text-xs"
         onInput={(e) => {
           e.stopPropagation()
           setValue(e.target.innerHTML)
