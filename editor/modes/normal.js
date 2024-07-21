@@ -68,7 +68,7 @@ class NormalMode extends Mode {
       'shift ArrowDown': this.shift_selection_down,
       'meta ArrowUp': this.select_first_sibling,
       'meta ArrowDown': this.select_last_sibling,
-      'meta ArrowLeft': this.clear_selections,
+      'meta ArrowLeft': this.select_root,
       'meta ArrowRight': this.select_first_leaf,
       'meta KeyA': this.select_all,
       'meta KeyC': this.copy_selections,
@@ -604,6 +604,14 @@ class NormalMode extends Mode {
     return {
       selections: selectionGuard([canvasDocument().body]),
     }
+  }
+
+  select_root() {
+    const newState = {
+      selections: selectionGuard([canvasDocument().body]),
+    }
+
+    return newState
   }
 
   delete_selections(state) {

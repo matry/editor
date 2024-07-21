@@ -17,5 +17,6 @@ channel.listen((e) => {
 
   if (e.data.action === 'mode_changed') {
     document.body.setAttribute('data-mode', e.data.data)
+    window.focus()
   }
 })
