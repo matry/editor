@@ -58,6 +58,7 @@ class NormalMode extends Mode {
       Slash: this.open_quick_command,
       BracketLeft: this.select_previous_cousin,
       BracketRight: this.select_next_cousin,
+      Enter: this.enter_edit_content,
       'shift BracketLeft': this.shift_select_previous_cousin,
       'shift BracketRight': this.shift_select_next_cousin,
       'alt ArrowUp': this.move_selections_up,
@@ -240,10 +241,10 @@ class NormalMode extends Mode {
   }
 
   update_selection_text({ selections }, textContent) {
-    for (const selection of selections) {
-      if (selection.getAttribute('data-type') === 'text') {
-        selection.innerHTML = textContent
-      }
+    const texts = getAllChildrenByType(selections, 'text')
+
+    for (const text of texts) {
+      text.innerHTML = textContent
     }
 
     return {
@@ -274,11 +275,62 @@ class NormalMode extends Mode {
     }
   }
 
+  enter_edit_content(state) {
+    if (state.selections.length === 0) {
+      return null
+    }
+
+    const images = getAllChildrenByType(state.selections, 'image')
+    const texts = getAllChildrenByType(state.selections, 'text')
+
+    if (images.length && !texts.length) {
+
+      let imagesSelected = 0
+      for (const selection of images) {
+        if (selection.getAttribute('data-type') === 'image') {
+          imagesSelected += 1
+        }
+      }
+  
+      if (imagesSelected === 0) {
+        return null
+      }
+  
+      return {
+        extension: 'image',
+        extensionProps: {
+          count: imagesSelected,
+        }
+      }
+
+    } else if (texts.length && !images.length) {
+
+      const textContents = {}
+      for (const selection of texts) {
+        if (selection.getAttribute('data-type') === 'text') {
+          textContents[selection.id] = selection.innerHTML
+        }
+      }
+  
+      if (isEmpty(textContents)) {
+        return null
+      }
+  
+      return {
+        extension: 'text',
+        extensionProps: textContents,
+      }
+
+    } else {
+      return null
+    }
+  }
+
   edit_selections_image(state) {
     const { selections } = state
 
     if (selections.length === 0) {
-      throw new Error('You must first select an element to edit')
+      return null
     }
 
     let imagesSelected = 0

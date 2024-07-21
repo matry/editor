@@ -273,8 +273,12 @@ export function getAllChildrenByType(elements, type) {
   let results = []
 
   for (const element of elements) {
-    let localResults = element.querySelectorAll(`[data-type="${type}"]`)
-    results.push(...localResults)
+    if (element.getAttribute('data-type') === type) {
+      results.push(element)
+    } else {
+      let localResults = element.querySelectorAll(`[data-type="${type}"]`)
+      results.push(...localResults)
+    }
   }
 
   return results
