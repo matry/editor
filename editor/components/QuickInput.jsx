@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import {
   forwardRef, useEffect, useRef, useState,
 } from 'react'
+import { isInBounds } from '../dom'
 import { Channel } from '../../utils/broadcast-channel'
 
 const channel = new Channel('matry')
@@ -100,7 +101,11 @@ const QuickInput = forwardRef(({
               e.preventDefault()
 
               if (selectedRef.current && selectedRef.current.nextElementSibling) {
-                selectedRef.current.nextElementSibling.scrollIntoView({ block: 'end' })
+                const parentTop = selectedRef.current.parentElement.offsetHeight + selectedRef.current.parentElement.scrollTop
+
+                if (selectedRef.current.nextElementSibling.offsetTop >= parentTop) {
+                  selectedRef.current.nextElementSibling.scrollIntoView({ block: 'start' })
+                }
               }
 
               setHighlightIndex(Math.min(highlightIndex + 1, suggestions.length - 1))
@@ -109,7 +114,9 @@ const QuickInput = forwardRef(({
               e.preventDefault()
 
               if (selectedRef.current && selectedRef.current.previousElementSibling) {
-                selectedRef.current.previousElementSibling.scrollIntoView({ block: 'end' })
+                if (selectedRef.current.previousElementSibling.offsetTop < selectedRef.current.parentElement.scrollTop) {
+                  selectedRef.current.previousElementSibling.scrollIntoView({ block: 'end' })
+                }
               }
 
               setHighlightIndex(Math.max(highlightIndex - 1, 0))
