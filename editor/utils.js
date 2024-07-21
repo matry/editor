@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver'
 import { canvasDocument } from './canvas'
 import { getBox } from 'css-box-model'
 
-export const randomId = (prefix = 'id', postfix = '', length = 8) => {
+export function randomId(prefix = 'id', postfix = '', length = 8) {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('')
 
   if (!length) {
@@ -20,15 +20,17 @@ export const randomId = (prefix = 'id', postfix = '', length = 8) => {
   return `${pre}${str}${post}`
 }
 
-export const randomNumber = (max, min = 100) => {
+export function randomNumber(max, min = 100) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export const randomPercent = (min = 0) => `${randomNumber(100, min)}%`
+export function randomPercent(min = 0) {
+  return `${randomNumber(100, min)}%`
+}
 
-export const randomImage = (w, h) => {
+export function randomImage(w, h) {
   const height = Math.floor(h || randomNumber(400, 100))
   const width = Math.floor(w || (height * 1.5))
 
@@ -39,7 +41,7 @@ export const randomImage = (w, h) => {
   }
 }
 
-export const randomColor = (preferPastel = true) => {
+export function randomColor(preferPastel = true) {
   const h = randomNumber(360, 0)
   const s = preferPastel ? randomNumber(100, 70) : randomNumber(60, 20)
   const l = preferPastel ? randomNumber(100, 70) : randomNumber(30, 10)
@@ -47,7 +49,7 @@ export const randomColor = (preferPastel = true) => {
   return `hsl(${h}deg, ${s}%, ${l}%)`
 }
 
-export const getKeyboardCommand = (e) => {
+export function getKeyboardCommand(e) {
   const modifiers = []
 
   if (e.metaKey && e.key !== 'Meta') {
@@ -71,7 +73,7 @@ export const getKeyboardCommand = (e) => {
   return modifiers.join(' ')
 }
 
-export const getSelectionTypes = (selections) => {
+export function getSelectionTypes(selections) {
   const types = {
     shape: false,
     text: false,
@@ -89,7 +91,7 @@ export const getSelectionTypes = (selections) => {
   return Object.keys(types).filter((type) => types[type])
 }
 
-export const downloadJSONFile = (data = {}, fileName = 'file') => {
+export function downloadJSONFile(data = {}, fileName = 'file') {
   const json = JSON.stringify(data)
 
   const file = new Blob([json], {
@@ -99,7 +101,7 @@ export const downloadJSONFile = (data = {}, fileName = 'file') => {
   saveAs(file, `${fileName}.json`)
 }
 
-export const downloadHTMLFile = (data = '', fileName = 'file') => {
+export function downloadHTMLFile(data = '', fileName = 'file') {
   const file = new Blob([data], {
     type: 'application/html',
   })
@@ -107,7 +109,7 @@ export const downloadHTMLFile = (data = '', fileName = 'file') => {
   saveAs(file, `${fileName}.html`)
 }
 
-export const openJSONFile = () => {
+export function openJSONFile() {
   const input = document.createElement('input')
   input.type = 'file'
   input.setAttribute('accept', '.json')
@@ -138,11 +140,11 @@ export const openJSONFile = () => {
   })
 }
 
-export const clearStorage = () => {
+export function clearStorage() {
   window.localStorage.clear()
 }
 
-export const readBlobs = (blobs) => {
+export function readBlobs(blobs) {
   const blobsArray = Array.isArray(blobs) ? blobs : Array.from(blobs)
   const count = blobsArray.length
   const results = []
@@ -164,7 +166,7 @@ export const readBlobs = (blobs) => {
   })
 }
 
-export const renderBoxModel = ({ showBoxModel, selections }) => {
+export function renderBoxModel({ showBoxModel, selections }) {
   const doc = canvasDocument()
 
   if (!showBoxModel) {
@@ -241,10 +243,14 @@ export const renderBoxModel = ({ showBoxModel, selections }) => {
   })
 }
 
-export const selectionGuard = (selections) => {
+export function selectionGuard(selections) {
   const existingIds = []
 
   const result = selections.filter((selection) => {
+    if (!selection) {
+      return false
+    }
+
     if (existingIds.includes(selection.id)) {
       return false
     } else {
