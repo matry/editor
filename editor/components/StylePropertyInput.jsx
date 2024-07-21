@@ -43,9 +43,6 @@ const filter = (val) => {
     ...fuzzyMatches,
   ])
 
-  console.log('result:')
-  console.log(result)
-
   return result
 }
 
