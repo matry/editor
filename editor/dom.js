@@ -208,12 +208,12 @@ export function deleteElements(elements) {
   })
 }
 
-export function isInBounds(element) {
+export function isInBounds(element, windowReference) {
   if (!element) {
     return true
   }
 
-  const win = canvasWindow()
+  const win = windowReference || canvasWindow()
 
   const {
     top, right, bottom, left,

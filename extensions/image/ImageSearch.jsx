@@ -65,7 +65,7 @@ export default function ImageSearch() {
             if (document.activeElement?.hasAttribute('data-link')) {
               const imageLink = document.activeElement.getAttribute('data-link')
               channel.post({
-                action: 'confirm_replace_content',
+                action: 'confirm_replace_image_content',
                 data: {
                   urls: [imageLink],
                 },

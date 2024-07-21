@@ -203,12 +203,23 @@ class NormalMode extends Mode {
     }
   }
 
-  confirm_replace_content({ selections }, { urls }) {
-    selections.forEach((selection, i) => {
-      if (selection.getAttribute('data-type') === 'image') {
-        selection.setAttribute('src', urls[i] || urls[0])
+  confirm_replace_image_content({ selections }, { urls }) {
+    if (!urls.length) {
+      return null
+    }
+
+    const images = getAllChildrenByType(selections, 'image')
+
+    for (let i = 0, x = 0, l = images.length; i < l; i++) {
+      const image = images[i]
+      let url = urls[x]
+      if (!url) {
+        x = 0
+        url = urls[x]
       }
-    })
+
+      image.setAttribute('src', url)
+    }
 
     return {
       hasUnsavedChanges: true,

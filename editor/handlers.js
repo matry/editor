@@ -103,8 +103,8 @@ export function handleChannelMessage(e) {
       }
 
       break
-    case 'confirm_replace_content':
-      window.state.current = modes.normal.confirm_replace_content(window.state.current, { urls: message.data.urls })
+    case 'confirm_replace_image_content':
+      window.state.current = modes.normal.confirm_replace_image_content(window.state.current, { urls: message.data.urls })
       break
     case 'update_selection_text':
       window.state.current = modes.normal.update_selection_text(window.state.current, message.data.value)

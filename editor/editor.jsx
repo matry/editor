@@ -31,7 +31,7 @@ channel.listen((e) => {
       canvasDOM = cloneCanvas()
       render(message.data)
       break
-    case 'confirm_replace_content':
+    case 'confirm_replace_image_content':
       render()
       break
     default:

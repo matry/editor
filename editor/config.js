@@ -53,6 +53,7 @@ export const config = {
             'user-select': 'none',
             'max-width': '100%',
             'box-sizing': 'border-box',
+            'object-fit': 'cover',
           },
         }
       },
