@@ -59,6 +59,14 @@ export default function TextContent({ textContents }) {
         onKeyDown={(e) => {
           e.stopPropagation()
 
+          if (e.key === 'Enter') {
+            if (!e.shiftKey) {
+              e.preventDefault()
+              channel.post({ action: 'exit_extension', data: {} })
+              return
+            }
+          }
+
           if (e.key === 'Escape') {
             channel.post({ action: 'exit_extension', data: {} })
           }
