@@ -21,19 +21,19 @@ export default function CanvasNode(props) {
     case 'text':
       typeColor = 'text-green-500'
       typeTag = (
-        <span className="leading-tight inline-block w-1 h-1 rounded-full bg-green-500" />
+        <span className="leading-tight flex self-center w-px h-3 rounded-full bg-green-500" />
       )
       break
     case 'image':
       typeColor = 'text-orange-500'
       typeTag = (
-        <span className="leading-tight inline-block w-1 h-1 rounded-full bg-orange-500" />
+        <span className="leading-tight flex self-center w-px h-3 rounded-full bg-orange-500" />
       )
       break
     case 'shape':
       typeColor = 'text-purple-500'
       typeTag = (
-        <span className="leading-tight inline-block w-1 h-1 rounded-full bg-purple-500" />
+        <span className="leading-tight flex self-center w-px h-3 rounded-full bg-purple-500" />
       )
       break
     default:
@@ -41,20 +41,21 @@ export default function CanvasNode(props) {
   }
 
   const openingTag = (
-    <span>
-      <pre className="inline">&lt;</pre>
-
+    <span className="leading-none flex items-baseline mb-2">
       {/* {Boolean(typeTag) && (
-        <span className="inline-flex h-4 items-center w-1 bg-red-500 leading-4">
+        <>
           {typeTag}
-        </span>
+          &nbsp;
+        </>
       )} */}
 
-      <span className={`inline ${isActive ? 'text-white' : ''}`}>{dataType}</span>
+      <pre className="inline leading-none">&lt;</pre>
+
+      <span className={`inline leading-none ${isActive ? 'text-white' : ''}`}>{dataType}</span>
       {Boolean(name) && (
-        <span className={`inline ${isActive ? 'text-white' : ''}`}>&nbsp;{name}</span>
+        <span className={`inline leading-none ${isActive ? 'text-white' : ''}`}>&nbsp;{name}</span>
       )}
-      <pre className="inline">
+      <pre className="inline leading-none">
         {!hasChildren && (
           <>&#47;</>
         )}
@@ -94,7 +95,7 @@ export default function CanvasNode(props) {
             })}
           </ul>
 
-          <span>
+          <span className="leading-none flex items-baseline mb-2">
             <pre className="inline">&lt;&#47;</pre>
             <span className={`inline ${isActive ? 'text-white' : ''}`}>{dataType}</span>
             <pre className="inline">&gt;</pre>
