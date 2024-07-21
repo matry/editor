@@ -5,8 +5,6 @@ import Extension from './Extension'
 
 const App = (props) => {
   let content = null
-  let extensionContent = null
-
   switch (props.mode) {
     case 'workspace':
       content = (
@@ -29,53 +27,27 @@ const App = (props) => {
       break
   }
 
-  switch (props.extension) {
-    case 'css':
-      extensionContent = (
-        <Extension
-          {...props}
-        />
-      )
-      break
-    case 'image':
-      extensionContent = (
-        <Extension
-          {...props}
-        />
-      )
-      break
-    case 'quick':
-      extensionContent = (
-        <Extension
-          {...props}
-        />
-      )
-      break
-    default:
-      break
-  }
-
   if (content) {
     return (
-      <div className="flex flex-col h-full pb-4 relative">
-        <div className="text-neutral-600 text-3xl py-2 px-4 flex select-none flex-grow-0">
-          <span title="project" className="px-1 py-2 leading-none cursor-pointer hover:text-white">›</span>
-          <span title="file" className={`px-1 py-2 leading-none cursor-pointer ${props.hasUnsavedChanges ? 'text-[#10CFFF]' : 'text-white'}`}>›</span>
-          {/* <span title="style" className="px-1 py-2 leading-none cursor-pointer hover:text-white">›</span> */}
-        </div>
+      <>
+        <div
+          className={`absolute top-0 left-0 right-0 h-px ${props.hasUnsavedChanges ? 'bg-[#38d7ff]' : 'bg-neutral-700'}`}
+        />
+
         {content}
+
         <div
           className="absolute inset-0 bottom-5"
         >
-          {extensionContent}
+          {Boolean(props.extension) && (
+            <Extension {...props} />
+          )}
         </div>
-      </div>
+      </>
     )
   }
 
-  return (
-    <div>no view selected, this is an illegal state</div>
-  )
+  return null
 }
 
 export default App

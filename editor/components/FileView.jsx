@@ -9,7 +9,7 @@ export default function FileView(props) {
       {props.canvasDOM !== null && (
         <>
           <div
-            className="w-full h-full absolute inset-0 overflow-x-hidden"
+            className="w-full h-full absolute inset-0"
           >
             <CanvasNode
               canvasDOM={props.canvasDOM}

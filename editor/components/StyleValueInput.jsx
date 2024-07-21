@@ -145,30 +145,30 @@ const StyleValueInput = forwardRef(({
       />
       <input type="submit" className="hidden" />
       {suggestions.length > 0 && (
-      <ul
-        className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-neutral-700 bg-opacity-90 max-h-72"
-      >
-        {suggestions.map((suggestion, i) => (
-          <li
-            key={suggestion}
-            className={classNames(
-              'py-2 px-6 hover:bg-neutral-400 transition-all hover:text-white cursor-pointer whitespace-nowrap',
-              {
-                'bg-neutral-400': highlightIndex === i,
-                'bg-transparent': highlightIndex !== i,
-              },
-            )}
-            onClick={() => {
-              setValue(suggestion)
-              setSuggestions([])
-              setHighlightIndex(-1)
-              onSubmit(suggestion)
-            }}
-          >
-            {suggestion}
-          </li>
-        ))}
-      </ul>
+        <ul
+          className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-neutral-700 bg-opacity-90 max-h-72"
+        >
+          {suggestions.map((suggestion, i) => (
+            <li
+              key={suggestion}
+              className={classNames(
+                'py-2 px-6 hover:bg-neutral-400 transition-all hover:text-white cursor-pointer whitespace-nowrap',
+                {
+                  'bg-neutral-400': highlightIndex === i,
+                  'bg-transparent': highlightIndex !== i,
+                },
+              )}
+              onClick={() => {
+                setValue(suggestion)
+                setSuggestions([])
+                setHighlightIndex(-1)
+                onSubmit(suggestion)
+              }}
+            >
+              {suggestion}
+            </li>
+          ))}
+        </ul>
       )}
     </form>
   )
