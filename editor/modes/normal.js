@@ -33,6 +33,7 @@ class NormalMode extends Mode {
         //   KeyR: this.replace_random_image,
         //   Enter: this.replace_content,
         // },
+        KeyN: this.edit_selections_name,
         KeyI: this.edit_selections_image,
         KeyS: this.edit_selections_styles,
         KeyT: this.edit_selections_text,
@@ -275,6 +276,30 @@ class NormalMode extends Mode {
 
     return {
       hasUnsavedChanges: true,
+    }
+  }
+
+  edit_selections_name(state) {
+    if (!state.selections.length) {
+      return null
+    }
+
+    let name = null
+    for (const s of state.selections) {
+      if (name === null) {
+        name = s.getAttribute('data-name')
+      } else {
+        if (s.getAttribute('data-name') !== name) {
+          name = ''
+        }
+      }
+    }
+
+    return {
+      extension: 'name',
+      extensionProps: {
+        name,
+      },
     }
   }
 

@@ -1,6 +1,7 @@
 import StyleEditor from './StyleEditor'
 import TextContent from './TextContent'
 import QuickForm from './QuickForm'
+import NameForm from './NameForm'
 
 export default function Extension(props) {
   const queryParams = Object.keys(props.extensionProps)
@@ -32,6 +33,11 @@ export default function Extension(props) {
         <StyleEditor
           styles={props.extensionProps}
         />
+      )
+      break
+    case 'name':
+      content = (
+        <NameForm initialName={props.extensionProps.name} />
       )
       break
     case '':
