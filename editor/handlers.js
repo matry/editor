@@ -97,6 +97,11 @@ export function handleChannelMessage(e) {
         extensionProps: {},
       }
       window.focus()
+
+      if (message.data.save) {
+        window.state.current = modes.normal.save_document(window.state.current)
+      }
+
       break
     case 'confirm_replace_content':
       window.state.current = modes.normal.confirm_replace_content(window.state.current, { urls: message.data.urls })

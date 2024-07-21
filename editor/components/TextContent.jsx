@@ -56,6 +56,11 @@ export default function TextContent({ textContents }) {
           if (e.key === 'Escape') {
             channel.post({ action: 'exit_extension', data: {} })
           }
+
+          if (e.metaKey && e.code === 'KeyS') {
+            e.preventDefault()
+            channel.post({ action: 'exit_extension', data: { save: true } })
+          }
         }}
       />
     </div>

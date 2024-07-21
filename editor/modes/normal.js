@@ -542,6 +542,11 @@ class NormalMode extends Mode {
     }
 
     function walk(node) {
+      const type = node.getAttribute('data-type')
+      if (['text', 'image', 'video'].includes(type)) {
+        return node
+      }
+
       if (node.firstElementChild === null) {
         return node
       }
