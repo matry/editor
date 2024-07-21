@@ -121,6 +121,11 @@ const StylePropertyInput = forwardRef(({
             }
           }
 
+          if (e.metaKey && e.code === 'KeyS') {
+            e.preventDefault()
+            channel.post({ action: 'exit_extension', data: { save: true } })
+          }
+
           if (!suggestions.length) {
             return
           }
