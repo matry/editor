@@ -8,22 +8,34 @@
   <title>Matry</title>
   <style>
     #editor {
-      overflow-x: hidden;
+      @apply w-80 overflow-x-hidden;
     }
 
-    .sidebar-open #editor {
-      @apply w-80;
+    [data-mode="interactive"] #editor {
+      @apply hidden;
+    }
+
+    [data-mode="interactive"] #overlay-frame {
+      @apply hidden;
+    }
+
+    body:not([data-mode="interactive"]) #zoom-container {
+      @apply overflow-hidden select-none;
+    }
+
+    body:not([data-mode="interactive"]) #canvas-frame {
+      @apply pointer-events-none;
     }
   </style>
   <script type="module" src="/editor/main.js"></script>
 </head>
 
-<body class="sidebar-open">
+<body>
   <main class="h-screen flex overflow-hidden">
     <section id="editor" class="bg-black w-0">
     </section>
-    <section id="zoom-container" class="overflow-hidden select-none relative flex-1">
-      <iframe id="canvas-frame" tabindex="-1" src="about:blank" class="block w-full h-full pointer-events-none">
+    <section id="zoom-container" class="relative flex-1">
+      <iframe id="canvas-frame" tabindex="-1" src="about:blank" class="block w-full h-full">
       </iframe>
       <iframe id="overlay-frame" tabindex="-1" src="/overlay/index.html"
         class="block w-full h-full pointer-events-none absolute inset-0">

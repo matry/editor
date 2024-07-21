@@ -54,24 +54,7 @@ export async function handlePaste(e) {
   }
 }
 
-export async function handleBlurredKeydown(e) {
-  if (e.metaKey && e.key === 'Enter') {
-    try {
-      const newState = modes.normal.focus_editor(window.state.current)
-
-      if (newState) {
-        e.preventDefault()
-        window.state.current = newState
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  } else if (e.key === 'h') {
-    window.open('/help/', '_blank').focus()
-  }
-}
-
-export async function handleFocusedKeydown(e) {
+export async function handleEditorKeydown(e) {
   const {
     metaKey, shiftKey, ctrlKey, altKey, code,
   } = e
@@ -93,6 +76,13 @@ export async function handleFocusedKeydown(e) {
     }
   } catch (error) {
     console.error(error)
+  }
+}
+
+export async function handleIframedKeydown(e) {
+  if (globalThis.parent) {
+    const keydownEvent = new KeyboardEvent(e.type, e)
+    globalThis.parent.dispatchEvent(keydownEvent)
   }
 }
 
@@ -122,10 +112,6 @@ export function handleChannelMessage(e) {
       break
     case 'set_selections':
       window.state.current = modes.normal.set_selections(window.state.current, message.data)
-      break
-    case 'did_focus_editor':
-      window.removeEventListener('keydown', handleBlurredKeydown)
-      window.addEventListener('keydown', handleFocusedKeydown)
       break
     default:
       break

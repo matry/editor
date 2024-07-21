@@ -41,9 +41,9 @@ export class Mode {
           this.commandSubPath = this.commands
         }
 
-        if (this.exit_mode) {
-          this.exit_mode()
-        }
+        // if (this.exit_mode) {
+        //   this.exit_mode()
+        // }
         break
     }
 
@@ -103,6 +103,12 @@ export class Mode {
 
   export_document() {
     downloadHTMLFile(serialize(canvasDocument().querySelector('html')))
+  }
+
+  toggle_interactive_mode(state) {
+    return {
+      mode: state.mode === 'interactive' ? 'normal' : 'interactive',
+    }
   }
 
   focus_editor() {

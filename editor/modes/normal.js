@@ -74,7 +74,7 @@ class NormalMode extends Mode {
       'meta KeyE': this.export_document,
       'meta KeyO': this.open_document,
       'meta Backspace': this.reset,
-      'meta Escape': this.blur_editor,
+      'meta Enter': this.toggle_interactive_mode,
     }
     this.commandSubPath = this.commands
   }

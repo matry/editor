@@ -1,4 +1,4 @@
-import { canvasDocument, populateCanvas } from './canvas'
+import { canvasDocument, canvasWindow, populateCanvas } from './canvas'
 import { State } from './state.js'
 import { Channel } from '../utils/broadcast-channel'
 import './editor.jsx'
@@ -7,7 +7,7 @@ import { initCanvasDOMObserver } from './observer'
 import './index.css'
 import { initStorage } from '../utils/storage.js'
 import { styleInitialCanvas } from './cssom.js'
-import { handleChannelMessage, handlePaste, handleBlurredKeydown, handleFocusedKeydown } from './handlers.js'
+import { handleChannelMessage, handleEditorKeydown, handleIframedKeydown, handlePaste } from './handlers.js'
 
 const channel = new Channel('matry')
 
@@ -61,13 +61,12 @@ async function initApp() {
 
   // initialize the state so that it triggers a channel message
   window.state.current = {
-    active: false,
     projects: storage.projects,
     files: storage.files,
     activeProjectId: '',
     activeFileId: '',
     hasUnsavedChanges: false,
-    mode: 'normal',
+    mode: 'interactive',
     selections: [doc.body],
     copiedIds: [],
     cutIds: [],
@@ -90,4 +89,8 @@ async function initApp() {
     activeFileId: storage.activeFile.id,
     activeProjectId: storage.activeProject.id,
   }
+
+  window.addEventListener('keydown', handleEditorKeydown)
+
+  canvasWindow().addEventListener('keydown', handleIframedKeydown)
 }
