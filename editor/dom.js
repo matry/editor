@@ -222,7 +222,7 @@ export function isInBounds(element, windowReference) {
   return top >= 0 && left >= 0 && right <= win.innerWidth && bottom <= win.innerHeight
 }
 
-export function serialize(element) {
+export function serializeHTML(element) {
   const serializer = new XMLSerializer()
   element.normalize()
 

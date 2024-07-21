@@ -1,7 +1,7 @@
 import { Channel } from '../../utils/broadcast-channel'
 import { saveFile } from '../../utils/storage'
 import { canvasDocument } from '../canvas'
-import { serialize } from '../dom'
+import { serializeHTML } from '../dom'
 import { downloadHTMLFile } from '../utils'
 
 const channel = new Channel('matry')
@@ -88,7 +88,7 @@ export class Mode {
     const html = doc.querySelector('html')
 
     saveFile(state.activeFileId, {
-      content: serialize(html),
+      content: serializeHTML(html),
     })
 
     channel.post({
@@ -102,7 +102,7 @@ export class Mode {
   }
 
   export_document() {
-    downloadHTMLFile(serialize(canvasDocument().querySelector('html')))
+    downloadHTMLFile(serializeHTML(canvasDocument().querySelector('html')))
   }
 
   toggle_interactive_mode(state) {

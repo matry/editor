@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import { getSharedStyles, resetRules, updateRule } from '../cssom'
 import {
-  deleteElements, getAllByIds, getAllChildrenByType, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serialize,
+  deleteElements, getAllByIds, getAllChildrenByType, leapNextNode, leapPreviousNode, selectAll, selectFirstSiblingNode, selectLastSiblingNode, selectNextNode, selectPreviousNode, serializeHTML,
 } from '../dom'
 import { openJSONFile } from '../utils'
 import { canvasDocument } from '../canvas'
@@ -399,7 +399,7 @@ class NormalMode extends Mode {
     }
 
     navigator.clipboard.writeText(JSON.stringify({
-      htmlContent: selections.map(serialize),
+      htmlContent: selections.map(serializeHTML),
     }))
 
     return null
