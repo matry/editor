@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { Channel } from '../../utils/broadcast-channel'
-import StyleInput from './StyleInput'
+import StyleValueInput from './StyleValueInput'
 import StylePropertyInput from './StylePropertyInput'
 
 const channel = new Channel('matry')
@@ -74,7 +74,7 @@ const StyleEditor = ({ styles }) => {
             }}
           />
           {styleProperty !== '' && (
-            <StyleInput
+            <StyleValueInput
               ref={valRef}
               value={value}
               values={possibleValues}

@@ -34,7 +34,7 @@ const filter = (val, values) => {
   ]
 }
 
-const StyleInput = forwardRef(({
+const StyleValueInput = forwardRef(({
   align,
   value,
   setValue,
@@ -169,4 +169,4 @@ const StyleInput = forwardRef(({
   )
 })
 
-export default StyleInput
+export default StyleValueInput
