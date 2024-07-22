@@ -66,7 +66,7 @@ async function initApp() {
     activeProjectId: '',
     activeFileId: '',
     hasUnsavedChanges: false,
-    mode: 'normal',
+    mode: 'interactive',
     selections: [doc.body],
     copiedIds: [],
     cutIds: [],

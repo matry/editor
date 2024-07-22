@@ -77,6 +77,17 @@ export default function ImageSearch() {
                 },
               })
               channel.post({ action: 'exit_extension', data: {} })
+            } else {
+              let link = document.activeElement.getAttribute('data-link')
+              if (link) {
+                channel.post({
+                  action: 'confirm_replace_image_content',
+                  data: {
+                    urls: [link],
+                  },
+                })
+                channel.post({ action: 'exit_extension', data: {} })
+              }
             }
 
             return
@@ -93,12 +104,21 @@ export default function ImageSearch() {
                 },
               })
               channel.post({ action: 'exit_extension', data: { save: true } })
+            } else {
+              let link = document.activeElement.getAttribute('data-link')
+              if (link) {
+                channel.post({
+                  action: 'confirm_replace_image_content',
+                  data: {
+                    urls: [link],
+                  },
+                })
+                channel.post({ action: 'exit_extension', data: { save: true } })
+              }
             }
 
             return
           }
-
-          let newActiveIndex = -1
 
           switch (e.key) {
             case ' ':
