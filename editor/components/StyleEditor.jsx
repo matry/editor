@@ -22,38 +22,36 @@ const StyleEditor = ({ styles }) => {
 
   return (
     <div
-      className="text-xs h-screen bg-black relative"
+      className="text-xs h-full bg-black text-neutral-400 relative overflow-hidden"
       onClick={() => {
         channel.post({ action: 'exit_extension', data: {} })
       }}
     >
       <div
-        className="relative overflow-visible text-white"
         onClick={(e) => {
           e.stopPropagation()
         }}
       >
-        <div className="p-5 overflow-x-hidden rounded bottom-full">
-          <ul>
-            {Object.entries(currentStyles).map(([stateKey, stateVal]) => {
-              return (
-                <li key={stateKey} className="w-full">
-                  <h3 className="text-neutral-100 font-semibold mb-2">{stateKey}</h3>
-                  <ul>
-                    {Object.entries(stateVal).map(([styleKey, styleVal]) => {
-                      return (
-                        <li key={styleKey} className="flex items-center justify-between w-full mb-1">
-                          <span className="text-neutral-300">{styleKey}</span>
-                          <span>{styleVal}</span>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <ul className="p-5">
+          {Object.entries(currentStyles).map(([stateKey, stateVal]) => {
+            return (
+              <li key={stateKey} className="w-full">
+                <h3 className="text-neutral-100 font-semibold mb-2">{stateKey}</h3>
+                <ul>
+                  {Object.entries(stateVal).map(([styleKey, styleVal]) => {
+                    return (
+                      <li key={styleKey} className="flex items-center justify-between w-full mb-1">
+                        <span className="text-neutral-300">{styleKey}</span>
+                        <span>{styleVal}</span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </li>
+            )
+          })}
+        </ul>
+
         <div>
           <StylePropertyInput
             ref={propRef}

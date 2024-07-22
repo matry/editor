@@ -162,7 +162,7 @@ const StylePropertyInput = forwardRef(({
       <input type="submit" className="hidden" />
       {suggestions.length > 0 && (
       <ul
-        className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-neutral-700 bg-opacity-90 max-h-72"
+        className="absolute left-0 right-0 max-w-full mt-1 overflow-x-hidden top-full bg-neutral-700 text-neutral-50 bg-opacity-90 max-h-72"
       >
         {suggestions.map((suggestion, i) => (
           <li
