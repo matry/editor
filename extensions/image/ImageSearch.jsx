@@ -89,7 +89,7 @@ export default function ImageSearch() {
         {!isLoading && (
           <>
             {searchResults.length !== 0 && (
-              <div className="w-full aspect-square bg-neutral-700 bg-opacity-20 mt-3">
+              <div className="w-full aspect-square bg-neutral-700 bg-opacity-20 mt-3 overflow-hidden">
                 {Boolean(highlightSrc) && (
                   <img className="w-full h-full object-cover" src={highlightSrc} />
                 )}
@@ -103,6 +103,7 @@ export default function ImageSearch() {
                 return (
                   <li
                     key={`link_${i}`}
+                    className="aspect-square"
                   >
                     <button
                       data-index={i}
@@ -110,7 +111,7 @@ export default function ImageSearch() {
                       ref={(el) => {
                         resultsRefs.current[i] = el
                       }}
-                      className="relative aspect-square overflow-hidden opacity-80 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="relative w-full h-full overflow-hidden opacity-80 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
                       onKeyDown={function(e) {
                         e.stopPropagation()
 
@@ -230,7 +231,7 @@ export default function ImageSearch() {
                     >
                       <img
                         src={result.src}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover block"
                       />
                       {isSelected && (
                         <span className="w-4 h-4 rounded-full bg-green-500 text-white absolute top-1 right-1 flex items-center justify-center">
