@@ -11,7 +11,7 @@ export default function CanvasNode(props) {
   const name = props.canvasDOM.getAttribute('data-name')
 
   const ElementType = dataType === 'html' ? 'ul' : 'li'
-  const elementClass = dataType === 'html' ? 'root px-5 text-xs text-neutral-500' : 'mb-1 relative'
+  const elementClass = dataType === 'html' ? 'root p-5 text-xs text-neutral-500 h-full' : 'mb-1 relative'
   const hasChildren = children.length !== 0 && ['html', 'body', 'shape'].includes(dataType)
 
   let typeTag = null

@@ -55,140 +55,6 @@ export default function ImageSearch() {
           }
         }}
 
-        onKeyDown={(e) => {
-          e.stopPropagation()
-
-          if (e.key === 'Escape') {
-            if (document.activeElement?.id === IMAGE_SEARCH_ID) {
-              channel.post({ action: 'exit_extension', data: {} })
-            } else {
-              searchRef.current?.focus()
-            }
-
-            return
-          }
-
-          if (e.key === 'Enter') {
-            if (selectedLinks.length) {
-              channel.post({
-                action: 'confirm_replace_image_content',
-                data: {
-                  urls: selectedLinks,
-                },
-              })
-              channel.post({ action: 'exit_extension', data: {} })
-            } else {
-              let link = document.activeElement.getAttribute('data-link')
-              if (link) {
-                channel.post({
-                  action: 'confirm_replace_image_content',
-                  data: {
-                    urls: [link],
-                  },
-                })
-                channel.post({ action: 'exit_extension', data: {} })
-              }
-            }
-
-            return
-          }
-
-          if (e.metaKey && e.code === 'KeyS') {
-            e.preventDefault()
-
-            if (selectedLinks.length) {
-              channel.post({
-                action: 'confirm_replace_image_content',
-                data: {
-                  urls: selectedLinks,
-                },
-              })
-              channel.post({ action: 'exit_extension', data: { save: true } })
-            } else {
-              let link = document.activeElement.getAttribute('data-link')
-              if (link) {
-                channel.post({
-                  action: 'confirm_replace_image_content',
-                  data: {
-                    urls: [link],
-                  },
-                })
-                channel.post({ action: 'exit_extension', data: { save: true } })
-              }
-            }
-
-            return
-          }
-
-          switch (e.key) {
-            case ' ':
-              e.preventDefault()
-
-              let linkId = document.activeElement.getAttribute('data-link')
-
-              if (linkId) {
-                if (selectedLinks.includes(linkId)) {
-                  setSelectedLinks(selectedLinks.filter((n) => n !== linkId))
-                } else {
-                  setSelectedLinks([...selectedLinks, linkId])
-                }
-              }
-
-              break
-            case 'ArrowUp':
-              e.preventDefault()
-
-              let uIndex = document.activeElement.getAttribute('data-index')
-              if (uIndex) {
-                let newIndex = Number(uIndex) - 3
-
-                let previousElement = document.querySelector(`[data-index="${newIndex}"]`)
-                if (previousElement) {
-                  previousElement.focus()
-                }
-              }
-              break
-            case 'ArrowDown':
-              e.preventDefault()
-
-              let dIndex = document.activeElement.getAttribute('data-index')
-              if (dIndex) {
-                let newIndex = Number(dIndex) + 3
-
-                let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
-                if (nextElement) {
-                  nextElement.focus()
-                }
-              }
-              break
-            case 'ArrowRight':
-              e.preventDefault()
-              let rIndex = document.activeElement.getAttribute('data-index')
-              if (rIndex) {
-                let newIndex = Number(rIndex) + 1
-
-                let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
-                if (nextElement) {
-                  nextElement.focus()
-                }
-              }
-              break
-            case 'ArrowLeft':
-              e.preventDefault()
-              let lIndex = document.activeElement.getAttribute('data-index')
-              if (lIndex) {
-                let newIndex = Number(lIndex) - 1
-
-                let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
-                if (nextElement) {
-                  nextElement.focus()
-                }
-              }
-              break
-            default:
-              break
-          }
-        }}
         className="text-white h-full p-3"
       >
         <input
@@ -234,6 +100,140 @@ export default function ImageSearch() {
                         resultsRefs.current[i] = el
                       }}
                       className="relative aspect-square overflow-hidden opacity-80 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      onKeyDown={(e) => {
+                        e.stopPropagation()
+
+                        if (e.key === 'Escape') {
+                          if (document.activeElement?.id === IMAGE_SEARCH_ID) {
+                            channel.post({ action: 'exit_extension', data: {} })
+                          } else {
+                            searchRef.current?.focus()
+                          }
+
+                          return
+                        }
+
+                        if (e.key === 'Enter') {
+                          if (selectedLinks.length) {
+                            channel.post({
+                              action: 'confirm_replace_image_content',
+                              data: {
+                                urls: selectedLinks,
+                              },
+                            })
+                            channel.post({ action: 'exit_extension', data: {} })
+                          } else {
+                            let link = document.activeElement.getAttribute('data-link')
+                            if (link) {
+                              channel.post({
+                                action: 'confirm_replace_image_content',
+                                data: {
+                                  urls: [link],
+                                },
+                              })
+                              channel.post({ action: 'exit_extension', data: {} })
+                            }
+                          }
+
+                          return
+                        }
+
+                        if (e.metaKey && e.code === 'KeyS') {
+                          e.preventDefault()
+
+                          if (selectedLinks.length) {
+                            channel.post({
+                              action: 'confirm_replace_image_content',
+                              data: {
+                                urls: selectedLinks,
+                              },
+                            })
+                            channel.post({ action: 'exit_extension', data: { save: true } })
+                          } else {
+                            let link = document.activeElement.getAttribute('data-link')
+                            if (link) {
+                              channel.post({
+                                action: 'confirm_replace_image_content',
+                                data: {
+                                  urls: [link],
+                                },
+                              })
+                              channel.post({ action: 'exit_extension', data: { save: true } })
+                            }
+                          }
+
+                          return
+                        }
+
+                        switch (e.key) {
+                          case ' ':
+                            e.preventDefault()
+
+                            let linkId = document.activeElement.getAttribute('data-link')
+
+                            if (linkId) {
+                              if (selectedLinks.includes(linkId)) {
+                                setSelectedLinks(selectedLinks.filter((n) => n !== linkId))
+                              } else {
+                                setSelectedLinks([...selectedLinks, linkId])
+                              }
+                            }
+
+                            break
+                          case 'ArrowUp':
+                            e.preventDefault()
+
+                            let uIndex = document.activeElement.getAttribute('data-index')
+                            if (uIndex) {
+                              let newIndex = Number(uIndex) - 3
+
+                              let previousElement = document.querySelector(`[data-index="${newIndex}"]`)
+                              if (previousElement) {
+                                previousElement.focus()
+                              }
+                            }
+                            break
+                          case 'ArrowDown':
+                            e.preventDefault()
+
+                            let dIndex = document.activeElement.getAttribute('data-index')
+                            if (dIndex) {
+                              let newIndex = Number(dIndex) + 3
+
+                              let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
+                              if (nextElement) {
+                                nextElement.focus()
+                              }
+                            }
+                            break
+                          case 'ArrowRight':
+                            e.preventDefault()
+                            let rIndex = document.activeElement.getAttribute('data-index')
+                            if (rIndex) {
+                              let newIndex = Number(rIndex) + 1
+
+                              let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
+                              if (nextElement) {
+                                nextElement.focus()
+                              }
+                            }
+                            break
+                          case 'ArrowLeft':
+                            e.preventDefault()
+                            let lIndex = document.activeElement.getAttribute('data-index')
+                            if (lIndex) {
+                              let newIndex = Number(lIndex) - 1
+
+                              let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
+                              if (nextElement) {
+                                nextElement.focus()
+                              }
+                            }
+                            break
+                          default:
+                            break
+                        }
+                      }}
                     >
                       <img
                         src={result.src}

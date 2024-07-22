@@ -45,7 +45,7 @@ export default function Extension(props) {
       break
     default:
       content = (
-        <div className="w-full h-screen z-10 bg-black relative">
+        <div className="w-full h-full z-10 bg-black relative">
           <iframe
             key={props.extension}
             title={props.extension}
