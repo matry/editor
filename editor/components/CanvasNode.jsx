@@ -41,7 +41,7 @@ export default function CanvasNode(props) {
   }
 
   const openingTag = (
-    <span className="leading-none flex items-baseline mb-2">
+    <span className="leading-none flex items-baseline mb-2 select-none">
       {/* {Boolean(typeTag) && (
         <>
           {typeTag}
@@ -70,11 +70,7 @@ export default function CanvasNode(props) {
       id={props.canvasDOM.id}
       className={elementClass}
     >
-      {!hasChildren && (
-        <>
-          {openingTag}
-        </>
-      )}
+      {!hasChildren && (openingTag)}
 
       {hasChildren && (
         <>
@@ -95,7 +91,7 @@ export default function CanvasNode(props) {
             })}
           </ul>
 
-          <span className="leading-none flex items-baseline mb-2">
+          <span className="leading-none flex items-baseline mb-2 select-none">
             <pre className="inline">&lt;&#47;</pre>
             <span className={`inline ${isActive ? 'text-white' : ''}`}>{dataType}</span>
             <pre className="inline">&gt;</pre>

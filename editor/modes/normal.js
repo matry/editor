@@ -217,6 +217,8 @@ class NormalMode extends Mode {
       if (!url) {
         x = 0
         url = urls[x]
+      } else {
+        x += 1
       }
 
       image.setAttribute('src', url)

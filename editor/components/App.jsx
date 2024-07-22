@@ -31,18 +31,19 @@ const App = (props) => {
     return (
       <>
         <div
-          className={`absolute top-0 left-0 right-0 h-px ${props.hasUnsavedChanges ? 'bg-[#38d7ff]' : 'bg-neutral-700'}`}
+          className={`absolute top-0 left-0 right-0 h-px ${props.hasUnsavedChanges ? 'bg-[#2acff9]' : 'bg-neutral-700'}`}
         />
 
         {content}
 
-        <div
-          className="absolute inset-0 bottom-5"
-        >
-          {Boolean(props.extension) && (
-            <Extension {...props} />
-          )}
-        </div>
+        {Boolean(props.extension) && (
+          <div className="absolute top-px left-0 right-0 bottom-0">
+            <Extension
+              extension={props.extension}
+              extensionProps={props.extensionProps}
+            />
+          </div>
+        )}
       </>
     )
   }

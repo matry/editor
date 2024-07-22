@@ -298,3 +298,12 @@ export function getAllByIds(ids = []) {
 
   return results
 }
+
+export function getElementIndex(element) {
+  for (let i = 0, l = element.parentElement.children.length; i < l; i++) {
+    const child = element.parentElement.children[i]
+    if (element === child) {
+      return i
+    }
+  }
+}
