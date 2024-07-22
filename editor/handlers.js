@@ -70,7 +70,7 @@ export function initHandlers() {
     ].filter((k) => k !== '').join(' ').trim()
   
     try {
-      const newState = modes[window.state.current.mode].on_command(altKey, keyboardShortcut, window.state.current)
+      const newState = await modes[window.state.current.mode].on_command(altKey, keyboardShortcut, window.state.current)
   
       if (newState) {
         e.preventDefault()

@@ -31,6 +31,10 @@ export function canvasStyleSheet(layer = 'base') {
 
 export function populateCanvas(file) {
   const doc = canvasDocument()
+  const iframe = document.getElementById('canvas-frame')
+
+  iframe.setAttribute('src', 'about:blank')
+
   doc.write(file.content)
 }
 

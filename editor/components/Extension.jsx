@@ -2,6 +2,7 @@ import StyleEditor from './StyleEditor'
 import TextContent from './TextContent'
 import QuickForm from './QuickForm'
 import NameForm from './NameForm'
+import FileNameForm from './FileNameForm'
 
 export default function Extension(props) {
   const queryParams = Object.keys(props.extensionProps)
@@ -38,6 +39,11 @@ export default function Extension(props) {
     case 'name':
       content = (
         <NameForm initialName={props.extensionProps.name} />
+      )
+      break
+    case 'file_name':
+      content = (
+        <FileNameForm initialName={props.extensionProps.name} />
       )
       break
     case '':

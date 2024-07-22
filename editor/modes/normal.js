@@ -48,8 +48,8 @@ class NormalMode extends Mode {
         KeyS: this.toggle_sidebar,
         KeyB: this.toggle_box_model,
       },
-      KeyN: {
-        KeyP: this.navigate_to_project,
+      KeyV: {
+        KeyP: this.view_project,
       },
       KeyH: this.help,
       ArrowUp: this.select_previous_sibling,
@@ -83,7 +83,7 @@ class NormalMode extends Mode {
     this.commandSubPath = this.commands
   }
 
-  navigate_to_project() {
+  view_project() {
     return {
       mode: 'project',
     }

@@ -4,13 +4,13 @@ import { Channel } from '../../utils/broadcast-channel'
 const channel = new Channel('matry')
 
 const formatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric',
-  hour12: true,
+  // year: 'numeric',
+  // month: 'long',
+  // day: 'numeric',
+  // hour: 'numeric',
+  // minute: 'numeric',
+  // second: 'numeric',
+  // hour12: true,
 })
 
 export default function ProjectView(props) {
@@ -18,27 +18,35 @@ export default function ProjectView(props) {
 
   const activeProject = props.projects.find((p) => p.id === props.activeProjectId)
 
-  useEffect(() => {
-    const list = document.getElementById('editor-project-list')
-    if (!list) {
-      return
-    }
-
-    const active = list.querySelector('[data-active="on"]')
-    if (active) {
-      active.focus()
-    }
-
-  }, [])
-
-
-
   return (
-    <section>
-      <header className="text-neutral-200 px-5">
-        <h2>{activeProject ? (activeProject.name || 'Untitled Project') : 'Your Project'}</h2>
-        <h2>Your Files</h2>
+    <section className="text-neutral-400 p-3 text-xs">
+      <header className="mb-3">
+        <dl>
+          <dt className="mb-px">project</dt>
+          <dd className="text-neutral-100">{activeProject ? (activeProject.name || 'Untitled Project') : 'Your Project'}</dd>
+        </dl>
       </header>
+
+      <h2 className="mb-px">files</h2>
+      <ul>
+        {props.files.map((file, i) => {
+          const created = new Date(file.created_at)
+          const lastModified = new Date(file.last_modified)
+          const isActive = i === selectedFileIndex
+
+          return (
+            <li
+              key={file.id}
+              data-active={isActive ? 'on' : 'off'}
+              className="flex items-baseline justify-between"
+            >
+              <strong className="text-neutral-100">{file.name || 'Untitled'}</strong>
+              <span>last modified {formatter.format(lastModified)}</span>
+            </li>
+          )
+        })}
+      </ul>
+
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -52,28 +60,7 @@ export default function ProjectView(props) {
         }}
       >
         <ul id="editor-project-list" className="text-xs px-5">
-          {props.files.map((file, i) => {
-            const created = new Date(file.created_at)
-            const lastModified = new Date(file.last_modified)
-            const isActive = i === selectedFileIndex
 
-            return (
-              <li
-                tabIndex="0"
-                key={file.id}
-                data-active={isActive ? 'on' : 'off'}
-                className={isActive ? 'text-white' : 'text-neutral-500'}
-              >
-                <span><strong>file id:</strong> {file.id}</span>
-                <br />
-                <span><strong>file name:</strong> {file.name || 'Untitled'}</span>
-                <br />
-                <span><strong>created:</strong> {formatter.format(created)}</span>
-                <br />
-                <span><strong>modified:</strong> {formatter.format(lastModified)}</span>
-              </li>
-            )
-          })}
         </ul>
       </form>
     </section>
