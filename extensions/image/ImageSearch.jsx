@@ -65,6 +65,16 @@ export default function ImageSearch() {
           onChange={(e) => {
             setSearchText(e.target.value)
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              channel.post({ action: 'exit_extension', data: {} })
+            }
+
+            if (e.metaKey && e.code === 'KeyS') {
+              e.preventDefault()
+              channel.post({ action: 'exit_extension', data: {} })
+            }
+          }}
           className="text-white text-sm block bg-transparent border-none outline-none"
           value={searchText}
           placeholder="Search for an image"
