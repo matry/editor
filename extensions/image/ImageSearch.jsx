@@ -100,7 +100,7 @@ export default function ImageSearch() {
                         resultsRefs.current[i] = el
                       }}
                       className="relative aspect-square overflow-hidden opacity-80 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                      onKeyDown={(e) => {
+                      onKeyDown={function(e) {
                         e.stopPropagation()
 
                         if (e.key === 'Escape') {
@@ -183,51 +183,33 @@ export default function ImageSearch() {
                           case 'ArrowUp':
                             e.preventDefault()
 
-                            let uIndex = document.activeElement.getAttribute('data-index')
-                            if (uIndex) {
-                              let newIndex = Number(uIndex) - 3
-
-                              let previousElement = document.querySelector(`[data-index="${newIndex}"]`)
-                              if (previousElement) {
-                                previousElement.focus()
-                              }
+                            let prevElement = document.querySelector(`[data-index="${i - 3}"]`)
+                            if (prevElement) {
+                              prevElement.focus()
                             }
                             break
                           case 'ArrowDown':
                             e.preventDefault()
 
-                            let dIndex = document.activeElement.getAttribute('data-index')
-                            if (dIndex) {
-                              let newIndex = Number(dIndex) + 3
-
-                              let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
-                              if (nextElement) {
-                                nextElement.focus()
-                              }
+                            let nextElement = document.querySelector(`[data-index="${i + 3}"]`)
+                            if (nextElement) {
+                              nextElement.focus()
                             }
                             break
                           case 'ArrowRight':
                             e.preventDefault()
-                            let rIndex = document.activeElement.getAttribute('data-index')
-                            if (rIndex) {
-                              let newIndex = Number(rIndex) + 1
 
-                              let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
-                              if (nextElement) {
-                                nextElement.focus()
-                              }
+                            let rElement = document.querySelector(`[data-index="${i + 1}"]`)
+                            if (rElement) {
+                              rElement.focus()
                             }
                             break
                           case 'ArrowLeft':
                             e.preventDefault()
-                            let lIndex = document.activeElement.getAttribute('data-index')
-                            if (lIndex) {
-                              let newIndex = Number(lIndex) - 1
 
-                              let nextElement = document.querySelector(`[data-index="${newIndex}"]`)
-                              if (nextElement) {
-                                nextElement.focus()
-                              }
+                            let lElement = document.querySelector(`[data-index="${i - 1}"]`)
+                            if (lElement) {
+                              lElement.focus()
                             }
                             break
                           default:
