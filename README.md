@@ -6,8 +6,6 @@ The Matry Editor can most easily be described as "vim for UI designers."
 It's a keyboard-driven UI design tool that is intended to bridge the gap between designers and developers,
 and takes inspiration from several ideas I've developed while working on [Matry](https://github.com/matry/tree-sitter-matry).
 
-You can [view a demo here](https://matry.design). WARNING - this tool is actively being developed, meaning you should expect bugs and breaking changes.
-
 ## Design Principles
 
 Matry is governed by a few key principles:
