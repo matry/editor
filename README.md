@@ -15,6 +15,7 @@ Matry is governed by a few key principles:
 3. **Design should be performed in the target medium**. If you're designing for the web, then the browser should be your working environment.
 4. **Drawing tools are not equipped to solve modern design problems**. At scale, designing a product often means creating a system, and text is better suited for that purpose than graphical illustrations.
 5. **Designers and developers should collaborate on the same artifact**. In the game industry, artists and developers actively collaborate together on the final product, yet for web and mobile app development, this has never been the case. Why shouldn't it be?
+6. **Design tools should be framework-agnostic**. Lots of new design tools output to React, but the only realistic future is one where a design tool can output to any target. Matry compiles your work into an [intermediate representation](https://en.wikipedia.org/wiki/Intermediate_representation), which can then be transpiled into any format you wish.
 
 ## Overview
 
@@ -22,7 +23,7 @@ Matry uses a mnemonic keyboard command system that is somewhat Vim-like in its a
 For example, in the same way that Vim's `d w` command means "delete word", Matry has the command `a s`, which means "add shape."
 And in the same way you can think of Vim Motions as a DSL for text editing, you can also think of Matry as a command language for UI editing.
 
-[Below](#command-reference) is a full (yet poorly organized) list of currently available commands.
+[Below](#command-reference) is an incomplete list of currently available commands.
 Many more will be added in the future.
 
 ## Roadmap
