@@ -19,7 +19,7 @@ Matry is governed by a few key principles:
 
 ## Overview
 
-Matry uses a mnemonic keyboard command system that is somewhat Vim-like in its attempt to feel like natural language.
+Matry uses a mnemonic command system that is inspired by Vim Motions, in the sense that it attempts to feel like natural language.
 For example, in the same way that Vim's `d w` command means "delete word", Matry has the command `a s`, which means "add shape."
 And in the same way you can think of Vim Motions as a DSL for text editing, you can also think of Matry as a command language for UI editing.
 
